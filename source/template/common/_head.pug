@@ -1,0 +1,30 @@
+meta(charset="utf-8")
+title #{title}
+meta(content="{description}" name="description")
+meta(content="{keywords}" name="keywords")
+meta(content="width=device-width, initial-scale=1" name="viewport")
+meta(content="ie=edge" http-equiv="x-ua-compatible")
+
+//- favicon block start
+link(rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png")
+link(rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32")
+link(rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16")
+meta(name="theme-color" content="#fff")
+//- favicon block end
+
+//- fonts
+link(rel='stylesheet' href='/assets/fonts/fonts.css')
+//- end fonts
+
+//- CSS
+- var css_all = ["foundation", "app"];
+for css in css_all
+    link(rel='stylesheet' href="/assets/css/"+css+'.css')
+//- end CSS
+//-js
+- var js_all = ["foundation", "app"];
+for js in js_all
+    script(src="/assets/js/"+js+'.js' defer)
+//- end js
+
+<!--[if lt IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script><![endif]-->
