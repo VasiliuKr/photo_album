@@ -34,5 +34,7 @@ var sass_lint_reporter = function(file, stream) {
 
     if(count_error)
       stream.emit('error', new $.gp.util.PluginError('scss-lint', 'Has '+count_error+' ERROR.', { showProperties: false}));
+    var msg='Total '+$.gp.util.colors.red('Error: '+count_error)+$.gp.util.colors.yellow('  Warning: '+count_warning);
+    console.log(msg);
   }
 };

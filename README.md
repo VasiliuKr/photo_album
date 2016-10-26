@@ -12,15 +12,14 @@
 * Иван Корепанов
 * Сергей Павлов
 * Михаил Пинчук
-* Вадим Новаш
 
 ---
 ##Инструкция по установке моего проекта
 
 >Копирование проекта
 
-1. git clone https://github.com/settler-mar/loft_school.d1_group dz1
-2. cd dz1
+1. git clone https://github.com/settler-mar/photo_album photo_album
+2. cd photo_album
 3. npm i
 
 >для работы sass-lint
@@ -31,6 +30,8 @@
 ```sh
 gem update --system && gem install scss_lint
 ````
+
+Если команда не выполнится, то для Windows воспользоваться http://rubyinstaller.org/ и через него поставить scss_lint
 
 ---------
 
