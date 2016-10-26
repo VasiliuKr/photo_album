@@ -1,0 +1,15 @@
+{
+  "http":{
+    "port":3000,
+    "host":"localhost",
+    "publicRoot":"dist",
+    "uploadDir":"upload"
+  },
+  "db":{
+    "host":"localhost",
+    "port":"27017",
+    "name":"photo_albom",
+    "user":"",
+    "password":""
+  }
+}
