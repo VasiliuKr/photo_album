@@ -95,7 +95,7 @@ linters:
 
   LeadingZero:
     enabled: true
-    style: exclude_zero # or 'include_zero'
+    style: include_zero #exclude_zero 
 
   MergeableSelector:
     enabled: true
@@ -104,11 +104,11 @@ linters:
   NameFormat:
     enabled: true
     allow_leading_underscore: true
-    convention: snake_case #hyphenated_lowercase or 'camel_case', or 'snake_case', or a regex pattern
+    convention: hyphenated_lowercase #hyphenated_lowercase or 'camel_case', or 'snake_case', or a regex pattern
 
   NestingDepth:
     enabled: true
-    max_depth: 3
+    max_depth: 4
     ignore_parent_selectors: false
 
   PlaceholderInExtend:
