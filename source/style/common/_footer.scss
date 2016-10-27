@@ -1,5 +1,5 @@
 .footer {
-  color: #fff;
+  color: $footer-text;
   font: 16px/1.5 'proxima_nova_ltlight', sans-serif;
 
   &-inner-wrapper {
@@ -11,11 +11,10 @@
     position: relative;
 
     &::before {
-      background: #000;
+      background: $footer-bg;
       bottom: 0;
       content: '';
       left: 0;
-      opacity: 0.6;
       position: absolute;
       right: 0;
       top: 0;
@@ -44,7 +43,7 @@
   transition: all 0.25s;
 
   &-icon {
-    fill: #fff;
+    fill: $footer-icon-top;
     height: 21px;
     width: 26px;
   }

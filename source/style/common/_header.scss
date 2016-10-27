@@ -7,11 +7,11 @@
     position: relative;
 
     &::before {
-      background: linear-gradient(to right, rgba(14, 14, 14, 1) 0%, rgba(14, 14, 14, 0) 60%);
+      background: linear-gradient(to right, $shapka-grad-left 0%, $shapka-grad-right 60%);
       bottom: 0;
       content: '';
       left: 0;
-      opacity: .6;
+      opacity: 0.6;
       position: absolute;
       right: 0;
       top: 0;
@@ -37,7 +37,7 @@
   }
 
   &__photo {
-    border: 3px solid #fff;
+    border: 3px solid $shapka-avatar-border;
     border-radius: 50%;
     max-height: 124px;
     max-width: 124px;
@@ -47,13 +47,13 @@
   }
 
   &__name {
-    color: #fff;
+    color: $shapka-avatar-text;
     font: 21px/1 'pantonbold', sans-serif;
     margin: 0 0 8px;
   }
 
   &__description {
-    color: #fff;
+    color: $shapka-avatar-description;
     font: 16px/1.5 'proxima_nova_ltlight', sans-serif;
     margin-bottom: 26px;
     max-width: 450px;
@@ -80,15 +80,14 @@
 
     &:hover {
       .social-icon {
-        opacity: 1;
+        fill: $social-icon-hover;
       }
     }
   }
 
   .social-icon {
-    fill: #fff;
+    fill: $social-icon;
     height: 20px;
-    opacity: .8;
     transition: all 0.2s;
     width: 20px;
   }
@@ -96,7 +95,7 @@
 
 // Profile buttons
 .profile-button-icon {
-  fill: #a0a09f;
+  fill: $btn-circle-icon;
   height: 20px;
   width: 20px;
 }
@@ -108,9 +107,9 @@
 }
 
 .profile-button {
-  background: #fff;
+  background: $btn-circle-bg;
   border-radius: 20px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 4px $btn-circle-shadow;
   cursor: pointer;
   display: inline-block;
   font: 14px/1 'pantonbold', sans-serif;
@@ -125,12 +124,12 @@
 
   &_edit {
     &:hover {
-      background-color: #28bbf0;
-      color: #fff;
+      background-color: $btn-circle-hover-bg;
+      color: $btn-circle-text;
       width: 150px;
 
       .profile-button-icon {
-        fill: #fff;
+        fill: $btn-circle-icon-hover;
       }
 
       .profile-button__text {
@@ -142,12 +141,12 @@
 
   &_login {
     &:hover {
-      background-color: #28bbf0;
-      color: #fff;
+      background-color: $btn-circle-hover-bg;
+      color: $btn-circle-text;
       width: 94px;
 
       .profile-button-icon {
-        fill: #fff;
+        fill: $btn-circle-icon-hover;
       }
 
       .profile-button__text {
@@ -158,7 +157,7 @@
   }
 
   &__text {
-    color: #fff;
+    color: $btn-circle-text;
     display: inline;
     line-height: 20px;
     opacity: 0;

@@ -1,0 +1,324 @@
+
+//Футер главной
+
+$footer-text: #fff;
+$footer-bg: rgba(#000, 0.8);
+$footer-copyright-text: rgba(#fff, 0.4);
+$footer-icon-top: #fff;
+
+//Футер под формой регистрации
+
+$footer-main-text: rgba(#fff, 0.6);
+
+//------------ Форма регистрации(/авторизации/восстановления)
+
+$onform-header-text: #fff; //цвет заголовка и текста над формой
+
+$form-header-text: #323232; // цвет заголовка внутри формы восстановления
+$form-text: rgba(#323232, 0.8); //основной цвет текста формы
+
+$form-bg: #fff;
+
+$input-icon: #a0a09f;
+$input-icon-active: #28bbf0;
+
+$input-text: rgba(#323232, 0.6);
+$input-active-text: #323232;
+
+$input-border: #e1e1e1;
+
+$btn-submit-text: #fff;
+$btn-submit-border: #28bbf0;
+$btn-submit-bg: #28bbf0;
+$btn-submit-hover-bg: #24b0e3;
+
+$form-link-text: rgba(#28bbf0, 0.8); // для формы авторизации
+
+$error-text: rgba(#323232, 0.6);
+$error-bg: rgba(#ffe0e0, 0.9);
+
+
+//------------- Шапка
+
+$shapka-avatar-text: #fff;
+$shapka-avatar-description: #fff;
+$shapka-avatar-border: #fff;
+
+$shapka-text: rgba(#fff, 0.8);
+
+$shapka-grad-left: rgba(14, 14, 14, 1);
+$shapka-grad-right: rgba(14, 14, 14, 0);
+
+$shapka-fixed-avatar-text: #323232;
+$shapka-fixed-header-text: #323232;
+$shapka-fixed-bg: rgba(#fff, 0.85);
+
+// Редактирование названия и описания альбома
+$album-edit-input-bg: #fff;
+$album-edit-input-text: rgba(#323232, 0.8);
+
+$album-edit-bg: rgba(#000, 0.8);
+$album-edit-overlay: rgba(#fff, 0.9);
+
+$album-edit-icon: rgba(#fff, 0.8);
+$album-edit-icon-text: rgba(#fff, 0.8);
+
+
+//Кнопки сохранить и отменить
+
+$btn-save-text: #fff;
+$btn-save-bg: #28bbf0;
+$btn-save-shadow: rgba(#000, 0.22);
+
+$btn-cancel-text: rgba(#28bbf0, 0.8);
+$btn-cancel-bg: transparent;
+
+
+//Круглая кнопка редактировать/выйти/добавить
+
+$btn-circle-text: #fff;
+
+$btn-circle-icon: #a0a09f;
+$btn-circle-icon-hover: #fff;
+
+$btn-circle-bg: #fff;
+$btn-circle-hover-bg: #28bbf0;
+
+$btn-circle-shadow: rgba(#000, 0.22);
+
+
+//-------------- Информация об альбоме
+
+$about-album-bg: rgba(#fff, 0.85);
+$about-album-text: #323232;
+
+
+//-------------- Фотки альбома
+
+$album-photo-title-text: #323232;
+
+$album-photo-like-icon: #fff;
+$album-photo-like-text: rgba(#fff, 0.8);
+
+$album-photo-zoom-icon: #fff;
+$album-photo-comment-icon: #fff;
+$album-photo-comment-text: rgba(#fff, 0.8);
+$album-photo-edit-icon: #a0a09f;
+
+$album-photo-hover-bg: rgba(#000, 0.4);
+$album-photo-shadow: rgba(#000, 0.15);
+
+
+
+
+// Попап окно
+
+$popup-bg: #fff;
+
+$popup-text: #323232;
+
+$popup-bottom-bg: #f1f1f1;
+
+$popup-btn-text: #28bbf0;
+$popup-btn-hover-text: #fff;
+
+$popup-btn-bg: transparent;
+$popup-btn-hover-bg: #20b6ed;
+
+$popup-btn-border: #20b6ed;
+
+
+//--------------- Модальное окно
+
+$modal-header-bg: #f1f1f1;
+$modal-header-text: #323232;
+
+$modal-close-icon: #a0a09f;
+$modal-close-icon-hover: rgba(#323232, 0.6);
+
+$modal-text: #323232;
+$modal-bottom-bg: #f1f1f1;
+
+$modal-overlay: rgba(#000, 0.9);
+
+
+//Удаление фото
+
+$modal-btn-yes-text: rgba(#323232, 0.8);
+
+$modal-btn-yes-hover-text: #fff;
+$modal-btn-yes-hover-bg: #ee4634;
+
+
+//Редактировать фотографию
+
+$modal-edit-label-text: #323232;
+$modal-edit-input-text: rgba(#323232, 0.8);
+$modal-edit-input-border: #d8d6d6;
+
+$modal-edit-input-active-text: #323232;
+$modal-edit-input-active-border: #28bbf0;
+
+//Кнопка добавить альбом/фото/фон
+
+$btn-add-img-border: #20b6ed;
+
+$btn-add-img-text: #28bbf0;
+$btn-add-img-bg: #fff;
+
+$btn-add-img-hover-text: #fff;
+$btn-add-img-hover-bg: #20b6ed;
+
+$modal-img-info-text: rgba(#323232, 0.8);
+
+
+//Добавить фотографии - начальное состояние (фоток не добавлено)
+
+$modal-add-label-text: #323232;
+$modal-add-title-text: rgba(#323232, 0.8);
+
+$modal-add-area-bg: #f9f9f9;
+$modal-add-area-border: #f1f1f1;
+$modal-add-area-icon: #a0a09f;
+$modal-add-area-text: rgba(#323232, 0.6);
+$modal-add-area-choose-text: rgba(#28bbf0, 0.6);
+
+$modal-add-area-icon-close: #fff;
+$modal-add-area-icon-close-border: #f9f9f9;
+$modal-add-area-icon-close-bg: #ee4634;
+
+$modal-error-text: rgba(#323232, 0.6);
+$modal-error-bg: rgba(#ffe0e0, 0.9);
+
+
+//------------ Слайдер, информация, связанная с фото
+
+$slider-icon: #f9f9f9;
+$slider-icon-hover: #fff;
+
+$slider-avatar-text: #323232;
+
+$slider-title-text: #323232;
+
+$slider-description-text: rgba(#323232, 0.8);
+$slider-hash-text: rgba(#28bbf0, 0.8);
+
+
+//Комментарии
+
+$com-title: #323232;
+$com-text: rgba(#323232, 0.8);
+$com-icon-open: #a0a09f;
+
+$com-avatar-text: #323232;
+
+$com-add-input-text: rgba(#323232, 0.6);
+$com-add-input-border: #d8d6d6;
+$com-add-input-active-border: #20b6ed;
+
+$com-add-btn-border: #20b6ed;
+$com-add-btn-text: #20b6ed;
+
+$com-add-btn-hover-text: #fff;
+$com-add-btn-hover-bg: #20b6ed;
+
+
+//Кнопка удаления
+
+$btn-del-icon: #fff;
+$btn-del-text: rgba(#fff, 0.8);
+$btn-del-hover-text: #fff;
+
+$btn-del-bg: #ee4634;
+$btn-del-hover-bg: #d94130;
+
+//Кнопка like == равна цветам кнопки удаления
+
+$btn-like-icon: #fff;
+$btn-like-text: rgba(#fff, 0.8);
+$btn-like-hover-text: #fff;
+
+$btn-like-bg: #ee4634;
+$btn-like-hover-bg: #d94130;
+
+
+//--------------Главная
+
+$main-header-avatar-text: #fff;
+
+$main-header-text: #323232; //Новое в мире
+
+//Социальные иконки
+
+$social-icon: rgba(#fff, 0.8);
+$social-icon-hover: #fff;
+
+$social-input-text: rgba(#323232, 0.8);
+$social-input-border:#d8d6d6;
+
+$social-btn-save-border: #28bbf0;
+$social-btn-save-text: #28bbf0;
+
+$social-btn-cancel-text: #28bbf0;
+
+
+//Поиск
+
+$search-plashka-bg: rgba(#f1f1f1, 0.9);
+$search-bg: #fff;
+
+$search-text: rgba(#323232, 0.6);
+$search-active-text: #323232;
+
+$search-icon: rgba(#323232, 0.6);
+$search-icon-active: rgba(#28bbf0, 0.6);
+
+$search-border: rgba(#28bbf0, 0.6);
+
+//Сообщение с сервера
+
+$notify-text: rgba(#323232, 0.9);
+$notify-bg: rgba(#fff, 0.9);
+
+$notify-shadow: rgba(0, 0, 0, 0.15);
+
+// Фотки - Новое в мире
+
+$photo-shadow: rgba(#000, 0.15);
+$photo-hover-bg: rgba(#000, 0.4);
+$photo-avatar-hover-bg: rgba(#000, 0.7);
+
+$photo-title-text: #323232;
+
+$photo-icon: #a0a09f;
+$photo-icon-text: rgba(#323232, 0.8);
+
+$photo-album-icon: #a0a09f;
+$photo-album-title: rgba(#323232, 0.8);
+$photo-album-bg: #f6f6f6;
+
+//Кнопка показать еще
+
+$btn-more-border: #20b6ed;
+
+$btn-more-text: #28bbf0;
+$btn-more-bg: #fff;
+
+$btn-more-hover-text: #fff;
+$btn-more-hover-bg: #20b6ed;
+
+
+// Мои альбомы
+
+$album-title-text: #323232;
+
+$album-icon-edit: #a0a09f;
+$album-icon-edit-hover: rgba(#323232, 0.6);
+$album-shadow: rgba(#000, 0.15);
+
+
+
+
+
+
+
