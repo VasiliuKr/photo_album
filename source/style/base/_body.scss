@@ -33,3 +33,15 @@ img {
   max-width: 100%;
   vertical-align: middle;
 }
+
+// Sticky footer
+.site-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-wrap {
+  flex: 1;
+}
+// Sticky footer end

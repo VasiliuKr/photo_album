@@ -7,9 +7,9 @@
     position: relative;
 
     &::before {
-      content: '';
       background: linear-gradient(to right, rgba(14, 14, 14, 1) 0%, rgba(14, 14, 14, 0) 60%);
       bottom: 0;
+      content: '';
       left: 0;
       opacity: .6;
       position: absolute;
@@ -75,6 +75,7 @@
   }
 
   &__link {
+    cursor: pointer;
     display: block;
 
     &:hover {
@@ -88,6 +89,7 @@
     fill: #fff;
     height: 20px;
     opacity: .8;
+    transition: all 0.2s;
     width: 20px;
   }
 }
@@ -109,6 +111,7 @@
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
   display: inline-block;
   font: 14px/1 'pantonbold', sans-serif;
   height: 40px;
