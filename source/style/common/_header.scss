@@ -1,0 +1,167 @@
+.header {
+  overflow: hidden;
+
+  &-inner-wrapper {
+    background: url('../img/bg-profile.jpg') center 50% no-repeat;
+    padding: 57px 40px 0 87px;
+    position: relative;
+
+    &::before {
+      content: '';
+      background: linear-gradient(to right, rgba(14, 14, 14, 1) 0%, rgba(14, 14, 14, 0) 60%);
+      bottom: 0;
+      left: 0;
+      opacity: .6;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 0;
+    }
+  }
+
+  &-top {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 50px;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// Profile
+.profile {
+  display: flex;
+
+  &__info {
+    margin-left: 48px;
+  }
+
+  &__photo {
+    border: 3px solid #fff;
+    border-radius: 50%;
+    max-height: 124px;
+    max-width: 124px;
+    min-height: 124px;
+    min-width: 124px;
+    overflow: hidden;
+  }
+
+  &__name {
+    color: #fff;
+    font: 21px/1 'pantonbold', sans-serif;
+    margin: 0 0 8px;
+  }
+
+  &__description {
+    color: #fff;
+    font: 16px/1.5 'proxima_nova_ltlight', sans-serif;
+    margin-bottom: 26px;
+    max-width: 450px;
+  }
+}
+
+//Social icons
+.social-list {
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    display: inline-block;
+    margin-left: 6px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  &__link {
+    display: block;
+
+    &:hover {
+      .social-icon {
+        opacity: 1;
+      }
+    }
+  }
+
+  .social-icon {
+    fill: #fff;
+    height: 20px;
+    opacity: .8;
+    width: 20px;
+  }
+}
+
+// Profile buttons
+.profile-button-icon {
+  fill: #a0a09f;
+  height: 20px;
+  width: 20px;
+}
+
+.profile-buttons {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-button {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  font: 14px/1 'pantonbold', sans-serif;
+  height: 40px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  text-decoration: none;
+  transition: all 0.2s;
+  width: 40px;
+
+  &_edit {
+    &:hover {
+      background-color: #28bbf0;
+      color: #fff;
+      width: 150px;
+
+      .profile-button-icon {
+        fill: #fff;
+      }
+
+      .profile-button__text {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &_login {
+    &:hover {
+      background-color: #28bbf0;
+      color: #fff;
+      width: 94px;
+
+      .profile-button-icon {
+        fill: #fff;
+      }
+
+      .profile-button__text {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &__text {
+    color: #fff;
+    display: inline;
+    line-height: 20px;
+    opacity: 0;
+    padding-left: 10px;
+    position: absolute;
+    transition: all 0.2s;
+    visibility: hidden;
+  }
+}

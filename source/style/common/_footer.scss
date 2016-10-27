@@ -1,0 +1,55 @@
+.footer {
+  color: #fff;
+  font: 16px/1.5 'proxima_nova_ltlight', sans-serif;
+
+  &-inner-wrapper {
+    align-items: center;
+    background: url('../img/bg-profile.jpg') center bottom no-repeat;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 64px;
+    position: relative;
+
+    &::before {
+      background: #000;
+      bottom: 0;
+      content: '';
+      left: 0;
+      opacity: 0.6;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 0;
+    }
+  }
+
+  &-left-col {
+    max-width: 480px;
+    position: relative;
+    text-align: left;
+  }
+
+  &-right-col {
+    max-width: 480px;
+    opacity: 0.4;
+    position: relative;
+    text-align: right;
+  }
+}
+
+.to-top {
+  cursor: pointer;
+  opacity: 0.8;
+  position: relative;
+  transition: all 0.25s;
+
+  &-icon {
+    fill: #fff;
+    height: 21px;
+    width: 26px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
