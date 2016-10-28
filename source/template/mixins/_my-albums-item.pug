@@ -1,0 +1,26 @@
+//-
+  Миксин для добавления альбома в раздел "Новое в мире" (стр. photo_main)
+  @param {albumName} - название альбома
+  @param {albumDescription} - описание альбома
+  @param {albumImagesNumber} - количество картинок в альбоме
+  @param {albumUrl} - ссылка на альбом
+  @param {coverImage} - путь к картинке
+  @param {editUrl} - ссылка на окно редактирования альбома  
+  @example
+   +my-albums-item("Прогулки по воде", "assets/img/album-cover.jpg", "#",  "#", "Путешествие на лодке по озеру", "assets/img/avatar.jpg", "#",  "9", "15")
+
+mixin my-albums-item(albumName, albumDescription, albumImagesNumber, albumImagesText, albumUrl, coverImage, editUrl)
+  .my-albums-item
+    a(href=`${coverUrl}` class="my-albums-item__cover-wrapper")
+      .my-albums-item__cover-hover
+        .my-albums-item__hover-text
+          .my-albums-item__hover-description #{albumDescription}
+          .my-albums-item__hover-num-wrapper
+            span.my-albums-item__hover-num #{albumImagesNumber}
+            span.my-albums-item__hover-num-text #{albumImagesText}
+      img(class="my-albums-item__cover" src=`${coverImage}` alt="Album cover")    
+    .my-albums-item__footer
+      a(class="my-albums-item__edit-link" href=`${editUrl}`)
+        +icon('edit', ['my-albums-item__icon', 'my-albums-item__icon_edit'])  
+      a(class="my-albums-item__link" href=`${albumUrl}`)
+        h3.my-albums-item__title #{albumName}

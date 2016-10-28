@@ -1,0 +1,214 @@
+// Блок "Новое в мире"
+.recent-albums {
+  display: flex;
+  justify-content: center;
+
+  &__inner-wrapper {
+    padding: 53px 0 60px;
+    width: 1180px;
+  }
+
+  &-items-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px -10px 14px;
+  }
+
+  &__title {
+    font: 42px/1 'pantonbold', sans-serif;
+    margin: 0 0 34px;
+  }
+}
+
+// Альбом в блоке "Новое в мире"
+.recent-albums-item {
+  border-radius: 3px;
+  box-shadow: 0 1px 4px $photo-shadow;
+  flex: 1 1 380px;
+  margin: 10px;
+  overflow: hidden;
+
+  // Фотка альбома
+  &__cover-wrapper {
+    display: block;
+    position: relative;
+
+    &:hover {
+
+      .recent-albums-item__cover-hover {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &__cover-icon {
+    fill: $photo-hover-icon;
+    height: 40px;
+    width: 40px;
+  }
+
+  &__cover-hover {
+    align-items: center;
+    background-color: $photo-hover-bg;
+    bottom: 0;
+    content: '';
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 0.25s;
+    visibility: hidden;
+  }
+
+
+  &__info-wrapper {
+    display: flex;
+    padding: 19px 20px 20px;
+  }
+
+  &__info {
+    margin-left: 20px;
+  }
+
+  &__avatar-wrapper {
+    display: block;
+    position: relative;
+
+    &:hover {
+
+      .recent-albums-item__avatar-hover {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &__avatar {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+  }
+
+  &__avatar-icon {
+    fill: $photo-hover-icon;
+    height: 4px;
+    width: 17px;
+  }
+
+  &__avatar-hover {
+    align-items: center;
+    background-color: $photo-avatar-hover-bg;
+    border-radius: 50%;
+    bottom: 0;
+    content: '';
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 0.25s;
+    visibility: hidden;
+  }
+
+  &__title-img {
+    color: $photo-title-text;
+    font: 16px/1 'proxima_nova_ltlight', sans-serif;
+    margin: 0 0 15px;
+  }
+
+  &__meta {
+    display: flex;
+  }
+
+  &__comments {
+    align-items: center;
+    display: flex;
+    text-decoration: none;
+
+    &-number {
+      color: $photo-album-title;
+      font: 16px/1 'pantonbold', sans-serif;
+      margin-left: 11px;
+    }
+  }
+
+  &__likes {
+    align-items: center;
+    display: flex;
+    margin-left: 17px;
+    text-decoration: none;
+
+    &-number {
+      color: $photo-album-title;
+      font: 16px/1 'pantonbold', sans-serif;
+      margin-left: 11px;
+    }
+  }
+
+  // Иконки
+  &__icon {
+    fill: $photo-icon;
+
+    &_comments {
+      height: 17px;
+      width: 20px;
+    }
+
+    &_likes {
+      height: 16px;
+      width: 20px;
+    }
+
+    &_album {
+      height: 18px;
+      width: 20px;
+    }
+  }
+
+  // Футер (обертка, название альбома, иконка)
+  &__footer {
+    align-items: center;
+    background-color: $photo-album-bg;
+    padding: 13px 23px 10px;
+  }
+
+  &__link {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    text-decoration: none;
+  }
+
+  &__title {
+    color: $photo-album-title;
+    font: 16px/1 'proxima_nova_ltsemibold', sans-serif;
+    margin: 0 0 0 8px;
+  }
+}
+
+// Кнопка (окантовка / на ховере - заливка)
+.outline-button {
+  border: 1px solid $btn-more-border;
+  border-radius: 30px;
+  color: $btn-more-text;
+  display: block;
+  font: 14px/1 "pantonbold", sans-serif;
+  margin: 0 auto;
+  max-width: 129px;
+  padding: 12px 18px;
+  text-decoration: none;
+  transition: background, color 0.4s;
+
+  &:hover {
+    background: $btn-more-hover-bg;
+    color: $btn-more-hover-text;
+  }
+}
