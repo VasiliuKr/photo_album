@@ -1,12 +1,12 @@
 section.my-albums
   .my-albums__inner-wrapper
-    h2.my-albums__title Мои альбомы
+    h2.section-title Мои альбомы
 
     a(class="my-albums-button my-albums-button_add" href="#") 
       +icon('add', ['my-albums-button-icon', 'my-albums-button-icon_add'])
       span.my-albums-button__text Добавить
 
-    .my-albums-items-wrapper
+    .my-albums__list
       +my-albums-item("Поход в горы", "Фотографии природы леса, енотов и оленей...", "2", "Фотографии",  "#", "assets/img/my-album-cover.jpg", "#")
       +my-albums-item("Животные", "Фотографии природы леса, енотов и оленей...", "26", "Фотографий", "#", "assets/img/my-album-cover.jpg", "#")
       +my-albums-item("Прогулки на лодке", "Фотографии природы леса, енотов и оленей...", "1", "Фотография", "#", "assets/img/my-album-cover.jpg", "#")

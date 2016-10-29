@@ -10,15 +10,10 @@
     width: 1180px;
   }
 
-  &-items-wrapper {
+  &__list {
     display: flex;
     flex-wrap: wrap;
     margin: -10px -10px 14px;
-  }
-
-  &__title {
-    font: 42px/1 'pantonbold', sans-serif;
-    margin: 0 0 34px;
   }
 }
 
@@ -36,15 +31,20 @@
     position: relative;
 
     &:hover {
-
-      .my-albums-item__cover-hover {
+      .my-albums-item__spinner {
         opacity: 1;
+        transform: scaleY(1);
         visibility: visible;
+      }
+
+      .my-albums-item__hover-description,
+      .my-albums-item__hover-num-wrapper {
+        transform: translateY(-150px);
       }
     }
   }
 
-  &__cover-hover {
+  &__spinner {
     align-items: center;
     background-color: $photo-hover-bg;
     bottom: 0;
@@ -57,6 +57,8 @@
     position: absolute;
     right: 0;
     top: 0;
+    transform: scaleY(0);
+    transform-origin: 50% 100%;
     transition: all 0.25s;
     visibility: hidden;
   }
@@ -73,10 +75,16 @@
   &__hover-description {
     line-height: 1.5;
     margin-bottom: 30px;
+    position: relative;
+    top: 150px;
+    transition: transform 0.25s 0.1s;
   }
 
   &__hover-num-wrapper {
     font-family: "proxima_nova_ltsemibold", sans-serif;
+    position: relative;
+    top: 150px;
+    transition: transform 0.25s 0.15s;
   }
 
   &__hover-num-text {
@@ -116,12 +124,19 @@
 
   &__link {
     text-decoration: none;
+
+    &:hover {
+      .my-albums-item__title {
+        opacity: 0.6;
+      }
+    }
   }
 
   &__title {
     color: $album-title-text;
     font: 16px/1 'proxima_nova_ltsemibold', sans-serif;
     margin: 0 0 0 8px;
+    transition: opacity 0.25s;
   }
 }
 

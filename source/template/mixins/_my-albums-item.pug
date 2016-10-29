@@ -12,7 +12,7 @@
 mixin my-albums-item(albumName, albumDescription, albumImagesNumber, albumImagesText, albumUrl, coverImage, editUrl)
   .my-albums-item
     a(href=`${coverUrl}` class="my-albums-item__cover-wrapper")
-      .my-albums-item__cover-hover
+      .my-albums-item__spinner
         .my-albums-item__hover-text
           .my-albums-item__hover-description #{albumDescription}
           .my-albums-item__hover-num-wrapper

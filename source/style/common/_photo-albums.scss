@@ -1,5 +1,5 @@
 // Блок "Новое в мире"
-.recent-albums {
+.photo-albums {
   display: flex;
   justify-content: center;
 
@@ -8,20 +8,15 @@
     width: 1180px;
   }
 
-  &-items-wrapper {
+  &__list {
     display: flex;
     flex-wrap: wrap;
     margin: -10px -10px 14px;
   }
-
-  &__title {
-    font: 42px/1 'pantonbold', sans-serif;
-    margin: 0 0 34px;
-  }
 }
 
 // Альбом в блоке "Новое в мире"
-.recent-albums-item {
+.photo-albums-item {
   border-radius: 3px;
   box-shadow: 0 1px 4px $photo-shadow;
   flex: 1 1 380px;
@@ -31,24 +26,38 @@
   // Фотка альбома
   &__cover-wrapper {
     display: block;
+    overflow: hidden;
     position: relative;
 
     &:hover {
-
-      .recent-albums-item__cover-hover {
+      .photo-albums-item__spinner {
         opacity: 1;
         visibility: visible;
+      }
+
+      .icon {
+        animation: fadeInScale 0.35s ease-in-out forwards;
+        animation-delay: 0.1s;
+      }
+
+      .photo-albums-item__cover {
+        transform: scale(1.25);
       }
     }
   }
 
-  &__cover-icon {
+  &__cover {
+    transition: all 0.25s;
+  }
+
+  &__spinner-icon {
     fill: $photo-hover-icon;
     height: 40px;
+    transform: scale(0);
     width: 40px;
   }
 
-  &__cover-hover {
+  &__spinner {
     align-items: center;
     background-color: $photo-hover-bg;
     bottom: 0;
@@ -63,6 +72,7 @@
     top: 0;
     transition: all 0.25s;
     visibility: hidden;
+    z-index: 10;
   }
 
 
@@ -80,8 +90,7 @@
     position: relative;
 
     &:hover {
-
-      .recent-albums-item__avatar-hover {
+      .photo-albums-item__avatar-hover {
         opacity: 1;
         visibility: visible;
       }
@@ -133,6 +142,12 @@
     display: flex;
     text-decoration: none;
 
+    &:hover {
+      .icon {
+        fill: $photo-icon-comment-hover;
+      }
+    }
+
     &-number {
       color: $photo-album-title;
       font: 16px/1 'pantonbold', sans-serif;
@@ -146,6 +161,12 @@
     margin-left: 17px;
     text-decoration: none;
 
+    &:hover {
+      .icon {
+        fill: $photo-icon-like-hover;
+      }
+    }
+
     &-number {
       color: $photo-album-title;
       font: 16px/1 'pantonbold', sans-serif;
@@ -156,6 +177,7 @@
   // Иконки
   &__icon {
     fill: $photo-icon;
+    transition: fill 0.25s;
 
     &_comments {
       height: 17px;
@@ -175,7 +197,6 @@
 
   // Футер (обертка, название альбома, иконка)
   &__footer {
-    align-items: center;
     background-color: $photo-album-bg;
     padding: 13px 23px 10px;
   }
@@ -185,6 +206,12 @@
     display: flex;
     justify-content: flex-end;
     text-decoration: none;
+
+    &:hover {
+      .icon {
+        fill: $photo-icon-title-hover;
+      }
+    }
   }
 
   &__title {

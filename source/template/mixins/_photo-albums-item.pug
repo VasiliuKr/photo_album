@@ -1,0 +1,38 @@
+//-
+  Миксин для добавления альбома в раздел "Новое в мире" (стр. photo_main)
+  @param {albumName} - название альбома
+  @param {coverImage} - путь к картинке альбома (первой картинке в альбоме)
+  @param {coverUrl} - ссылка с картинки (на попап с слайдером)
+  @param {albumUrl} - ссылка альбом
+  @param {coverImageTitle} - название первого фото в альбоме
+  @param {avatar} - путь к аватарке автора 
+  @param {avatarUrl} - ссылка на профиль 
+  @param {commentsNumber} - количество комментов
+  @param {likesNumber} - количество лайков
+  @example
+   +photo-albums-item("Прогулки по воде", "assets/img/album-cover.jpg", "#",  "#", "Путешествие на лодке по озеру", "assets/img/avatar.jpg", "#",  "9", "15")
+
+mixin photo-albums-item(albumName, coverImage, coverUrl, albumUrl, coverImageTitle, avatar, avatarUrl, commentsNumber, likesNumber)
+  .photo-albums-item
+    a(href=`${coverUrl}` class="photo-albums-item__cover-wrapper")
+      .photo-albums-item__spinner
+        +icon('loupe', ['photo-albums-item__spinner-icon'])
+      img(class="photo-albums-item__cover" src=`${coverImage}` alt="Album cover")
+    .photo-albums-item__info-wrapper
+      a(href=`${avatarUrl}` class="photo-albums-item__avatar-wrapper")
+        .photo-albums-item__avatar-hover
+          +icon('more', ['photo-albums-item__avatar-icon'])
+        img(class="photo-albums-item__avatar" src=`${avatar}` alt="Avatar")
+      .photo-albums-item__info
+        h4.photo-albums-item__title-img #{coverImageTitle}
+        .photo-albums-item__meta
+          a(class="photo-albums-item__comments" href="#")
+            +icon('comments', ['photo-albums-item__icon', 'photo-albums-item__icon_comments'])
+            span.photo-albums-item__comments-number #{commentsNumber}
+          a(class="photo-albums-item__likes" href="")
+            +icon('like', ['photo-albums-item__icon', 'photo-albums-item__icon_likes'])  
+            span.photo-albums-item__likes-number #{likesNumber}
+    .photo-albums-item__footer
+      a(class="photo-albums-item__link" href=`${albumUrl}`)
+        +icon('album', ['photo-albums-item__icon', 'photo-albums-item__icon_album'])  
+        h3.photo-albums-item__title #{albumName}
