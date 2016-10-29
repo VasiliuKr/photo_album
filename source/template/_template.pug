@@ -7,10 +7,8 @@ html
     include common/_head
   body
     .site-wrapper
-      if page_type!='index'
-        include common/_header
+      include common/_header
       .page-wrap
-        if page_type!='index'
-          div.content
-            block content
+        div.content
+          block content
       include common/_footer
