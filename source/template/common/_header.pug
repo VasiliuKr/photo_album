@@ -5,7 +5,7 @@ header.header
         .profile__photo
           img(class="profile__img" src="./assets/img/cherepov_anton.jpg" alt="Антон Черепов")
         .profile__info
-          h2.profile__name Антон Черепов
+          h1.profile__name Антон Черепов
           p.profile__description Я веб разработчик. Мне 24 года. Люблю путешествия, кодинг, фриланс и активный отдых.
           .profile__social
             ul.social-list
@@ -31,7 +31,8 @@ header.header
         a(class="profile-button profile-button_login" href="#") 
           +icon('off', ['profile-button-icon', 'profile-button-icon_off'])
           span.profile-button__text Выйти
-    .search-bar
-      .search-bar-inner-wrapper
-        .search-fld
-          .search-fld__button
+  .search-bar
+    .search-bar__inner-wrapper
+      form(id="search" class="search__form")
+        input(type="search" class="search__field" placeholder="Исследовать мир")          
+        +icon('search', ['search__icon'])

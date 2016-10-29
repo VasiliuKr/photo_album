@@ -267,8 +267,8 @@ $social-btn-cancel-text: #28bbf0;
 $search-plashka-bg: rgba(#f1f1f1, 0.9);
 $search-bg: #fff;
 
-$search-text: rgba(#323232, 0.6);
-$search-active-text: #323232;
+$search-text: rgba(#323232, 0.3);
+$search-active-text: rgba(#323232, 0.6);
 
 $search-icon: rgba(#323232, 0.6);
 $search-icon-active: rgba(#28bbf0, 0.6);
@@ -286,12 +286,17 @@ $notify-shadow: rgba(0, 0, 0, 0.15);
 
 $photo-shadow: rgba(#000, 0.15);
 $photo-hover-bg: rgba(#000, 0.4);
+$photo-hover-icon: #fff;
 $photo-avatar-hover-bg: rgba(#000, 0.7);
 
 $photo-title-text: #323232;
 
 $photo-icon: #a0a09f;
 $photo-icon-text: rgba(#323232, 0.8);
+$photo-icon-text-hover: rgba(#323232, 1);
+$photo-icon-comment-hover: #20b6f3;
+$photo-icon-like-hover: #ef4536;
+$photo-icon-title-hover: #20b6f3;
 
 $photo-album-icon: #a0a09f;
 $photo-album-title: rgba(#323232, 0.8);
@@ -312,13 +317,11 @@ $btn-more-hover-bg: #20b6ed;
 
 $album-title-text: #323232;
 
-$album-icon-edit: #a0a09f;
+$albums-wrapper-bg: #f6f6f6;
+$album-bg: #fff;
+
+$album-hover-text: #fff;
+
+$album-icon-edit: rgba(#323232, 0.2);
 $album-icon-edit-hover: rgba(#323232, 0.6);
 $album-shadow: rgba(#000, 0.15);
-
-
-
-
-
-
-

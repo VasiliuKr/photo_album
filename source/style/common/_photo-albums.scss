@@ -1,0 +1,248 @@
+// Блок "Новое в мире"
+.photo-albums {
+  display: flex;
+  justify-content: center;
+
+  &__inner-wrapper {
+    padding: 53px 0 60px;
+    width: 1180px;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px -10px 14px;
+  }
+}
+
+// Альбом в блоке "Новое в мире"
+.photo-albums__item {
+  border-radius: 3px;
+  box-shadow: 0 1px 4px $photo-shadow;
+  display: flex;
+  flex: 1 1 380px;
+  flex-direction: column;
+  margin: 10px;
+  overflow: hidden;
+
+  // Фотка альбома
+  &-cover-wrapper {
+    display: block;
+    overflow: hidden;
+    position: relative;
+
+    &:hover {
+      .photo-albums__item-spinner {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .icon {
+        animation: fadeInScale 0.35s ease-in-out forwards;
+        animation-delay: 0.1s;
+      }
+
+      .photo-albums-item__cover {
+        transform: scale(1.25);
+      }
+    }
+  }
+
+  &-cover {
+    transition: all 0.25s;
+  }
+
+  &-spinner-icon {
+    fill: $photo-hover-icon;
+    height: 40px;
+    transform: scale(0);
+    width: 40px;
+  }
+
+  &-spinner {
+    align-items: center;
+    background-color: $photo-hover-bg;
+    bottom: 0;
+    content: '';
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 0.25s;
+    visibility: hidden;
+    z-index: 10;
+  }
+
+
+  &-info-wrapper {
+    display: flex;
+    flex: 1;
+    padding: 19px 20px 20px;
+  }
+
+  &-info {
+    margin-left: 20px;
+  }
+
+  &-avatar-wrapper {
+    display: block;
+    max-height: 50px;
+    max-width: 50px;
+    position: relative;
+
+    &:hover {
+      .photo-albums__item-avatar-hover {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &-avatar {
+    border-radius: 50%;
+    max-height: 50px;
+    max-width: 50px;
+  }
+
+  &-avatar-icon {
+    fill: $photo-hover-icon;
+    height: 4px;
+    width: 17px;
+  }
+
+  &-avatar-hover {
+    align-items: center;
+    background-color: $photo-avatar-hover-bg;
+    border-radius: 50%;
+    bottom: 0;
+    content: '';
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 0.25s;
+    visibility: hidden;
+  }
+
+  &-title-img {
+    color: $photo-title-text;
+    font: 16px/1 'proxima_nova_ltlight', sans-serif;
+    margin: 0 0 16px;
+  }
+
+  &-meta {
+    display: flex;
+  }
+
+  &-comments {
+    align-items: center;
+    display: flex;
+    text-decoration: none;
+
+    &:hover {
+      .icon {
+        fill: $photo-icon-comment-hover;
+      }
+    }
+
+    &-number {
+      color: $photo-album-title;
+      font: 16px/1 'pantonbold', sans-serif;
+      margin-left: 11px;
+    }
+  }
+
+  &-likes {
+    align-items: center;
+    display: flex;
+    margin-left: 17px;
+    text-decoration: none;
+
+    &:hover {
+      .icon {
+        fill: $photo-icon-like-hover;
+      }
+    }
+
+    &-number {
+      color: $photo-album-title;
+      font: 16px/1 'pantonbold', sans-serif;
+      margin-left: 11px;
+    }
+  }
+
+  // Иконки
+  &-icon {
+    fill: $photo-icon;
+    transition: fill 0.25s;
+
+    &_comments {
+      height: 17px;
+      width: 20px;
+    }
+
+    &_likes {
+      height: 16px;
+      width: 20px;
+    }
+
+    &_album {
+      max-height: 18px;
+      max-width: 20px;
+      min-height: 18px;
+      min-width: 20px;
+    }
+  }
+
+  // Футер (обертка, название альбома, иконка)
+  &-footer {
+    background-color: $photo-album-bg;
+    padding: 13px 20px 10px;
+  }
+
+  &-link {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    text-decoration: none;
+
+    &:hover {
+      .icon {
+        fill: $photo-icon-title-hover;
+      }
+    }
+  }
+
+  &-title {
+    color: $photo-album-title;
+    font: 16px/1 'proxima_nova_ltsemibold', sans-serif;
+    margin: 0 0 0 9px;
+  }
+}
+
+// Кнопка (окантовка / на ховере - заливка)
+.outline-button {
+  border: 1px solid $btn-more-border;
+  border-radius: 30px;
+  color: $btn-more-text;
+  display: block;
+  font: 14px/1 "pantonbold", sans-serif;
+  margin: 0 auto;
+  max-width: 129px;
+  padding: 12px 18px;
+  text-decoration: none;
+  transition: background, color 0.4s;
+
+  &:hover {
+    background: $btn-more-hover-bg;
+    color: $btn-more-hover-text;
+  }
+}
