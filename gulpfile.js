@@ -38,3 +38,13 @@ $.gulp.task('default', $.gulp.series(
     'serve'
   )
 ));
+
+$.gulp.task('make_dist', $.gulp.parallel(
+  'dist.sass',
+  'dist.js:foundation',
+  'dist.js:process',
+  'dist.css:foundation',
+  'dist.sprite:svg',
+  'dist.image',
+  'dist.fonts'
+));
