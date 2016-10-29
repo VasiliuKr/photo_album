@@ -4,7 +4,7 @@ h1.index-title Регистрация
 form.form-index
   label.form-index__label
     +icon('name',['form-index__icon'])
-    input.form-inde__input(name="name" id= "name" placeholder="Имя")
+    input.form-index__input(name="name" id= "name" placeholder="Имя")
   label.form-index__label
     +icon('envelope',['form-index__icon'])
     input.form-index__input(name="mail" id="mail" placeholder="Электронная почта")
@@ -14,6 +14,6 @@ form.form-index
   .form-index__text Ваши данные остаются строго конфеденциальны
   input.form-index__button.button(name="button" type="submit" value="Создать аккаунт")
   .form-index__footer
-    span.form-index__footer_text Уже зарегистрированы?
-    a.form-index__footer_link(href="#") Войти
+    span.form-index__text Уже зарегистрированы?
+    a.form-index__link(href="#") Войти
 
