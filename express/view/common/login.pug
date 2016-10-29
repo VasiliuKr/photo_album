@@ -1,0 +1,21 @@
+block login
+
+.window__login
+    form.form.form__login
+        label.form__label
+            +icon('envelope',['form__input-icon'])
+            input.form__input(name="mail" id="mail" placeholder="Электронная почта")
+        label.form__label
+            +icon('password',['form__input-icon'])
+            input.form__input(name="password" id="password" placeholder="Пароль")
+        a.login__forget(href="#")
+            span.login__forget-text Забыли пароль?
+        .login__form-error
+            span E-mail или пароль не верен
+        button.button.login__button
+        span.button__text Войти
+    .account__question
+        span.account__question-text Нет аккаунта?
+        a.account__question-link(href="#") Зарегистрироваться
+
+

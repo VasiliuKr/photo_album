@@ -33,146 +33,145 @@
 
   ajaxForm.prototype.ajaxDone = function(data) {
     if(data.href) {
-      setTimeout('location.hash="";location.pathname="'+data.href+'"',2000);
+      setTimeout('location.hash="";location.pathname="' + data.href + '"', 2000);
     }
-    if(data.error){
-      form.resultMessage(data.error,'error_windows')
-    }else if(data.message){
+    if(data.error) {
+      form.resultMessage(data.error, 'error_windows');
+    }else if(data.message) {
       form.resultMessage(data.message);
-      form.form[0].reset()
+      form.form[0].reset();
     }
     form.form.removeClass('disabled');
-    form.form.find('[type=submit]').prop('disabled',false);
+    form.form.find('[type=submit]').prop('disabled', false);
   };
 
   ajaxForm.prototype.ajaxFail = function(data) {
-    form.resultMessage(form.config.errMessage.failAjax,'error_windows');
+    form.resultMessage(form.config.errMessage.failAjax, 'error_windows');
     form.form.removeClass('disabled');
-    form.form.find('[type=submit]').prop('disabled',false);
+    form.form.find('[type=submit]').prop('disabled', false);
   };
 
-  ajaxForm.prototype.resultMessage = function(text,className) {
-    var message_windows=$('<div/>',{
-      class:'message_windows '+className
+  ajaxForm.prototype.resultMessage = function(text, className) {
+    var messageWindows = $('<div/>', {
+      'class': 'message_windows ' + className
     });
-    var close_btn=$('<input/>',{
-      value:'Закрыть',
-      type:'button',
-      class:'message_windows__button'
-    }).on('click',function(){
-      $(this).parent().parent().remove()
+    var closeButton = $('<input/>', {
+      value: 'Закрыть',
+      type: 'button',
+      'class': 'message_windows__button'
+    }).on('click', function() {
+      $(this).parent().parent().remove();
     });
-    var content=$('<div/>',{
-      class:'message_windows__content',
-      text:text
+    var content = $('<div/>', {
+      'class': 'message_windows__content',
+      text: text
     });
-    content.append(close_btn);
-    message_windows.append(content);
-    $('body').append(message_windows);
-    message_windows.addClass('open');
-    setTimeout('$(".message_windows .message_windows__button").click()',3000)
+    content.append(closeButton);
+    messageWindows.append(content);
+    $('body').append(messageWindows);
+    messageWindows.addClass('open');
+    setTimeout( '$(".message_windows .message_windows__button").click()', 3000);
   };
 
-  ajaxForm.prototype.vlidate=function(element){
+  ajaxForm.prototype.vlidate = function( block ) {
     if(form.form.hasClass('disabled'))return;
-    element=$(element);
-    if(element.val().length<3){
-      element.parent().addClass(form.config.error_class);
-      element.parent().attr(form.config.error_message_param,form.config.errMessage[element.attr('name')]);
-      element
-        .off( "input")
-        .off( "paste")
+    var $block = $(block);
+    if($block.val().length < 3) {
+      $block.parent().addClass( form.config.error_class);
+      $block.parent().attr( form.config.error_message_param, form.config.errMessage[$block.attr('name')]);
+      $block
+        .off( 'input')
+        .off( 'paste')
         .on('input',  function() {
-          form.vlidate(this)
+          form.vlidate(this);
         })
         .on('paste',  function() {
-          form.vlidate(this)
+          form.vlidate(this);
         });
       return false;
-    }else {
-      element.parent().removeClass(form.config.error_class);
+    } else {
+      $block.parent().removeClass(form.config.error_class);
       return true;
     }
   };
 
-  ajaxForm.prototype.init=function(){
-    var elements=this.form.find('[required]');
-    $.each(elements,function(){
+  ajaxForm.prototype.init = function() {
+    var elements = this.form.find('[required]');
+    $.each(elements, function() {
       $(this)
-        .attr('required',false)
+        .attr('required', false)
         .addClass('required');
     });
-    this.form.find('[type=file]').on('change',function(){
-      var file_name;
-      var input=this;
-      var $this=$(input);
-      if( fileApi && input.files[0] )
-        file_name = input.files[ 0].name;
-      else
-        file_name = $this.val();
-
-      if(!file_name.length){
-        $this.parent().find('span').text($this.attr('default_text'))
-      }else{
-        $this.parent().find('span').text(file_name)
+    this.form.find('[type=file]').on('change', function() {
+      var fileName;
+      var input = this;
+      var $this = $(input);
+      if( fileApi && input.files[0] ) {
+        fileName = input.files[0].name;
+      } else {
+        fileName = $this.val();
       }
-    }).each(function(){
-      $this=$(this);
-      $this.attr('default_text',$this.parent().find('span').text())
+
+      if(!fileName.length) {
+        $this.parent().find('span').text($this.attr('default_text'));
+      }else{
+        $this.parent().find('span').text(fileName);
+      }
+    }).each(function() {
+      var $this = $(this);
+      $this.attr('default_text', $this.parent().find('span').text());
     });
     this.form
-      .on('submit',function(e){
+      .on('submit', function(e) {
         e.preventDefault();
-        var is_validate=true;
-        $this=$(this);
-        elements=$this.find('.required');
-        $.each(elements,function(){
-          var $this=$(this);
-          is_validate=form.vlidate($this) && is_validate;
+        var isValidate = true;
+        var $this = $(this);
+        elements = $this.find('.required');
+        $.each(elements, function() {
+          $this = $(this);
+          isValidate = form.vlidate($this) && isValidate;
         });
 
-        if(!is_validate)return;
+        if(!isValidate)return;
         form.form.addClass('disabled');
-        form.form.find('[type=submit]').prop('disabled',true);
-        var ajax_parametr={
-          url: $this.attr('action')||form.config.url,
-          method:$this.attr('method')||form.config.method,
-          dataType:$this.attr('dataType')||form.config.dataType
+        form.form.find('[type=submit]').prop('disabled', true);
+        var ajaxParametr = {
+          url: $this.attr('action') || form.config.url,
+          method: $this.attr('method') || form.config.method,
+          dataType: $this.attr('dataType') || form.config.dataType
         };
-        if($this.find('[type=file]').length>0){
-          ajax_parametr['data']=new FormData($this[0]);
-          ajax_parametr['processData']=false;
-          ajax_parametr['contentType']=false;
+        if($this.find('[type=file]').length > 0) {
+          ajaxParametr.data = new FormData($this[0]);
+          ajaxParametr.processData = false;
+          ajaxParametr.contentType = false;
         }else{
-          ajax_parametr['data']=JSON.stringify($this.serializeObject());
-          ajax_parametr['beforeSend']= function (xhr) {
+          ajaxParametr.data = JSON.stringify($this.serializeObject());
+          ajaxParametr.beforeSend = function(xhr) {
             xhr.setRequestHeader('content-type', 'application/json');
-          }
+          };
         }
-          $.ajax(ajax_parametr)
-          .done(form.ajaxDone)
-          .fail(form.ajaxFail);
+        $.ajax(ajaxParametr)
+        .done(form.ajaxDone)
+        .fail(form.ajaxFail);
       })
-      .on('reset',function(e){
-        $this=$(this);
+      .on('reset', function(e) {
+        var $this = $(this);
         $this.find('.required')
-          .off( "input")
-          .off( "paste")
-          .parent().removeClass(form.config.error_class)
-      })
+          .off( 'input')
+          .off( 'paste')
+          .parent().removeClass( form.config.error_class );
+      });
   };
 
-  $.fn.ajaxForm=function(options){
-    $(this).each(function(){
-      new ajaxForm(this,options);
+  $.fn.ajaxForm = function(options) {
+    $(this).each(function() {
+      return new ajaxForm(this, options);
     });
     return this;
-  }
-
+  };
 })(jQuery);
 
-$.fn.serializeObject = function()
-{
+$.fn.serializeObject = function() {
   var o = {};
   var a = this.serializeArray();
   $.each(a, function() {
