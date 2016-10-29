@@ -8,10 +8,11 @@ block variables
   - var keywords = 'Стартовая страница общего проекта'
 
 block content
-  .content__window
-    block login
-      include ../common/login.pug
-    block registration
-      include ../common/registration.pug
-    block password
-      include ../common/password.pug
+  .wrapper
+    .content
+      .window__index
+        include ../common/_authorization/login
+      .window__index
+        include ../common/_authorization/registration
+      .window__index
+        include ../common/_authorization/password

@@ -1,0 +1,18 @@
+block registration
+
+h1.window__index-title Регистрация
+form.form__index
+    label.form__index-label
+        +icon('name',['form__index-icon'])
+        input.form__index-input(name="name" id= "name" placeholder="Имя")
+    label.form__index-label
+        +icon('envelope',['form__index-icon'])
+        input.form__index-input(name="mail" id="mail" placeholder="Электронная почта")
+    label.form__index-label
+        +icon('password',['form__index-icon'])
+        input.form__index-input(name="password" id="password" placeholder="Пароль")
+    .form__index-text Ваши данные остаются строго конфеденциальны
+    input.form__index-button.button(name="button" type="submit" value="Создать аккаунт")
+    .form__index-question
+        span.form__index-question_text Уже зарегистрированы?
+        a.form__index-question_link(href="#") Войти
