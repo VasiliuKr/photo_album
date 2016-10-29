@@ -18,33 +18,36 @@
 }
 
 // Альбом в блоке "Мои альбомы"
-.my-albums-item {
+.my-albums__item {
+  background-color: $album-bg;
   border-radius: 3px;
   box-shadow: 0 1px 4px $photo-shadow;
+  display: flex;
+  flex-direction: column;
   margin: 10px;
   max-width: 280px;
   overflow: hidden;
 
   // Фотка альбома
-  &__cover-wrapper {
+  &-cover-wrapper {
     display: block;
     position: relative;
 
     &:hover {
-      .my-albums-item__spinner {
+      .my-albums__item-spinner {
         opacity: 1;
         transform: scaleY(1);
         visibility: visible;
       }
 
-      .my-albums-item__hover-description,
-      .my-albums-item__hover-num-wrapper {
+      .my-albums__item-hover-description,
+      .my-albums__item-hover-num-wrapper {
         transform: translateY(-150px);
       }
     }
   }
 
-  &__spinner {
+  &-spinner {
     align-items: center;
     background-color: $photo-hover-bg;
     bottom: 0;
@@ -63,7 +66,7 @@
     visibility: hidden;
   }
 
-  &__hover-text {
+  &-hover-text {
     color: $album-hover-text;
     display: flex;
     flex-direction: column;
@@ -72,7 +75,7 @@
     padding: 38px 22px;
   }
 
-  &__hover-description {
+  &-hover-description {
     line-height: 1.5;
     margin-bottom: 30px;
     position: relative;
@@ -80,19 +83,19 @@
     transition: transform 0.25s 0.1s;
   }
 
-  &__hover-num-wrapper {
+  &-hover-num-wrapper {
     font-family: "proxima_nova_ltsemibold", sans-serif;
     position: relative;
     top: 150px;
     transition: transform 0.25s 0.15s;
   }
 
-  &__hover-num-text {
+  &-hover-num-text {
     padding-left: 4px;
   }
 
   // Иконки
-  &__icon {
+  &-icon {
     fill: $album-icon-edit;
     transition: all 0.25s;
 
@@ -103,15 +106,15 @@
   }
 
   // Футер (обертка, название альбома, иконка)
-  &__footer {
+  &-footer {
     align-items: center;
-    background-color: $album-footer-bg;
     display: flex;
+    flex: 1;
     justify-content: space-between;
     padding: 13px 21px;
   }
 
-  &__edit-link {
+  &-edit-link {
     cursor: pointer;
 
     &:hover {
@@ -122,17 +125,17 @@
     }
   }
 
-  &__link {
+  &-link {
     text-decoration: none;
 
     &:hover {
-      .my-albums-item__title {
+      .my-albums__item-title {
         opacity: 0.6;
       }
     }
   }
 
-  &__title {
+  &-title {
     color: $album-title-text;
     font: 16px/1 'proxima_nova_ltsemibold', sans-serif;
     margin: 0 0 0 8px;
