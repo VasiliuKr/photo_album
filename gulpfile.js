@@ -48,3 +48,6 @@ $.gulp.task('make_dist', $.gulp.parallel(
   'dist.image',
   'dist.fonts'
 ));
+
+
+$.gulp.task('dev', $.gulp.parallel('watch','serve'));

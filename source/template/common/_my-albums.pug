@@ -1,11 +1,8 @@
 section.my-albums
   .my-albums__inner-wrapper
     h2.section-title Мои альбомы
-    
-    .button-add-wrapper
-      a(class="button-circle button-circle--add" href="#") 
-        +icon('add', ['button-circle-icon', 'button-circle-icon--add'])
-        span.button-circle--text Добавить
+    a(class="my-albums-button my-albums-button_add open-modal" href="#" data-modal-class="modal-add-album") 
+      +icon('add', ['my-albums-button-icon', 'my-albums-button-icon_add'])
 
     .my-albums__list
       +my-albums-item("Поход в горы", "Фотографии природы леса, енотов и оленей...", "2", "Фотографии",  "#", "assets/img/my-album-cover.jpg", "#")
