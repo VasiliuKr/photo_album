@@ -75,11 +75,29 @@
   }
 
   .icon-like {
-    fill: $button-icon-color;
-    height: 17px;
-    width: 21px;
+    fill: transparent;
+    height: 19px;
+    stroke: $button-icon-color;
+    stroke-width: 3px;
+    transition: all 0.2s;
+    width: 23px;
+  }
+
+  &:hover {
+    .icon-like {
+      fill: $button-icon-color;
+    }
+  }
+
+  // К кнопкам like, лайкнутых фоток добавляем класс liked
+  &.liked {
+    .icon-like {
+      fill: $button-icon-color;
+    }
   }
 }
+
+
 
 // Модификатор - Кнопка с иконкой ("Закрыть")
 .button--icon-close {

@@ -328,11 +328,11 @@ $album-shadow: rgba(#000, 0.15);
 
 
 // Базовые стили для всех кнопок
-$button-primary-color: #20b6ed;
-$button-primary-color-hover: #24b0e3;
+$button-primary-color: hsla(196, 87%, 55%, 1);
+$button-primary-color-hover: hsla(196, 87%, 35%, 1);
 
-$button-secondary-color: #ee4634;
-$button-secondary-color-hover: #d94130;
+$button-secondary-color: hsla(6, 85%, 57%, 1);
+$button-secondary-color-hover: hsla(6, 85%, 37%, 1);
 
 $button-primary-text-color: #fff;
 $button-secondary-text-color: #28bbf0;
