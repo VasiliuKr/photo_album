@@ -6,13 +6,13 @@ form.form-index
     +icon('name',['form-index__icon'])
     input.form-index__input(name="name" id= "name" placeholder="Имя")
   label.form-index__label
-    +icon('envelope',['form-index__icon'])
+    +icon('envelope',['form-index__icon','form-index__icon-mail'])
     input.form-index__input(name="mail" id="mail" placeholder="Электронная почта")
   label.form-index__label
     +icon('password',['form-index__icon'])
     input.form-index__input(name="password" id="password" placeholder="Пароль")
   .form-index__text Ваши данные остаются строго конфеденциальны
-  input.form-index__button.button(name="button" type="submit" value="Создать аккаунт")
+  input.button.button--full-width(name="button" type="submit" value="Создать аккаунт")
   .form-index__footer
     span.form-index__text Уже зарегистрированы?
     a.form-index__link(href="#") Войти

@@ -1,4 +1,4 @@
-extends ../_template
+extends ../_template_index.pug
 
 block variables
   - var title = 'Home page'
@@ -9,7 +9,6 @@ block variables
 
 block content
   .wrapper
-    .content
       .content__index.content__index-login
         include ../common/authorization/_login
       .content__index.content__index-registration

@@ -1,4 +1,8 @@
 @import 'base/body';
 @import 'base/colors';
+@import 'pages/index';
 @import 'common/header';
 @import 'common/footer';
+@import 'common/authorization/login';
+@import 'common/authorization/password';
+@import 'common/authorization/registration';
