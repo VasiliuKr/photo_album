@@ -42,7 +42,7 @@
         animation-delay: 0.1s;
       }
 
-      .photo-albums-item__cover {
+      .photo-albums__item-cover {
         transform: scale(1.25);
       }
     }
@@ -228,21 +228,8 @@
   }
 }
 
-// Кнопка (окантовка / на ховере - заливка)
-.outline-button {
-  border: 1px solid $btn-more-border;
-  border-radius: 30px;
-  color: $btn-more-text;
+.button--outline-albums {
   display: block;
-  font: 14px/1 "pantonbold", sans-serif;
   margin: 0 auto;
-  max-width: 129px;
-  padding: 12px 18px;
-  text-decoration: none;
-  transition: background, color 0.4s;
-
-  &:hover {
-    background: $btn-more-hover-bg;
-    color: $btn-more-hover-text;
-  }
+  max-width: 128px;
 }

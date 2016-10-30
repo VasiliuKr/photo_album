@@ -327,3 +327,17 @@ $album-hover-text: #fff;
 $album-icon-edit: rgba(#323232, 0.2);
 $album-icon-edit-hover: rgba(#323232, 0.6);
 $album-shadow: rgba(#000, 0.15);
+
+
+// Базовые стили для всех кнопок
+$button-primary-color: hsla(196, 87%, 55%, 1);
+$button-primary-color-hover: hsla(196, 87%, 35%, 1);
+
+$button-secondary-color: hsla(6, 85%, 57%, 1);
+$button-secondary-color-hover: hsla(6, 85%, 37%, 1);
+
+$button-primary-text-color: #fff;
+$button-secondary-text-color: #28bbf0;
+$button-simple-text-color: #323232;
+
+$button-icon-color: #fff;

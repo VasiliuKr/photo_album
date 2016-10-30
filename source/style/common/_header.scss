@@ -93,81 +93,18 @@
   }
 }
 
-// Profile buttons
-.profile-button-icon {
-  fill: $btn-circle-icon;
-  height: 20px;
-  width: 20px;
-}
-
+// Контейнер для кнопок в хеддере
 .profile-buttons {
   align-items: flex-end;
   display: flex;
   flex-direction: column;
   margin-top: -37px;
-}
 
-.profile-button {
-  background: $btn-circle-bg;
-  border-radius: 20px;
-  box-shadow: 0 1px 4px $btn-circle-shadow;
-  cursor: pointer;
-  display: inline-block;
-  font: 14px/1 'pantonbold', sans-serif;
-  height: 40px;
-  margin-bottom: 10px;
-  overflow: hidden;
-  padding: 10px;
-  position: relative;
-  text-decoration: none;
-  transition: all 0.2s;
-  width: 40px;
-
-  &_edit {
-    &:hover {
-      background-color: $btn-circle-hover-bg;
-      color: $btn-circle-text;
-      width: 150px;
-
-      .profile-button-icon {
-        fill: $btn-circle-icon-hover;
-      }
-
-      .profile-button__text {
-        opacity: 1;
-        visibility: visible;
-      }
-    }
-  }
-
-  &_login {
-    &:hover {
-      background-color: $btn-circle-hover-bg;
-      color: $btn-circle-text;
-      width: 94px;
-
-      .profile-button-icon {
-        fill: $btn-circle-icon-hover;
-      }
-
-      .profile-button__text {
-        opacity: 1;
-        visibility: visible;
-      }
-    }
-  }
-
-  &__text {
-    color: $btn-circle-text;
-    display: inline;
-    line-height: 20px;
-    opacity: 0;
-    padding-left: 10px;
-    position: absolute;
-    transition: all 0.2s;
-    visibility: hidden;
+  .button-circle {
+    margin-bottom: 10px;
   }
 }
+
 
 // Строка поиска
 .search-bar {
