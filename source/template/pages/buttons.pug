@@ -33,11 +33,19 @@ block content
 
     .link-wrapper
       .left
-        //- Базовая кнопка с измененным цветом
-        a(href="#" class="button button--theme-secondary") Да
+        //- Базовая кнопка с измененным цветом фона появляющимся при ховере
+        a(href="#" class="button button--transparent") Отменить
         //-
       .right
-        code class="button button--theme-secondary"
+        code class="button button--transparent"
+
+    .link-wrapper
+      .left
+        //- Базовая кнопка с измененным цветом фона появляющимся при ховере
+        a(href="#" class="button button--theme-secondary button--transparent-secondary") Да
+        //-
+      .right
+        code class="button button--theme-secondary button--transparent-secondary"
 
     .link-wrapper
       .left

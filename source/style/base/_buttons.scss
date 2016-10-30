@@ -45,6 +45,28 @@
   }
 }
 
+// Модификатор - фон прозрачный, на ховере - синий
+.button--transparent {
+  background: transparent;
+  color: $button-primary-color;
+
+  &:hover {
+    background: $button-primary-color;
+    color: $button-primary-text-color;
+  }
+}
+
+// Модификатор - фон прозрачный, на ховере - красный
+.button--transparent-secondary {
+  background: transparent;
+  color: $button-simple-text-color;
+
+  &:hover {
+    background: $button-secondary-color;
+    color: $button-primary-text-color;
+  }
+}
+
 // Модификатор - Кнопка с иконкой ("Удалить")
 .button--icon-delete {
   align-items: center;
