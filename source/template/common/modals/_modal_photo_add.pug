@@ -42,12 +42,14 @@
 									+icon('close')
 								.add-photo__item-image
 									img.add-photo__image(src="/assets/img/bg-profile.jpg", alt="photo__image")
-
-					.modal__error
-						.error-message Выбран неверный формат изображений. Попробуйте снова
+					.modal__errors
+						.modal__error-item
+							.modal__error-message Выбран неверный формат изображений. Попробуйте снова
+						.modal__error-item
+							.modal__error-message Заполните поле название
 				.modal__footer
-					button.modal-btn-save(type='submit') Сохранить
-					button.modal-btn-cancel(class='modal-action-close') Отменить
+					button.modal__btn-save(type='submit') Сохранить
+					button.modal__btn-cancel(class='modal-action-close') Отменить
 
 
 	
