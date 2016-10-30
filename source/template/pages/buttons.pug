@@ -1,0 +1,109 @@
+extends ../_template
+
+block variables
+  - var title = 'Кнопочки'
+  - var descrption = 'Кнопочки'
+  - var page_type = 'source'
+
+block content
+  .buttons-container
+    .link-wrapper
+      .left
+        //- Базовая кнопка
+        a(href="#" class="button") Закрыть
+        //-
+      .right
+        code class="button"
+    
+    .link-wrapper
+      .left
+        //- Базовая кнопка на всю ширину контейнера
+        a(href="#" class="button button--fullwidth") Войти
+        //-
+      .right
+        code class="button button--fullwidth"
+
+    .link-wrapper
+      .left
+        //- Базовая кнопка с обводкой вместо заливки
+        a(href="#" class="button button--outline") Показать еще  
+        //-
+      .right
+        code class="button button--outline"
+
+    .link-wrapper
+      .left
+        //- Базовая кнопка с измененным цветом
+        a(href="#" class="button button--theme-secondary") Да
+        //-
+      .right
+        code class="button button--theme-secondary"
+
+    .link-wrapper
+      .left
+        //- Базовая кнопка с измененным цветом и иконкой "удалить"
+        a(class="button button--theme-secondary button--icon-delete" href="#")
+          +icon('delete', [''])
+          span.button--icon-text Удалить
+        //-
+      .right
+        code class="button button--theme-secondary button--icon-delete"
+    
+    .link-wrapper
+      .left
+        //- Базовая кнопка с измененным цветом и иконкой "лайк"
+        a(class="button button--theme-secondary button--icon-like" href="#")
+          +icon('like', [''])
+          span.button--icon-text 16
+        //-
+      .right
+        code class="button button--theme-secondary button--icon-like"
+
+    .link-wrapper
+      .left
+        //- Круглая кнопка "закрыть"
+        a(class="button button--theme-secondary button--icon-close" href="#")
+          +icon('close', [''])
+        //-
+      .right
+        code class="button button--theme-secondary button--icon-close"
+
+    .link-wrapper
+      .left
+        //- Круглая раскрывающаяся кнопка "редактировать"
+        a(class="button-circle button-circle--edit" href="#") 
+          +icon('edit', ['button-circle-icon', 'button-circle-icon--edit'])
+          span.button-circle--text Редактировать
+        //-
+      .right
+        code class="button-circle button-circle--edit"
+
+    .link-wrapper
+      .left
+        //- Круглая раскрывающаяся кнопка "Выйти"
+        a(class="button-circle button-circle--login" href="#")
+          +icon('off', ['button-circle-icon', 'button-circle-icon--login'])
+          span.button-circle--text Выйти
+        //-
+      .right
+        code class="button-circle button-circle--login"
+
+    .link-wrapper
+      .left
+        //- Круглая раскрывающаяся кнопка "На главную"
+        a(class="button-circle button-circle--home" href="#")
+          +icon('home', ['button-circle-icon', 'button-circle-icon--home'])
+          span.button-circle--text На главную
+        //-
+      .right
+        code class="button-circle button-circle--home"
+
+    .link-wrapper
+      .left
+        //- Круглая раскрывающаяся кнопка "Добавить"
+        a(class="button-circle button-circle--add" href="#")
+          +icon('add', ['button-circle-icon', 'button-circle-icon--add'])
+          span.button-circle--text Добавить
+        //-
+      .right
+        code class="button-circle button-circle--add"        

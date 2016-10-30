@@ -1,0 +1,175 @@
+// Базовая кнопка - заливка, на ховере - меняется цвет заливки
+.button {
+  background: $button-primary-color;
+  border: 0;
+  border-radius: 30px;
+  color: $button-primary-text-color;
+  display: inline-block;
+  font: 14px/1 "pantonbold", sans-serif;
+  outline: none;
+  overflow: hidden;
+  padding: 13px 19px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.4s;
+
+  &:hover {
+    background-color: $button-primary-color-hover;
+  }
+}
+
+.button--fullwidth {
+  width: 100%;
+}
+
+
+// Модификатор - окантовка, на ховере - меняется цвет заливки + меняется цвет текста
+.button--outline {
+  background: transparent;
+  border: 1px solid $button-primary-color;
+  color: $button-secondary-text-color;
+  padding: 12px 18px;
+
+  &:hover {
+    background: $button-primary-color;
+    color: $button-primary-text-color;
+  }
+}
+
+// Модификатор - красный цвет фона
+.button--theme-secondary {
+  background: $button-secondary-color;
+
+  &:hover {
+    background: $button-secondary-color-hover;
+  }
+}
+
+// Модификатор - Кнопка с иконкой ("Удалить")
+.button--icon-delete {
+  align-items: center;
+  display: inline-flex;
+  padding: 12px 20px;
+
+  .button--icon-text {
+    opacity: 0.8;
+    padding-left: 10px;
+  }
+
+  .icon-delete {
+    fill: $button-icon-color;
+    height: 16px;
+    width: 12px;
+  }
+}
+
+// Модификатор - Кнопка с иконкой ("Like")
+.button--icon-like {
+  align-items: center;
+  display: inline-flex;
+  padding: 12px 20px 11px;
+
+  .button--icon-text {
+    font-size: 16px;
+    padding-left: 10px;
+  }
+
+  .icon-like {
+    fill: $button-icon-color;
+    height: 17px;
+    width: 21px;
+  }
+}
+
+// Модификатор - Кнопка с иконкой ("Закрыть")
+.button--icon-close {
+  align-items: center;
+  border: 3px solid $button-icon-color;
+  border-radius: 50%;
+  display: flex;
+  height: 26px;
+  justify-content: center;
+  padding: 0;
+  width: 26px;
+
+  .icon-close {
+    fill: $button-icon-color;
+    height: 10px;
+    vertical-align: middle;
+    width: 10px;
+  }
+}
+
+
+// Круглые кнопки с выезжающим тектом ("Редактировать", "Выйти", "Главная")
+.button-circle {
+  background: $btn-circle-bg;
+  border-radius: 20px;
+  box-shadow: 0 1px 4px $btn-circle-shadow;
+  cursor: pointer;
+  display: inline-block;
+  font: 14px/1 'pantonbold', sans-serif;
+  height: 40px;
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  text-decoration: none;
+  transition: all 0.3s;
+  width: 40px;
+
+  &-icon {
+    fill: $btn-circle-icon;
+    height: 20px;
+    width: 20px;
+  }
+
+  &--text {
+    color: $btn-circle-text;
+    display: inline;
+    line-height: 20px;
+    opacity: 0;
+    padding-left: 10px;
+    position: absolute;
+    transition: all 0.3s;
+    visibility: hidden;
+    width: 100%;
+  }
+
+  &:hover {
+    background-color: $btn-circle-hover-bg;
+    color: $btn-circle-text;
+
+    .button-circle-icon {
+      fill: $btn-circle-icon-hover;
+    }
+
+    .button-circle--text {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &--edit {
+    &:hover {
+      width: 150px;
+    }
+  }
+
+  &--login {
+    &:hover {
+      width: 94px;
+    }
+  }
+
+  &--home {
+    &:hover {
+      width: 132px;
+    }
+  }
+
+  &--add {
+    &:hover {
+      width: 112px;
+    }
+  }
+}
