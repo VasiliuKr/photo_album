@@ -28,6 +28,7 @@ app.use(bodyParser.json());
 /**/
 //===Маршруты====
 app.use('/',require('./routes/middleware'));
+app.use('/ajax/user',require('./routes/ajax/user'));
 app.use('/ajax',require('./routes/ajax'));
 app.use('/',require('./routes/index'));
 //===============

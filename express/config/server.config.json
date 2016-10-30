@@ -1,15 +1,29 @@
 {
-  "http":{
-    "port":3000,
-    "host":"localhost",
-    "publicRoot":"dist",
-    "uploadDir":"upload"
+  "http": {
+    "port": 3000,
+    "host": "localhost",
+    "publicRoot": "dist",
+    "uploadDir": "upload"
   },
-  "db":{
-    "host":"localhost",
-    "port":"27017",
-    "name":"photo_albom",
-    "user":"",
-    "password":""
+  "db": {
+    "host": "localhost",
+    "port": "27017",
+    "name": "photo_albom",
+    "user": "",
+    "password": ""
+  },
+  "mail":{
+    "fromName":"Photo albom",
+    "fromMail":"photoalbom@max-s.net",
+    "subject":"Сообщения с сайта ФОТОАЛЬБОМ",
+    "smtp":{
+      "host":"smtp.yandex.ua",
+      "port":465,
+      "secure":true,
+      "auth":{
+        "user":"photoalbom@max-s.net",
+        "pass":"hbHBgbh7T76by"
+      }
+    }
   }
 }

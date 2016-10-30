@@ -1,10 +1,10 @@
 block login
 
 .window__login
-    form.form.form__login
+    form.form.form__login(method='POST' action='/ajax/user/login')
         label.form__label
             +icon('envelope',['form__input-icon'])
-            input.form__input(name="mail" id="mail" placeholder="Электронная почта")
+            input.form__input(name="login" id="mail" placeholder="Электронная почта")
         label.form__label
             +icon('password',['form__input-icon'])
             input.form__input(name="password" id="password" placeholder="Пароль")

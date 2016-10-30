@@ -8,5 +8,17 @@ route.get('/',(req,res)=> {
   res.render('index')
 });
 
+route.get('/logout',(req,res)=> {
+  console.log('logout:'+req.session.userId);
+  req.session.isAuth=false;
+  req.session.userId=false;
+  res.redirect('/');
+});
+
+
+route.get('/photo_main',(req,res)=> {
+  console.log('photo_main:'+req.session.userId);
+  res.render('photo_main')
+});
 
 module.exports = route;
