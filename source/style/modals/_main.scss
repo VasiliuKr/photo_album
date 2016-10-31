@@ -77,7 +77,7 @@
     vertical-align: top;
   }
 
-  %modal__input-placeholder {
+  %modal-input-placeholder {
     background-color: $modal-bg;
     border: 1px solid $modal-edit-input-border;
     border-radius: 20px;
@@ -94,11 +94,11 @@
   }
 
   &__input {
-    @extend %modal__input-placeholder;
+    @extend %modal-input-placeholder;
   }
 
   &__textarea {
-    @extend %modal__input-placeholder;
+    @extend %modal-input-placeholder;
 
     min-height: 120px;
     outline: 0;

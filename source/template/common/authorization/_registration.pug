@@ -12,7 +12,8 @@ form.form-index.form-index--registration
     input.form-index__input(name="password" id="password" placeholder="Пароль")
     +icon('password',['form-index__icon'])
   .form-index__text Ваши данные остаются строго конфеденциальны
-  input.button.button--full-width(name="button" type="submit" value="Создать аккаунт")
+  label.form-index__label.form-index__label--button
+    input.button.button--full-width(name="button" type="submit" value="Создать аккаунт")
   .form-index__footer
     span.form-index__text Уже зарегистрированы?
     a.form-index__link(href="/#") Войти
