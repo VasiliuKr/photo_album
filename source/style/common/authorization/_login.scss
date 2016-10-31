@@ -1,0 +1,122 @@
+.index-title {
+  color: $onform-header-text;
+  font-family: 'pantonbold';
+  font-size: 42px;
+  margin: 5px 0;
+  opacity: 1;
+  text-align: center;
+  transition: all 0.35s ease 0.35s;
+}
+
+.index-description {
+  color: $onform-header-text;
+  font-family: 'proxima_nova_ltlight';
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 34px;
+  max-width: 550px;
+  opacity: 1;
+  text-align: center;
+  transition: all 0.35s ease 0.35s;
+}
+
+.form-index {
+  background-color: $form-bg;
+  border-radius: 20px;
+  margin: 30px;
+  transform: rotate3d(0, 1, 0, 0deg);
+  transition: all 0.35s ease 0.35s;
+  width: 280px;
+}
+
+.form-index__label {
+  border: 0;
+  border-bottom: 1px solid $input-border;
+  display: inline-block;
+  padding: 10px;
+}
+
+.form-index__input {
+  border: 0;
+  color: $input-text;
+  font-family: 'proxima_nova_ltlight';
+  font-size: 16px;
+  vertical-align: bottom;
+}
+
+.form-index__icon {
+  fill: $input-icon;
+  float: left;
+  height: 18px;
+  opacity: 0.6;
+  width: 11%;
+}
+
+.form-index__icon-mail {
+  height: 14px;
+}
+
+.form-index__input:focus {
+  color: $input-active-text;
+
+  ~.form-index__icon {
+    fill: $input-icon-active;
+  }
+}
+
+.form-index__link {
+  color: $form-link-text;
+  display: inline-block;
+  font-family: 'proxima_nova_ltsemibold';
+  font-size: 14px;
+  margin: 10px 0 10px 17px;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.form-index__error {
+  background-color: $error-bg;
+  color: $error-text;
+  display: none;
+  font-family: 'proxima_nova_ltsemibold';
+  font-size: 14px;
+  margin: auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 85%;
+}
+
+.button {
+  display: block;
+  height: 22px;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.form-index__footer {
+  display: inline-block;
+  margin-bottom: 10px;
+  width: 100%;
+
+  .form-index__link {
+    margin: 10px 5px;
+  }
+}
+
+.form-index__text {
+  font-family: 'proxima_nova_ltlight';
+  font-size: 14px;
+  padding-left: 20px;
+}
+
+.footer__content {
+  font-family: 'proxima_nova_ltlight';
+  font-size: 16px;
+  margin-bottom: 25px;
+  opacity: 0.8;
+  text-align: center;
+}
+

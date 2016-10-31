@@ -1,0 +1,69 @@
+.site-wrapper__index {
+  background: url('../img/bg-index.jpg') center 0 no-repeat;
+  background-size: cover;
+}
+
+.wrapper {
+  display: flex;
+  flex: 1;
+}
+
+.content__index {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  position: absolute;
+  transition: all 0.35s ease 0.35s;
+  width: 100vw;
+  z-index: 10;
+}
+
+.content__target:target~.content__index--login {
+  transition: all 0.35s ease;
+  z-index: 0;
+
+  .form-index {
+    transform: rotate3d(0, 1, 0, 90deg);
+    transition: all 0.35s ease;
+  }
+
+  .index-title {
+    opacity: 0;
+    transition: all 0.35s ease;
+  }
+
+  .index-description {
+    opacity: 0;
+    transition: all 0.35s ease;
+  }
+}
+
+.content__target--registration:target~.content__index--registration {
+  z-index: 10;
+
+  .form-index--registration {
+    transform: rotate3d(0, 1, 0, 0deg);
+    transition: all 0.35s ease 0.35s;
+  }
+
+  .index-title--registration {
+    opacity: 1;
+    transition: all 0.35s ease 0.35s;
+  }
+}
+
+.content__target--password:target~.content__index--password {
+  z-index: 10;
+
+  .form-index--password {
+    transform: rotate3d(0, 1, 0, 0deg);
+    transition: all 0.35s ease 0.35s;
+  }
+
+  .index-title--password {
+    opacity: 1;
+    transition: all 0.35s ease 0.35s;
+  }
+}
