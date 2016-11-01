@@ -14,6 +14,14 @@ module.exports = [
   './gulp/tasks/copy.image.js',
   './gulp/tasks/sprite.svg.js',
   './gulp/tasks/sprite.png.js',
-  './gulp/tasks/fonts.js'
+  './gulp/tasks/fonts.js',
+
+  './gulp/tasks/dist/dist.css:foundation.js',
+  './gulp/tasks/dist/dist.fonts.js',
+  './gulp/tasks/dist/dist.image.js',
+  './gulp/tasks/dist/dist.js:foundation.js',
+  './gulp/tasks/dist/dist.js:process.js',
+  './gulp/tasks/dist/dist.sass.js',
+  './gulp/tasks/dist/dist.sprite:svg.js',
 ];
 
