@@ -195,6 +195,7 @@ $modal-error-bg: rgba(#ffe0e0, 0.9);
 
 //------------ Слайдер, информация, связанная с фото
 
+$slider-bg: #000;
 $slider-icon: #f9f9f9;
 $slider-icon-hover: #fff;
 
@@ -203,11 +204,13 @@ $slider-avatar-text: #323232;
 $slider-title-text: #323232;
 
 $slider-description-text: rgba(#323232, 0.8);
+$slider-description-bg: #fff;
 $slider-hash-text: rgba(#28bbf0, 0.8);
 
 
 //Комментарии
 
+$com-bg: #f6f6f6;
 $com-title: #323232;
 $com-text: rgba(#323232, 0.8);
 $com-icon-open: #a0a09f;

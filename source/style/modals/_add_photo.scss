@@ -89,24 +89,9 @@
   }
 
   &__item-close {
-    background-color: $modal-add-area-icon-close-bg;
-    border: 3px solid $modal-add-area-icon-close-border;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    height: 26px;
     position: absolute;
     right: 8px;
     top: -14px;
-    width: 26px;
-
-    .icon-close {
-      display: inline-block;
-      fill: $modal-add-area-icon-close;
-      height: 10px;
-      margin: auto;
-      width: 10px;
-    }
   }
 
 }

@@ -14,7 +14,7 @@
 
 mixin photo-albums-item(albumName, coverImage, coverUrl, albumUrl, coverImageTitle, avatar, avatarUrl, commentsNumber, likesNumber)
   .photo-albums__item
-    a(href=`${coverUrl}` class="open-modal photo-albums__item-cover-wrapper" data-modal-class="modal-add-photo")
+    a(href=`${coverUrl}` class="open-slider photo-albums__item-cover-wrapper" data-modal-class="modal-slider")
       .photo-albums__item-spinner
         +icon('loupe', ['photo-albums__item-spinner-icon'])
       img(class="photo-albums__item-cover" src=`${coverImage}` alt="Album cover")

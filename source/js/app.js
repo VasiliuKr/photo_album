@@ -2,4 +2,5 @@
 
 (function() {
   modal.init();
+  slider.init();
 })();
