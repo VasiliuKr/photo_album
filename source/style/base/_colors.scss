@@ -54,7 +54,7 @@ $shapka-fixed-header-text: #323232;
 $shapka-fixed-bg: rgba(#fff, 0.85);
 
 // Редактирование названия и описания альбома
-$album-edit-input-bg: #fff;
+$album-edit-input-active: #323232;
 $album-edit-input-text: rgba(#323232, 0.8);
 
 $album-edit-bg: rgba(#000, 0.8);
@@ -129,6 +129,8 @@ $popup-btn-border: #20b6ed;
 
 
 //--------------- Модальное окно
+
+$modal-bg: #fff;
 
 $modal-header-bg: #f1f1f1;
 $modal-header-text: #323232;
@@ -267,8 +269,8 @@ $social-btn-cancel-text: #28bbf0;
 $search-plashka-bg: rgba(#f1f1f1, 0.9);
 $search-bg: #fff;
 
-$search-text: rgba(#323232, 0.6);
-$search-active-text: #323232;
+$search-text: rgba(#323232, 0.3);
+$search-active-text: rgba(#323232, 0.6);
 
 $search-icon: rgba(#323232, 0.6);
 $search-icon-active: rgba(#28bbf0, 0.6);
@@ -286,12 +288,17 @@ $notify-shadow: rgba(0, 0, 0, 0.15);
 
 $photo-shadow: rgba(#000, 0.15);
 $photo-hover-bg: rgba(#000, 0.4);
+$photo-hover-icon: #fff;
 $photo-avatar-hover-bg: rgba(#000, 0.7);
 
 $photo-title-text: #323232;
 
 $photo-icon: #a0a09f;
 $photo-icon-text: rgba(#323232, 0.8);
+$photo-icon-text-hover: rgba(#323232, 1);
+$photo-icon-comment-hover: #20b6f3;
+$photo-icon-like-hover: #ef4536;
+$photo-icon-title-hover: #20b6f3;
 
 $photo-album-icon: #a0a09f;
 $photo-album-title: rgba(#323232, 0.8);
@@ -312,13 +319,25 @@ $btn-more-hover-bg: #20b6ed;
 
 $album-title-text: #323232;
 
-$album-icon-edit: #a0a09f;
+$albums-wrapper-bg: #f6f6f6;
+$album-bg: #fff;
+
+$album-hover-text: #fff;
+
+$album-icon-edit: rgba(#323232, 0.2);
 $album-icon-edit-hover: rgba(#323232, 0.6);
 $album-shadow: rgba(#000, 0.15);
 
 
+// Базовые стили для всех кнопок
+$button-primary-color: hsla(196, 87%, 55%, 1);
+$button-primary-color-hover: hsla(196, 87%, 35%, 1);
 
+$button-secondary-color: hsla(6, 85%, 57%, 1);
+$button-secondary-color-hover: hsla(6, 85%, 37%, 1);
 
+$button-primary-text-color: #fff;
+$button-secondary-text-color: #28bbf0;
+$button-simple-text-color: #323232;
 
-
-
+$button-icon-color: #fff;

@@ -1,8 +1,8 @@
 .header {
+  background: url('../img/bg-profile.jpg') center 50% no-repeat;
   overflow: hidden;
 
   &-inner-wrapper {
-    background: url('../img/bg-profile.jpg') center 50% no-repeat;
     padding: 57px 40px 0 87px;
     position: relative;
 
@@ -22,7 +22,7 @@
   &-top {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 50px;
+    padding-bottom: 56px;
     position: relative;
     z-index: 1;
   }
@@ -93,77 +93,56 @@
   }
 }
 
-// Profile buttons
-.profile-button-icon {
-  fill: $btn-circle-icon;
-  height: 20px;
-  width: 20px;
-}
-
+// Контейнер для кнопок в хеддере
 .profile-buttons {
   align-items: flex-end;
   display: flex;
   flex-direction: column;
+  margin-top: -37px;
+
+  .button-circle {
+    margin-bottom: 10px;
+  }
 }
 
-.profile-button {
-  background: $btn-circle-bg;
-  border-radius: 20px;
-  box-shadow: 0 1px 4px $btn-circle-shadow;
-  cursor: pointer;
-  display: inline-block;
-  font: 14px/1 'pantonbold', sans-serif;
-  height: 40px;
-  margin-bottom: 10px;
-  overflow: hidden;
-  padding: 10px;
+
+// Строка поиска
+.search-bar {
+  background-color: $search-plashka-bg;
+  padding: 10px 0;
   position: relative;
-  text-decoration: none;
-  transition: all 0.2s;
-  width: 40px;
 
-  &_edit {
-    &:hover {
-      background-color: $btn-circle-hover-bg;
-      color: $btn-circle-text;
-      width: 150px;
+  &__inner-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 60px;
+  }
+}
 
-      .profile-button-icon {
-        fill: $btn-circle-icon-hover;
-      }
-
-      .profile-button__text {
-        opacity: 1;
-        visibility: visible;
-      }
-    }
+.search {
+  &__form {
+    position: relative;
+    width: 380px;
   }
 
-  &_login {
-    &:hover {
-      background-color: $btn-circle-hover-bg;
-      color: $btn-circle-text;
-      width: 94px;
-
-      .profile-button-icon {
-        fill: $btn-circle-icon-hover;
-      }
-
-      .profile-button__text {
-        opacity: 1;
-        visibility: visible;
-      }
-    }
+  &__field {
+    background-color: $search-bg;
+    border: 0;
+    border-radius: 24px;
+    color: $search-active-text;
+    font-family: 'proxima_nova_ltlight';
+    font-size: 16px;
+    padding: 11px 12px 11px 45px;
+    width: 100%;
   }
 
-  &__text {
-    color: $btn-circle-text;
-    display: inline;
-    line-height: 20px;
-    opacity: 0;
-    padding-left: 10px;
+  &__icon {
+    color: $search-icon;
+    fill: $search-icon;
+    height: 15px;
+    left: 20px;
     position: absolute;
-    transition: all 0.2s;
-    visibility: hidden;
+    top: 12px;
+    width: 15px;
   }
 }

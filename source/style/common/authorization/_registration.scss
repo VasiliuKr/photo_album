@@ -1,10 +1,14 @@
 .content__index--registration {
   transition: all 0.35s ease;
   z-index: 0;
+
+  .form-index__link {
+    margin: 5px 5px 13px;
+  }
 }
 
 .form-index--registration {
-  margin: 25px;
+  margin: 20px;
   transform: rotate3d(0, 1, 0, 90deg);
   transition: all 0.35s ease;
 }
@@ -14,9 +18,13 @@
   transition: all 0.35s ease;
 }
 
-.form-index__text {
-  font-family: 'proxima_nova_ltlight';
-  font-size: 14px;
-  margin: 8px 0 15px;
+.form-index__text--registration {
+  margin: 10px 0 0;
+  padding-left: 22px;
 }
+
+.form-index__label--button-registration {
+  padding: 12px 20px 3px;
+}
+
 

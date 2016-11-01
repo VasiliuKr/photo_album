@@ -1,0 +1,19 @@
+block registration
+
+.window__registration
+    form.form.form__registration(method='POST' action='/ajax/user_registration')
+        label.form__label
+            +icon('name',['form__input_icon'])
+            input.form__input(name="name" id= "name" placeholder="Имя")
+        label.form__label
+            +icon('envelope',['form__input-icon'])
+            input.form__input(name="mail" id="mail" placeholder="Электронная почта")
+        label.form__label
+            +icon('password',['form__input-icon'])
+            input.form__input(name="password" id="password" placeholder="Пароль")
+        .registration__text Ваши данные остаются строго конфеденциальны
+        button.button.registration__button
+            span.button__text Создать аккаунт
+    .account__question
+        span.account__question-text Уже зарегистрированы?
+        a.account__question-link(href="#") Войти

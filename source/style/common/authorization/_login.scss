@@ -2,7 +2,7 @@
   color: $onform-header-text;
   font-family: 'pantonbold';
   font-size: 42px;
-  margin: 5px 0;
+  margin: 10px 0;
   opacity: 1;
   text-align: center;
   transition: all 0.35s ease 0.35s;
@@ -13,7 +13,7 @@
   font-family: 'proxima_nova_ltlight';
   font-size: 16px;
   line-height: 1.5;
-  margin-bottom: 34px;
+  margin-bottom: 5px;
   max-width: 550px;
   opacity: 1;
   text-align: center;
@@ -32,8 +32,13 @@
 .form-index__label {
   border: 0;
   border-bottom: 1px solid $input-border;
-  display: inline-block;
+  display: block;
   padding: 10px;
+}
+
+.form-index__label--button {
+  border: 0;
+  padding: 9px 20px 0;
 }
 
 .form-index__input {
@@ -42,25 +47,30 @@
   font-family: 'proxima_nova_ltlight';
   font-size: 16px;
   vertical-align: bottom;
+  width: 80%;
 }
 
 .form-index__icon {
   fill: $input-icon;
   float: left;
   height: 18px;
+  margin: 1px 5px 0 7px;
   opacity: 0.6;
-  width: 11%;
+  width: 9%;
 }
 
 .form-index__icon-mail {
   height: 14px;
+  margin: 4px 6px 0;
 }
 
 .form-index__input:focus {
   color: $input-active-text;
+  transition: all 0.35s ease 0.1s;
 
   ~.form-index__icon {
     fill: $input-icon-active;
+    transition: all 0.35s ease 0.1s;
   }
 }
 
@@ -69,7 +79,7 @@
   display: inline-block;
   font-family: 'proxima_nova_ltsemibold';
   font-size: 14px;
-  margin: 10px 0 10px 17px;
+  margin: 7px 0 7px 16px;
   text-decoration: none;
 
   &:hover {
@@ -89,34 +99,20 @@
   width: 85%;
 }
 
-.button {
-  display: block;
-  height: 22px;
-  margin: auto;
-  margin-bottom: 15px;
-}
-
 .form-index__footer {
   display: inline-block;
-  margin-bottom: 10px;
   width: 100%;
 
   .form-index__link {
-    margin: 10px 5px;
+    margin: 5px 5px 17px;
   }
 }
 
 .form-index__text {
   font-family: 'proxima_nova_ltlight';
   font-size: 14px;
-  padding-left: 20px;
+  padding-left: 26px;
 }
 
-.footer__content {
-  font-family: 'proxima_nova_ltlight';
-  font-size: 16px;
-  margin-bottom: 25px;
-  opacity: 0.8;
-  text-align: center;
-}
+
 

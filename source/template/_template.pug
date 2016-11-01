@@ -1,5 +1,7 @@
 block variables
 include mixins/_icons
+include mixins/_photo-albums-item
+include mixins/_my-albums-item
 
 doctype html
 html
@@ -7,6 +9,7 @@ html
     include common/_head
   body
     .site-wrapper
+      include common/modals/_all_modals
       include common/_header
       .page-wrap
         div.content

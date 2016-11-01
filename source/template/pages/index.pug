@@ -1,9 +1,8 @@
-extends ../_template_index.pug
+extends ../_template_index
 
 block variables
   - var title = 'Home page'
   - var descrption = 'Home page'
-  - var page_type = 'index'
   - var description = 'Стартовая страница общего проекта'
   - var keywords = 'Стартовая страница общего проекта'
 
@@ -17,4 +16,3 @@ block content
       include ../common/authorization/_registration
     .content__index.content__index--password
       include ../common/authorization/_password
-        
