@@ -31,7 +31,8 @@ $.gulp.task('default', $.gulp.series(
     'css:foundation',
     'sprite:svg',
     'sprite:png',
-    'fonts'
+    'fonts',
+    'frontend.jade'
   ),
   $.gulp.parallel(
     'watch',
@@ -46,7 +47,8 @@ $.gulp.task('make_dist', $.gulp.parallel(
   'dist.css:foundation',
   'dist.sprite:svg',
   'dist.image',
-  'dist.fonts'
+  'dist.fonts',
+  'dist.frontend.pug'
 ));
 
 

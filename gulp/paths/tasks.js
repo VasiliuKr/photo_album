@@ -15,6 +15,8 @@ module.exports = [
   './gulp/tasks/sprite.svg.js',
   './gulp/tasks/sprite.png.js',
   './gulp/tasks/fonts.js',
+  './gulp/tasks/frontend.pug.tempator.js',
+
 
   './gulp/tasks/dist/dist.css.foundation.js',
   './gulp/tasks/dist/dist.fonts.js',
@@ -22,6 +24,7 @@ module.exports = [
   './gulp/tasks/dist/dist.js.foundation.js',
   './gulp/tasks/dist/dist.js.process.js',
   './gulp/tasks/dist/dist.sass.js',
-  './gulp/tasks/dist/dist.sprite.svg.js'
+  './gulp/tasks/dist/dist.sprite.svg.js',
+  './gulp/tasks/dist/dist.frontend.pug.js'
 ];
 
