@@ -1,0 +1,38 @@
+.modal-overlay.modal-add-album
+	.modal
+		.modal__header
+			a(class="modal__close modal-action-close" href="#")
+				+icon('close')
+			.modal__title Добавить альбом
+		.modal__body
+			form(action="/addalbum" method="POST")
+				.add-album
+
+					.modal__row
+						.modal__label Название
+						input.modal__input(class="modal--stretch" type="text" name="title" placeholder="Название")
+
+					.modal__row
+						.modal__label Описание
+						textarea.modal__textarea(class="modal--stretch" type="text" name="description" placeholder="Описание")
+
+					.modal-cover
+						.modal-cover__thumb
+							.modal-cover__thumb-wrapper
+								img.modal-cover__thumb-img(src="/assets/img/album-cover.jpg" width="50" height="50" alt="cover")
+						input.modal-cover__file#modal-cover(type="file" name="cover" accept="image/*")
+						label(for="modal-cover")
+							.modal-cover__btn(class="button button--outline button--pointer") Загрузить обложку
+						.modal-cover__file-info (файл должен быть размером не более #[span.modal-cover__file-size 1024 КБ] )
+
+					.modal__errors
+						.modal__error-item
+							.modal__error-message Заполните поле описание
+						.modal__error-item
+							.modal__error-message Добавьте файлы для загрузки
+
+				.modal__footer
+					button.button.button--pointer(type='submit') Сохранить
+					button.button.button--transparent.button--pointer(class='modal-action-close') Отменить
+
+	

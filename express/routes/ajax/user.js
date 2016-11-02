@@ -40,7 +40,7 @@ route.post('/registration',(req,res)=>{
 route.post('/login',(req,res)=>{
   console.log('autorisaton');
 
-  if(!req.body.login || !req.body.password){
+  if(!req.body.mail || !req.body.password){
     return res.send(JSON.stringify({error:'Укажите логин и пароль!'}));
   }
 
@@ -50,7 +50,7 @@ route.post('/login',(req,res)=>{
       .digest('hex');
 
   Model.findOne({
-    login:req.body.login,
+    login:req.body.mail,
     password:password
   }).then(item=>{
     if(!item){

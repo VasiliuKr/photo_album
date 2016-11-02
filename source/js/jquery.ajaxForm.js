@@ -9,6 +9,7 @@
     url: location.href,
     method: 'post',
     dataType: 'json',
+    onMessage: false,
     errMessage: {
       login: 'Заполните поле логин',
       password: 'Заполните поле пароль',
@@ -52,6 +53,14 @@
   };
 
   ajaxForm.prototype.resultMessage = function(text, className) {
+    if(form.config.onMessage) {
+      var data = {
+        message: text,
+        className: className
+      };
+      form.config.onMessage( data );
+      return false;
+    }
     var messageWindows = $('<div/>', {
       'class': 'message_windows ' + className
     });
@@ -187,4 +196,4 @@ $.fn.serializeObject = function() {
   return o;
 };
 
-$('form').ajaxForm();
+$('form').ajaxForm({ onMessage: modal.popup });
