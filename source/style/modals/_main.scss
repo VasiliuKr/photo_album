@@ -7,6 +7,7 @@
 }
 
 .modal-overlay {
+  animation: modalShow 0.25s linear;
   background-color: $modal-overlay;
   display: flex;
   height: 100vh;
@@ -17,6 +18,11 @@
   right: 0;
   top: 0;
   z-index: 100;
+}
+
+@keyframes modalShow {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .modal {

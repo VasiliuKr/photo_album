@@ -6,9 +6,6 @@ var modal = (function() {
   };
 
   var _setUpListeners = function() {
-   // $('.photo-albums__item-cover-wrapper').on('click', slider);
-    $('.my-albums-button_add').on('click', add_album);
-
     $('body').on('click', '.modal-action-close,.modal-overlay', _closeModal);
     $('body').on('click', '.modal', _stopPropogation);
   };
