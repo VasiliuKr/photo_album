@@ -1,0 +1,21 @@
+block login
+
+h1.index-title Добро пожаловать
+.index-description Перед вами сервис, который поможет вам организовать свои фотографии в альбомы и поделиться ими со всем миром!
+form.form-index
+  label.form-index__label
+    input.form-index__input(name="mail" id="mail" placeholder="Электронная почта")
+    +icon('envelope',['form-index__icon','form-index__icon-mail'])
+  label.form-index__label
+    input.form-index__input(name="password" id="password" placeholder="Пароль")
+    +icon('password',['form-index__icon'])
+  a.form-index__link(href="/#password")
+    span Забыли пароль?
+  .form-index__error
+    span E-mail или пароль не верен
+  label.form-index__label.form-index__label--button
+    input.button.button--full-width(name="button" type="submit" value="Войти")
+  .form-index__footer
+    span.form-index__text Нет аккаунта?
+    a.form-index__link(href="/#registration") Зарегистрироваться
+

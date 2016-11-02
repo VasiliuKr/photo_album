@@ -1,0 +1,151 @@
+// Блок "Мои альбомы"
+.my-albums {
+  background: $albums-wrapper-bg;
+  display: flex;
+  justify-content: center;
+
+  &__inner-wrapper {
+    padding: 53px 0 38px;
+    position: relative;
+    width: 1180px;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px -10px 14px;
+  }
+}
+
+// Альбом в блоке "Мои альбомы"
+.my-albums__item {
+  background-color: $album-bg;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px $photo-shadow;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  max-width: 280px;
+  overflow: hidden;
+
+  // Фотка альбома
+  &-cover-wrapper {
+    display: block;
+    position: relative;
+
+    &:hover {
+      .my-albums__item-spinner {
+        opacity: 1;
+        transform: scaleY(1);
+        visibility: visible;
+      }
+
+      .my-albums__item-hover-description,
+      .my-albums__item-hover-num-wrapper {
+        transform: translateY(-150px);
+      }
+    }
+  }
+
+  &-spinner {
+    align-items: center;
+    background-color: $photo-hover-bg;
+    bottom: 0;
+    content: '';
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: scaleY(0);
+    transform-origin: 50% 100%;
+    transition: all 0.25s;
+    visibility: hidden;
+  }
+
+  &-hover-text {
+    color: $album-hover-text;
+    display: flex;
+    flex-direction: column;
+    font: 16px/1 "proxima_nova_ltlight", sans-serif;
+    margin-top: auto;
+    padding: 38px 22px;
+  }
+
+  &-hover-description {
+    line-height: 1.5;
+    margin-bottom: 30px;
+    position: relative;
+    top: 150px;
+    transition: transform 0.25s 0.1s;
+  }
+
+  &-hover-num-wrapper {
+    font-family: "proxima_nova_ltsemibold", sans-serif;
+    position: relative;
+    top: 150px;
+    transition: transform 0.25s 0.15s;
+  }
+
+  &-hover-num-text {
+    padding-left: 4px;
+  }
+
+  // Иконки
+  &-icon {
+    fill: $album-icon-edit;
+    transition: all 0.25s;
+
+    &_edit {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  // Футер (обертка, название альбома, иконка)
+  &-footer {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    padding: 13px 21px;
+  }
+
+  &-edit-link {
+    cursor: pointer;
+
+    &:hover {
+
+      .icon-edit {
+        fill: $album-icon-edit-hover;
+      }
+    }
+  }
+
+  &-link {
+    text-decoration: none;
+
+    &:hover {
+      .my-albums__item-title {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  &-title {
+    color: $album-title-text;
+    font: 16px/1 'proxima_nova_ltsemibold', sans-serif;
+    margin: 0 0 0 8px;
+    transition: opacity 0.25s;
+  }
+}
+
+// Обертка кнопки "Добавить"
+.button-add-wrapper {
+  position: absolute;
+  right: -21px;
+  top: 60px;
+}

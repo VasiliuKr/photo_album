@@ -1,0 +1,35 @@
+.modal-overlay.modal-slider
+  .modal.modal--top
+
+    .slider
+      a(class="modal__close modal__close--slider modal-action-close" href="#")
+        +icon('close')
+
+      a.slider__prev(href="#")
+        +icon('arrow_left')
+      a.slider__next(href="#")
+        +icon('arrow_right')
+
+      .slider__images
+        .slider__images-item
+          img.slider__image(src="/assets/img/album-cover.jpg" alt="slider image")
+        .slider__images-item
+          img.slider__image(src="/assets/img/bg-profile.jpg" alt="slider image")
+        .slider__images-item
+          img.slider__image(src="/assets/img/cherepov_anton.jpg" alt="slider image")
+        .slider__images-item
+          img.slider__image(src="/assets/img/my-album-cover.jpg" alt="slider image")
+
+      .slider__description
+        .slider__description-item
+          include _description
+          include _comments
+        .slider__description-item
+          include _description
+          include _comments
+        .slider__description-item
+          include _description
+          include _comments
+        .slider__description-item
+          include _description
+          include _comments
