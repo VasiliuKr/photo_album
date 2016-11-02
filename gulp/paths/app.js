@@ -2,6 +2,7 @@
 
 module.exports = [
   './source/js/modals.js',
+  './source/js/album.js',
   './source/js/page_template.js',
   './source/js/jquery.ajaxForm.js',
   './source/js/slider.js',
