@@ -1,0 +1,23 @@
+.photo-albums__item #{photoNumber}
+  a(href=`${coverUrl}` class="photo-albums__item-cover-wrapper")
+    .photo-albums__item-spinner
+      +icon('loupe', ['photo-albums__item-spinner-icon'])
+    img(class="photo-albums__item-cover" src=#{photoImages} alt="Album cover")
+  .photo-albums__item-info-wrapper
+    a(href=`${avatarUrl}` class="photo-albums__item-avatar-wrapper")
+      .photo-albums__item-avatar-hover
+        +icon('more', ['photo-albums__item-avatar-icon'])
+      img(class="photo-albums__item-avatar" src=#{photoAvatar} alt="Avatar")
+    .photo-albums__item-info
+      p.photo-albums__item-title-img #{photoDescription}
+      .photo-albums__item-meta
+        a(class="photo-albums__item-comments" href="#")
+          +icon('comments', ['photo-albums__item-icon', 'photo-albums__item-icon_comments'])
+          span.photo-albums__item-comments-number #{photoCommentsNumber}
+        a(class="photo-albums__item-likes" href="")
+          +icon('like', ['photo-albums__item-icon', 'photo-albums__item-icon_likes'])
+          span.photo-albums__item-likes-number #{photoLikesNumber}
+  .photo-albums__item-footer
+    a(class="photo-albums__item-link" href=`${albumUrl}`)
+      +icon('album', ['photo-albums__item-icon', 'photo-albums__item-icon_album'])
+      h3.photo-albums__item-title #{photoAlbumName}
