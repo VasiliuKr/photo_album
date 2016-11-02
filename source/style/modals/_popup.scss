@@ -1,0 +1,21 @@
+
+.popup {
+  border-radius: 3px;
+  min-width: 270px;
+  overflow: hidden;
+  width: auto;
+
+  &__message {
+    color: $popup-text;
+    font-family: 'proxima_nova_ltsemibold', sans-serif;
+    font-size: 16px;
+    line-height: 1.313;
+    padding: 30px 20px;
+  }
+
+  &__footer {
+    background-color: $popup-bottom-bg;
+    padding: 10px;
+    text-align: center;
+  }
+}

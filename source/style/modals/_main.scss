@@ -8,7 +8,7 @@
 
 .modal-overlay {
   background-color: $modal-overlay;
-  display: none;
+  display: flex;
   height: 100vh;
   left: 0;
   overflow: auto;
@@ -126,38 +126,6 @@
     font-size: 14px;
     line-height: 1.143;
     padding: 10px;
-  }
-
-  &__btn-save {
-    background-color: $btn-save-bg;
-    border: 0;
-    border-radius: 40px;
-    color: $btn-save-text;
-    cursor: pointer;
-    display: inline-block;
-    font-family: 'pantonbold', sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
-    outline: 0;
-    padding: 12px 20px;
-    text-align: center;
-  }
-
-  &__btn-cancel {
-    background-color: transparent;
-    border: 0;
-    color: $btn-cancel-text;
-    cursor: pointer;
-    font-family: 'proxima_nova_ltsemibold', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    outline: 0;
-    padding: 12px 20px;
-    text-align: center;
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 
   //модуль загрузки обложки

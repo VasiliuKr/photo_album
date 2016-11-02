@@ -2,5 +2,7 @@
 
 (function() {
   modal.init();
-  slider.init();
+  // modal.popup({message: 'message'});
+  // modal.add_album();
+  // modal.add_photo();
 })();
