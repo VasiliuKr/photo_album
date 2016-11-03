@@ -2,9 +2,10 @@
 
 (function() {
   modal.init();
+  popup.init();
   urlParser.init( pageTemplate.update );
 
-  // modal.popup({message: 'messagecsddfd'});
-  // modal.add_album();
+  // popup.open({message: 'messagecsddfd'});
   // modal.add_photo();
+  // modal.add_album();
 })();

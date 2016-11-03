@@ -52,4 +52,4 @@ $.gulp.task('make_dist', $.gulp.parallel(
 ));
 
 
-$.gulp.task('dev', $.gulp.parallel('watch','serve'));
+$.gulp.task('dev', $.gulp.parallel('watch:ivan','serve'));

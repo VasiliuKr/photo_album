@@ -19,7 +19,7 @@ var modal = (function() {
     close();
   };
 
-  var close = function() {
+  var close = function(clickedElem) {
     $('body').removeClass('modal-show');
     $('.modal-overlay').fadeOut(200, function() { $(this).remove(); });
   };
@@ -35,14 +35,9 @@ var modal = (function() {
     };
   };
 
-  var addAlbum = open('modal_add_album');
-  var addPhoto = open('modal_photo_add');
-  var popup = open('popup');
-
   return {
-    add_album: addAlbum,
-    add_photo: addPhoto,
-    popup: popup,
+    add_album: open('modal_add_album'),
+    add_photo: open('modal_photo_add'),
     close: close,
     init: init
   };
