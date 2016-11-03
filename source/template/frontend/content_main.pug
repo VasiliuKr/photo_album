@@ -1,0 +1,12 @@
+include ../mixins/_icons
+
+section.photo-albums
+  .photo-albums__inner-wrapper
+    h2.section-title Новое в мире
+    .photo-albums__list
+section.my-albums
+  .my-albums__inner-wrapper
+    h2.section-title Мои альбомы
+    a(class="my-albums-button my-albums-button_add" href="#")
+      +icon('add', ['my-albums-button-icon', 'my-albums-button-icon_add'])
+    .my-albums__list
