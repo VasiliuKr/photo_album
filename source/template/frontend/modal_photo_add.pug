@@ -1,57 +1,57 @@
 include ../mixins/_icons
 
 .modal-overlay.modal-add-photo
-	.modal
-		.modal__header
-			a(class="modal__close modal-action-close" href="#")
-				+icon('close')
-			.modal__title Добавить фотографии
-		.modal__body
-			form(action="/addphoto" method="POST")
-				.add-photo
-					.add-photo__header
-						.add-photo__label Название
-						.add-photo__title Как я провел лето
-					.add-photo__area
-						.add-photo__info
-							.add-photo__info-icon
-								+icon('cam')
-							.add-photo__info-text Перетащите фото сюда или 
-								span.choose выберите файл
-						.add-photo__images
-							.add-photo__item
-								a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
-									+icon('close')
-								.add-photo__item-image
-									img.add-photo__image(src="/assets/img/cherepov_anton.jpg", alt="photo__image")
-							.add-photo__item
-								a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
-									+icon('close')
-								.add-photo__item-image
-									img.add-photo__image(src="/assets/img/bg-profile.jpg", alt="photo__image")
-							.add-photo__item
-								a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
-									+icon('close')
-								.add-photo__item-image
-									img.add-photo__image(src="/assets/img/bg-profile.jpg", alt="photo__image")
-							.add-photo__item
-								a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
-									+icon('close')
-								.add-photo__item-image
-									img.add-photo__image(src="/assets/img/bg-profile.jpg", alt="photo__image")
-							.add-photo__item
-								a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
-									+icon('close')
-								.add-photo__item-image
-									img.add-photo__image(src="/assets/img/bg-profile.jpg", alt="photo__image")
-					.modal__errors
-						.modal__error-item
-							.modal__error-message Выбран неверный формат изображений. Попробуйте снова
-						.modal__error-item
-							.modal__error-message Заполните поле название
-				.modal__footer
-					button.button.button--pointer(type='submit') Сохранить
-					button.button.button--transparent.button--pointer(class='modal-action-close') Отменить
+  .modal
+    .modal__header
+      a(class="modal__close modal-action-close" href="#")
+        +icon('close')
+      .modal__title Добавить фотографии
+    .modal__body
+      form(action="/addphoto" method="POST")
+        .add-photo
+          .add-photo__header
+            .add-photo__label Название
+            .add-photo__title Как я провел лето
+          .add-photo__area
+            .add-photo__info
+              .add-photo__info-icon
+                +icon('cam')
+              .add-photo__info-text Перетащите фото сюда или 
+                span.choose выберите файл
+            .add-photo__images
+              .add-photo__item
+                a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
+                  +icon('close')
+                .add-photo__item-image
+                  img.add-photo__image(src="/assets/img/cherepov_anton.jpg", alt="photo__image")
+              .add-photo__item
+                a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
+                  +icon('close')
+                .add-photo__item-image
+                  img.add-photo__image(src="/assets/img/bg-profile.jpg", alt="photo__image")
+              .add-photo__item
+                a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
+                  +icon('close')
+                .add-photo__item-image
+                  img.add-photo__image(src="/assets/img/bg-profile.jpg", alt="photo__image")
+              .add-photo__item
+                a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
+                  +icon('close')
+                .add-photo__item-image
+                  img.add-photo__image(src="/assets/img/bg-profile.jpg", alt="photo__image")
+              .add-photo__item
+                a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
+                  +icon('close')
+                .add-photo__item-image
+                  img.add-photo__image(src="/assets/img/bg-profile.jpg", alt="photo__image")
+          .modal__errors
+            .modal__error-item
+              .modal__error-message Выбран неверный формат изображений. Попробуйте снова
+            .modal__error-item
+              .modal__error-message Заполните поле название
+        .modal__footer
+          button.button.button--pointer(type='submit') Сохранить
+          button.button.button--transparent.button--pointer(class='modal-action-close') Отменить
 
 
-	
+  
