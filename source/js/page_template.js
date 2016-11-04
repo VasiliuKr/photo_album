@@ -8,7 +8,10 @@ var pageTemplate = (function() {
       album: {
         ajax_url: '/ajax/album/get/',
         box: '.my-albums__list'
-      }
+      },
+      // header: {
+      //
+      // }
     },
     album: {
       contentTemplate: 'content_user',
@@ -23,7 +26,8 @@ var pageTemplate = (function() {
         ajax_url: '/ajax/main/',
         box: '.photo-albums__list'
       }
-    }
+    },
+
   };
 
   var init = function(updateFunction) {
