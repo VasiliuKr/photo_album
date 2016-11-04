@@ -3,13 +3,18 @@
 let mongoose = require('mongoose'),
   Schema=mongoose.Schema,
   PhotoSchema = new Schema({
-    albom:{
-      type: String
+    _id:{
+      type:Number,
+      required:true
     },
-        title:{
+    album:[{ type: Number, ref: 'album' }],
+    title:{
       type: String
     },
     src: {
+      type: String
+    },
+    dir: {
       type: String
     },
     description: {

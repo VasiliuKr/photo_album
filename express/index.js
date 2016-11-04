@@ -11,7 +11,7 @@ let bodyParser = require('body-parser');
 let session=require('express-session');
 let MongoStore=require('connect-mongo')(session);
 
-require('./models/user');
+require('./models_db/user');
 
 app.use(session({
   secret:'loftschool',

@@ -2,8 +2,8 @@
 
 let route = require('express').Router(),
   mongoose = require('mongoose');
-require('./../../models/album');
-require('./../../models/photo');
+require('./../../models_db/album');
+require('./../../models_db/photo');
 
 route.post('/create',(req,res)=> {
 

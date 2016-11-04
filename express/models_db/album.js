@@ -2,11 +2,12 @@
 
 let mongoose = require('mongoose'),
   Schema=mongoose.Schema,
-  AlbomSchema = new Schema({
-    user:{
-      type:String,
-      required:[true,'Укажите пользователя']
+  AlbumSchema = new Schema({
+    _id:{
+      type:Number,
+      required:true
     },
+    user:[{ type: Number, ref: 'user' }],
     title:{
       type:String,
       required:[true,'Укажите название альбома']
@@ -15,10 +16,8 @@ let mongoose = require('mongoose'),
       type:String,
       required:[true,'Укажите описание альбома']
     },
-    cover:{
-      type:String,
-      required:[true,'Укажите обложку альбома']
-    }
+    cover: [{ type: Number, ref: 'photo' }]
   });
 
-mongoose.model('albom',AlbomSchema);
+
+mongoose.model('album',AlbumSchema);
