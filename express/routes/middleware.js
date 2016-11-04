@@ -12,7 +12,7 @@ module.exports=(req, res, next)=> {
     req.session.isAuth &&
     url[1].length==0
   ){
-    res.redirect('/photo_main');
+    res.redirect('/main');
   }else{
     next();
   }
