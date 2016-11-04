@@ -233,4 +233,4 @@ $.fn.serializeObject = function() {
   return o;
 };
 
-$('form').ajaxForm({ onMessage: modal.popup });
+$('form').ajaxForm({ onMessage: popup.popup });

@@ -2,10 +2,11 @@
 
 (function() {
   modal.init();
-  album.init( {showAddModal: modal.add_album});
+  //album.init( {showAddModal: modal.add_album});
+  popup.init();
   urlParser.init( pageTemplate.update );
 
-  // modal.popup({message: 'messagecsddfd'});
-  // modal.add_album();
+  // popup.open({message: 'messagecsddfd'});
   // modal.add_photo();
+  // modal.add_album();
 })();

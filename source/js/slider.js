@@ -27,91 +27,10 @@ var slider = (function() {
   };
   // имитация подгрузки
   var ajaxGetData = function(from, to) {
-    return {
-      slides: [
-        {
-          image: 'img/nature-wallpaper-HD-06sm.jpg',
-          likes: 16,
-          author: {
-            avatar: 'img/bogdanova.png',
-            name: 'Анна Богданова'
-          },
-          title: 'Путешествие в долину',
-          description: 'Мы отправились в #горы 2 дня назад, но уже сейчас такое ощущение, что мы посмотрели целый новый мир!',
-          user: {
-            avatar: 'img/cherepov.png',
-            name: 'Антон Черепов'
-          },
-          comments: [
-            {
-              avatar: 'img/vinogradov.png',
-              name: 'Виталий Виноградов',
-              text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, culpa.'
-            },
-            {
-              avatar: 'img/tanya.png',
-              name: 'Татьяна Литвинова',
-              text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, culpa.'
-            }
-          ]
-
-        },
-        {
-          image: 'img/nature-wallpaper-HD-07sm.jpg',
-          likes: 9,
-          author: {
-            avatar: 'img/vinogradov.png',
-            name: 'Виталий Виноградов'
-          },
-          title: 'Путешествие в долину',
-          description: 'Мы отправились в #горы 2 дня назад, но уже сейчас такое ощущение, что мы посмотрели целый новый мир!',
-          user: {
-            avatar: 'img/cherepov.png',
-            name: 'Антон Черепов'
-          },
-          comments: [
-            {
-              avatar: 'img/bogdanova.png',
-              name: 'Анна Богданова',
-              text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, culpa.'
-            }
-          ]
-        },
-        {
-          image: 'img/nature-wallpaper-HD-08sm.jpg',
-          likes: 9,
-          author: {
-            avatar: 'img/tanya.png',
-            name: 'Татьяна Литвинова'
-          },
-          title: 'Путешествие в долину',
-          description: 'Мы отправились в #горы 2 дня назад, но уже сейчас такое ощущение, что мы посмотрели целый новый мир!',
-          user: {
-            avatar: 'img/cherepov.png',
-            name: 'Антон Черепов'
-          },
-          comments: []
-        }
-      ]
-    };
+    return {};
   };
   // добавление данных в слайдер
   var addData = function(data) {
-    var slideImg = '';
-    var slideDescription = '';
-
-    data.slides.forEach(function(item, i, arr) {
-      slideImg += '<div class="slider__images-item">' +
-        '<img src="' + item.image + '" alt="">' +
-      '</div>';
-
-      slideDescription += '<div class="slider__description-item">' +
-        '<div>' + item.description + '</div>' +
-      '</div>';
-    });
-
-    $('.slider__images').append(slideImg);
-    $('.slider__description').append(slideDescription);
   };
 
   var nextSlide = function(event) {

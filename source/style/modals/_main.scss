@@ -1,12 +1,14 @@
 
 // Общие стили модальных окон
 
-.modal-show {
+.modal-show,
+.popup-show {
   height: 100vh;
   overflow: hidden;
 }
 
-.modal-overlay {
+.modal-overlay,
+.popup-overlay {
   animation: modalShow 0.25s linear;
   background-color: $modal-overlay;
   display: flex;
