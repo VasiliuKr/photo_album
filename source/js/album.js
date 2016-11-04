@@ -3,6 +3,7 @@
 var album = (function() {
   var albumCollection = [];
   var albumContainer = false;
+  var albumCanEdit = false;
   var showAddModal = false;
   var errorMessageText = {
     title: 'Введите название альбома',
@@ -11,12 +12,18 @@ var album = (function() {
     file_size: 'Превышен допустимый размер файла'
   };
   var setParam = function(albums, conteiner, canAdd) {
-
+    albumContainer = $(conteiner);
+    var addButton = albumContainer.find('.button-circle-icon--add');
+    if (addButton.length > 0) {
+      albumCanEdit = true;
+      addButton.on('click', _addAlbum);
+    }else{
+      albumCanEdit = false;
+    }
   };
 
   var init = function(params) {
     showAddModal = params.showAddModal;
-    _addAlbum();
   };
 
   var addMessage = function(message, className) {
@@ -62,7 +69,8 @@ var album = (function() {
   var _failAjax = function(json) {
   };
 
-  var _addAlbum = function() {
+  var _addAlbum = function(e) {
+    e.stopPropagation();
     var form = showAddModal();
     var ajaxFormParam = {
       onMessage: addMessage,
@@ -72,6 +80,8 @@ var album = (function() {
       onGetAjaxFail: _failAjax
     };
     form.ajaxForm(ajaxFormParam);
+
+    return false;
   };
 
   return {
