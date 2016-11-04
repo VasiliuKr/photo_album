@@ -1,6 +1,6 @@
 include ../mixins/_icons
 
-.modal-overlay
+.modal-overlay.modal-photo-add
 	.modal
 		.modal__header
 			a(class="modal__close modal-action-close" href="#")
@@ -13,37 +13,15 @@ include ../mixins/_icons
 						.add-photo__label Название
 						.add-photo__title Как я провел лето
 					.add-photo__area
+						input.add-photo__file(type="file" id="files" multiple accept="image/*" )
+						label.add-photo__area-label(for="files")
 						.add-photo__info
 							.add-photo__info-icon
 								+icon('cam')
 							.add-photo__info-text Перетащите фото сюда или 
 								span.choose выберите файл
 						.add-photo__images
-							.add-photo__item
-								a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
-									+icon('close')
-								.add-photo__item-image
-									img.add-photo__image(src="/assets/img/cherepov_anton.jpg", alt="photo__image")
-							.add-photo__item
-								a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
-									+icon('close')
-								.add-photo__item-image
-									img.add-photo__image(src="/assets/img/bg-profile.jpg", alt="photo__image")
-							.add-photo__item
-								a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
-									+icon('close')
-								.add-photo__item-image
-									img.add-photo__image(src="/assets/img/bg-profile.jpg", alt="photo__image")
-							.add-photo__item
-								a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
-									+icon('close')
-								.add-photo__item-image
-									img.add-photo__image(src="/assets/img/bg-profile.jpg", alt="photo__image")
-							.add-photo__item
-								a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
-									+icon('close')
-								.add-photo__item-image
-									img.add-photo__image(src="/assets/img/bg-profile.jpg", alt="photo__image")
+
 					.modal__errors
 						.modal__error-item
 							.modal__error-message Выбран неверный формат изображений. Попробуйте снова
