@@ -26,7 +26,7 @@ var urlParser = (function() {
 
   var _linkClick = function(e) {
     if(_analyzeUrl( this.href )) {
-      event.stopPropagation();
+      e.stopPropagation();
     }
   };
 

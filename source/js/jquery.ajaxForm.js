@@ -10,6 +10,10 @@
     method: 'post',
     dataType: 'json',
     onMessage: false,
+    onValidateUpdate: false,
+    onFileChoose: false,
+    onGetAjaxDone: false,
+    onGetAjaxFail: false,
     errMessage: {
       login: 'Заполните поле логин',
       password: 'Заполните поле пароль',
@@ -33,6 +37,11 @@
   }
 
   ajaxForm.prototype.ajaxDone = function(data) {
+    if(form.config.onGetAjaxDone) {
+      form.config.onGetAjaxDone(data);
+      return false;
+    }
+
     if(data.href) {
       setTimeout('location.hash="";location.pathname="' + data.href + '"', 2000);
     }
@@ -47,6 +56,10 @@
   };
 
   ajaxForm.prototype.ajaxFail = function(data) {
+    if(form.config.onGetAjaxFail) {
+      form.config.onGetAjaxFail(data);
+      return false;
+    }
     form.resultMessage(form.config.errMessage.failAjax, 'error_windows');
     form.form.removeClass('disabled');
     form.form.find('[type=submit]').prop('disabled', false);
@@ -86,8 +99,13 @@
     if(form.form.hasClass('disabled'))return;
     var $block = $(block);
     if($block.val().length < 3) {
-      $block.parent().addClass( form.config.error_class);
-      $block.parent().attr( form.config.error_message_param, form.config.errMessage[$block.attr('name')]);
+      if(form.config.onValidateUpdate) {
+        form.config.onValidateUpdate( {block: $block, hasError: true} );
+      }else {
+        $block.parent().addClass(form.config.error_class);
+        $block.parent().attr(form.config.error_message_param, form.config.errMessage[$block.attr('name')]);
+      }
+
       $block
         .off( 'input')
         .off( 'paste')
@@ -99,7 +117,11 @@
         });
       return false;
     } else {
-      $block.parent().removeClass(form.config.error_class);
+      if(form.config.onValidateUpdate) {
+        form.config.onValidateUpdate( {block: $block, hasError: false} );
+      }else {
+        $block.parent().removeClass(form.config.error_class);
+      }
       return true;
     }
   };
@@ -122,9 +144,24 @@
       }
 
       if(!fileName.length) {
-        $this.parent().find('span').text($this.attr('default_text'));
+        $this.parent().find('span.file_name').text($this.attr('default_text'));
       }else{
-        $this.parent().find('span').text(fileName);
+        $this.parent().find('span.file_name').text(fileName);
+      }
+
+      if( fileApi && input.files[0] ) {
+        var file = input.files[0];
+        var img = document.createElement( 'img' );
+        img.file = file;
+        var readerImg = new FileReader();
+        readerImg.onload = (function(aImg) {
+          return function(e) {
+            if(form.config.onFileChoose) {
+              form.config.onFileChoose(e);
+            }
+          };
+        })(img);
+        readerImg.readAsDataURL(file);
       }
     }).each(function() {
       var $this = $(this);
@@ -137,8 +174,8 @@
         var $this = $(this);
         elements = $this.find('.required');
         $.each(elements, function() {
-          $this = $(this);
-          isValidate = form.vlidate($this) && isValidate;
+          var $element = $(this);
+          isValidate = form.vlidate($element) && isValidate;
         });
 
         if(!isValidate)return;
@@ -196,4 +233,4 @@ $.fn.serializeObject = function() {
   return o;
 };
 
-$('form').ajaxForm({ onMessage: modal.popup });
+$('form').ajaxForm({ onMessage: popup.popup });

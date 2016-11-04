@@ -2,6 +2,7 @@
 
 (function() {
   modal.init();
+  album.init( {showAddModal: modal.add_album});
   popup.init();
   urlParser.init( pageTemplate.update );
 
