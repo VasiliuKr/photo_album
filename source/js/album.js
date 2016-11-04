@@ -41,6 +41,7 @@ var album = (function() {
     }
   };
 
+  // Вызывается после выбора обложки
   var _testFile = function(e) {
     if (e.loaded > 1024 * 1024 ) {
       _showErrorMessage( {name: 'file_size', hasError: true });
@@ -53,9 +54,24 @@ var album = (function() {
     }
   };
 
+  // вызовится в случае успеного сохранения формы
+  var _getAjax = function(json) {
+  };
+
+  // вызовится в случае ошибки отправки JSON на сервер
+  var _failAjax = function(json) {
+  };
+
   var _addAlbum = function() {
     var form = showAddModal();
-    form.ajaxForm({ onMessage: addMessage, onValidateUpdate: _updateValidateStatus, onFileChoose: _testFile });
+    var ajaxFormParam = {
+      onMessage: addMessage,
+      onValidateUpdate: _updateValidateStatus,
+      onFileChoose: _testFile,
+      onGetAjaxDone: _getAjax,
+      onGetAjaxFail: _failAjax
+    };
+    form.ajaxForm(ajaxFormParam);
   };
 
   return {

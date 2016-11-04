@@ -12,6 +12,8 @@
     onMessage: false,
     onValidateUpdate: false,
     onFileChoose: false,
+    onGetAjaxDone: false,
+    onGetAjaxFail: false,
     errMessage: {
       login: 'Заполните поле логин',
       password: 'Заполните поле пароль',
@@ -35,6 +37,11 @@
   }
 
   ajaxForm.prototype.ajaxDone = function(data) {
+    if(form.config.onGetAjaxDone) {
+      form.config.onGetAjaxDone(data);
+      return false;
+    }
+
     if(data.href) {
       setTimeout('location.hash="";location.pathname="' + data.href + '"', 2000);
     }
@@ -49,6 +56,10 @@
   };
 
   ajaxForm.prototype.ajaxFail = function(data) {
+    if(form.config.onGetAjaxFail) {
+      form.config.onGetAjaxFail(data);
+      return false;
+    }
     form.resultMessage(form.config.errMessage.failAjax, 'error_windows');
     form.form.removeClass('disabled');
     form.form.find('[type=submit]').prop('disabled', false);
