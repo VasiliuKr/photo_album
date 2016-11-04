@@ -5,17 +5,33 @@ var pageTemplate = (function() {
     main: {
       content_template: 'content_main',
       photos: {
-        ajax_url:'/ajax/main/',
+        ajax_url: '/ajax/main/',
         box: '.photo-albums__list',
         canEdit: false
       },
       album: {
-        ajax_url:'/ajax/main/',
+        ajax_url: '/ajax/main/',
         box: '.my-albums__list',
         canEdit: true
       }
+    },
+    album: {
+      content_template: 'content_user',
+      album: {
+        ajax_url: '/ajax/main/',
+        box: '.my-albums__list',
+        canEdit: false
+      }
+    },
+    photos: {
+      content_template: 'content_album',
+      photos: {
+        ajax_url: '/ajax/main/',
+        box: '.photo-albums__list',
+        canEdit: true
+      }
     }
-  }
+  };
 
   var init = function(updateFunction) {
 
@@ -35,17 +51,17 @@ var pageTemplate = (function() {
 
   $('#content').html(content_template);
 
-  var _functionAdd = function(data,url_param,callbackFunction) {
-    url=data.ajax_url+url_param,
-    /*$.post(url,function(djson){
+  var _functionAdd = function(data, url_param, callbackFunction) {
+    url = data.ajax_url + url_param;
+    /* $.post(url,function(djson){
      callbackFunction(djson,data.box)
-     },'json')*/
-    callbackFunction({},data.box,data.canEdit)
+     },'json') */
+    callbackFunction({}, data.box, data.canEdit);
   };
 
-  if(template.photos){
-    _functionAdd(template.photos,data.data,photo.set);
-   }
+  if(template.photos) {
+    _functionAdd(template.photos, data.data, photo.set);
+  }
 
   if(template.album) {
     _functionAdd(template.album, data.data, album.set);
@@ -55,8 +71,4 @@ var pageTemplate = (function() {
     update: update,
     init: init
   };
-  
 }());
-
-
-
