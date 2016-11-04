@@ -16,9 +16,9 @@ route.get('/logout',(req,res)=> {
 });
 
 
-route.get('/photo_main',(req,res)=> {
-  console.log('photo_main:'+req.session.userId);
-  res.render('photo_main')
+route.get('/main',(req,res)=> {
+  console.log('main:'+req.session.userId);
+  res.render('main')
 });
 
 module.exports = route;

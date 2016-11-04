@@ -1,34 +1,27 @@
 'use strict';
 
 var pageTemplate = (function() {
-  var template__base = {
+  var templateBase = {
     main: {
-      content_template: 'content_main',
-      photos: {
-        ajax_url: '/ajax/main/',
-        box: '.photo-albums__list',
-        canEdit: false
-      },
+      contentTemplate: 'content_main',
+      photos: false,
       album: {
-        ajax_url: '/ajax/main/',
-        box: '.my-albums__list',
-        canEdit: true
+        ajax_url: '/ajax/album/get/',
+        box: '.my-albums__list'
       }
     },
     album: {
-      content_template: 'content_user',
+      contentTemplate: 'content_user',
       album: {
         ajax_url: '/ajax/main/',
-        box: '.my-albums__list',
-        canEdit: false
+        box: '.my-albums__list'
       }
     },
     photos: {
-      content_template: 'content_album',
+      contentTemplate: 'content_album',
       photos: {
         ajax_url: '/ajax/main/',
-        box: '.photo-albums__list',
-        canEdit: true
+        box: '.photo-albums__list'
       }
     }
   };
@@ -38,34 +31,34 @@ var pageTemplate = (function() {
   };
 
   var update = function(data) {
+    var template = data.template.replace('.html', '');
+
+    if (!templateBase[template]) return false;
+
+    template = templateBase[template];
+    var contentTemplate = template.contentTemplate;
+    contentTemplate = templates[contentTemplate]();
+
+    $('#content').html(contentTemplate);
+
+    if(template.photos) {
+      _functionAdd(template.photos, data.data);
+    }
+
+    if(template.album) {
+      _functionAdd(template.album, data.data);
+    }
+
     return true;
   };
 
-  var template = data.template.replace('.html', '');
 
-  if (!template__base[template]) return false;
-
-  template = template__base[template];
-  var content_template = template['content_template'];
-  content_template = templates[content_template]();
-
-  $('#content').html(content_template);
-
-  var _functionAdd = function(data, url_param, callbackFunction) {
-    url = data.ajax_url + url_param;
-    /* $.post(url,function(djson){
-     callbackFunction(djson,data.box)
-     },'json') */
-    callbackFunction({}, data.box, data.canEdit);
+  var _functionAdd = function(data, urlParam, callbackFunction) {
+    var url = data.ajax_url + urlParam;
+    $.post(url, function(djson) {
+      callbackFunction(djson, data.box);
+    }, 'json');
   };
-
-  if(template.photos) {
-    _functionAdd(template.photos, data.data, photo.set);
-  }
-
-  if(template.album) {
-    _functionAdd(template.album, data.data, album.set);
-  }
 
   return {
     update: update,
