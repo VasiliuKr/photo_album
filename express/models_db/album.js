@@ -7,7 +7,7 @@ let mongoose = require('mongoose'),
       type:Number,
       required:true
     },
-    user:[{ type: Number, ref: 'user' }],
+    user:{ type: Number, ref: 'user' },
     title:{
       type:String,
       required:[true,'Укажите название альбома']
@@ -16,7 +16,7 @@ let mongoose = require('mongoose'),
       type:String,
       required:[true,'Укажите описание альбома']
     },
-    cover: [{ type: Number, ref: 'photo' }]
+    cover: { type: Number, ref: 'photo' }
   });
 
 

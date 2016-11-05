@@ -115,7 +115,15 @@ let  getLast = function() {
   return  new Promise(function(resolve, reject) {
     let resolveCallback = resolve;
     let photo = mongoose.model('photo');
-    photo.find(filer,{},{ sort: { '_id' : -1 }}).populate('user').limit(60).then(u => {
+    let populate_album={
+      path: 'album',
+      model: 'album'
+    };
+    let populate_user={
+      path: 'album.user',
+      model: 'user'
+    };
+    photo.find({},{},{ sort: { '_id' : -1 }}).populate(populate_album).limit(1).then(u => {
       resolveCallback(u);
     })
   })

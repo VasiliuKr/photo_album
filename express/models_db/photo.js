@@ -7,7 +7,7 @@ let mongoose = require('mongoose'),
       type:Number,
       required:true
     },
-    album:[{ type: Number, ref: 'album' }],
+    album:{ type: Number, ref: 'album' },
     title:{
       type: String
     },

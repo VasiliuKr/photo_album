@@ -35,7 +35,8 @@ route.post('/update',(req,res)=> {
   res.send('update');
 });
 
-route.post('/get/*',(req,res)=> {
+route.get('/get/',(req,res)=> {
+  console.log(0)
   photoModel.getLast().then( u => {
     res.send(u);
   });
