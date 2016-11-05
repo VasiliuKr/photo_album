@@ -90,8 +90,8 @@ var album = (function() {
   var _getAjax = function(json) {
     popup.open({ message: 'Альбом создан' });
     modal.close();
-    // Закрываем через 2 секунды
-    setTimeout(popup.close, 2000);
+    setTimeout(popup.close, 1000);
+    urlParser.init( pageTemplate.update );
   };
 
   // вызовится в случае ошибки отправки JSON на сервер
