@@ -42,11 +42,11 @@ var pageTemplate = (function() {
     $('#content').html(contentTemplate);
 
     if(template.photos) {
-      _functionAdd(template.photos, data.data);
+      _functionAdd(template.photos, data.data, photo.set);
     }
 
     if(template.album) {
-      _functionAdd(template.album, data.data);
+      _functionAdd(template.album, data.data, album.set);
     }
 
     return true;
@@ -56,7 +56,7 @@ var pageTemplate = (function() {
   var _functionAdd = function(data, urlParam, callbackFunction) {
     var url = data.ajax_url + urlParam;
     $.post(url, function(djson) {
-      callbackFunction(djson, data.box);
+      callbackFunction(djson, data.box, callbackFunction);
     }, 'json');
   };
 
