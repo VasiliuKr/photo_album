@@ -20,7 +20,7 @@ route.post('/add',(req,res)=> {
       }
       photoModel.add(req.session.userId, albomid, files['photos[]']).then( u =>{
         console.log(u.fileList);
-        photoModel.get({_id:{ "$in": u.fileList}}).then( u => {
+        return photoModel.get({_id:{ "$in": u.fileList}}).then( u => {
           res.send('photo add');
         });
       });

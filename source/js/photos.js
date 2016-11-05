@@ -23,7 +23,7 @@ var photo = (function() {
   };
 
   var _addPhoto = function(e) {
-    // e.stopPropagation();
+    // e.preventDefault();
     var form = showAddModal();
     photosAdd.init(form);
     var ajaxFormParam = {

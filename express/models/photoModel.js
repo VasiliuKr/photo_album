@@ -100,12 +100,12 @@ let add = function(userId, albumId, files, fields) {
   });
 };
 
-let  get = function(filer) {
-  if (!filer)filer={};
+let  get = function(filter) {
+  if (!filter)filter={};
   return  new Promise(function(resolve, reject) {
     let resolveCallback = resolve;
     let photo = mongoose.model('photo');
-    photo.find(filer,{},{ sort: { '_id' : -1 }} ).then(u => {
+    photo.find(filter,{},{ sort: { '_id' : -1 }} ).then(u => {
       resolveCallback(u);
     })
   })
@@ -116,14 +116,12 @@ let  getLast = function() {
     let resolveCallback = resolve;
     let photo = mongoose.model('photo');
     let populate_album={
-      path: 'album',
-      model: 'album'
+      path: 'album'
     };
     let populate_user={
-      path: 'album.user',
-      model: 'user'
+      path: 'album -user'
     };
-    photo.find({},{},{ sort: { '_id' : -1 }}).populate(populate_album).limit(1).then(u => {
+    photo.find({},{},{ sort: { '_id' : -1 }}).populate('album').populate(populate_user).limit(1).then(u => {
       resolveCallback(u);
     })
   })

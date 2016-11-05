@@ -65,7 +65,7 @@ route.post('/login',(req,res)=>{
     }else{
       req.session.isAuth=true;
       req.session.userId=item._id;
-      res.send(JSON.stringify({href:'/photo_main',message:'Успешная авторизация'}));
+      res.send(JSON.stringify({href:'/main',message:'Успешная авторизация'}));
     }
   })
 });

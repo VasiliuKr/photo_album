@@ -67,11 +67,11 @@ var album = (function() {
 
   // вызовится в случае ошибки отправки JSON на сервер
   var _failAjax = function(json) {
-    popup.open({message:'Ошибка отправки данных на сервер'});
+    popup.open( {message: 'Ошибка отправки данных на сервер'});
   };
 
   var _addAlbum = function(e) {
-    e.stopPropagation();
+    e.preventDefault();
     var form = showAddModal();
     var ajaxFormParam = {
       onMessage: addMessage,
