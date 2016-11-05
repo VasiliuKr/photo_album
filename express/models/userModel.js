@@ -34,7 +34,6 @@ let  getUser = function(userId) {
     User.findOne({'_id':userId}).then(u => {
       delete u.password;
       let path = getPath(u._id);
-      console.log(config.style);
       u.background=(
         u.background.length<3?
         u.background=config.style.userBackground :

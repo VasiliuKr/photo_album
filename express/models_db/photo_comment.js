@@ -3,12 +3,8 @@
 let mongoose = require('mongoose'),
   Schema=mongoose.Schema,
   PhotoCommentSchema = new Schema({
-    photo:{
-      type: String
-    },
-    user:{
-      type: String
-    },
+    photo:{ type: Number, ref: 'photo' },
+    user:{ type: Number, ref: 'user' },
     commet:{
       type: String
     }

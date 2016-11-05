@@ -35,9 +35,35 @@ var modal = (function() {
     };
   };
 
+// Добавление альбома
+  var modalAlbumAdd = function(json) {
+    close();
+
+    $('body')
+      .addClass('modal-show')
+      .append(templates.modal_add_album(json));
+
+    // albumAdd.init();
+
+    var form = $('.modal-overlay').find('form').eq(0);
+    return form || '';
+  };
+
+// Добавление фотографий
+  var modalPhotoAdd = function(json) {
+    close();
+
+    $('body')
+      .addClass('modal-show')
+      .append(templates.modal_photo_add(json));
+
+    var form = $('.modal-overlay').find('form').eq(0);
+    return form || '';
+  };
+
   return {
-    add_album: open('modal_add_album'),
-    add_photo: open('modal_photo_add'),
+    add_album: modalAlbumAdd,
+    add_photo: modalPhotoAdd,
     close: close,
     init: init
   };

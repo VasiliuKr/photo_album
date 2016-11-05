@@ -1,0 +1,7 @@
+include ../mixins/_icons
+
+.add-photo__item
+	a(class="add-photo__item-close button button--theme-secondary button--icon-close" href="#")
+		+icon('close')
+	.add-photo__item-image
+		img.add-photo__image(src=`${src}`, alt="photo image")
