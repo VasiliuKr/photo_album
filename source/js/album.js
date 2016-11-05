@@ -20,6 +20,13 @@ var album = (function() {
     }else{
       albumCanEdit = false;
     }
+
+    var albums_array = albums.array;
+    for (var i = 0; i < albums_array.length; i++) {
+      var album = templates.my_albums_item(albums_array[i]);
+      albumContainer.append(album);
+    }
+  
   };
 
   var init = function(params) {
@@ -61,8 +68,16 @@ var album = (function() {
     }
   };
 
+  var _render = function(data) {
+    
+  };
+
   // вызовится в случае успеного сохранения формы
   var _getAjax = function(json) {
+    popup.open({message:'Альбом создан'});
+    modal.close();
+    //Закрываем через 2 секунды
+    setTimeout(popup.close, 2000);
   };
 
   // вызовится в случае ошибки отправки JSON на сервер

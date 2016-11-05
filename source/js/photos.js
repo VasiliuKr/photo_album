@@ -20,6 +20,13 @@ var photo = (function() {
     }else{
       photoCanEdit = false;
     } */
+
+    var photos_array = photos.array;
+    for (var i = 0; i < photos_array.length; i++) {
+      var photo = templates.photo_albums_item(photos_array[i]);
+      $(conteiner).append(photo);
+    }
+
   };
 
   var _addPhoto = function(e) {

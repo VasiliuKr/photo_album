@@ -4,7 +4,10 @@ var pageTemplate = (function() {
   var templateBase = {
     main: {
       contentTemplate: 'content_main',
-      photos: false,
+      photos: {
+        ajax_url: '/ajax/main/',
+        box: '.photo-albums__list'
+      },
       album: {
         ajax_url: '/ajax/album/get/',
         box: '.my-albums__list'

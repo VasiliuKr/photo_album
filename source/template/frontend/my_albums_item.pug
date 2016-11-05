@@ -1,0 +1,25 @@
+include ../mixins/_icons
+
+//-
+  Для добавления альбома в раздел "Новое в мире" (стр. photo_main)
+  @param {albumName} - название альбома
+  @param {albumDescription} - описание альбома
+  @param {albumImagesNumber} - количество картинок в альбоме
+  @param {albumUrl} - ссылка на альбом
+  @param {coverImage} - путь к картинке
+  @param {editUrl} - ссылка на окно редактирования альбома  
+  
+.my-albums__item
+  a(href=`${coverUrl}` class="my-albums__item-cover-wrapper")
+    .my-albums__item-spinner
+      .my-albums__item-hover-text
+        .my-albums__item-hover-description #{albumDescription}
+        .my-albums__item-hover-num-wrapper
+          span.my-albums__item-hover-num #{albumImagesNumber}
+          span.my-albums__item-hover-num-text #{albumImagesText}
+    img(class="my-albums__item-cover" src=`${coverImage}` alt="Album cover")    
+  .my-albums__item-footer
+    a(class="my-albums__item-edit-link" href=`${editUrl}`)
+      +icon('edit', ['my-albums__item-icon', 'my-albums__item-icon_edit'])  
+    a(class="my-albums__item-link" href=`${albumUrl}`)
+      h3.my-albums__item-title #{albumName}
