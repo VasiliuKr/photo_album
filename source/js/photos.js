@@ -47,7 +47,10 @@ var photo = (function() {
       // нужен вывод сообщения что файлов для отправки нет
       return false;
     }
-    data.data.append('photos[]', photosAdd.files);
+    for (var i = 0; i < photosAdd.files.length; i++) {
+      data.data.append('photos[]', photosAdd.files[i]);
+    }
+
     return data;
   };
 

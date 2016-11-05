@@ -42,11 +42,11 @@ var pageTemplate = (function() {
     $('#content').html(contentTemplate);
 
     if(template.photos) {
-      _functionAdd(template.photos, data.data);
+      _functionAdd(template.photos, data.data, photo.set);
     }
 
     if(template.album) {
-      _functionAdd(template.album, data.data);
+      _functionAdd(template.album, data.data, album.set);
     }
 
     return true;

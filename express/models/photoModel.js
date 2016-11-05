@@ -75,10 +75,11 @@ let add = function(userId, albumId, files, fields) {
       }
       path=getPath(userId,albumId);
       loadPhoto(path.server,files).then(files=> {
-
+        let fileList = [];
         files.map((file, key)=> {
           if (file) {
             photoId++;
+            fileList.push(photoId);
             let photoData = {
               _id: photoId,
               album: albumId,
@@ -93,14 +94,37 @@ let add = function(userId, albumId, files, fields) {
             Photo.collection.insert(photoData);
           }
         });
-        resolveCallback({photoId: photoId});
+        resolveCallback({photoId: photoId, fileList: fileList});
       })
     });
   });
 };
 
+let  get = function(filer) {
+  if (!filer)filer={};
+  return  new Promise(function(resolve, reject) {
+    let resolveCallback = resolve;
+    let photo = mongoose.model('photo');
+    photo.find(filer,{},{ sort: { '_id' : -1 }} ).then(u => {
+      resolveCallback(u);
+    })
+  })
+};
+
+let  getLast = function() {
+  return  new Promise(function(resolve, reject) {
+    let resolveCallback = resolve;
+    let photo = mongoose.model('photo');
+    photo.find(filer,{},{ sort: { '_id' : -1 }}).populate('user').limit(60).then(u => {
+      resolveCallback(u);
+    })
+  })
+};
+
 module.exports = {
   add: add,
+  get: get,
+  getLast: getLast,
   getPath: getPath,
   loadPhoto: loadPhoto
 };

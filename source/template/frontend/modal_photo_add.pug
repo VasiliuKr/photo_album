@@ -7,7 +7,7 @@ include ../mixins/_icons
         +icon('close')
       .modal__title Добавить фотографии
     .modal__body
-      form(action="/addphoto" method="POST")
+      form(action="/ajax/photo/add" method="POST")
         .add-photo
           .add-photo__header
             .add-photo__label Название
