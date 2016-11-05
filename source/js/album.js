@@ -20,12 +20,12 @@ var album = (function() {
     }else{
       albumCanEdit = false;
     }
-
-    var albums_array = albums.array;
+alert(albums);
+  /*  var albums_array = albums.array;
     for (var i = 0; i < albums_array.length; i++) {
       var album = templates.my_albums_item(albums_array[i]);
       albumContainer.append(album);
-    }
+    }*/
   
   };
 
@@ -82,11 +82,11 @@ var album = (function() {
 
   // вызовится в случае ошибки отправки JSON на сервер
   var _failAjax = function(json) {
-    popup.open({message:'Ошибка отправки данных на сервер'});
+    popup.open( {message: 'Ошибка отправки данных на сервер'});
   };
 
   var _addAlbum = function(e) {
-    e.stopPropagation();
+    e.preventDefault();
     var form = showAddModal();
     var ajaxFormParam = {
       onMessage: addMessage,

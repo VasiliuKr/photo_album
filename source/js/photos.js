@@ -20,17 +20,18 @@ var photo = (function() {
     }else{
       photoCanEdit = false;
     } */
-
+    alert(photos);
+/*
     var photos_array = photos.array;
     for (var i = 0; i < photos_array.length; i++) {
       var photo = templates.photo_albums_item(photos_array[i]);
       $(conteiner).append(photo);
     }
-
+*/
   };
 
   var _addPhoto = function(e) {
-    // e.stopPropagation();
+    // e.preventDefault();
     var form = showAddModal();
     photosAdd.init(form);
     var ajaxFormParam = {

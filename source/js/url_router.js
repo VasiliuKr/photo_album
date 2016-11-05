@@ -6,7 +6,7 @@ var urlParser = (function() {
   var init = function(updateFunction) {
     pageTemplate = updateFunction;
     _setUpListeners();
-    var hereUrl = location.pathname;
+    var hereUrl = location.href;
     _analyzeUrl(hereUrl);
   };
 
@@ -17,8 +17,8 @@ var urlParser = (function() {
   var _analyzeUrl = function(url) {
     var urlSplit = url.split( '/' );
     var pageData = {
-      template: urlSplit[1] ? urlSplit[1] : '',
-      data: urlSplit[2] ? urlSplit[2] : ''
+      template: urlSplit[3] ? urlSplit[3] : '',
+      data: urlSplit[4] ? urlSplit[4] : ''
     };
 
     return pageTemplate(pageData);
@@ -26,7 +26,7 @@ var urlParser = (function() {
 
   var _linkClick = function(e) {
     if(_analyzeUrl( this.href )) {
-      e.stopPropagation();
+      e.preventDefault();
     }
   };
 
