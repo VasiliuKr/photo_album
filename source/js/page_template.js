@@ -3,31 +3,29 @@
 var pageTemplate = (function() {
   var templateBase = {
     main: {
+      headerTemplate: 'header_main',
       contentTemplate: 'content_main',
       photos: false,
       album: {
         ajax_url: '/ajax/album/get/',
         box: '.my-albums__list'
       },
-      // header: {
-      //
-      // }
     },
     album: {
-      contentTemplate: 'content_user',
-      album: {
-        ajax_url: '/ajax/main/',
-        box: '.my-albums__list'
-      }
-    },
-    photos: {
+      headerTemplate: 'header_album',
       contentTemplate: 'content_album',
       photos: {
         ajax_url: '/ajax/main/',
         box: '.photo-albums__list'
       }
     },
-
+    user: {
+      contentTemplate: 'content_user',
+      album: {
+        ajax_url: '/ajax/main/',
+        box: '.my-albums__list'
+      }
+    },
   };
 
   var init = function(updateFunction) {
@@ -40,10 +38,15 @@ var pageTemplate = (function() {
     if (!templateBase[template]) return false;
 
     template = templateBase[template];
+
+    var headerTemplate = template.headerTemplate;
+    headerTemplate = templates[headerTemplate]();
+    $('#header').html(headerTemplate);
+
     var contentTemplate = template.contentTemplate;
     contentTemplate = templates[contentTemplate]();
-
     $('#content').html(contentTemplate);
+
 
     if(template.photos) {
       _functionAdd(template.photos, data.data);

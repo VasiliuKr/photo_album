@@ -1,0 +1,84 @@
+.header-wrapper__album {
+  background: url('../img/bg-album.jpg') no-repeat;
+  background-size: cover;
+}
+
+.header-inner-wrapper__album {
+  padding: 0;
+}
+
+.header-top__album {
+  padding: 18px 29px 80px 90px;
+}
+
+.profile-album {
+  flex: 1 auto;
+}
+
+.profile-album__photo {
+  max-height: 55px;
+  max-width: 55px;
+  min-height: 55px;
+  min-width: 55px;
+}
+
+.profile-album__info {
+  margin-left: 20px;
+  margin-top: 18px;
+}
+
+.profile-album__name {
+  font-size: 16px;
+  min-width: 120px;
+  max-width: 200px;
+}
+
+.profile-album__text {
+  margin-top: 40px;
+  text-align: center;
+  max-width: 740px;
+  color: #ffffff;
+  flex: 5 auto;
+  line-height: 21px;
+}
+
+.profile-album__title {
+  font-size: 21px;
+  font-family: 'pantonbold';
+}
+
+.profile-album___description {
+  font-size: 16px;
+  font-family: 'proxima_nova_ltlight';
+}
+
+.profile-buttons__album {
+  margin: 0;
+  flex: 1 auto;
+  width: 200px;
+}
+.search-bar--album {
+  padding: 0;
+}
+
+.search-bar__inner-wrapper--album {
+  justify-content: center;
+  margin-bottom: -2px;
+  margin-left: 40px;
+  margin-right: 0;
+}
+
+.search-bar__list {
+  display: flex;
+}
+
+.search-bar__item {
+  display: flex;
+  margin-right: 35px;
+  font-family: 'pantonbold';
+  font-size: 16px;
+}
+
+.search-bar__number {
+  margin-right: 5px;
+}

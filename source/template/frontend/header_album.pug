@@ -1,0 +1,33 @@
+include ../mixins/_icons
+
+.header-wrapper.header-wrapper__album
+  .header-inner-wrapper.header-inner-wrapper__album
+    .header-top.header-top__album
+        .profile.profile-album
+          .profile__photo.profile-album__photo
+            img(class="profile__img" src="./assets/img/cherepov_anton.jpg" alt="Антон Черепов")
+          .profile__info.profile-album__info
+            h1.profile__name.profile-album__name Антон Черепов
+        .profile-album__text
+          h1.profile-album__title Лесные прогулки
+          p.profile-album___description Фотографии природы леса, енотов и оленей. Как прекрасно сойти на дальней станции и пройтись по полю босиком. И чтобы никто не беспокоил бродить влюбленным в тишину.
+          p.profile-album___description Запах мёда, лесных оленей и енотов будоражит нутро.
+        .profile-buttons.profile-buttons__album
+          a(class="button-circle button-circle--home" href="#")
+            +icon('home', ['button-circle-icon', 'button-circle--home'])
+            span.button-circle--text На главную
+          a(class="button-circle button-circle--edit" href="#")
+            +icon('edit', ['button-circle-icon', 'button-circle-icon--edit'])
+            span.button-circle--text Редактировать
+    .search-bar.search-bar--album
+      .search-bar__inner-wrapper.search-bar__inner-wrapper--album
+        ul.search-bar__list
+          li.search-bar__item
+            .search-bar__number 18
+            .search-bar__text Фотографий
+          li.search-bar__item
+            .search-bar__number 12
+            .search-bar__text Лайков
+          li.search-bar__item
+            .search-bar__number 4
+            .search-bar__text Комментария

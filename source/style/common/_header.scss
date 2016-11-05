@@ -1,31 +1,31 @@
 .header-wrapper {
   background: url('../img/bg-profile.jpg') center 50% no-repeat;
   overflow: hidden;
+}
 
-  &-inner-wrapper {
-    padding: 57px 40px 0 87px;
-    position: relative;
+.header-inner-wrapper {
+  padding: 57px 40px 0 87px;
+  position: relative;
 
-    &::before {
-      background: linear-gradient(to right, $shapka-grad-left 0%, $shapka-grad-right 60%);
-      bottom: 0;
-      content: '';
-      left: 0;
-      opacity: 0.6;
-      position: absolute;
-      right: 0;
-      top: 0;
-      z-index: 0;
-    }
+  &::before {
+    background: linear-gradient(to right, $shapka-grad-left 0%, $shapka-grad-right 60%);
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0.6;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
   }
+}
 
-  &-top {
+.header-top {
     display: flex;
     justify-content: space-between;
     padding-bottom: 56px;
     position: relative;
     z-index: 1;
-  }
 }
 
 // Profile
