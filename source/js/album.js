@@ -20,13 +20,29 @@ var album = (function() {
     }else{
       albumCanEdit = false;
     }
-alert(albums);
-  /*  var albums_array = albums.array;
-    for (var i = 0; i < albums_array.length; i++) {
-      var album = templates.my_albums_item(albums_array[i]);
-      albumContainer.append(album);
-    }*/
-  
+
+    var data = albums.data;
+    var user = albums.user;
+
+    for (var i = 0; i < data.length; i++) {
+
+      var album = {
+        albumName: data[i].title, //название альбома
+        albumDescription: data[i].description, // описание альбома
+        albumImagesNumber: data[i].photos_count, // количество картинок в альбоме
+        albumUrl: "/album/"+data[i]._id, // ссылка на альбом
+        coverImage: data[i].dir+'/'+data[i].cover,// путь к картинке
+        editUrl: ""//ссылка на окно редактирования альбома  
+      };
+
+      if (albumCanEdit) {
+        album.editUrl = "/album/edit/"+data[i]._id;
+      }
+
+      var album_item = templates.my_albums_item(album);
+      albumContainer.append(album_item);  
+    }
+
   };
 
   var init = function(params) {

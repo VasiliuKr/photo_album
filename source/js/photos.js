@@ -1,5 +1,5 @@
 'use strict';
-
+var aaa;
 var photo = (function() {
   var photoCollection = [];
   var photoContainer = false;
@@ -20,9 +20,9 @@ var photo = (function() {
     }else{
       photoCanEdit = false;
     } */
-    alert(photos);
+
 /*
-    var photos_array = photos.array;
+    var photos_array = photos.data;
     for (var i = 0; i < photos_array.length; i++) {
       var photo = templates.photo_albums_item(photos_array[i]);
       $(conteiner).append(photo);
