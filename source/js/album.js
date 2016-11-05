@@ -13,7 +13,7 @@ var album = (function() {
   };
   var setParam = function(albums, conteiner, canAdd) {
     albumContainer = $(conteiner);
-    var addButton = albumContainer.find('.button-circle-icon--add');
+    var addButton = albumContainer.parent().find('.button-circle--add');
     if (addButton.length > 0) {
       albumCanEdit = true;
       addButton.on('click', _addAlbum);
@@ -67,6 +67,7 @@ var album = (function() {
 
   // вызовится в случае ошибки отправки JSON на сервер
   var _failAjax = function(json) {
+    popup.open({message:'Ошибка отправки данных на сервер'});
   };
 
   var _addAlbum = function(e) {

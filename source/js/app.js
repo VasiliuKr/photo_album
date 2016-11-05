@@ -2,12 +2,12 @@
 
 (function() {
   modal.init();
+  popup.init();
+  if( $('.form-index').length > 0) {
+    $('form').ajaxForm({ onMessage: popup.open });
+    return;
+  }
   album.init( {showAddModal: modal.add_album});
   photo.init( {showAddModal: modal.add_photo});
-  popup.init();
   urlParser.init( pageTemplate.update );
-
-  // popup.open({message: 'messagecsddfd'});
-  // modal.add_photo();
-  // modal.add_album();
 })();

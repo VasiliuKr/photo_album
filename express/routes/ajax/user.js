@@ -34,7 +34,7 @@ route.post('/registration',(req,res)=>{
       u=> {
         req.session.isAuth = true;
         req.session.userId = u._id;
-        res.send(JSON.stringify({error: 0, message: 'Успешная регистрация', href: '/photo_main'}));
+        res.send(JSON.stringify({error: 0, message: 'Успешная регистрация', href: '/main'}));
       },
       e=> {
         res.send(JSON.stringify({error: e.message}))

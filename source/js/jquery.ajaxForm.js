@@ -38,6 +38,9 @@
   }
 
   ajaxForm.prototype.ajaxDone = function(data) {
+    form.form.removeClass('disabled');
+    form.form.find('[type=submit]').prop('disabled', false);
+
     if(form.config.onGetAjaxDone) {
       form.config.onGetAjaxDone(data);
       return false;
@@ -52,18 +55,17 @@
       form.resultMessage(data.message);
       form.form[0].reset();
     }
-    form.form.removeClass('disabled');
-    form.form.find('[type=submit]').prop('disabled', false);
   };
 
   ajaxForm.prototype.ajaxFail = function(data) {
+    form.form.removeClass('disabled');
+    form.form.find('[type=submit]').prop('disabled', false);
+
     if(form.config.onGetAjaxFail) {
       form.config.onGetAjaxFail(data);
       return false;
     }
     form.resultMessage(form.config.errMessage.failAjax, 'error_windows');
-    form.form.removeClass('disabled');
-    form.form.find('[type=submit]').prop('disabled', false);
   };
 
   ajaxForm.prototype.resultMessage = function(text, className) {
@@ -237,5 +239,3 @@ $.fn.serializeObject = function() {
   });
   return o;
 };
-
-$('form').ajaxForm({ onMessage: popup.popup });
