@@ -25,24 +25,22 @@ var album = (function() {
     var user = albums.user;
 
     for (var i = 0; i < data.length; i++) {
-
-      var album = {
-        albumName: data[i].title, //название альбома
+      var albumItem = {
+        albumName: data[i].title, // название альбома
         albumDescription: data[i].description, // описание альбома
         albumImagesNumber: data[i].photos_count, // количество картинок в альбоме
-        albumUrl: "/album/"+data[i]._id, // ссылка на альбом
-        coverImage: data[i].dir+'/'+data[i].cover,// путь к картинке
-        editUrl: ""//ссылка на окно редактирования альбома  
+        albumUrl: '/album/' + data[i]._id, // ссылка на альбом
+        coverImage: data[i].dir + '/' + data[i].cover, // путь к картинке
+        editUrl: '' // ссылка на окно редактирования альбома
       };
 
       if (albumCanEdit) {
-        album.editUrl = "/album/edit/"+data[i]._id;
+        albumItem.editUrl = '/album/edit/' + data[i]._id;
       }
 
-      var album_item = templates.my_albums_item(album);
-      albumContainer.append(album_item);  
+      var albumHTML = templates.my_albums_item(albumItem);
+      albumContainer.append(albumHTML);
     }
-
   };
 
   var init = function(params) {
@@ -85,14 +83,14 @@ var album = (function() {
   };
 
   var _render = function(data) {
-    
+
   };
 
   // вызовится в случае успеного сохранения формы
   var _getAjax = function(json) {
-    popup.open({message:'Альбом создан'});
+    popup.open({ message: 'Альбом создан' });
     modal.close();
-    //Закрываем через 2 секунды
+    // Закрываем через 2 секунды
     setTimeout(popup.close, 2000);
   };
 
