@@ -6,38 +6,6 @@ let mongoose = require('mongoose'),
   fs = require('fs'),
   crypto=require('crypto'),
   thumb = require('node-thumbnail').thumb;
-require('./../models_db/photo');
-
-let getPath = function(userId,albomId) {
-  let dirName='upload/'+Math.ceil(userId/100);
-
-  let uploadDir = path.resolve(config.http.publicRoot,dirName);
-  if(!fs.existsSync(uploadDir)){
-    fs.mkdirSync(uploadDir);
-  }
-
-  dirName+='/'+(userId % 100);
-  uploadDir = path.resolve(config.http.publicRoot,dirName);
-  if(!fs.existsSync(uploadDir)){
-    fs.mkdirSync(uploadDir);
-  }
-
-  dirName+='/'+albomId;
-  uploadDir = path.resolve(config.http.publicRoot,dirName);
-  if(!fs.existsSync(uploadDir)){
-    fs.mkdirSync(uploadDir);
-  }
-
-  let thumbsDir = path.resolve(config.http.publicRoot,dirName+'/_thumbs');
-  if(!fs.existsSync(thumbsDir)){
-    fs.mkdirSync(thumbsDir);
-  }
-
-  return {
-    server: uploadDir,
-    browser: dirName
-  };
-};
 
 let loadPhoto = function(path,files){
   return  new Promise(function(resolve, reject) {
@@ -63,6 +31,22 @@ let loadPhoto = function(path,files){
   })
 };
 
+let createPhotoArray = function(files,dir,fields){
+  return  new Promise(function(resolve, reject) {
+    loadPhoto(dir,files).then(files=> {
+      let fileList=[];
+      files.map((file, key)=> {
+        if (file) {
+          let photoData=fields;
+          photoData.src=file;
+          fileList.push(photoData);
+        }
+      });
+      resolve(fileList);
+    })
+  })
+};
+/*
 let add = function(userId, albumId, files, fields) {
   return  new Promise(function(resolve, reject) {
     let resolveCallback=resolve;
@@ -121,16 +105,30 @@ let  getLast = function() {
     let populate_user={
       path: 'album -user'
     };
-    photo.find({},{},{ sort: { '_id' : -1 }}).populate('album').populate(populate_user).limit(1).then(u => {
+    let project= {
+      name:1,
+      likes:1,
+      count: {
+        $add: [1]
+      }
+    };
+    //photo.aggregate({},{ $project: {name:1} },{ sort: { '_id' : -1 }}).populate('album').populate(populate_user).limit(1).then(u => {
+    photo
+      .find()
+      .populate('album')
+      .aggregate({$unwind: "$album"})
+      .limit(1)
+      .then(u => {
       resolveCallback(u);
     })
   })
-};
+};*/
 
 module.exports = {
-  add: add,
+ /* add: add,
   get: get,
   getLast: getLast,
-  getPath: getPath,
-  loadPhoto: loadPhoto
+  getPath: getPath,*/
+  loadPhoto: loadPhoto,
+  createPhotoArray: createPhotoArray
 };

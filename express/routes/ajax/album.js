@@ -22,17 +22,18 @@ route.post('/create',(req,res)=> {
       if(u){
         albumId=u._id+1;
       };
-      photoModel.add(req.session.userId, albumId, files.cover, false).then(u=>{
-        if(!u){
-          throw new Error('Ошибка загрузки обложки');
+      let path = albumModel.getPath(req.session.userId,albumId);
+      photoModel.createPhotoArray(files.cover,path.server, {is_cover: true}).then(photos=>{
+        if(!photos){
+          throw res.send(JSON.stringify({err:'Ошибка загрузки обложки'}));
         }
-
         let item = new Model({
           _id: albumId,
           user:req.session.userId,
           title:fields.title[0],
           description:fields.description[0],
-          cover:u.photoId
+          dir: path.browser,
+          photos:photos
         });
         item.save().then(
           i=> {
@@ -53,7 +54,7 @@ route.post('/create',(req,res)=> {
           }
         );
       });
-    });
+    })
   })
 });
 

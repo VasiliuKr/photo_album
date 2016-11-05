@@ -7,7 +7,7 @@ let route = require('express').Router(),
   albumModel=require('./../../models/albumModel'),
   userModel=require('./../../models/userModel');
 require('./../../models_db/album');
-require('./../../models_db/photo');
+
 
 route.post('/add',(req,res)=> {
   let form= new multiparty.Form();
