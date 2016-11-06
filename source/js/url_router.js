@@ -52,8 +52,7 @@ var urlParser = (function() {
   var _linkClick = function(e) {
     var url = this.href;
     if(url.indexOf('#') >= 0 ) {
-      e.preventDefault();
-      return false;
+      return true;
     }
     if(_analyzeUrl( url )) {
       _setLocation(url);

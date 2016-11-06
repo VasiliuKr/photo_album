@@ -7,6 +7,7 @@
     $('form').ajaxForm({ onMessage: popup.open });
     return;
   }
+  headerEditor.init('.header');
   album.init( {showAddModal: modal.add_album});
   photo.init( {showAddModal: modal.add_photo});
   urlParser.init( pageTemplate.update );
