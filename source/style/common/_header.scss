@@ -107,6 +107,13 @@
   margin-top: -37px;
 }
 
+.header__buttons-down {
+  position: absolute;
+  width: 250px;
+  bottom: -50px;
+  transform: rotate3d(1,0,0,90deg);
+  transition: all 0.2s;
+}
 // Строка поиска
 .search-bar {
   background-color: $search-plashka-bg;

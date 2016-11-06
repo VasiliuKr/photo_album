@@ -34,6 +34,8 @@ include ../mixins/_icons
           a(class="button-circle button-circle--login" href="#")
             +icon('off', ['button-circle-icon', 'button-circle--off'])
             span.button-circle--text Выйти
+        .header__buttons-wrapper.header__buttons-wrapper--editor
+          include ./../common/_header_edit_control
   .search-bar
     .search-bar__inner-wrapper
       form(id="search" class="search__form")
