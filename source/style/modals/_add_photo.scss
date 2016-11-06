@@ -54,8 +54,8 @@
     text-align: center;
 
     &--header {
-      transform: rotate3d(0,1,0,90deg);
-      transition: all .2s;
+      transform: rotate3d(0, 1, 0, 90deg);
+      transition: all 0.2s;
     }
 
     &-icon {

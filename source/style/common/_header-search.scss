@@ -16,6 +16,7 @@
 }
 
 .header__top-title--search {
+  animation: Down 1s;
   color: $shapka-search-title;
   flex: 10 auto;
   font-family: 'pantonbold', sans-serif;
@@ -35,6 +36,7 @@
 }
 
 .profile--search {
+  animation: Right 1s;
   margin-left: 60px;
   margin-right: 200px;
 }
@@ -45,6 +47,7 @@
 
 .search__form--search {
   align-items: center;
+  animation: Left 1s;
   display: flex;
   margin: 7px 0;
 }

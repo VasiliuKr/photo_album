@@ -13,3 +13,43 @@
     visibility: visible;
   }
 }
+
+@keyframes Right {
+  0% {
+    transform: translateX(-200%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes Left {
+  0% {
+    transform: translateX(200%);
+  }
+  
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes Up {
+  0% {
+    transform: translateY(200%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes Down {
+  0% {
+    transform: translateY(-200%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}

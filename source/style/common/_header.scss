@@ -36,6 +36,7 @@
   }
 
   &__photo {
+    animation: Right 1s;
     border: 3px solid $shapka-avatar-border;
     border-radius: 50%;
     max-height: 124px;
@@ -46,12 +47,14 @@
   }
 
   &__name {
+    animation: Down 1s;
     color: $shapka-avatar-text;
     font: 21px/1 'pantonbold', sans-serif;
     margin: 0 0 8px;
   }
 
   &__description {
+    animation: Up 1s -0.3s;
     color: $shapka-avatar-description;
     font: 16px/1.5 'proxima_nova_ltlight', sans-serif;
     margin-bottom: 26px;
@@ -61,6 +64,7 @@
 
 //Social icons
 .social-list {
+  animation: Up 1s;
   margin: 0;
   padding: 0;
 
@@ -102,17 +106,18 @@
 
 .header__buttons-wrapper {
   align-items: flex-end;
+  animation: Down 1s;
   display: flex;
   flex-direction: column;
   margin-top: -37px;
 }
 
 .header__buttons-down {
-  position: absolute;
-  width: 250px;
   bottom: -50px;
-  transform: rotate3d(1,0,0,90deg);
+  position: absolute;
+  transform: rotate3d(1, 0, 0, 90deg);
   transition: all 0.2s;
+  width: 250px;
 }
 // Строка поиска
 .search-bar {
