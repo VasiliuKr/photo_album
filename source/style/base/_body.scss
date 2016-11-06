@@ -34,6 +34,10 @@ img {
   vertical-align: middle;
 }
 
+.header {
+  z-index: 100;
+}
+
 // Sticky footer
 .site-wrapper {
   display: flex;
@@ -43,6 +47,17 @@ img {
 
 .page-wrap {
   flex: 1;
+
+  &:before {
+    background: rgba($photo-hover-icon, 0.6);
+    content: '';
+    height: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    transition: all 0.8s;
+    z-index: 99;
+  }
 }
 // Sticky footer end
 
@@ -57,4 +72,15 @@ img {
 
 .links {
   margin-right: 20px;
+}
+
+[contenteditable] {
+  background: $onform-header-text;
+  color: $form-header-text !important;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.hashtag {
+  color: $slider-hash-text;
 }

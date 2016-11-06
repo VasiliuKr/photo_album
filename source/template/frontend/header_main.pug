@@ -7,8 +7,8 @@ include ../mixins/_icons
         .profile__photo
           img(class="profile__img" src="./assets/img/cherepov_anton.jpg" alt="Антон Черепов")
         .profile__info
-          h1.profile__name Антон Черепов
-          p.profile__description Я веб разработчик. Мне 24 года. Люблю путешествия, кодинг, фриланс и активный отдых.
+          h1.profile__name(name='name' editor='text') Антон Черепов
+          p.profile__description(name='description' editor='text_tag') Я веб разработчик. Мне 24 года. Люблю путешествия, кодинг, фриланс и активный отдых.
           .profile__social
             ul.social-list
               li.social-list__item

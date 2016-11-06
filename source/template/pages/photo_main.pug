@@ -1,0 +1,12 @@
+extends ../_template
+
+block variables
+  - var title = 'Главная'
+  - var descrption = 'Главная'
+  - var page_type = 'main'
+  - var description = 'Страница последних добавленных фото и альбомов пользователя'
+  - var keywords = 'Страница последних добавленных фото и альбомов пользователя'  
+
+block content
+  include ../common/_photo-albums
+  include ../common/_my-albums
