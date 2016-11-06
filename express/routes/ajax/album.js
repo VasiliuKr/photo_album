@@ -66,7 +66,11 @@ route.post('/update',(req,res)=> {
 
 route.post('/get/*',(req,res)=> {
   albumModel.get({user:req.session.userId}).then(u => {
-    userModel.get(req.session.userId).then(user => {
+    let user_list=[];
+    u.map((album)=> {
+      user_list.push(album.user);
+    });
+    userModel.get({ "$in" : user_list}).then(user => {
       res.send(JSON.stringify({
         data: u,
         user: user

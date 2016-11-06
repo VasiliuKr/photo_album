@@ -35,9 +35,10 @@ let createPhotoArray = function(files,dir,fields){
   return  new Promise(function(resolve, reject) {
     loadPhoto(dir,files).then(files=> {
       let fileList=[];
-      files.map((file, key)=> {
+      fields.created=(new Date).getTime();
+      files.map((file)=> {
         if (file) {
-          let photoData=fields;
+          let photoData = Object.assign({},fields);
           photoData.src=file;
           fileList.push(photoData);
         }
@@ -46,89 +47,53 @@ let createPhotoArray = function(files,dir,fields){
     })
   })
 };
-/*
-let add = function(userId, albumId, files, fields) {
+
+let  get = function(filter,user) {
+  if (!filter)filter={};
+  let userId=user;
   return  new Promise(function(resolve, reject) {
-    let resolveCallback=resolve;
-    let Photo = mongoose.model('photo');
-    Photo.findOne({},{},{ sort: { '_id' : -1 }}).then(u=> {
-      let path,
-        photoId=1;
-      if(u){
-        photoId=u._id;
-      }
-      path=getPath(userId,albumId);
-      loadPhoto(path.server,files).then(files=> {
-        let fileList = [];
-        files.map((file, key)=> {
-          if (file) {
-            photoId++;
-            fileList.push(photoId);
-            let photoData = {
-              _id: photoId,
-              album: albumId,
-              src: file,
-              dir: path.browser
-            };
-            if (fields) {
-              photoData.title = fields.title[0] || '';
-              photoData.description = fields.description[0] || '';
-              photoData.tags = fields.description[0] || '';
-            }
-            Photo.collection.insert(photoData);
+    let resolveCallback = resolve;
+    let startParametr={
+      _id:'$photos._id',
+      album_id:'$_id',
+      dir:'$dir',
+      user:'$user',
+      src:'$photos.src',
+      created:'$photos.created',
+      is_cover:'$photos.is_cover',
+      comments:'$photos.comments',
+      likes:'$photos.likes',
+      tags:'$photos.tags'
+    };
+    let Album = mongoose.model('album');
+    Album.aggregate(
+      {$unwind: "$photos"},
+      {$project: startParametr},
+      {$match: filter},
+      {$sort: {created:-1}},
+      {$limit: 60}
+    ).then(u => {
+      u.map(photo=>{
+        photo.iLike=false;
+        photo.likes.map(like=>{
+          if(like.user==userId){
+            photo.iLike=true;
           }
         });
-        resolveCallback({photoId: photoId, fileList: fileList});
-      })
-    });
-  });
-};
-
-let  get = function(filter) {
-  if (!filter)filter={};
-  return  new Promise(function(resolve, reject) {
-    let resolveCallback = resolve;
-    let photo = mongoose.model('photo');
-    photo.find(filter,{},{ sort: { '_id' : -1 }} ).then(u => {
+        photo.likes=photo.likes.length;
+        photo.comments=photo.comments.length;
+      });
       resolveCallback(u);
     })
   })
 };
-
-let  getLast = function() {
-  return  new Promise(function(resolve, reject) {
-    let resolveCallback = resolve;
-    let photo = mongoose.model('photo');
-    let populate_album={
-      path: 'album'
-    };
-    let populate_user={
-      path: 'album -user'
-    };
-    let project= {
-      name:1,
-      likes:1,
-      count: {
-        $add: [1]
-      }
-    };
-    //photo.aggregate({},{ $project: {name:1} },{ sort: { '_id' : -1 }}).populate('album').populate(populate_user).limit(1).then(u => {
-    photo
-      .find()
-      .populate('album')
-      .aggregate({$unwind: "$album"})
-      .limit(1)
-      .then(u => {
-      resolveCallback(u);
-    })
-  })
-};*/
 
 module.exports = {
  /* add: add,
-  get: get,
   getLast: getLast,
+  get: get,
   getPath: getPath,*/
+  get: get,
   loadPhoto: loadPhoto,
   createPhotoArray: createPhotoArray
 };
