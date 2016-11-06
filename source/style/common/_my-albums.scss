@@ -6,12 +6,10 @@
   justify-content: center;
   &__inner-wrapper {
     position: relative;
-    // width: 1180px;
     width: 100%;
     padding: 53px 0 38px;
 
     @include media_min($phones) {
-      // max-width: 280px;
       max-width: 280px;
     }
     @include media_min($tablets) {
@@ -37,11 +35,11 @@
   display: flex;
   overflow: hidden;
   flex-direction: column;
-  // max-width: 280px;
   margin: 10px;
   border-radius: 3px;
   background-color: $album-bg;
   box-shadow: 0 1px 4px $photo-shadow;
+
   @include media_min($phones) {
     max-width: 320px;
   }
@@ -146,7 +144,6 @@
     }
   }
   &-title {
-    // font: 16px/1 'proxima_nova_ltsemibold', sans-serif;
     margin: 0 0 0 8px;
     transition: opacity .25s;
     color: $album-title-text;

@@ -3,186 +3,177 @@
 
 .modal-show,
 .popup-show {
-  height: 100vh;
   overflow: hidden;
+  height: 100vh;
 }
 
 .modal-overlay,
 .popup-overlay {
-  animation: modalShow 0.25s linear;
-  background-color: $modal-overlay;
-  display: flex;
-  height: 100vh;
-  left: 0;
-  overflow: auto;
-  padding: 30px;
   position: fixed;
-  right: 0;
-  top: 0;
   z-index: 100;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  overflow: auto;
+  height: 100vh;
+  animation: modalShow .25s linear;
+  background-color: $modal-overlay;
+
+  @include media_min($phones) {
+    padding: 10px;
+  }
+  @include media_min($tablets) {
+    padding: 30px;
+  }
 }
 
 @keyframes modalShow {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .modal {
-  background-color: $modal-bg;
-  margin: auto;
-  max-width: 678px;
   position: relative;
-  width: 60%;
+  max-width: 678px;
+  margin: auto;
+  background-color: $modal-bg;
 
+  @include media_min($phones) {
+    width: 100%;
+  }
+  @include media_min($tablets) {
+    width: 80%;
+  }
   &__header {
-    background-color: $modal-header-bg;
-    color: $modal-header-text;
     font-family: 'pantonbold', sans-serif;
     font-size: 21px;
     line-height: 1;
     padding: 20px;
+    color: $modal-header-text;
+    background-color: $modal-header-bg;
   }
-
   &__close {
     float: right;
     text-decoration: none;
-
     .icon-close {
-      fill: $modal-close-icon;
-      height: 22px;
-      transition: fill 0.2s linear;
       width: 22px;
+      height: 22px;
+      transition: fill .2s linear;
 
+      fill: $modal-close-icon;
       &:hover {
         fill: $modal-close-icon-hover;
       }
     }
-
   }
-
   &__body {
     background-color: $modal-bg;
   }
-
   &__row {
     display: flex;
     margin-bottom: 20px;
   }
-
   &--stretch {
     flex: 1;
   }
-
   &__label {
-    color: $modal-edit-label-text;
-    display: inline-block;
     font-family: 'proxima_nova_ltsemibold', sans-serif;
     font-size: 16px;
     line-height: 1.313;
-    margin-right: 20px;
+    display: inline-block;
     min-width: 100px;
+    margin-right: 20px;
     padding-top: 11px;
     text-align: right;
     vertical-align: top;
+    color: $modal-edit-label-text;
   }
-
   %modal-input-placeholder {
-    background-color: $modal-bg;
-    border: 1px solid $modal-edit-input-border;
-    border-radius: 20px;
-    color: $modal-edit-input-text;
     font-family: 'proxima_nova_ltlight', sans-serif;
     font-size: 16px;
     line-height: 1.313;
     padding: 10px 20px;
-
+    color: $modal-edit-input-text;
+    border: 1px solid $modal-edit-input-border;
+    border-radius: 20px;
+    background-color: $modal-bg;
     &:focus {
-      border: 1px solid $modal-edit-input-active-border;
       color: $modal-edit-input-active-text;
+      border: 1px solid $modal-edit-input-active-border;
     }
   }
-
   &__input {
     @extend %modal-input-placeholder;
   }
-
   &__textarea {
-    @extend %modal-input-placeholder;
-
     min-height: 120px;
     outline: 0;
 
+    @extend %modal-input-placeholder;
   }
-
   &__footer {
-    background-color: $modal-bottom-bg;
     padding: 14px 28px;
+    background-color: $modal-bottom-bg;
   }
-
   &__errors {
     margin: 40px 0;
   }
-
   &__error-item {
     margin: 5px 0;
   }
-
   &__error-message {
-    background-color: $modal-error-bg;
-    color: $modal-error-text;
-    display: inline-block;
     font-family: 'proxima_nova_ltsemibold', sans-serif;
     font-size: 14px;
     line-height: 1.143;
+    display: inline-block;
     padding: 10px;
+    color: $modal-error-text;
+    background-color: $modal-error-bg;
   }
-
   //модуль загрузки обложки
   &-cover {
-    align-items: center;
     display: flex;
 
+    align-items: center;
     &__thumb {
       display: inline-block;
-      margin-right: 20px;
       min-width: 100px;
-      opacity: 0;
+      margin-right: 20px;
+      transition: all .25s;
       text-align: right;
-      transition: all 0.25s;
-
+      opacity: 0;
       &-wrapper {
-        border-radius: 50%;
         display: inline-block;
-        height: 50px;
         overflow: hidden;
         width: 50px;
+        height: 50px;
+        border-radius: 50%;
       }
-
       &--active {
         opacity: 1;
       }
     }
-
     &__file {
-      left: -9999px;
       position: absolute;
+      left: -9999px;
     }
-
     &__btn {
       margin-right: 20px;
     }
-
     &__file-info {
-      color: $modal-img-info-text;
-      font-family: "proxima_novalight_italic",sans-serif;
+      font-family: 'proxima_novalight_italic',sans-serif;
       font-size: 14px;
       line-height: 1;
       max-width: 200px;
+      color: $modal-img-info-text;
     }
-
     &__file-size {
       font-weight: 600;
     }
-
   }
 }

@@ -9,12 +9,21 @@
   }
   &-inner-wrapper {
     position: relative;
-    display: flex;
-    padding: 14px 61px;
     background: url('../img/bg-profile.jpg') center bottom no-repeat;
 
-    align-items: center;
     justify-content: space-between;
+    align-items: flex-start;
+    @include media_min($phones) {
+      display: block;
+      padding: 60px 14px 14px 14px;
+    }
+    @include media_min($tablets) {
+      display: flex;
+      padding: 14px 22px;
+    }
+    @include media_min($laptop) {
+      padding: 14px 61px;
+    }
     &::before {
       position: absolute;
       z-index: 0;
@@ -28,22 +37,49 @@
   }
   &-left-col {
     position: relative;
-    max-width: 480px;
-    text-align: left;
+
+    @include media_min($phones) {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    @include media_min($tablets) {
+      max-width: 480px;
+      text-align: left;
+    }
   }
   &-right-col {
     position: relative;
-    max-width: 480px;
-    text-align: right;
     opacity: .4;
+
+    @include media_min($phones) {
+      text-align: center;
+    }
+    @include media_min($tablets) {
+      max-width: 480px;
+      text-align: right;
+    }
   }
 }
 
 .to-top {
-  position: relative;
   cursor: pointer;
   transition: all .25s;
   opacity: .8;
+
+  @include media_min($phones) {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    left: 0;
+    width: 26px;
+    margin: auto;
+  }
+  @include media_min($tablets) {
+    position: relative;
+    top: 10px;
+    right: 0;
+    bottom: 0;
+  }
   &-icon {
     width: 26px;
     height: 21px;
