@@ -9,7 +9,7 @@ var pageTemplate = (function() {
       album: {
         ajax_url: '/ajax/album/get/',
         box: '.my-albums__list'
-      },
+      }
     },
     album: {
       headerTemplate: 'header_album',
@@ -34,7 +34,7 @@ var pageTemplate = (function() {
         ajax_url: '/ajax/main/',
         box: '.photo-albums__list'
       }
-    },
+    }
   };
 
   var init = function(updateFunction) {
@@ -50,7 +50,25 @@ var pageTemplate = (function() {
 
     var headerTemplate = template.headerTemplate;
     headerTemplate = templates[headerTemplate]();
-    $('#header').html(headerTemplate);
+
+    $('#header').find('.wrapper-hide').remove();;
+    var header__wrapper = $('#header').find('.header__wrapper');
+    if(header__wrapper.length>0) {
+      var oldHeight = $('#header').height();
+      header__wrapper.hide();
+      $('#header').append(headerTemplate);
+      var newHeight = $('#header').height();
+      header__wrapper.addClass('wrapper-hide');
+      header__wrapper.show();
+      $('#header')
+        .css({height: oldHeight})
+        .animate({height: newHeight}, 1000, function() {
+          $(this).css({height: ''})
+        });
+    } else {
+      $('#header').html(headerTemplate);
+      // ОТключить задержку анимации
+    }
 
     var contentTemplate = template.contentTemplate;
     contentTemplate = templates[contentTemplate]();

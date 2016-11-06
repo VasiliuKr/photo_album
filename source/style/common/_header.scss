@@ -160,3 +160,9 @@
     width: 15px;
   }
 }
+
+.wrapper-hide {
+  position: absolute;
+  width: 100vw;
+  z-index: 0;
+}
