@@ -16,7 +16,35 @@ let mongoose = require('mongoose'),
       type:String,
       required:[true,'Укажите описание альбома']
     },
-    cover: { type: Number, ref: 'photo' }
+    dir: {
+      type: String
+    },
+    photos: [{
+      title:{
+        type: String
+      },
+      src: {
+        type: String
+      },
+      created:{"type":Number},
+      description: {
+        type: String
+      },
+      tags: {
+        type: [String]
+      },
+      is_cover:{
+        type: Boolean
+      },
+      likes:[{
+        user:{ type: Number, ref: 'user' }
+      }],
+      comments:[{
+        user:{ type: Number, ref: 'user' },
+        date:{ type: String },
+        comment:{ type: String}
+      }]
+    }]
   });
 
 

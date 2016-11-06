@@ -1,5 +1,5 @@
 'use strict';
-
+var aaa;
 var photo = (function() {
   var photoCollection = [];
   var photoContainer = false;
@@ -20,10 +20,18 @@ var photo = (function() {
     }else{
       photoCanEdit = false;
     } */
+
+/*
+    var photos_array = photos.data;
+    for (var i = 0; i < photos_array.length; i++) {
+      var photo = templates.photo_albums_item(photos_array[i]);
+      $(conteiner).append(photo);
+    }
+*/
   };
 
   var _addPhoto = function(e) {
-    // e.stopPropagation();
+    // e.preventDefault();
     var form = showAddModal();
     photosAdd.init(form);
     var ajaxFormParam = {

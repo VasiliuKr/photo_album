@@ -7,26 +7,39 @@ let route = require('express').Router(),
   albumModel=require('./../../models/albumModel'),
   userModel=require('./../../models/userModel');
 require('./../../models_db/album');
-require('./../../models_db/photo');
+
 
 route.post('/add',(req,res)=> {
   let form= new multiparty.Form();
   form.parse(req,function(err,fields,files) {
-    let albomid = fields.albomid[0];
-    albumModel.get({_id:albomid}).then( u => {
-      if(!u || u[0].user[0]!=req.session.userId){
-        res.send(JSON.stringify({error:'Ошибка доступа'}));
-        return ;
+    let albomid = parseInt(fields.albomid[0]);
+    let Album = mongoose.model('album');
+    let oldPhotos;
+    Album.findOne({_id:albomid}).then( u => {
+      if (!u || u.length == 0 || u.user != req.session.userId) {
+        res.send(JSON.stringify({error: 'Ошибка доступа'}));
+        return;
       }
-      photoModel.add(req.session.userId, albomid, files['photos[]']).then( u =>{
-        console.log(u.fileList);
-        photoModel.get({_id:{ "$in": u.fileList}}).then( u => {
-          res.send('photo add');
+      oldPhotos=u.photos;
+      let path = albumModel.getPath(u.user, u._id);
+      return photoModel.createPhotoArray(files['photos[]'], path.server, {is_cover: false})
+    }).then(photos=>{
+      let totPhotos=oldPhotos.concat(photos);
+      Album.findOneAndUpdate({_id:albomid},{photos:totPhotos},{upsert:true}).then(albums=>{
+        let photo_list=[];
+        photos.map(photo=>{
+          photo_list.push(photo.src);
+        });
+        let filter={
+          album_id:albomid,
+          src: {$in:photo_list}
+        };
+        photoModel.get(filter,req.session.userId).then( u => {
+          res.send(u);
         });
       });
     });
-
-  })
+  });
 });
 
 
@@ -35,15 +48,19 @@ route.post('/update',(req,res)=> {
   res.send('update');
 });
 
-route.get('/get/',(req,res)=> {
-  console.log(0)
-  photoModel.getLast().then( u => {
-    res.send(u);
+route.post('/get/',(req,res)=> {
+  photoModel.get({},req.session.userId).then( u => {
+    let user_list=[];
+    u.map((album)=> {
+      user_list.push(album.user);
+    });
+    userModel.get({ "$in" : user_list}).then(user => {
+      res.send(JSON.stringify({
+        data: u,
+        user: user
+      }))
+    })
   });
-});
-
-route.post('/get_user/:id',(req,res)=> {
-
 });
 
 route.post('/delete',(req,res)=> {

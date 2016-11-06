@@ -6,38 +6,6 @@ let mongoose = require('mongoose'),
   fs = require('fs'),
   crypto=require('crypto'),
   thumb = require('node-thumbnail').thumb;
-require('./../models_db/photo');
-
-let getPath = function(userId,albomId) {
-  let dirName='upload/'+Math.ceil(userId/100);
-
-  let uploadDir = path.resolve(config.http.publicRoot,dirName);
-  if(!fs.existsSync(uploadDir)){
-    fs.mkdirSync(uploadDir);
-  }
-
-  dirName+='/'+(userId % 100);
-  uploadDir = path.resolve(config.http.publicRoot,dirName);
-  if(!fs.existsSync(uploadDir)){
-    fs.mkdirSync(uploadDir);
-  }
-
-  dirName+='/'+albomId;
-  uploadDir = path.resolve(config.http.publicRoot,dirName);
-  if(!fs.existsSync(uploadDir)){
-    fs.mkdirSync(uploadDir);
-  }
-
-  let thumbsDir = path.resolve(config.http.publicRoot,dirName+'/_thumbs');
-  if(!fs.existsSync(thumbsDir)){
-    fs.mkdirSync(thumbsDir);
-  }
-
-  return {
-    server: uploadDir,
-    browser: dirName
-  };
-};
 
 let loadPhoto = function(path,files){
   return  new Promise(function(resolve, reject) {
@@ -63,76 +31,69 @@ let loadPhoto = function(path,files){
   })
 };
 
-let add = function(userId, albumId, files, fields) {
+let createPhotoArray = function(files,dir,fields){
   return  new Promise(function(resolve, reject) {
-    let resolveCallback=resolve;
-    let Photo = mongoose.model('photo');
-    Photo.findOne({},{},{ sort: { '_id' : -1 }}).then(u=> {
-      let path,
-        photoId=1;
-      if(u){
-        photoId=u._id;
-      }
-      path=getPath(userId,albumId);
-      loadPhoto(path.server,files).then(files=> {
-        let fileList = [];
-        files.map((file, key)=> {
-          if (file) {
-            photoId++;
-            fileList.push(photoId);
-            let photoData = {
-              _id: photoId,
-              album: albumId,
-              src: file,
-              dir: path.browser
-            };
-            if (fields) {
-              photoData.title = fields.title[0] || '';
-              photoData.description = fields.description[0] || '';
-              photoData.tags = fields.description[0] || '';
-            }
-            Photo.collection.insert(photoData);
-          }
-        });
-        resolveCallback({photoId: photoId, fileList: fileList});
-      })
-    });
-  });
-};
-
-let  get = function(filer) {
-  if (!filer)filer={};
-  return  new Promise(function(resolve, reject) {
-    let resolveCallback = resolve;
-    let photo = mongoose.model('photo');
-    photo.find(filer,{},{ sort: { '_id' : -1 }} ).then(u => {
-      resolveCallback(u);
+    loadPhoto(dir,files).then(files=> {
+      let fileList=[];
+      fields.created=(new Date).getTime();
+      files.map((file)=> {
+        if (file) {
+          let photoData = Object.assign({},fields);
+          photoData.src=file;
+          fileList.push(photoData);
+        }
+      });
+      resolve(fileList);
     })
   })
 };
 
-let  getLast = function() {
+let  get = function(filter,user) {
+  if (!filter)filter={};
+  let userId=user;
   return  new Promise(function(resolve, reject) {
     let resolveCallback = resolve;
-    let photo = mongoose.model('photo');
-    let populate_album={
-      path: 'album',
-      model: 'album'
+    let startParametr={
+      _id:'$photos._id',
+      album_id:'$_id',
+      dir:'$dir',
+      user:'$user',
+      src:'$photos.src',
+      created:'$photos.created',
+      is_cover:'$photos.is_cover',
+      comments:'$photos.comments',
+      likes:'$photos.likes',
+      tags:'$photos.tags'
     };
-    let populate_user={
-      path: 'album.user',
-      model: 'user'
-    };
-    photo.find({},{},{ sort: { '_id' : -1 }}).populate(populate_album).limit(1).then(u => {
+    let Album = mongoose.model('album');
+    Album.aggregate(
+      {$unwind: "$photos"},
+      {$project: startParametr},
+      {$match: filter},
+      {$sort: {created:-1}},
+      {$limit: 60}
+    ).then(u => {
+      u.map(photo=>{
+        photo.iLike=false;
+        photo.likes.map(like=>{
+          if(like.user==userId){
+            photo.iLike=true;
+          }
+        });
+        photo.likes=photo.likes.length;
+        photo.comments=photo.comments.length;
+      });
       resolveCallback(u);
     })
   })
 };
 
 module.exports = {
-  add: add,
-  get: get,
+ /* add: add,
   getLast: getLast,
-  getPath: getPath,
-  loadPhoto: loadPhoto
+  get: get,
+  getPath: getPath,*/
+  get: get,
+  loadPhoto: loadPhoto,
+  createPhotoArray: createPhotoArray
 };
