@@ -25,21 +25,8 @@ var album = (function() {
     var user = albums.user;
 
     for (var i = 0; i < data.length; i++) {
-      var albumItem = {
-        albumName: data[i].title, // название альбома
-        albumDescription: data[i].description, // описание альбома
-        albumImagesNumber: data[i].photos_count, // количество картинок в альбоме
-        albumUrl: '/album/' + data[i]._id, // ссылка на альбом
-        coverImage: data[i].dir + '/' + data[i].cover, // путь к картинке
-        editUrl: '' // ссылка на окно редактирования альбома
-      };
-
-      if (albumCanEdit) {
-        albumItem.editUrl = '/album/edit/' + data[i]._id;
-      }
-
-      var albumHTML = templates.my_albums_item(albumItem);
-      albumContainer.append(albumHTML);
+      data[i].albumCanEdit = albumCanEdit;
+      albumContainer.append(templates.my_albums_item(data[i]));
     }
   };
 
