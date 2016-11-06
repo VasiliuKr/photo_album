@@ -31,20 +31,37 @@ let  getUser = function(userId) {
   return  new Promise(function(resolve, reject) {
     let resolveCallback = resolve;
     let User = mongoose.model('user');
-    User.findOne({'_id':userId}).then(u => {
-      delete u.password;
-      let path = getPath(u._id);
-      u.background=(
-        u.background.length<3?
-        u.background=config.style.userBackground :
-        path.browser+'/'+u.background
-      );
-      u.photo=(
-        u.photo.length<3?
-          u.photo=config.style.userPhoto :
-        path.browser+'/'+u.photo
-      );
-      resolveCallback(u);
+    let startParametr={
+      "_id":1,
+      "login":1,
+      "name":1,
+      "google":1,
+      "twitter":1,
+      "fb":1,
+      "vk":1,
+      "email":1,
+      "description":1,
+      "background":1,
+      "photo":1
+    };
+    User.aggregate(
+      {$project: startParametr},
+      {$match: {'_id':userId}}
+    ).then(users => {
+      users.map(u=> {
+        let path = getPath(u._id);
+        u.background = (
+          u.background.length < 3 ?
+            u.background = config.style.userBackground :
+          path.browser + '/' + u.background
+        );
+        u.photo = (
+          u.photo.length < 3 ?
+            u.photo = config.style.userPhoto :
+          path.browser + '/' + u.photo
+        );
+      });
+      resolveCallback(users);
     })
   })
 };

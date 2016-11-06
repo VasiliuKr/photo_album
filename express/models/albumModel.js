@@ -37,8 +37,8 @@ let getPath = function(userId,albomId) {
   };
 };
 
-let  getAlbum = function(filer) {
-  if (!filer)filer={};
+let  getAlbum = function(filter) {
+  if (!filter)filter={};
   return  new Promise(function(resolve, reject) {
     let resolveCallback = resolve;
     let Album = mongoose.model('album');
@@ -82,10 +82,10 @@ let  getAlbum = function(filer) {
       cover:'$_id.cover',
       photos_count:1
     };
-
     Album.aggregate(
+      {$match: filter},
       {$sort: {_id:-1}},
-      {$limit: 1},
+      {$limit: 60},
       {$project: startParametr},
       {$unwind: "$cover"},
       {$unwind: "$photos_count"},
