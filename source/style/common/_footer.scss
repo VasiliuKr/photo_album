@@ -1,53 +1,55 @@
 .footer {
-  color: $footer-text;
   font: 16px/1.5 'proxima_nova_ltlight', sans-serif;
+  color: $footer-text;
 
+  @include media($phones) {
+    font-size: 14px;
+    line-height: 21px;
+    padding: 0 10px;
+  }
   &-inner-wrapper {
-    align-items: center;
-    background: url('../img/bg-profile.jpg') center bottom no-repeat;
-    display: flex;
-    justify-content: space-between;
-    padding: 14px 61px;
     position: relative;
+    display: flex;
+    padding: 14px 61px;
+    background: url('../img/bg-profile.jpg') center bottom no-repeat;
 
+    align-items: center;
+    justify-content: space-between;
     &::before {
-      background: $footer-bg;
-      bottom: 0;
-      content: '';
-      left: 0;
       position: absolute;
-      right: 0;
-      top: 0;
       z-index: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      content: '';
+      background: $footer-bg;
     }
   }
-
   &-left-col {
-    max-width: 480px;
     position: relative;
+    max-width: 480px;
     text-align: left;
   }
-
   &-right-col {
-    max-width: 480px;
-    opacity: 0.4;
     position: relative;
+    max-width: 480px;
     text-align: right;
+    opacity: .4;
   }
 }
 
 .to-top {
-  cursor: pointer;
-  opacity: 0.8;
   position: relative;
-  transition: all 0.25s;
-
+  cursor: pointer;
+  transition: all .25s;
+  opacity: .8;
   &-icon {
-    fill: $footer-icon-top;
-    height: 21px;
     width: 26px;
-  }
+    height: 21px;
 
+    fill: $footer-icon-top;
+  }
   &:hover {
     opacity: 1;
   }
