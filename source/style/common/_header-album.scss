@@ -1,0 +1,80 @@
+.header__inner-wrapper--album {
+  padding: 0;
+}
+
+.header__top--album {
+  padding: 18px 29px 80px 90px;
+}
+
+.profile--album {
+  flex: 1 auto;
+}
+
+.profile__photo--album {
+  max-height: 55px;
+  max-width: 55px;
+  min-height: 55px;
+  min-width: 55px;
+}
+
+.profile__info--album {
+  margin-left: 20px;
+  margin-top: 18px;
+}
+
+.profile__name--album {
+  font-size: 16px;
+  max-width: 200px;
+  min-width: 120px;
+}
+
+.profile-album__text {
+  color: $shapka-album-text;
+  flex: 5 auto;
+  line-height: 21px;
+  margin-top: 40px;
+  max-width: 740px;
+  text-align: center;
+}
+
+.profile-album__title {
+  font-family: 'pantonbold';
+  font-size: 21px;
+}
+
+.profile-album__description {
+  font-family: 'proxima_nova_ltlight';
+  font-size: 16px;
+}
+
+.header__buttons-wrapper--album {
+  flex: 1 auto;
+  margin: 0;
+  width: 200px;
+}
+
+.search-bar--album {
+  padding: 0;
+}
+
+.search-bar__inner-wrapper--album {
+  justify-content: center;
+  margin-bottom: -2px;
+  margin-left: 40px;
+  margin-right: 0;
+}
+
+.search-bar__list {
+  display: flex;
+}
+
+.search-bar__item {
+  display: flex;
+  font-family: 'pantonbold';
+  font-size: 16px;
+  margin-right: 35px;
+}
+
+.search-bar__number {
+  margin-right: 5px;
+}
