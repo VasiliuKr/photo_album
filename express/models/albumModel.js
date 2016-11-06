@@ -85,7 +85,7 @@ let  getAlbum = function(filer) {
 
     Album.aggregate(
       {$sort: {_id:-1}},
-      {$limit: 1},
+      {$limit: 60},
       {$project: startParametr},
       {$unwind: "$cover"},
       {$unwind: "$photos_count"},

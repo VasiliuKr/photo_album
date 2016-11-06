@@ -75,7 +75,7 @@ var album = (function() {
 
   // вызовится в случае успеного сохранения формы
   var _getAjax = function(json) {
-    popup.open({ message: 'Альбом создан' });
+    popup.open({ message: json.message });
     modal.close();
     setTimeout(popup.close, 1000);
     urlParser.init( pageTemplate.update );
