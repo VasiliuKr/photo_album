@@ -34,8 +34,9 @@
     display: flex;
     margin-bottom: 40px;
     padding: 20px;
-    // padding-left: 20px;
+    padding-bottom: 50px;
     position: relative;
+    transition: all 0.2s linear;
 
     &-label {
       cursor: pointer;
@@ -45,14 +46,18 @@
       top: 0;
       width: 100%;
     }
+
+    &--dropenter {
+      background-color: $modal-upload-bg;
+      border-color: $modal-upload-border;
+    }
   }
 
   &__info {
     margin: auto;
     max-width: 200px;
-    padding-right: 20px;
+    padding-top: 30px;
     text-align: center;
-
 
     &-icon {
       margin-bottom: 20px;
@@ -75,13 +80,30 @@
         font-family: 'proxima_nova_ltsemibold', sans-serif;
       }
     }
+  }
 
+  &__big-images--show {
+    display: flex;
+  }
+
+  &__big-images-wrapper {
+    display: none;
+    flex-wrap: wrap;
+
+    .add-photo__header {
+      margin-bottom: 40px;
+      padding: 0;
+    }
+  }
+
+  &__big-images {
+    display: flex;
+    flex-wrap: wrap;
   }
 
   &__images {
     display: flex;
     flex-wrap: wrap;
-    // display: none;
   }
 
   &__item {
