@@ -25,5 +25,9 @@
         "pass":"hbHBgbh7T76by"
       }
     }
+  },
+  "style":{
+    "userBackground":"/img/bg-profile.jpg",
+    "userPhoto":"/img/default_avatar.jpg"
   }
 }

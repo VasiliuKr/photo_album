@@ -1,9 +1,9 @@
 'use strict';
 
 let route = require('express').Router(),
-    crypto=require('crypto'),
-    mongoose = require('mongoose');
-require('./../../models/user');
+  crypto=require('crypto'),
+  mongoose = require('mongoose');
+require('./../../models_db/user');
 
 route.post('/registration',(req,res)=>{
   if(!req.body.name || !req.body.password || !req.body.mail){
@@ -11,29 +11,36 @@ route.post('/registration',(req,res)=>{
   };
   var password=crypto.createHash('md5').update(req.body.password).digest("hex");
 
-  let User =mongoose.model('user'),
-    newUser=new User({
-      login:req.body.mail,
-      password:password,
-      email:req.body.mail,
-      name:req.body.name
-    });
-
-  User.findOne({login:req.body.mail}).then(u=>{
+  let User = mongoose.model('user');
+  User.findOne({},{},{ sort: { '_id' : -1 }}).then(u=> {
+    let userId=1;
     if(u){
-      throw new Error('Такой пользователь уже существует');
+      userId=u._id+1;
     };
-    return newUser.save();
-  }).then(
-    u=> {
-      req.session.isAuth=true;
-      req.session.userId=u._id;
-      res.send(JSON.stringify({error: 0, message: 'Успешная регистрация',href:'/photo_main'}));
-    },
-    e=>{
-      res.send(JSON.stringify({error:e.message}))
-    }
-  ).then(()=>res.send(JSON.stringify({error:'Неизвестная ошибка'})))
+    let newUser = new User({
+        _id: userId,
+        login: req.body.mail,
+        password: password,
+        email: req.body.mail,
+        name: req.body.name
+      });
+
+    User.findOne({login: req.body.mail}).then(u=> {
+      if (u) {
+        throw new Error('Такой пользователь уже существует');
+      };
+      return newUser.save();
+    }).then(
+      u=> {
+        req.session.isAuth = true;
+        req.session.userId = u._id;
+        res.send(JSON.stringify({error: 0, message: 'Успешная регистрация', href: '/main'}));
+      },
+      e=> {
+        res.send(JSON.stringify({error: e.message}))
+      }
+    ).then(()=>res.send(JSON.stringify({error: 'Неизвестная ошибка'})))
+  });
 });
 
 

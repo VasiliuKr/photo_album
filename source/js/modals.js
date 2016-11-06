@@ -19,7 +19,7 @@ var modal = (function() {
     close();
   };
 
-  var close = function() {
+  var close = function(clickedElem) {
     $('body').removeClass('modal-show');
     $('.modal-overlay').fadeOut(200, function() { $(this).remove(); });
   };
@@ -35,14 +35,35 @@ var modal = (function() {
     };
   };
 
-  var addAlbum = open('modal_add_album');
-  var addPhoto = open('modal_photo_add');
-  var popup = open('popup');
+// Добавление альбома
+  var modalAlbumAdd = function(json) {
+    close();
+
+    $('body')
+      .addClass('modal-show')
+      .append(templates.modal_add_album(json));
+
+    // albumAdd.init();
+
+    var form = $('.modal-overlay').find('form').eq(0);
+    return form || '';
+  };
+
+// Добавление фотографий
+  var modalPhotoAdd = function(json) {
+    close();
+
+    $('body')
+      .addClass('modal-show')
+      .append(templates.modal_photo_add(json));
+
+    var form = $('.modal-overlay').find('form').eq(0);
+    return form || '';
+  };
 
   return {
-    add_album: addAlbum,
-    add_photo: addPhoto,
-    popup: popup,
+    add_album: modalAlbumAdd,
+    add_photo: modalPhotoAdd,
     close: close,
     init: init
   };

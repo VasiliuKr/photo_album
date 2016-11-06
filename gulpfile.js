@@ -40,7 +40,7 @@ $.gulp.task('default', $.gulp.series(
   )
 ));
 
-$.gulp.task('make_dist', $.gulp.parallel(
+$.gulp.task('dist', $.gulp.parallel(
   'dist.sass',
   'dist.js:foundation',
   'dist.js:process',
@@ -52,4 +52,4 @@ $.gulp.task('make_dist', $.gulp.parallel(
 ));
 
 
-$.gulp.task('dev', $.gulp.parallel('watch','serve'));
+$.gulp.task('dev', $.gulp.parallel('watch:ivan','serve'));

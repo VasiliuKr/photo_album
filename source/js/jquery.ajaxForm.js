@@ -10,6 +10,11 @@
     method: 'post',
     dataType: 'json',
     onMessage: false,
+    onValidateUpdate: false,
+    onFileChoose: false,
+    onGetAjaxDone: false,
+    onGetAjaxFail: false,
+    beforeAjax: false,
     errMessage: {
       login: 'Заполните поле логин',
       password: 'Заполните поле пароль',
@@ -33,6 +38,14 @@
   }
 
   ajaxForm.prototype.ajaxDone = function(data) {
+    form.form.removeClass('disabled');
+    form.form.find('[type=submit]').prop('disabled', false);
+
+    if(form.config.onGetAjaxDone) {
+      form.config.onGetAjaxDone(data);
+      return false;
+    }
+
     if(data.href) {
       setTimeout('location.hash="";location.pathname="' + data.href + '"', 2000);
     }
@@ -42,14 +55,17 @@
       form.resultMessage(data.message);
       form.form[0].reset();
     }
-    form.form.removeClass('disabled');
-    form.form.find('[type=submit]').prop('disabled', false);
   };
 
   ajaxForm.prototype.ajaxFail = function(data) {
-    form.resultMessage(form.config.errMessage.failAjax, 'error_windows');
     form.form.removeClass('disabled');
     form.form.find('[type=submit]').prop('disabled', false);
+
+    if(form.config.onGetAjaxFail) {
+      form.config.onGetAjaxFail(data);
+      return false;
+    }
+    form.resultMessage(form.config.errMessage.failAjax, 'error_windows');
   };
 
   ajaxForm.prototype.resultMessage = function(text, className) {
@@ -86,8 +102,13 @@
     if(form.form.hasClass('disabled'))return;
     var $block = $(block);
     if($block.val().length < 3) {
-      $block.parent().addClass( form.config.error_class);
-      $block.parent().attr( form.config.error_message_param, form.config.errMessage[$block.attr('name')]);
+      if(form.config.onValidateUpdate) {
+        form.config.onValidateUpdate( {block: $block, hasError: true} );
+      }else {
+        $block.parent().addClass(form.config.error_class);
+        $block.parent().attr(form.config.error_message_param, form.config.errMessage[$block.attr('name')]);
+      }
+
       $block
         .off( 'input')
         .off( 'paste')
@@ -99,7 +120,11 @@
         });
       return false;
     } else {
-      $block.parent().removeClass(form.config.error_class);
+      if(form.config.onValidateUpdate) {
+        form.config.onValidateUpdate( {block: $block, hasError: false} );
+      }else {
+        $block.parent().removeClass(form.config.error_class);
+      }
       return true;
     }
   };
@@ -111,25 +136,40 @@
         .attr('required', false)
         .addClass('required');
     });
-    this.form.find('[type=file]').on('change', function() {
-      var fileName;
-      var input = this;
-      var $this = $(input);
-      if( fileApi && input.files[0] ) {
-        fileName = input.files[0].name;
-      } else {
-        fileName = $this.val();
-      }
+    if(form.config.onFileChoose) {
+      this.form.find('[type=file]').on('change', function() {
+        var fileName;
+        var input = this;
+        var $this = $(input);
+        if (fileApi && input.files[0]) {
+          fileName = input.files[0].name;
+        } else {
+          fileName = $this.val();
+        }
 
-      if(!fileName.length) {
-        $this.parent().find('span').text($this.attr('default_text'));
-      }else{
-        $this.parent().find('span').text(fileName);
-      }
-    }).each(function() {
-      var $this = $(this);
-      $this.attr('default_text', $this.parent().find('span').text());
-    });
+        if (!fileName.length) {
+          $this.parent().find('span.file_name').text($this.attr('default_text'));
+        } else {
+          $this.parent().find('span.file_name').text(fileName);
+        }
+
+        if (fileApi && input.files[0]) {
+          var file = input.files[0];
+          var img = document.createElement('img');
+          img.file = file;
+          var readerImg = new FileReader();
+          readerImg.onload = (function(aImg) {
+            return function(e) {
+              form.config.onFileChoose(e);
+            };
+          })(img);
+          readerImg.readAsDataURL(file);
+        }
+      }).each(function() {
+        var $this = $(this);
+        $this.attr('default_text', $this.parent().find('span').text());
+      });
+    }
     this.form
       .on('submit', function(e) {
         e.preventDefault();
@@ -137,13 +177,11 @@
         var $this = $(this);
         elements = $this.find('.required');
         $.each(elements, function() {
-          $this = $(this);
-          isValidate = form.vlidate($this) && isValidate;
+          var $element = $(this);
+          isValidate = form.vlidate($element) && isValidate;
         });
 
         if(!isValidate)return;
-        form.form.addClass('disabled');
-        form.form.find('[type=submit]').prop('disabled', true);
         var ajaxParametr = {
           url: $this.attr('action') || form.config.url,
           method: $this.attr('method') || form.config.method,
@@ -159,6 +197,12 @@
             xhr.setRequestHeader('content-type', 'application/json');
           };
         }
+        if(form.config.beforeAjax) {
+          ajaxParametr = form.config.beforeAjax(ajaxParametr);
+          if(!ajaxParametr) return false;
+        }
+        form.form.addClass('disabled');
+        form.form.find('[type=submit]').prop('disabled', true);
         $.ajax(ajaxParametr)
         .done(form.ajaxDone)
         .fail(form.ajaxFail);
@@ -195,5 +239,3 @@ $.fn.serializeObject = function() {
   });
   return o;
 };
-
-$('form').ajaxForm({ onMessage: modal.popup });

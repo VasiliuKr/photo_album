@@ -1,5 +1,5 @@
 include ../mixins/_icons
-  
+
 .header-wrapper
   .header-inner-wrapper
     .header-top
@@ -27,12 +27,9 @@ include ../mixins/_icons
                 a(class="social-list__link" href="#")
                   +icon('soc_email', ['social-icon', 'social-icon_email'])
       .profile-buttons
-        a(class="button-circle button-circle--edit" href="#")
-          +icon('edit', ['button-circle-icon', 'button-circle-icon--edit'])
-          span.button-circle--text Редактировать
-        a(class="button-circle button-circle--login" href="#")
-          +icon('off', ['button-circle-icon', 'button-circle--off'])
-          span.button-circle--text Выйти
+        a(class="button-circle button-circle--home" href="#")
+          +icon('home', ['button-circle-icon', 'button-circle--home'])
+          span.button-circle--text На главную
   .search-bar
     .search-bar__inner-wrapper
       form(id="search" class="search__form")

@@ -1,0 +1,65 @@
+.header-wrapper--search {
+  background: #ffffff;
+}
+.header-inner-wrapper--search {
+  padding: 20px;
+  &:before {
+    background: #ffffff;
+  }
+}
+
+.header-top--search {
+  justify-content: center;
+  padding-bottom: 0;
+}
+
+.header-top__title--search {
+  text-align: center;
+  font-size: 42px;
+  font-family: 'pantonbold', sans-serif;
+  color: #323232;
+  padding-left: 15%;
+  flex: 10 auto;
+}
+
+.profile-buttons--search {
+  width: 150px;
+  margin-top: 0;
+}
+
+.search-bar--search {
+  display: flex;
+  padding: 0;
+}
+
+.profile--search{
+  margin-right: 200px;
+  margin-left: 60px;
+}
+
+.profile__name--search {
+  color: #323232;
+}
+
+.search__form--search {
+  display: flex;
+  align-items: center;
+  margin: 7px 0;
+}
+
+.search__field--search {
+  min-width: 100%;
+}
+
+.search__link {
+  min-width: 250px;
+  margin-left: 20px;
+  text-decoration: none;
+  color: $form-link-text;
+  font-family: 'proxima_nova_ltsemibold';
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+

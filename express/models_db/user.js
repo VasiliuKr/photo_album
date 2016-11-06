@@ -4,6 +4,10 @@ let mongoose = require('mongoose'),
   crypto=require('crypto'),
   Schema=mongoose.Schema,
   UserSchema = new Schema({
+    _id:{
+      type:Number,
+      required:true
+    },
     login:{
       type:String,
       required:[true,'Укажите логин']
