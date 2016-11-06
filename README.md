@@ -12,7 +12,7 @@
 * Иван Корепанов
 * Елизавета Овинова
 * Михаил Пинчук
-* Дмитрий Гордиенко
+
 
 ---
 ##Инструкция по установке проекта
@@ -60,3 +60,24 @@ gulp dist
 node express/index
 ````
 
+##Создание превью на сервере
+
+Для создания миниатюр необходимо установить imagemagick
+
+Ubuntu
+
+```sh
+apt-get install imagemagick
+````
+
+Mac OS X
+
+```sh
+brew install imagemagick
+````
+
+Fedora/CentOS
+
+```sh
+yum install imagemagick
+````
