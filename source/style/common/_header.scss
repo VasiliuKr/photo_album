@@ -1,9 +1,9 @@
-.header-wrapper {
+.header__wrapper {
   background: url('../img/bg-profile.jpg') center 50% no-repeat;
   overflow: hidden;
 }
 
-.header-inner-wrapper {
+.header__inner-wrapper {
   padding: 57px 40px 0 87px;
   position: relative;
 
@@ -20,14 +20,13 @@
   }
 }
 
-.header-top {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 56px;
-    position: relative;
-    z-index: 1;
+.header__top {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 56px;
+  position: relative;
+  z-index: 1;
 }
-
 // Profile
 .profile {
   display: flex;
@@ -94,17 +93,19 @@
 }
 
 // Контейнер для кнопок в хеддере
-.profile-buttons {
-  align-items: flex-end;
-  display: flex;
-  flex-direction: column;
-  margin-top: -37px;
+.profile__buttons {
 
   .button-circle {
     margin-bottom: 10px;
   }
 }
 
+.header__buttons-wrapper {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  margin-top: -37px;
+}
 
 // Строка поиска
 .search-bar {

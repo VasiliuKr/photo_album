@@ -1,8 +1,8 @@
 include ../mixins/_icons
-  
-.header-wrapper
-  .header-inner-wrapper
-    .header-top
+
+.header__wrapper
+  .header__inner-wrapper
+    .header__top
       .profile
         .profile__photo
           img(class="profile__img" src="./assets/img/cherepov_anton.jpg" alt="Антон Черепов")
@@ -26,13 +26,14 @@ include ../mixins/_icons
               li.social-list__item
                 a(class="social-list__link" href="#")
                   +icon('soc_email', ['social-icon', 'social-icon_email'])
-      .profile-buttons
-        a(class="button-circle button-circle--edit" href="#")
-          +icon('edit', ['button-circle-icon', 'button-circle-icon--edit'])
-          span.button-circle--text Редактировать
-        a(class="button-circle button-circle--login" href="#")
-          +icon('off', ['button-circle-icon', 'button-circle--off'])
-          span.button-circle--text Выйти
+      .profile__buttons
+        .header__buttons-wrapper
+          a(class="button-circle button-circle--edit" href="#")
+            +icon('edit', ['button-circle-icon', 'button-circle-icon--edit'])
+            span.button-circle--text Редактировать
+          a(class="button-circle button-circle--login" href="#")
+            +icon('off', ['button-circle-icon', 'button-circle--off'])
+            span.button-circle--text Выйти
   .search-bar
     .search-bar__inner-wrapper
       form(id="search" class="search__form")
