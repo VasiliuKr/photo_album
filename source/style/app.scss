@@ -1,11 +1,12 @@
-@import 'base/body';
 @import 'base/colors';
+@import 'base/body';
 @import 'mixin/media';
 @import 'base/buttons';
 @import 'base/buttons-container'; // Удалить перед релизом (стили для офрмления страницы Buttons)
 @import 'base/animation';
 @import 'pages/index';
 @import 'common/header';
+@import 'common/header_edit';
 @import 'common/footer';
 @import 'common/authorization/login';
 @import 'common/authorization/password';

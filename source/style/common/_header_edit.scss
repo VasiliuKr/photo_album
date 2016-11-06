@@ -1,0 +1,28 @@
+.header-edit {
+  .button-circle {
+    transform: translate3d(200px, 0, 0);
+    width: 40px;
+  }
+
+  .add-photo__info--header {
+    transform: rotate3d(0, 1, 0, 0deg);
+  }
+
+  .header__buttons-down {
+    transform: rotate3d(1, 0, 0, 0deg);
+  }
+
+  .search-bar {
+    height: 0;
+    padding: 0;
+  }
+
+  .header__inner-wrapper:after {
+    opacity: 0.6;
+  }
+}
+
+.page-wrap--shadow:before {
+  height: 100vh;
+}
+

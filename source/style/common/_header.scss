@@ -1,13 +1,12 @@
 .header__wrapper {
   background: url('../img/bg-profile.jpg') center 50% no-repeat;
-  overflow: hidden;
 }
 
 .header__inner-wrapper {
-  padding: 57px 40px 0 87px;
+  padding: 20px 40px 0 87px;
   position: relative;
 
-  &::before {
+  &:before {
     background: linear-gradient(to right, $shapka-grad-left 0%, $shapka-grad-right 60%);
     bottom: 0;
     content: '';
@@ -16,6 +15,20 @@
     position: absolute;
     right: 0;
     top: 0;
+    transition: all 0.8s;
+    z-index: 0;
+  }
+
+  &:after {
+    background: $shapka-grad-left;
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 0.8s;
     z-index: 0;
   }
 }
@@ -30,6 +43,7 @@
 // Profile
 .profile {
   display: flex;
+  padding-top: 37px;
 
   &__info {
     margin-left: 48px;
@@ -94,6 +108,7 @@
 
 // Контейнер для кнопок в хеддере
 .profile__buttons {
+  overflow: hidden;
 
   .button-circle {
     margin-bottom: 10px;
@@ -104,21 +119,23 @@
   align-items: flex-end;
   display: flex;
   flex-direction: column;
-  margin-top: -37px;
 }
 
 .header__buttons-down {
-  position: absolute;
-  width: 250px;
   bottom: -50px;
-  transform: rotate3d(1,0,0,90deg);
+  position: absolute;
+  transform: rotate3d(1, 0, 0, 90deg);
   transition: all 0.2s;
+  width: 250px;
 }
+
 // Строка поиска
 .search-bar {
   background-color: $search-plashka-bg;
+  overflow: hidden;
   padding: 10px 0;
   position: relative;
+  transition: all 0.3s;
 
   &__inner-wrapper {
     display: flex;
