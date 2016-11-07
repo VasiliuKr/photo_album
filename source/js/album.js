@@ -5,6 +5,7 @@ var album = (function() {
   var albumContainer = false;
   var albumCanEdit = false;
   var showAddModal = false;
+  var showEditModal = false;
   var errorMessageText = {
     title: 'Введите название альбома',
     description: 'Введите описание  альбома',
@@ -32,6 +33,9 @@ var album = (function() {
 
   var init = function(params) {
     showAddModal = params.showAddModal;
+    showEditModal = params.showEditModal;
+
+    $('body').on('click', '.my-albums__item-edit-link', _editAlbum);
   };
 
   var addMessage = function(message, className) {
@@ -73,7 +77,7 @@ var album = (function() {
 
   };
 
-  // вызовится в случае успеного сохранения формы
+  // вызовется в случае успеного сохранения формы
   var _getAjax = function(json) {
     popup.open({ message: json.message });
     modal.close();
@@ -81,7 +85,7 @@ var album = (function() {
     urlParser.init( pageTemplate.update );
   };
 
-  // вызовится в случае ошибки отправки JSON на сервер
+  // вызовется в случае ошибки отправки JSON на сервер
   var _failAjax = function(json) {
     popup.open( {message: 'Ошибка отправки данных на сервер'});
   };
@@ -89,6 +93,21 @@ var album = (function() {
   var _addAlbum = function(e) {
     e.preventDefault();
     var form = showAddModal();
+    var ajaxFormParam = {
+      onMessage: addMessage,
+      onValidateUpdate: _updateValidateStatus,
+      onFileChoose: _testFile,
+      onGetAjaxDone: _getAjax,
+      onGetAjaxFail: _failAjax
+    };
+    form.ajaxForm(ajaxFormParam);
+
+    return false;
+  };
+
+  var _editAlbum = function(e) {
+    e.preventDefault();
+    var form = showEditModal();
     var ajaxFormParam = {
       onMessage: addMessage,
       onValidateUpdate: _updateValidateStatus,

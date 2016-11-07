@@ -27,6 +27,22 @@
   100% { opacity: 1; }
 }
 
+%modal-input-placeholder {
+  background-color: $modal-bg;
+  border: 1px solid $modal-edit-input-border;
+  border-radius: 20px;
+  color: $modal-edit-input-text;
+  font-family: 'proxima_nova_ltlight', sans-serif;
+  font-size: 16px;
+  line-height: 1.313;
+  padding: 10px 20px;
+
+  &:focus {
+    border: 1px solid $modal-edit-input-active-border;
+    color: $modal-edit-input-active-text;
+  }
+}
+
 .modal {
   background-color: $modal-bg;
   margin: auto;
@@ -84,22 +100,6 @@
     padding-top: 11px;
     text-align: right;
     vertical-align: top;
-  }
-
-  %modal-input-placeholder {
-    background-color: $modal-bg;
-    border: 1px solid $modal-edit-input-border;
-    border-radius: 20px;
-    color: $modal-edit-input-text;
-    font-family: 'proxima_nova_ltlight', sans-serif;
-    font-size: 16px;
-    line-height: 1.313;
-    padding: 10px 20px;
-
-    &:focus {
-      border: 1px solid $modal-edit-input-active-border;
-      color: $modal-edit-input-active-text;
-    }
   }
 
   &__input {

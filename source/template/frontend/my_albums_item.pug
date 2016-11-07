@@ -11,7 +11,7 @@ include ../mixins/_icons
     img(class="my-albums__item-cover" src=`${dir}/_thumbs/${cover}` alt="Album cover")
   .my-albums__item-footer
     if albumCanEdit
-      a(class="my-albums__item-edit-link" href=`/album/edit/${_id}`)
+      a(class="my-albums__item-edit-link" href=`#${_id}`)
         +icon('edit', ['my-albums__item-icon', 'my-albums__item-icon_edit'])  
     a(class="my-albums__item-link" href=`/album/${_id}`)
       h3.my-albums__item-title #{title}
