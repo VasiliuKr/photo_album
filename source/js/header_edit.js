@@ -13,6 +13,7 @@ var headerEditor = (function() {
       break;
     case 'social':
       var href = $element.find('a').attr('href');
+      $element.find('.social-edit').remove();
       $element.append(templates.social_edit({value: href, name: $element.attr('name')}));
       break;
     default:
@@ -21,7 +22,8 @@ var headerEditor = (function() {
 
   var _editorBlockOff = function(index, element) {
     var $element = $(element);
-
+    $element.find('.social-edit').remove();
+    
     switch ($element.attr('editor')) {
     case 'text_tag':
       $element.html($element.data('value'));

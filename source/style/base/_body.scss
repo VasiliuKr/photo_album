@@ -48,7 +48,7 @@ img {
 .page-wrap {
   flex: 1;
 
-  &:before {
+  &::before {
     background: rgba($photo-hover-icon, 0.6);
     content: '';
     height: 0;
@@ -62,8 +62,17 @@ img {
 // Sticky footer end
 
 .section-title {
-  font: 42px/1 'pantonbold', sans-serif;
-  margin: 0 0 34px;
+  @include media-min($phones) {
+    font: 30px/1 'pantonbold', sans-serif;
+    margin: 0 0 15px;
+    text-align: center;
+  }
+
+  @include media-min($tablets) {
+    font-size: 42px;
+    margin: 0 0 34px;
+    text-align: left;
+  }
 }
 
 .section-title--search {
@@ -76,9 +85,9 @@ img {
 
 [contenteditable] {
   background: $onform-header-text;
+  border-radius: 8px;
   color: $form-header-text !important;
   padding: 8px;
-  border-radius: 8px;
 }
 
 .hashtag {

@@ -5,7 +5,7 @@
 .header__inner-wrapper--search {
   padding: 20px;
 
-  &:before {
+  &::before {
     background: $shapka-search-bg;
   }
 }

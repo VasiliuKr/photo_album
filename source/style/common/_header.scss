@@ -6,7 +6,7 @@
   padding: 20px 40px 0 87px;
   position: relative;
 
-  &:before {
+  &::before {
     background: linear-gradient(to right, $shapka-grad-left 0%, $shapka-grad-right 60%);
     bottom: 0;
     content: '';
@@ -19,7 +19,7 @@
     z-index: 0;
   }
 
-  &:after {
+  &::after {
     background: $shapka-grad-left;
     bottom: 0;
     content: '';

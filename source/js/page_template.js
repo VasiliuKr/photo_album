@@ -51,19 +51,19 @@ var pageTemplate = (function() {
     var headerTemplate = template.headerTemplate;
     headerTemplate = templates[headerTemplate]();
 
-    $('#header').find('.wrapper-hide').remove();;
-    var header__wrapper = $('#header').find('.header__wrapper');
-    if(header__wrapper.length>0) {
+    $('#header').find('.wrapper-hide').remove();
+    var headerWrapper = $('#header').find('.header__wrapper');
+    if(headerWrapper.length > 0) {
       var oldHeight = $('#header').height();
-      header__wrapper.hide();
+      headerWrapper.hide();
       $('#header').append(headerTemplate);
       var newHeight = $('#header').height();
-      header__wrapper.addClass('wrapper-hide');
-      header__wrapper.show();
+      headerWrapper.addClass('wrapper-hide');
+      headerWrapper.show();
       $('#header')
         .css({height: oldHeight})
         .animate({height: newHeight}, 1000, function() {
-          $(this).css({height: ''})
+          $(this).css({height: ''});
         });
     } else {
       $('#header').html(headerTemplate);
