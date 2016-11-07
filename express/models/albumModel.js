@@ -2,6 +2,7 @@
 
 let mongoose = require('mongoose'),
   config = require('./../config/server.config.json'),
+  photoModel=require('./photoModel'),
   path = require('path'),
   fs = require('fs');
 require('./../models_db/album');
@@ -37,8 +38,9 @@ let getPath = function(userId,albomId) {
   };
 };
 
-let  getAlbum = function(filter) {
+let  getAlbum = function(filter, user) {
   if (!filter)filter={};
+  var userId=user;
   return  new Promise(function(resolve, reject) {
     let resolveCallback = resolve;
     let Album = mongoose.model('album');
@@ -55,7 +57,7 @@ let  getAlbum = function(filter) {
       description:1,
       user:1,
       dir:1,
-      cover:'$cover.src',
+      cover:'$cover._id',
       photos_count:{
         count: {$add: [1]},
         _id:1
@@ -93,8 +95,23 @@ let  getAlbum = function(filter) {
       {$project: baseParametr},
       {$group: groupParametr},
       {$project: finishParametr}
-    ).then(u => {
-      resolveCallback(u);
+    ).then(albums => {
+      var cover_list = [];
+      albums.map(album=> {
+        album.canEdit = (album.user == userId)
+        cover_list.push(album.cover);
+      });
+      return photoModel.get({_id: {$in: cover_list}}, userId).then(covers => {
+        cover_list={};
+        covers.map(cover=> {
+         cover_list[cover._id]=cover;
+        });
+        albums.map(album=> {
+          album.cover=cover_list[album.cover];
+          return album;
+        });
+        resolveCallback(albums);
+      })
     })
   })
 };

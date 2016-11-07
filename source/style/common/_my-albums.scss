@@ -1,5 +1,7 @@
 // Блок "Мои альбомы"
 .my-albums {
+  animation: AlbumLoad 0.5s;
+  animation-direction: both;
   background: $albums-wrapper-bg;
   display: flex;
   justify-content: center;

@@ -37,7 +37,7 @@ route.post('/create',(req,res)=> {
         });
         item.save().then(
           i=> {
-            albumModel.get({_id:albumId}).then(u => {
+            albumModel.get({_id:albumId},req.session.userId).then(u => {
               res.send(JSON.stringify({
                 error: 0,
                 message: 'Альбом создан!',
@@ -60,12 +60,55 @@ route.post('/create',(req,res)=> {
 
 
 route.post('/update',(req,res)=> {
-
-  res.send('update');
+  let form= new multiparty.Form();
+  form.parse(req,function(err,fields,files) {
+    let albumid = parseInt(fields.id[0]);
+    let Album = mongoose.model('album');
+    let oldPhotos;
+    let newData;
+    let path;
+    Album.findOne({_id:albumid}).then( u => {
+      if (!u || u.length == 0 || u.user != req.session.userId) {
+        throw new Error({error: 'Ошибка доступа'});
+        return;
+      }
+      oldPhotos=u.photos;
+      newData = {
+        title: fields.title[0],
+        description: fields.description[0]
+      };
+      path = albumModel.getPath(u.user, u._id);
+      return photoModel.loadPhoto(path.server,files['cover']);
+    }).then(photos=>{
+      if(photos.length>0 && photos[0]!==false){
+        oldPhotos.map((photo)=> {
+          if(photo.is_cover){
+            photoModel.unlinkPhoto(path.server,photo.src);
+            photo.src=photos[0];
+            return photo;
+          }
+        });
+        newData['photos']=oldPhotos;
+      }
+      Album.findOneAndUpdate({_id:albumid},newData,{upsert:true}).then(albums=>{
+        let photo_list=[];
+        photos.map(photo=>{
+          photo_list.push(photo.src);
+        });
+        albumModel.get({_id:albumid}, req.session.userId).then(u => {
+          res.send(JSON.stringify({
+            error: 0,
+            message: 'Альбом создан!',
+            data: u
+          }))
+        });
+      });
+    }).then(message=>res.send(JSON.stringify({error: message.error})));;
+  });
 });
 
 route.post('/get/*',(req,res)=> {
-  albumModel.get({user:req.session.userId}).then(u => {
+  albumModel.get({user:req.session.userId},req.session.userId).then(u => {
     let user_list=[];
     u.map((album)=> {
       user_list.push(album.user);
@@ -80,7 +123,7 @@ route.post('/get/*',(req,res)=> {
 });
 
 route.post('/get_user/:id',(req,res)=> {
-  albumModel.get({user:req.params.id}).then(u => {
+  albumModel.get({user:req.params.id},req.session.userId).then(u => {
     userModel.get(req.session.userId).then(user => {
       res.send(JSON.stringify({
         data: u,

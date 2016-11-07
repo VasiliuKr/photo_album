@@ -4,11 +4,11 @@ section.photo-albums
   .photo-albums__inner-wrapper
     h2.section-title Новое в мире
     .photo-albums__list
-    a(href="#" class="button button--outline button--outline-albums") Показать еще
+    a.button.button--outline.button--outline-albums.show_more(href="#") Показать еще
 section.my-albums
   .my-albums__inner-wrapper
     h2.section-title Мои альбомы
-    a(class="button-circle button-circle--add" href="#")
+    a(class="button-circle button-circle--add" href="#" )
       +icon('add', ['button-circle-icon', 'button-circle-icon--add'])
       span.button-circle--text Добавить
     .my-albums__list

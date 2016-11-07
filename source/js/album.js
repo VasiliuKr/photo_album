@@ -2,6 +2,7 @@
 
 var album = (function() {
   var albumCollection = [];
+  var albumUser = [];
   var albumContainer = false;
   var albumCanEdit = false;
   var showAddModal = false;
@@ -22,12 +23,12 @@ var album = (function() {
       albumCanEdit = false;
     }
 
-    var data = albums.data;
-    var user = albums.user;
+    albumCollection = albums.data;
+    albumUser = albums.user;
 
-    for (var i = 0; i < data.length; i++) {
-      data[i].albumCanEdit = albumCanEdit;
-      albumContainer.append(templates.my_albums_item(data[i]));
+    for (var i = 0; i < albumCollection.length; i++) {
+      albumCollection[i].albumCanEdit = albumCanEdit;
+      albumContainer.append(templates.my_albums_item(albumCollection[i]));
     }
   };
 
@@ -82,7 +83,13 @@ var album = (function() {
     popup.open({ message: json.message });
     modal.close();
     setTimeout(popup.close, 1000);
-    urlParser.init( pageTemplate.update );
+
+    var i = albumCollection.length;
+    for (var j = 0; j < json.data.length; j++) {
+      albumCollection[ i + j ] = json.data[j];
+      albumCollection[ i + j ].albumCanEdit = albumCanEdit;
+      albumContainer.prepend(templates.my_albums_item(albumCollection[ i + j ]));
+    }
   };
 
   // вызовется в случае ошибки отправки JSON на сервер
@@ -105,9 +112,22 @@ var album = (function() {
     return false;
   };
 
+  var getAlbum = function(albumId) {
+    for (var i = 0; i < albumCollection.length; i++ ) {
+      if (albumCollection[i]._id === albumId) {
+        return albumCollection[i];
+      }
+    }
+    return false;
+  };
+
   var _editAlbum = function(e) {
     e.preventDefault();
-    var form = showEditModal();
+
+    var albumId = $(this).attr('code');
+    var albumData = album.getAlbum(albumId);
+
+    var form = showEditModal(albumData);
     var ajaxFormParam = {
       onMessage: addMessage,
       onValidateUpdate: _updateValidateStatus,
@@ -122,6 +142,7 @@ var album = (function() {
 
   return {
     init: init,
-    set: setParam
+    set: setParam,
+    getAlbum: getAlbum
   };
 }());

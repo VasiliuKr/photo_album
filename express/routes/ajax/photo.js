@@ -12,12 +12,12 @@ require('./../../models_db/album');
 route.post('/add',(req,res)=> {
   let form= new multiparty.Form();
   form.parse(req,function(err,fields,files) {
-    let albomid = parseInt(fields.albomid[0]);
+    let albumid = parseInt(fields.id[0]);
     let Album = mongoose.model('album');
     let oldPhotos;
-    Album.findOne({_id:albomid}).then( u => {
+    Album.findOne({_id:albumid}).then( u => {
       if (!u || u.length == 0 || u.user != req.session.userId) {
-        res.send(JSON.stringify({error: 'Ошибка доступа'}));
+        throw new Error({error: 'Ошибка доступа'});
         return;
       }
       oldPhotos=u.photos;
@@ -25,20 +25,20 @@ route.post('/add',(req,res)=> {
       return photoModel.createPhotoArray(files['photos[]'], path.server, {is_cover: false})
     }).then(photos=>{
       let totPhotos=oldPhotos.concat(photos);
-      Album.findOneAndUpdate({_id:albomid},{photos:totPhotos},{upsert:true}).then(albums=>{
+      Album.findOneAndUpdate({_id:albumid},{photos:totPhotos},{upsert:true}).then(albums=>{
         let photo_list=[];
         photos.map(photo=>{
           photo_list.push(photo.src);
         });
         let filter={
-          album_id:albomid,
+          album_id:albumid,
           src: {$in:photo_list}
         };
         photoModel.get(filter,req.session.userId).then( u => {
           res.send(u);
         });
       });
-    });
+    }).then(message=>res.send(JSON.stringify({error: message.error})));
   });
 });
 

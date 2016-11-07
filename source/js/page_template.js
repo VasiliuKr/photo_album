@@ -2,25 +2,28 @@
 
 var pageTemplate = (function() {
   var templateBase = {
-    main: {
+    main: {// стартовая
       contentTemplate: 'content_main',
-      photos: false,
+      photos: {
+        ajax_url: '/ajax/photo/get/',
+        box: '.photo-albums__list'
+      },
       album: {
         ajax_url: '/ajax/album/get/',
         box: '.my-albums__list'
       }
     },
-    album: {
+    user: { // альбомы пользователя
       contentTemplate: 'content_user',
       album: {
-        ajax_url: '/ajax/main/',
+        ajax_url: '/ajax/album/get/',
         box: '.my-albums__list'
       }
     },
-    photos: {
+    album: { // карточка альбома
       contentTemplate: 'content_album',
       photos: {
-        ajax_url: '/ajax/main/',
+        ajax_url: '/ajax/photo/get/',
         box: '.photo-albums__list'
       }
     }

@@ -13,3 +13,23 @@
     visibility: visible;
   }
 }
+
+@keyframes AlbumLoad {
+  0% {
+    transform: rotate3d(0.05, 1, 0, 90deg);
+  }
+
+  100% {
+    transform: rotate3d(0.05, 1, 0, 0deg);
+  }
+}
+
+@keyframes PhotoLoad {
+  0% {
+    transform: rotate3d(0.05, 1, 0, 90deg);
+  }
+
+  100% {
+    transform: rotate3d(0.05, 1, 0, 0deg);
+  }
+}
