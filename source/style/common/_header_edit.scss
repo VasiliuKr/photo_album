@@ -35,9 +35,10 @@
       max-width: 280px;
       transform: translateX(-50%);
       position: absolute;
-      z-index: -1;
-      opacity: 0;
-      transition: opacity 0.15s linear;
+      // z-index: -11;
+      // opacity: 0;
+      // transition: opacity 0.15s linear;
+      display: none;
       padding: 10px;
       background-color: $modal-bg;
       margin-top: 5px;
@@ -79,8 +80,8 @@
 
       .social-edit {
         display: block;
-        opacity: 1;
-        z-index: 1;
+        // opacity: 1;
+        // z-index: 1;
       }
 
     }
