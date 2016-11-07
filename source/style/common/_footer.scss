@@ -1,60 +1,68 @@
 .footer {
-  font: 16px/1.5 'proxima_nova_ltlight', sans-serif;
   color: $footer-text;
+  font: 16px/1.5 'proxima_nova_ltlight', sans-serif;
 
   @include media($phones) {
     font-size: 14px;
     line-height: 21px;
     padding: 0 10px;
   }
-  &-inner-wrapper {
-    position: relative;
-    background: url('../img/bg-profile.jpg') center bottom no-repeat;
 
-    justify-content: space-between;
+  &-inner-wrapper {
     align-items: flex-start;
-    @include media_min($phones) {
+    background: url('../img/bg-profile.jpg') center bottom no-repeat;
+    justify-content: space-between;
+    position: relative;
+
+    @include media-min($phones) {
       display: block;
-      padding: 60px 14px 14px 14px;
+      padding: 60px 14px 14px;
     }
-    @include media_min($tablets) {
+
+    @include media-min($tablets) {
       display: flex;
       padding: 14px 22px;
     }
-    @include media_min($laptop) {
+
+    @include media-min($laptop) {
       padding: 14px 61px;
     }
+
     &::before {
-      position: absolute;
-      z-index: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      content: '';
       background: $footer-bg;
+      bottom: 0;
+      content: '';
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 0;
     }
   }
+
   &-left-col {
     position: relative;
 
-    @include media_min($phones) {
+    @include media-min($phones) {
       margin-bottom: 10px;
       text-align: center;
     }
-    @include media_min($tablets) {
+
+    @include media-min($tablets) {
       max-width: 480px;
       text-align: left;
     }
   }
-  &-right-col {
-    position: relative;
-    opacity: .4;
 
-    @include media_min($phones) {
+  &-right-col {
+    opacity: 0.4;
+    position: relative;
+
+    @include media-min($phones) {
       text-align: center;
     }
-    @include media_min($tablets) {
+
+    @include media-min($tablets) {
       max-width: 480px;
       text-align: right;
     }
@@ -63,29 +71,31 @@
 
 .to-top {
   cursor: pointer;
-  transition: all .25s;
-  opacity: .8;
+  opacity: 0.8;
+  transition: all 0.25s;
 
-  @include media_min($phones) {
-    position: absolute;
-    top: 20px;
-    right: 0;
+  @include media-min($phones) {
     left: 0;
-    width: 26px;
     margin: auto;
-  }
-  @include media_min($tablets) {
-    position: relative;
-    top: 10px;
+    position: absolute;
     right: 0;
-    bottom: 0;
-  }
-  &-icon {
+    top: 20px;
     width: 26px;
-    height: 21px;
-
-    fill: $footer-icon-top;
   }
+
+  @include media-min($tablets) {
+    bottom: 0;
+    position: relative;
+    right: 0;
+    top: 10px;
+  }
+
+  &-icon {
+    fill: $footer-icon-top;
+    height: 21px;
+    width: 26px;
+  }
+
   &:hover {
     opacity: 1;
   }

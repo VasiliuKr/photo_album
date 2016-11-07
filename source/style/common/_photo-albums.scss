@@ -1,246 +1,276 @@
 // Блок "Новое в мире"
 .photo-albums {
   display: flex;
-
   justify-content: center;
-  &__inner-wrapper {
-    width: 100%;
-    padding: 53px 0 60px;
 
-    @include media_min($phones) {
+  &__inner-wrapper {
+    padding: 53px 0 60px;
+    width: 100%;
+
+    @include media-min($phones) {
       max-width: 300px;
     }
-    @include media_min($tablets) {
+      
+    @include media-min($tablets) {
       max-width: 700px;
     }
-    @include media_min($laptop) {
+    
+    @include media-min($laptop) {
       max-width: 1180px;
     }
-    @include media_min($desktop) {
+    
+    @include media-min($desktop) {
       max-width: 1580px;
     }
   }
+
   &__list {
     display: flex;
-    margin: -10px -10px 14px;
-
     flex-wrap: wrap;
+    margin: -10px -10px 14px;
   }
 }
 
 // Альбом в блоке "Новое в мире"
 .photo-albums__item {
-  display: flex;
-  overflow: hidden;
-  flex-direction: column;
-  margin: 10px;
   border-radius: 3px;
   box-shadow: 0 1px 4px $photo-shadow;
-
+  display: flex;
   flex: 1 1 380px;
-  @include media_min($phones) {
+  flex-direction: column;
+  margin: 10px;
+  overflow: hidden;
+
+  @include media-min($phones) {
     max-width: 300px;
   }
-  @include media_min($tablets) {
+  
+  @include media-min($tablets) {
     max-width: 340px;
   }
-  @include media_min($laptop) {
+  
+  @include media-min($laptop) {
     max-width: 380px;
   }
+
   // Фотка альбома
   &-cover-wrapper {
-    position: relative;
     display: block;
     overflow: hidden;
+    position: relative;
+
     &:hover {
       .photo-albums__item-spinner {
-        visibility: visible;
         opacity: 1;
+        visibility: visible;
       }
+
       .icon {
-        animation: fadeInScale .35s ease-in-out forwards;
-        animation-delay: .1s;
+        animation: fadeInScale 0.35s ease-in-out forwards;
+        animation-delay: 0.1s;
       }
+
       .photo-albums__item-cover {
         transform: scale(1.25);
       }
     }
   }
+
   &-cover {
-    transition: all .25s;
+    transition: all 0.25s;
   }
+
   &-spinner-icon {
-    width: 40px;
+    fill: $photo-hover-icon;
     height: 40px;
     transform: scale(0);
-
-    fill: $photo-hover-icon;
+    width: 40px;
   }
+
   &-spinner {
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    right: 0;
+    align-items: center;
+    background-color: $photo-hover-bg;
     bottom: 0;
-    left: 0;
-    display: flex;
-    visibility: hidden;
     content: '';
     cursor: pointer;
-    transition: all .25s;
-    opacity: 0;
-    background-color: $photo-hover-bg;
-
-    align-items: center;
+    display: flex;
     justify-content: center;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 0.25s;
+    visibility: hidden;
+    z-index: 10;
   }
+
   &-info-wrapper {
     display: flex;
+    flex: 1;
 
-    @include media_min($phones) {
+    @include media-min($phones) {
       padding: 10px;
     }
-    @include media_min($tablets) {
+    
+    @include media-min($tablets) {
       padding: 19px 20px 20px;
     }
-    flex: 1;
   }
+
   &-info {
     margin-left: 20px;
   }
+
   &-avatar-wrapper {
-    position: relative;
     display: block;
-    max-width: 50px;
     max-height: 50px;
+    max-width: 50px;
+    position: relative;
+
     &:hover {
       .photo-albums__item-avatar-hover {
-        visibility: visible;
         opacity: 1;
+        visibility: visible;
       }
     }
   }
-  &-avatar {
-    max-width: 50px;
-    max-height: 50px;
-    border-radius: 50%;
-  }
-  &-avatar-icon {
-    width: 17px;
-    height: 4px;
 
-    fill: $photo-hover-icon;
+  &-avatar {
+    border-radius: 50%;
+    max-height: 50px;
+    max-width: 50px;
   }
+
+  &-avatar-icon {
+    fill: $photo-hover-icon;
+    height: 4px;
+    width: 17px;
+  }
+
   &-avatar-hover {
-    position: absolute;
-    top: 0;
-    right: 0;
+    align-items: center;
+    background-color: $photo-avatar-hover-bg;
+    border-radius: 50%;
     bottom: 0;
-    left: 0;
-    display: flex;
-    visibility: hidden;
     content: '';
     cursor: pointer;
-    transition: all .25s;
-    opacity: 0;
-    border-radius: 50%;
-    background-color: $photo-avatar-hover-bg;
-
-    align-items: center;
+    display: flex;
     justify-content: center;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 0.25s;
+    visibility: hidden;
   }
-  &-title-img {
-    margin: 0 0 16px;
-    color: $photo-title-text;
 
-    @include media_min($phones) {
+  &-title-img {
+    color: $photo-title-text;
+    margin: 0 0 16px;
+
+    @include media-min($phones) {
       font: 14px/1 'proxima_nova_ltlight', sans-serif;
     }
-    @include media_min($tablets) {
+    
+    @include media-min($tablets) {
       font-size: 16px;
     }
   }
+
   &-meta {
     display: flex;
   }
+
   &-comments {
+    align-items: center;
     display: flex;
     text-decoration: none;
 
-    align-items: center;
     &:hover {
       .icon {
         fill: $photo-icon-comment-hover;
       }
     }
+
     &-number {
+      color: $photo-album-title;
       font: 16px/1 'pantonbold', sans-serif;
       margin-left: 11px;
-      color: $photo-album-title;
     }
   }
+
   &-likes {
+    align-items: center;
     display: flex;
     margin-left: 17px;
     text-decoration: none;
 
-    align-items: center;
     &:hover {
       .icon {
         fill: $photo-icon-like-hover;
       }
     }
+
     &-number {
+      color: $photo-album-title;
       font: 16px/1 'pantonbold', sans-serif;
       margin-left: 11px;
-      color: $photo-album-title;
     }
   }
+
   // Иконки
   &-icon {
-    transition: fill .25s;
-
     fill: $photo-icon;
+    transition: fill 0.25s;
+
     &_comments {
-      width: 20px;
       height: 17px;
-    }
-    &_likes {
       width: 20px;
-      height: 16px;
     }
+
+    &_likes {
+      height: 16px;
+      width: 20px;
+    }
+
     &_album {
-      min-width: 20px;
+      max-height: 18px;
       max-width: 20px;
       min-height: 18px;
-      max-height: 18px;
+      min-width: 20px;
     }
   }
+
   // Футер (обертка, название альбома, иконка)
   &-footer {
-    padding: 13px 20px 10px;
     background-color: $photo-album-bg;
+    padding: 13px 20px 10px;
   }
+
   &-link {
+    align-items: center;
     display: flex;
+    justify-content: flex-end;
     text-decoration: none;
 
-    align-items: center;
-    justify-content: flex-end;
     &:hover {
       .icon {
         fill: $photo-icon-title-hover;
       }
     }
   }
+  
   &-title {
-    margin: 0 0 0 9px;
     color: $photo-album-title;
+    margin: 0 0 0 9px;
 
-    @include media_min($phones) {
+    @include media-min($phones) {
       font: 14px/1 'proxima_nova_ltsemibold', sans-serif;
     }
-    @include media_min($tablets) {
+    
+    @include media-min($tablets) {
       font-size: 16px;
     }
   }
@@ -248,6 +278,6 @@
 
 .button--outline-albums {
   display: block;
-  max-width: 128px;
   margin: 0 auto;
+  max-width: 128px;
 }
