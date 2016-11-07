@@ -5,6 +5,7 @@ var photo = (function() {
   var photoContainer = false;
   var photoCanEdit = false;
   var showAddModal = false;
+  var showEditModal = false;
   var errorMessageText = {
     title: 'Введите название альбома',
     description: 'Введите описание  альбома',
@@ -21,13 +22,24 @@ var photo = (function() {
       photoCanEdit = false;
     } */
 
-/*
-    var photos_array = photos.data;
-    for (var i = 0; i < photos_array.length; i++) {
-      var photo = templates.photo_albums_item(photos_array[i]);
-      $(conteiner).append(photo);
+    /*
+    var data = photos.data;
+    var user = photos.user;
+
+    for (var i = 0; i < data.length; i++) {
+      data[i].photoCanEdit = photoCanEdit;
+      photoContainer.append(templates.photo_albums_item(data[i]));
     }
-*/
+    */
+  };
+
+  var init = function(params) {
+    showAddModal = params.showAddModal;
+    showEditModal = params.showEditModal;
+    // _editPhoto();
+    // _addPhoto();
+
+    // $('body').on('click', '.класс редактирования фото', _editAlbum);
   };
 
   var _addPhoto = function(e) {
@@ -45,10 +57,21 @@ var photo = (function() {
     return false;
   };
 
-  var init = function(params) {
-    showAddModal = params.showAddModal;
-    _addPhoto();
+  var _editPhoto = function(e) {
+    // e.preventDefault();
+    var form = showEditModal();
+    photoEditDelete.init(form);
+    var ajaxFormParam = {
+      onValidateUpdate: _updateValidateStatus,
+      beforeAjax: _addFileToPost,
+      onGetAjaxDone: _getAjax,
+      onGetAjaxFail: _failAjax
+    };
+    form.ajaxForm(ajaxFormParam);
+
+    return false;
   };
+
 
   var _addFileToPost = function(data) {
     if(photosAdd.files.length < 1) {
