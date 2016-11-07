@@ -13,24 +13,7 @@ var photo = (function() {
     file_size: 'Превышен допустимый размер файла'
   };
   var setParam = function(photos, conteiner, canAdd) {
-    /* photoContainer = $(conteiner);
-    var addButton = photoContainer.find('.button-circle-icon--add');
-    if (addButton.length > 0) {
-      photoCanEdit = true;
-      addButton.on('click', _addphoto);
-    }else{
-      photoCanEdit = false;
-    } */
 
-    /*
-    var data = photos.data;
-    var user = photos.user;
-
-    for (var i = 0; i < data.length; i++) {
-      data[i].photoCanEdit = photoCanEdit;
-      photoContainer.append(templates.photo_albums_item(data[i]));
-    }
-    */
   };
 
   var init = function(params) {

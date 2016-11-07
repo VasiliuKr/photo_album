@@ -112,7 +112,11 @@
 
 // Контейнер для кнопок в хеддере
 .profile__buttons {
-  overflow: hidden;
+  padding-right: 40px;
+  position: absolute;
+  right: 0;
+  top: 20px;
+  z-index: 1;
 
   .button-circle {
     margin-bottom: 10px;
@@ -129,9 +133,9 @@
 .header__buttons-down {
   bottom: -50px;
   position: absolute;
+  right: 0;
   transform: rotate3d(1, 0, 0, 90deg);
   transition: all 0.2s;
-  width: 250px;
 }
 
 // Строка поиска

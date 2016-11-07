@@ -6,6 +6,13 @@ include ../mixins/_icons
       .profile
         .profile__photo
           img(class="profile__img" src="./assets/img/cherepov_anton.jpg" alt="Антон Черепов")
+          .add-photo__info.add-photo__info--avatar
+            .add-photo__info-icon
+              +icon('cam')
+            .add-photo__info-title Изменить фото
+          input.profile__file(type="file" name="avatar" id="file-avatar")
+          label.profile__label(for="file-avatar")
+
         .profile__info
           h1.profile__name(name='name' editor='text') Антон Черепов
           p.profile__description(name='description' editor='text_tag') Я веб разработчик. Мне 24 года. Люблю путешествия, кодинг, фриланс и активный отдых.
@@ -26,16 +33,27 @@ include ../mixins/_icons
               li.social-list__item(name='description' editor='social')
                 a(class="social-list__link" href="#")
                   +icon('soc_email', ['social-icon', 'social-icon_email'])
-      .profile__buttons
-        .header__buttons-wrapper
-          a(class="button-circle button-circle--edit" href="#")
-            +icon('edit', ['button-circle-icon', 'button-circle-icon--edit'])
-            span.button-circle--text Редактировать
-          a(class="button-circle button-circle--login" href="#")
-            +icon('off', ['button-circle-icon', 'button-circle--off'])
-            span.button-circle--text Выйти
-        .header__buttons-wrapper.header__buttons-wrapper--editor
-          include ./../common/_header_edit_control
+      .header__buttons-wrapper.header__buttons-wrapper--editor
+        .add-photo__info.add-photo__info--header
+          .add-photo__info-icon
+            +icon('cam')
+          .add-photo__info-title Изменить фон
+          input.cover__file(type="file" name="cover" id="file-cover")
+          label.cover__label(for="file-cover")
+
+      .header__buttons-down
+        button.button.button--transparent(class='header-edit__cancel') Отменить
+        button.button(type='submit') Сохранить
+
+    .profile__buttons
+      .header__buttons-wrapper
+        a(class="button-circle button-circle--edit" href="#")
+          +icon('edit', ['button-circle-icon', 'button-circle-icon--edit'])
+          span.button-circle--text Редактировать
+        a(class="button-circle button-circle--login" href="#")
+          +icon('off', ['button-circle-icon', 'button-circle--off'])
+          span.button-circle--text Выйти
+
   .search-bar
     .search-bar__inner-wrapper
       form(id="search" class="search__form")

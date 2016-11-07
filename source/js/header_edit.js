@@ -7,6 +7,7 @@ var headerEditor = (function() {
     var $element = $(element);
 
     switch ($element.attr('editor')) {
+    case 'text':
     case 'text_tag':
       $element.data('value', $element.html());
       $element.textEditor();
@@ -23,8 +24,9 @@ var headerEditor = (function() {
   var _editorBlockOff = function(index, element) {
     var $element = $(element);
     $element.find('.social-edit').remove();
-    
+
     switch ($element.attr('editor')) {
+    case 'text':
     case 'text_tag':
       $element.html($element.data('value'));
       $element.removeAttr('contenteditable');
@@ -32,6 +34,7 @@ var headerEditor = (function() {
     default:
     }
   };
+
   var _startEdit = function(e) {
     e.preventDefault();
     var buttonBlock = headerBlock.find('.profile__buttons');
