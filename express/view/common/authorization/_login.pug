@@ -2,7 +2,7 @@ block login
 
 h1.index-title Добро пожаловать
 .index-description Перед вами сервис, который поможет вам организовать свои фотографии в альбомы и поделиться ими со всем миром!
-form.form-index(method='POST' action='/ajax/user/login')
+form.form-index(method='POST' action='/ajax/autorisation/login')
   label.form-index__label
     input.form-index__input(name="mail" id="mail" placeholder="Электронная почта")
     +icon('envelope',['form-index__icon','form-index__icon-mail'])

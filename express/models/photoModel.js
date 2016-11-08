@@ -35,10 +35,12 @@ let loadPhoto = function(path,files){
 
 let unlinkPhoto = function(path,files){
   return  new Promise(function(resolve, reject) {
-    files.map((file,key)=>{
-      fs.unlink(path+'/_thumbs/'+file);
-      fs.unlink(path+'/'+file);
-    });
+    if(files.length>0) {
+      files.map((file, key)=> {
+        fs.unlink(path + '/_thumbs/' + file);
+        fs.unlink(path + '/' + file);
+      });
+    }
     resolve();
   })
 };

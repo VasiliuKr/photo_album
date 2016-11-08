@@ -31,24 +31,30 @@ var photo = (function() {
   };
 
   var setParam = function(photos, conteiner, canAdd) {
-    /* photoContainer = $(conteiner);
-    var addButton = photoContainer.find('.button-circle-icon--add');
+    photoContainer = $(conteiner);
+    var addButton = photoContainer.parent().find('.button-circle-icon--add');
     if (addButton.length > 0) {
       photoCanEdit = true;
-      addButton.on('click', _addphoto);
+      // addButton.on('click', _addphoto);
     }else{
       photoCanEdit = false;
-    } */
-
-    /*
-    var data = photos.data;
-    var user = photos.user;
-
-    for (var i = 0; i < data.length; i++) {
-      data[i].photoCanEdit = photoCanEdit;
-      photoContainer.append(templates.photo_albums_item(data[i]));
     }
-    */
+
+    var showMore = photoContainer.parent().find( '.show_more' );
+    if(showMore.length > 0) {
+      showMore.on('click', _showMoreClick);
+      lastPhotoNumer = photoOnPage;
+    }else{
+      lastPhotoNumer = photos.data.length;
+    }
+
+    photoCollection = photos.data;
+    userCollection = photos.user;
+
+    for (var i = 0; i < lastPhotoNumer; i++) {
+      photoCollection[i].photoCanEdit = photoCanEdit;
+      photoContainer.append(templates.photo_albums_item(photoCollection[i]));
+    }
   };
 
   var init = function(params) {
@@ -93,7 +99,7 @@ var photo = (function() {
 
   var _addFileToPost = function(data) {
     if(photosAdd.files.length < 1) {
-      popup.open({message: 'Выберите фотографии для загрузки'});
+      // нужен вывод сообщения что файлов для отправки нет
       return false;
     }
     for (var i = 0; i < photosAdd.files.length; i++) {
