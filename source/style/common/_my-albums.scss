@@ -59,8 +59,12 @@
 
   // Фотка альбома
   &-cover-wrapper {
+    background: no-repeat 50% 50%;
+    background-size: cover;
     display: block;
+    height: 220px;
     position: relative;
+    width: 230px;
 
     &:hover {
       .my-albums__item-spinner {

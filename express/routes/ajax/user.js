@@ -35,19 +35,21 @@ route.post('/update',(req,res)=> {
       return photoModel.loadPhoto(path.server,files['avatar']);
     }).then( avatar => {
       if(avatar.length>0 && avatar[0]){
-        newUserData.avatar = avatar[0];
-        if(oldData.avatar.length>5){
-          fileToDel.push(oldData.avatar);
+        newUserData.photo = avatar[0];
+        if(oldData.photo.length>5){
+          fileToDel.push(oldData.photo);
         }
       }
       return photoModel.loadPhoto(path.server,files['background']);
     }).then( background => {
+      console.log(background);
       if (background.length > 0 && background[0]) {
         newUserData.background = background[0];
         if (oldData.background.length > 5) {
           fileToDel.push(oldData.background);
         }
       }
+      console.log(fileToDel);
       return photoModel.unlinkPhoto(path.server,fileToDel);
     }).then( u => {
       return User.findOneAndUpdate({_id: req.session.userId}, newUserData, {upsert: true});
