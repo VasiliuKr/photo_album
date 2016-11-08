@@ -107,7 +107,7 @@ route.post('/update',(req,res)=> {
   });
 });
 
-route.post('/get/*',(req,res)=> {
+route.post('/get/',(req,res)=> {
   albumModel.get({user:req.session.userId},req.session.userId).then(u => {
     let user_list=[];
     u.map((album)=> {
@@ -117,6 +117,27 @@ route.post('/get/*',(req,res)=> {
       res.send(JSON.stringify({
         data: u,
         user: user
+      }))
+    })
+  });
+});
+
+
+//Альбом с данным id (для шапки)
+route.post('/get/:id',(req,res)=> {
+  albumModel.get({_id: parseInt(req.params.id)},req.session.userId).then(u => {
+    let user_list=[];
+    u.map((album)=> {
+      user_list.push(album.user);
+    });
+    userModel.get({ "$in" : user_list}).then(user => {
+      let outData = {
+        background: u[0].dir + '/' + u[0].cover.src,
+        data: u[0],
+        user: user[0]
+      };
+      res.send(JSON.stringify({
+        data: [outData]
       }))
     })
   });

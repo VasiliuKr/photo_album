@@ -12,6 +12,10 @@ var urlParser = (function() {
     }
   }
 
+  var _scrollTop = function() {
+    $('html, body').stop().animate({scrollTop:0}, '500');
+  };
+
   var _onpopstate = function( e ) {
     var url;
     if (history.location === undefined) {
@@ -28,6 +32,7 @@ var urlParser = (function() {
     _setUpListeners();
     var hereUrl = location.href;
     _analyzeUrl(hereUrl);
+    $('.to-top').on('click',_scrollTop)
   };
 
   var _setUpListeners = function() {

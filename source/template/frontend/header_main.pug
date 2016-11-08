@@ -4,8 +4,8 @@ include ../mixins/_icons
   .header__inner-wrapper
     form.header__top(method='post' action='/ajax/user/update')
       .profile
-        .profile__photo
-          img(class="profile__img" src= photo alt= name)
+        .profile__photo(style=`background-image: url(${photo})`)
+          img(class="profile__img")
           .add-photo__info.add-photo__info--avatar
             .add-photo__info-icon
               +icon('cam')

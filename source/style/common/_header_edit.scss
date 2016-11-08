@@ -55,6 +55,7 @@
   .header__buttons-wrapper--editor {
     animation: Down 1s;
     transform: translateY(0%);
+    z-index: 99;
   }
 
   .button-circle {
@@ -108,8 +109,7 @@
     margin-bottom: 10px;
   }
 
-  .profile__name,
-  .profile__description {
+  [contenteditable]{
     @extend %modal-input-placeholder;
     border: 0;
     outline: 0;
