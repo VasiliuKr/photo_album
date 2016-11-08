@@ -37,7 +37,7 @@ app.use('/ajax/like',require('./routes/ajax/like'));
 app.use('/ajax',require('./routes/ajax'));
 app.use('/',require('./routes/index'));
 //===============
-
+12
 app.use((req,res,next)=>res.status(404).send('404! Page not found'));
 app.use((err,req,res,next)=>{
   res.status(500);
