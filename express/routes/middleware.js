@@ -5,7 +5,7 @@ module.exports=(req, res, next)=> {
   if(
       !req.session.isAuth &&
       url[1].length!=0 &&
-      (url[1]!='ajax' || url[2]!=('user'))
+      (url[1]!='ajax' || url[2]!=('autorisation'))
   ){
     res.redirect('/');
   }else if(

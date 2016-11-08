@@ -20,6 +20,10 @@ let getPath = function(userId) {
     fs.mkdirSync(uploadDir);
   }
 
+  let thumbsDir = path.resolve(config.http.publicRoot,dirName+'/_thumbs');
+  if(!fs.existsSync(thumbsDir)){
+    fs.mkdirSync(thumbsDir);
+  }
 
   return {
     server: uploadDir,
@@ -67,5 +71,6 @@ let  getUser = function(userId) {
 };
 
 module.exports = {
-  get: getUser
+  get: getUser,
+  getPath: getPath
 };
