@@ -5,7 +5,23 @@
 
   &__inner-wrapper {
     padding: 53px 0 60px;
-    width: 1180px;
+    width: 100%;
+
+    @include media-min($phones) {
+      max-width: 300px;
+    }
+      
+    @include media-min($tablets) {
+      max-width: 700px;
+    }
+    
+    @include media-min($laptop) {
+      max-width: 1180px;
+    }
+    
+    @include media-min($desktop) {
+      max-width: 1580px;
+    }
   }
 
   &__list {
@@ -24,6 +40,18 @@
   flex-direction: column;
   margin: 10px;
   overflow: hidden;
+
+  @include media-min($phones) {
+    max-width: 300px;
+  }
+  
+  @include media-min($tablets) {
+    max-width: 340px;
+  }
+  
+  @include media-min($laptop) {
+    max-width: 380px;
+  }
 
   // Фотка альбома
   &-cover-wrapper {
@@ -77,11 +105,17 @@
     z-index: 10;
   }
 
-
   &-info-wrapper {
     display: flex;
     flex: 1;
-    padding: 19px 20px 20px;
+
+    @include media-min($phones) {
+      padding: 10px;
+    }
+    
+    @include media-min($tablets) {
+      padding: 19px 20px 20px;
+    }
   }
 
   &-info {
@@ -134,8 +168,15 @@
 
   &-title-img {
     color: $photo-title-text;
-    font: 16px/1 'proxima_nova_ltlight', sans-serif;
     margin: 0 0 16px;
+
+    @include media-min($phones) {
+      font: 14px/1 'proxima_nova_ltlight', sans-serif;
+    }
+    
+    @include media-min($tablets) {
+      font-size: 16px;
+    }
   }
 
   &-meta {
@@ -220,11 +261,18 @@
       }
     }
   }
-
+  
   &-title {
     color: $photo-album-title;
-    font: 16px/1 'proxima_nova_ltsemibold', sans-serif;
     margin: 0 0 0 9px;
+
+    @include media-min($phones) {
+      font: 14px/1 'proxima_nova_ltsemibold', sans-serif;
+    }
+    
+    @include media-min($tablets) {
+      font-size: 16px;
+    }
   }
 }
 

@@ -1,5 +1,13 @@
 .header__wrapper {
+  animation: fadeIn 0.25s;
   background: url('../img/bg-profile.jpg') center 50% no-repeat;
+  opacity: 1;
+
+  &.wrapper-hide {
+    animation: fadeOutHide 0.25s;
+    animation-fill-mode: forwards;
+    opacity: 1;
+  }
 }
 
 .header__inner-wrapper {
@@ -68,7 +76,7 @@
   }
 
   &__description {
-    animation: Up 1s -0.3s;
+    animation: Up 1s;
     color: $shapka-avatar-description;
     font: 16px/1.5 'proxima_nova_ltlight', sans-serif;
     margin-bottom: 26px;

@@ -1,0 +1,48 @@
+.edit-photo {
+
+  .modal__body {
+    padding: 40px 20px 0;
+    position: relative;
+  }
+
+  .modal__footer {
+    position: relative;
+  }
+
+  .button--icon-delete {
+    position: absolute;
+    right: 19px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__delete {
+    align-items: center;
+    background-color: $modal-bg;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    opacity: 0;
+    padding-top: 20px;
+    position: absolute;
+    top: 0;
+    transition: opacity 0.2s linear;
+    width: 100%;
+    z-index: -1;
+  }
+
+  &__delete-text {
+    color: $modal-edit-label-text;
+    font-family: 'proxima_nova_ltlight', sans-serif;
+    font-size: 16px;
+    line-height: 1.313;
+    margin-bottom: 17px;
+  }
+
+  &__delete-center {
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+}

@@ -22,7 +22,15 @@ include ../mixins/_icons
               .add-photo__info-text Перетащите фото сюда или
                 span.choose  выберите файл
             .add-photo__images
-              .modal__errors
+
+          .add-photo__big-images-wrapper
+            .add-photo__header
+              .add-photo__label Следующие файлы не будут загружены
+              .add-photo__title (размер более 1мб)
+            .add-photo__big-images
+
+          .modal__errors
+
         .modal__footer
           button.button.button--pointer(type='submit') Сохранить
           button.button.button--transparent.button--pointer(class='modal-action-close') Отменить

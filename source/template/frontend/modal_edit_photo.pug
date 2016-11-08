@@ -1,0 +1,38 @@
+include ../mixins/_icons
+
+.modal-overlay
+  .modal
+    form(action="/ajax/photo/update" method="POST")
+      .edit-photo
+        .modal__header
+          a(class="modal__close modal-action-close" href="#")
+            +icon('close')
+          .modal__title Отредактировать фотографию
+        .modal__body
+
+          .edit-photo__delete
+            form(action="/ajax/photo/delete" method="POST")
+              .edit-photo__delete-center
+                .edit-photo__delete-text Вы действительно хотите удалить это фото?
+                .edit-photo__delete-buttons
+                  button(href="#" class="button button--theme-secondary button--transparent-secondary") Да
+                  button(href="#" class="button button--theme-secondary button--transparent-secondary edit-photo__button-cancel") Отменить
+
+          .modal__row
+            .modal__label Название
+            input.modal__input(class="modal--stretch" type="text" name="title" placeholder="Название" value=`${title}` required=true)
+
+          .modal__row
+            .modal__label Описание
+            textarea.modal__textarea(class="modal--stretch" type="text" name="description" placeholder="Описание" required=true) #{description}
+
+          .modal__errors
+
+        .modal__footer
+          button.button(type='submit') Сохранить
+          button.button.button--transparent(class='modal-action-close') Отменить
+          button(class="button button--theme-secondary button--icon-delete" href="#")
+            +icon('delete')
+            span.button--icon-text Удалить
+
+
