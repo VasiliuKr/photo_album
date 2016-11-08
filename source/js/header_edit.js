@@ -95,11 +95,14 @@ var headerEditor = (function() {
       $('.page-wrap').removeClass('page-wrap--shadow');
       $.each(editBlock, _editorBlockOff);
       $('.test-image').animateCssAndRemove('fade-out');
+      $('body').removeClass('popup-show');
     } else {
       buttonBlock.addClass('header-edit');
       headerBlock.find('.header__wrapper').addClass('header-edit');
       $('.page-wrap').addClass('page-wrap--shadow');
       $.each(editBlock, _editorBlockOn);
+      $('body').addClass('popup-show');
+      $('html, body').stop().animate({scrollTop:0}, '500');
 
       var ajaxFormParam = {
         onMessage: popup.open,

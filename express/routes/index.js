@@ -21,4 +21,19 @@ route.get('/main',(req,res)=> {
   res.render('main')
 });
 
+route.get('/album/*',(req,res)=> {
+  console.log('album:'+req.session.userId);
+  res.render('main')
+});
+
+route.get('/search/*',(req,res)=> {
+  console.log('search:'+req.session.userId);
+  res.render('main')
+});
+
+route.get('/user/*',(req,res)=> {
+  console.log('user:'+req.session.userId);
+  res.render('main')
+});
+
 module.exports = route;

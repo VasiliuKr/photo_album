@@ -5,7 +5,7 @@ var pageTemplate = (function() {
     main: { // Cтартовая
       headerTemplate: 'header_main',
       contentTemplate: 'content_main',
-      header_data: '/ajax/user/get/',
+      header_data:'/ajax/user/get/',
       photos: {
         ajax_url: '/ajax/photo/get/',
         box: '.photo-albums__list'
@@ -18,9 +18,9 @@ var pageTemplate = (function() {
     album: { // Карточка альбома
       headerTemplate: 'header_album',
       contentTemplate: 'content_album',
-      header_data: '/ajax/user/get/',
+      header_data: '/ajax/album/get/',
       photos: {
-        ajax_url: '/ajax/photo/get',
+        ajax_url: '/ajax/photo/get/',
         box: '.photo-albums__list'
       }
     },
@@ -29,7 +29,7 @@ var pageTemplate = (function() {
       header_data: '/ajax/user/get/',
       contentTemplate: 'content_user',
       album: {
-        ajax_url: '/ajax/album/get',
+        ajax_url: '/ajax/album/get_user/',
         box: '.my-albums__list'
       }
     },
@@ -68,7 +68,7 @@ var pageTemplate = (function() {
       }
 
       $('#header').append(headerTemplate);
-      $('.page_background').css('background-image', 'url(' + djson.data[0].background + ')');
+      $('.page_background').css('background-image', 'url(/' + djson.data[0].background + ')');
 
       if(waitResize) {
         var newHeight = $('#header').height();
