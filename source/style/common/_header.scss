@@ -1,10 +1,12 @@
 .header__wrapper {
   background: url('../img/bg-profile.jpg') center 50% no-repeat;
+  position: relative;
 }
 
 .header__inner-wrapper {
   padding: 20px 40px 0 87px;
   position: relative;
+  z-index: 9;
 
   &::before {
     background: linear-gradient(to right, $shapka-grad-left 0%, $shapka-grad-right 60%);
@@ -58,6 +60,11 @@
     min-height: 124px;
     min-width: 124px;
     overflow: hidden;
+    position: relative;
+  }
+
+  &__img {
+    border-radius: 100%;
   }
 
   &__name {
@@ -94,6 +101,13 @@
   &__link {
     cursor: pointer;
     display: block;
+    transition: all 0.8s;
+
+    &[href=""] {
+      opacity: 0;
+      transform: rotate3d(1, 0, 0, 90deg);
+      width: 0;
+    }
 
     &:hover {
       .social-icon {
@@ -125,7 +139,6 @@
 
 .header__buttons-wrapper {
   align-items: flex-end;
-  animation: Down 1s;
   display: flex;
   flex-direction: column;
 }

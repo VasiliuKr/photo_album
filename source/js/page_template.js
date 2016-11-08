@@ -3,6 +3,7 @@
 var pageTemplate = (function() {
   var templateBase = {
     main: {// стартовая
+      headerTemplate: 'header_main',
       contentTemplate: 'content_main',
       photos: {
         ajax_url: '/ajax/photo/get/',
@@ -14,14 +15,16 @@ var pageTemplate = (function() {
       }
     },
     user: { // альбомы пользователя
-      contentTemplate: 'content_user',
+      headerTemplate: 'header_album',
+      contentTemplate: 'content_album',
       album: {
         ajax_url: '/ajax/album/get/',
         box: '.my-albums__list'
       }
     },
     album: { // карточка альбома
-      contentTemplate: 'content_album',
+      headerTemplate: 'header_user',
+      contentTemplate: 'content_user',
       photos: {
         ajax_url: '/ajax/photo/get/',
         box: '.photo-albums__list'

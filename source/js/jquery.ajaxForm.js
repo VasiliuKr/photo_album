@@ -157,12 +157,15 @@
           var file = input.files[0];
           var img = document.createElement('img');
           img.file = file;
+
           var readerImg = new FileReader();
-          readerImg.onload = (function(aImg) {
+          readerImg.onload = (function(inputHere) {
+            var inputObject = inputHere;
             return function(e) {
-              form.config.onFileChoose(e);
+              form.config.onFileChoose(e, inputObject);
             };
-          })(img);
+          })(input);
+
           readerImg.readAsDataURL(file);
         }
       }).each(function() {

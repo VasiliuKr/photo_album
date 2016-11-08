@@ -1,5 +1,5 @@
 'use strict';
-var aaa;
+
 var photo = (function() {
   var photoCollection = [];
   var userCollection = [];
@@ -93,7 +93,7 @@ var photo = (function() {
 
   var _addFileToPost = function(data) {
     if(photosAdd.files.length < 1) {
-      // нужен вывод сообщения что файлов для отправки нет
+      popup.open({message: 'Выберите фотографии для загрузки'});
       return false;
     }
     for (var i = 0; i < photosAdd.files.length; i++) {
