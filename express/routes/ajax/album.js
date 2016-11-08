@@ -98,7 +98,7 @@ route.post('/update',(req,res)=> {
         albumModel.get({_id:albumid}, req.session.userId).then(u => {
           res.send(JSON.stringify({
             error: 0,
-            message: 'Альбом создан!',
+            message: 'Альбом отредактирован!',
             data: u
           }))
         });
