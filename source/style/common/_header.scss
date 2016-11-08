@@ -1,6 +1,14 @@
 .header__wrapper {
+  animation: fadeIn 0.25s;
   background: url('../img/bg-profile.jpg') center 50% no-repeat;
+  opacity: 1;
   position: relative;
+
+  &.wrapper-hide {
+    animation: fadeOutHide 0.25s;
+    animation-fill-mode: forwards;
+    opacity: 1;
+  }
 }
 
 .header__inner-wrapper {
