@@ -9,7 +9,7 @@ require('./../../models_db/album');
 
 route.post('/social',(req,res)=> {
   let newUserSocial={};
-  let names = ['vk_','fb','twitter','google','email'];
+  let names = ['vk','fb','twitter','google','email'];
   for (var i = 0;i<names.length;i++) {
     if (req.body[names[i]] && req.body[names[i]].length>2) {
       newUserSocial[names[i]] = req.body[names[i]];
@@ -20,7 +20,7 @@ route.post('/social',(req,res)=> {
     return;
   }
   let User = mongoose.model('user');
-  User.findOneAndUpdate({_id: req.session.userId}, newUserData, {upsert: true}).then( u => {
+  User.findOneAndUpdate({_id: req.session.userId}, newUserSocial, {upsert: true}).then( u => {
     userModel.get(req.session.userId).then(user => {
       res.send(JSON.stringify({
         error  : 0,
