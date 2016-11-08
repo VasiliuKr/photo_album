@@ -19,3 +19,7 @@
 
   urlParser.init( pageTemplate.update );
 })();
+
+function pug_style(style){
+  return style;
+}

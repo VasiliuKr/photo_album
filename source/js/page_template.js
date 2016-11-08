@@ -5,7 +5,7 @@ var pageTemplate = (function() {
     main: { // Cтартовая
       headerTemplate: 'header_main',
       contentTemplate: 'content_main',
-      header_data:'/ajax/user/get/',
+      header_data: '/ajax/user/get/',
       photos: {
         ajax_url: '/ajax/photo/get/',
         box: '.photo-albums__list'
@@ -18,7 +18,7 @@ var pageTemplate = (function() {
     album: { // Карточка альбома
       headerTemplate: 'header_album',
       contentTemplate: 'content_album',
-      header_data:'/ajax/user/get/',
+      header_data: '/ajax/user/get/',
       photos: {
         ajax_url: '/ajax/photo/get',
         box: '.photo-albums__list'
@@ -26,7 +26,7 @@ var pageTemplate = (function() {
     },
     user: { // Альбомы пользователя
       headerTemplate: 'header_user',
-      header_data:'/ajax/user/get/',
+      header_data: '/ajax/user/get/',
       contentTemplate: 'content_user',
       album: {
         ajax_url: '/ajax/album/get',
@@ -35,7 +35,7 @@ var pageTemplate = (function() {
     },
     search: { // Поиск
       headerTemplate: 'header_search',
-      header_data:'/ajax/user/get/',
+      header_data: '/ajax/user/get/',
       contentTemplate: 'content_search',
       photos: {
         ajax_url: '/ajax/main/',
@@ -54,32 +54,32 @@ var pageTemplate = (function() {
 
   };
 
-  var headerRender = function(resizeHeader,urlSufix){
+  var headerRender = function(resizeHeader, urlSufix) {
     var waitResize = resizeHeader;
     var headerTemplate = template.headerTemplate;
 
     var url = template.header_data + urlSufix;
     $.post(url, function(djson) {
       headerTemplate = templates[headerTemplate](djson.data[0]);
-      if(waitResize){
-        var oldHeight = $('#header').height();
+      var oldHeight;
+      if(waitResize) {
+        oldHeight = $('#header').height();
         headerWrapper.hide();
       }
 
       $('#header').append(headerTemplate);
-      $('.page_background').css('background-image','url('+djson.data[0].background+')')
+      $('.page_background').css('background-image', 'url(' + djson.data[0].background + ')');
 
-      if(waitResize){
+      if(waitResize) {
         var newHeight = $('#header').height();
         headerWrapper.addClass('wrapper-hide');
         headerWrapper.show();
 
         $('#header')
-          .css({height: oldHeight})
+          .css( {height: oldHeight} )
           .animate({height: newHeight}, 1000, function() {
             $(this).css({height: ''});
           });
-
       }
     }, 'json');
   };
@@ -122,26 +122,26 @@ var pageTemplate = (function() {
     $('#header .wrapper-hide').remove();
     headerWrapper = $('#header').find('.header__wrapper');
     if (headerWrapper.length > 0) {
-      $('#content >*').animate({height: 0,opaciti:0}, 300, animationEnd);
+      $('#content >*').animate({height: 0, opaciti: 0}, 300, animationEnd);
       headerRender(true, data.data);
     } else {
       animationEnd();
       headerRender(false, data.data);
     }
 
-
+    var url;
     if (template.photos) {
-     var url = template.photos.ajax_url + data.data;
-     $.post(url, function(djson) {
-       dataPhoto = djson;
-       if (animationContent) {
-         photo.set(djson, template.photos.box);
-       }
+      url = template.photos.ajax_url + data.data;
+      $.post(url, function(djson) {
+        dataPhoto = djson;
+        if (animationContent) {
+          photo.set(djson, template.photos.box);
+        }
       }, 'json');
     }
 
     if (template.album) {
-      var url = template.album.ajax_url + data.data;
+      url = template.album.ajax_url + data.data;
       $.post(url, function(djson) {
         dataAlbum = djson;
         if (animationContent) {
