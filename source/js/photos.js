@@ -2,18 +2,53 @@
 var aaa;
 var photo = (function() {
   var photoCollection = [];
+  var userCollection = [];
   var photoContainer = false;
   var photoCanEdit = false;
   var showAddModal = false;
   var showEditModal = false;
+  var photoOnPage = 12;
+  var photoOnShowMore = 6;
+  var lastPhotoNumer = 0;
   var errorMessageText = {
     title: 'Введите название альбома',
     description: 'Введите описание  альбома',
     cover: 'Выберите фаил для обдлжки',
     file_size: 'Превышен допустимый размер файла'
   };
-  var setParam = function(photos, conteiner, canAdd) {
 
+  var showMorePhoto = function() {
+    for (var i = 0; i < photoOnShowMore; i++) {
+      photoCollection[i].photoCanEdit = photoCanEdit;
+      photoContainer.append(templates.photo_albums_item(photoCollection[i]));
+    }
+    lastPhotoNumer += photoOnShowMore;
+  };
+
+  var _showMoreClick = function(e) {
+    e.preventDefault();
+    photo.showMore();
+  };
+
+  var setParam = function(photos, conteiner, canAdd) {
+    /* photoContainer = $(conteiner);
+    var addButton = photoContainer.find('.button-circle-icon--add');
+    if (addButton.length > 0) {
+      photoCanEdit = true;
+      addButton.on('click', _addphoto);
+    }else{
+      photoCanEdit = false;
+    } */
+
+    /*
+    var data = photos.data;
+    var user = photos.user;
+
+    for (var i = 0; i < data.length; i++) {
+      data[i].photoCanEdit = photoCanEdit;
+      photoContainer.append(templates.photo_albums_item(data[i]));
+    }
+    */
   };
 
   var init = function(params) {
@@ -26,7 +61,7 @@ var photo = (function() {
   };
 
   var _addPhoto = function(e) {
-    // e.preventDefault();
+    e.preventDefault();
     var form = showAddModal();
     photosAdd.init(form);
     var ajaxFormParam = {
@@ -96,6 +131,7 @@ var photo = (function() {
 
   return {
     init: init,
-    set: setParam
+    set: setParam,
+    showMore: showMorePhoto
   };
 }());

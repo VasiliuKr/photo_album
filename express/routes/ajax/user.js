@@ -28,7 +28,7 @@ route.post('/registration',(req,res)=>{
     User.findOne({login: req.body.mail}).then(u=> {
       if (u) {
         throw new Error('Такой пользователь уже существует');
-      };
+      }
       return newUser.save();
     }).then(
       u=> {

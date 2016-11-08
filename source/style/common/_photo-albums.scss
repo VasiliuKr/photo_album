@@ -33,6 +33,8 @@
 
 // Альбом в блоке "Новое в мире"
 .photo-albums__item {
+  animation: PhotoLoad 0.5s;
+  animation-direction: both;
   border-radius: 3px;
   box-shadow: 0 1px 4px $photo-shadow;
   display: flex;

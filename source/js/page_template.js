@@ -2,36 +2,28 @@
 
 var pageTemplate = (function() {
   var templateBase = {
-    main: {
-      headerTemplate: 'header_main',
+    main: {// стартовая
       contentTemplate: 'content_main',
-      photos: false,
+      photos: {
+        ajax_url: '/ajax/photo/get/',
+        box: '.photo-albums__list'
+      },
       album: {
         ajax_url: '/ajax/album/get/',
         box: '.my-albums__list'
       }
     },
-    album: {
-      headerTemplate: 'header_album',
-      contentTemplate: 'content_album',
-      photos: {
-        ajax_url: '/ajax/main/',
-        box: '.photo-albums__list'
-      }
-    },
-    user: {
-      headerTemplate: 'header_user',
+    user: { // альбомы пользователя
       contentTemplate: 'content_user',
       album: {
-        ajax_url: '/ajax/main/',
+        ajax_url: '/ajax/album/get/',
         box: '.my-albums__list'
       }
     },
-    search: {
-      headerTemplate: 'header_search',
-      contentTemplate: 'content_search',
+    album: { // карточка альбома
+      contentTemplate: 'content_album',
       photos: {
-        ajax_url: '/ajax/main/',
+        ajax_url: '/ajax/photo/get/',
         box: '.photo-albums__list'
       }
     }
@@ -72,6 +64,7 @@ var pageTemplate = (function() {
 
     var contentTemplate = template.contentTemplate;
     contentTemplate = templates[contentTemplate]();
+
     $('#content').html(contentTemplate);
 
 
