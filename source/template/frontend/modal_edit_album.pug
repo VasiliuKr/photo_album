@@ -21,7 +21,7 @@ include ../mixins/_icons
           .modal-cover
             .modal-cover__thumb.modal-cover__thumb--active
               .modal-cover__thumb-wrapper
-                img.modal-cover__thumb-img(src=`${dir}/${cover}` width="50" height="50" alt="cover")
+                img.modal-cover__thumb-img(src=`${cover.dir}/_thumbs/${cover.src}` width="50" height="50" alt="cover")
             input.modal-cover__file#modal-cover(type="file" name="cover" accept="image/*")
             label(for="modal-cover")
               .modal-cover__btn(class="button button--outline button--pointer") Загрузить обложку
@@ -30,7 +30,7 @@ include ../mixins/_icons
           .modal__errors
 
         .modal__footer
-          button.button.button--pointer(type='submit') Сохранить
-          button.button.button--transparent.button--pointer(class='modal-action-close') Отменить
+          button.button(type='submit') Сохранить
+          button.button.button--transparent(class='modal-action-close') Отменить
 
 
