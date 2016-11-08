@@ -10,6 +10,8 @@ let mongoose = require('mongoose'),
 let loadPhoto = function(path,files){
   return  new Promise(function(resolve, reject) {
     let picture=files.map((file,key)=>{
+      if(file.size<100) return false;
+
       let fileName=file.path.split('.');
       fileName=fileName[fileName.length-1];
       fileName=crypto.createHash('md5').update(file.path).digest('hex')+'.'+fileName;
@@ -28,6 +30,16 @@ let loadPhoto = function(path,files){
       return fileName;
     });
     resolve(picture);
+  })
+};
+
+let unlinkPhoto = function(path,files){
+  return  new Promise(function(resolve, reject) {
+    files.map((file,key)=>{
+      fs.unlink(path+'/_thumbs/'+file);
+      fs.unlink(path+'/'+file);
+    });
+    resolve();
   })
 };
 
@@ -74,6 +86,7 @@ let  get = function(filter,user) {
       {$limit: 60}
     ).then(u => {
       u.map(photo=>{
+        photo.canEdit=(photo.user==userId);
         photo.iLike=false;
         photo.likes.map(like=>{
           if(like.user==userId){
@@ -95,5 +108,6 @@ module.exports = {
   getPath: getPath,*/
   get: get,
   loadPhoto: loadPhoto,
+  unlinkPhoto: unlinkPhoto,
   createPhotoArray: createPhotoArray
 };

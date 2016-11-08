@@ -1,6 +1,7 @@
 .header__wrapper {
   animation: fadeIn 0.25s;
   background: url('../img/bg-profile.jpg') center 50% no-repeat;
+<<<<<<< HEAD
   opacity: 1;
 
   &.wrapper-hide {
@@ -8,13 +9,17 @@
     animation-fill-mode: forwards;
     opacity: 1;
   }
+=======
+  position: relative;
+>>>>>>> origin/master
 }
 
 .header__inner-wrapper {
   padding: 20px 40px 0 87px;
   position: relative;
+  z-index: 9;
 
-  &:before {
+  &::before {
     background: linear-gradient(to right, $shapka-grad-left 0%, $shapka-grad-right 60%);
     bottom: 0;
     content: '';
@@ -27,7 +32,7 @@
     z-index: 0;
   }
 
-  &:after {
+  &::after {
     background: $shapka-grad-left;
     bottom: 0;
     content: '';
@@ -66,6 +71,11 @@
     min-height: 124px;
     min-width: 124px;
     overflow: hidden;
+    position: relative;
+  }
+
+  &__img {
+    border-radius: 100%;
   }
 
   &__name {
@@ -102,6 +112,13 @@
   &__link {
     cursor: pointer;
     display: block;
+    transition: all 0.8s;
+
+    &[href=""] {
+      opacity: 0;
+      transform: rotate3d(1, 0, 0, 90deg);
+      width: 0;
+    }
 
     &:hover {
       .social-icon {
@@ -120,7 +137,11 @@
 
 // Контейнер для кнопок в хеддере
 .profile__buttons {
-  overflow: hidden;
+  padding-right: 40px;
+  position: absolute;
+  right: 0;
+  top: 20px;
+  z-index: 1;
 
   .button-circle {
     margin-bottom: 10px;
@@ -129,7 +150,6 @@
 
 .header__buttons-wrapper {
   align-items: flex-end;
-  animation: Down 1s;
   display: flex;
   flex-direction: column;
 }
@@ -137,9 +157,9 @@
 .header__buttons-down {
   bottom: -50px;
   position: absolute;
+  right: 0;
   transform: rotate3d(1, 0, 0, 90deg);
   transition: all 0.2s;
-  width: 250px;
 }
 
 // Строка поиска

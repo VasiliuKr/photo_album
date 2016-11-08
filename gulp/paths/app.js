@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = [
+  './source/js/jquery.animation_callback.js',
   './source/js/popup.js',
   './source/js/modals.js',
   './source/js/multi_photo_add.js',

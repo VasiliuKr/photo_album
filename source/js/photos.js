@@ -1,17 +1,35 @@
 'use strict';
-var aaa;
+
 var photo = (function() {
   var photoCollection = [];
+  var userCollection = [];
   var photoContainer = false;
   var photoCanEdit = false;
   var showAddModal = false;
   var showEditModal = false;
+  var photoOnPage = 12;
+  var photoOnShowMore = 6;
+  var lastPhotoNumer = 0;
   var errorMessageText = {
     title: 'Введите название альбома',
     description: 'Введите описание  альбома',
     cover: 'Выберите фаил для обдлжки',
     file_size: 'Превышен допустимый размер файла'
   };
+
+  var showMorePhoto = function() {
+    for (var i = 0; i < photoOnShowMore; i++) {
+      photoCollection[i].photoCanEdit = photoCanEdit;
+      photoContainer.append(templates.photo_albums_item(photoCollection[i]));
+    }
+    lastPhotoNumer += photoOnShowMore;
+  };
+
+  var _showMoreClick = function(e) {
+    e.preventDefault();
+    photo.showMore();
+  };
+
   var setParam = function(photos, conteiner, canAdd) {
     /* photoContainer = $(conteiner);
     var addButton = photoContainer.find('.button-circle-icon--add');
@@ -43,7 +61,7 @@ var photo = (function() {
   };
 
   var _addPhoto = function(e) {
-    // e.preventDefault();
+    e.preventDefault();
     var form = showAddModal();
     photosAdd.init(form);
     var ajaxFormParam = {
@@ -75,7 +93,7 @@ var photo = (function() {
 
   var _addFileToPost = function(data) {
     if(photosAdd.files.length < 1) {
-      // нужен вывод сообщения что файлов для отправки нет
+      popup.open({message: 'Выберите фотографии для загрузки'});
       return false;
     }
     for (var i = 0; i < photosAdd.files.length; i++) {
@@ -113,6 +131,7 @@ var photo = (function() {
 
   return {
     init: init,
-    set: setParam
+    set: setParam,
+    showMore: showMorePhoto
   };
 }());

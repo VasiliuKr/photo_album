@@ -2,7 +2,11 @@
 
 var pageTemplate = (function() {
   var templateBase = {
+<<<<<<< HEAD
     main: { // Cтартовая
+=======
+    main: {// стартовая
+>>>>>>> origin/master
       headerTemplate: 'header_main',
       contentTemplate: 'content_main',
       photos: {
@@ -14,6 +18,7 @@ var pageTemplate = (function() {
         box: '.my-albums__list'
       }
     },
+<<<<<<< HEAD
     album: { // Карточка альбома
       headerTemplate: 'header_album',
       contentTemplate: 'content_album',
@@ -33,8 +38,21 @@ var pageTemplate = (function() {
     search: { // Поиск
       headerTemplate: 'header_search',
       contentTemplate: 'content_search',
+=======
+    user: { // альбомы пользователя
+      headerTemplate: 'header_album',
+      contentTemplate: 'content_album',
+      album: {
+        ajax_url: '/ajax/album/get/',
+        box: '.my-albums__list'
+      }
+    },
+    album: { // карточка альбома
+      headerTemplate: 'header_user',
+      contentTemplate: 'content_user',
+>>>>>>> origin/master
       photos: {
-        ajax_url: '/ajax/main/',
+        ajax_url: '/ajax/photo/get/',
         box: '.photo-albums__list'
       }
     }
@@ -74,16 +92,23 @@ var pageTemplate = (function() {
 
     $('#header').find('.wrapper-hide').remove();
     var headerWrapper = $('#header').find('.header__wrapper');
+<<<<<<< HEAD
     if (headerWrapper.length > 0) {
+=======
+    if(headerWrapper.length > 0) {
+>>>>>>> origin/master
       var oldHeight = $('#header').height();
       headerWrapper.hide();
       $('#header').append(headerTemplate);
       var newHeight = $('#header').height();
       headerWrapper.addClass('wrapper-hide');
       headerWrapper.show();
+<<<<<<< HEAD
       // if (headerWrapper.show()) {
       //   $('#content >*').animate({height: 0}, 300, animationEnd());
       // }
+=======
+>>>>>>> origin/master
       $('#header')
         .css({height: oldHeight})
         .animate({height: newHeight}, 1000, function() {
@@ -104,6 +129,7 @@ var pageTemplate = (function() {
 
     var contentTemplate = template.contentTemplate;
     contentTemplate = templates[contentTemplate]();
+
     $('#content').html(contentTemplate);
 
    /* if (template.photos) {

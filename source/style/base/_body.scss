@@ -48,7 +48,7 @@ img {
 .page-wrap {
   flex: 1;
 
-  &:before {
+  &::before {
     background: rgba($photo-hover-icon, 0.6);
     content: '';
     height: 0;
@@ -86,7 +86,11 @@ img {
 [contenteditable] {
   background: $onform-header-text;
   border-radius: 8px;
+<<<<<<< HEAD
   color: $form-header-text !important;
+=======
+  // color: $form-header-text !important;
+>>>>>>> origin/master
   padding: 8px;
 }
 

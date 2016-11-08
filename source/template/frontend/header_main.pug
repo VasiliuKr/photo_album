@@ -1,41 +1,59 @@
 include ../mixins/_icons
 
-.header__wrapper
+.header__wrapper.page_background
   .header__inner-wrapper
-    .header__top
+    form.header__top(method='post' action='/ajax/user/update')
       .profile
         .profile__photo
           img(class="profile__img" src="./assets/img/cherepov_anton.jpg" alt="Антон Черепов")
+          .add-photo__info.add-photo__info--avatar
+            .add-photo__info-icon
+              +icon('cam')
+            .add-photo__info-title Изменить фото
+          input.profile__file(type="file" name="avatar" id="file-avatar" to_img='#header .profile__img')
+          label.profile__label(for="file-avatar")
+
         .profile__info
           h1.profile__name(name='name' editor='text') Антон Черепов
           p.profile__description(name='description' editor='text_tag') Я веб разработчик. Мне 24 года. Люблю путешествия, кодинг, фриланс и активный отдых.
           .profile__social
             ul.social-list
-              li.social-list__item
-                a(class="social-list__link" href="#")
+              li.social-list__item(name='vk' editor='social')
+                a(class="social-list__link" href="")
                   +icon('soc_vk', ['social-icon', 'social-icon_vk'])
-              li.social-list__item
-                a(class="social-list__link" href="#")
+              li.social-list__item(name='fb' editor='social')
+                a(class="social-list__link" href="")
                   +icon('soc_fb', ['social-icon', 'social-icon_fb'])
-              li.social-list__item
-                a(class="social-list__link" href="#")
+              li.social-list__item(name='twitter' editor='social')
+                a(class="social-list__link" href="")
                   +icon('soc_twitter', ['social-icon', 'social-icon_twitter'])
-              li.social-list__item
-                a(class="social-list__link" href="#")
+              li.social-list__item(name='icon_google' editor='social')
+                a(class="social-list__link" href="")
                   +icon('social_google', ['social-icon', 'social-icon_google'])
-              li.social-list__item
-                a(class="social-list__link" href="#")
+              li.social-list__item(name='email' editor='social')
+                a(class="social-list__link" href="blalbla@lala.com")
                   +icon('soc_email', ['social-icon', 'social-icon_email'])
-      .profile__buttons
-        .header__buttons-wrapper
-          a(class="button-circle button-circle--edit" href="#")
-            +icon('edit', ['button-circle-icon', 'button-circle-icon--edit'])
-            span.button-circle--text Редактировать
-          a(class="button-circle button-circle--login" href="#")
-            +icon('off', ['button-circle-icon', 'button-circle--off'])
-            span.button-circle--text Выйти
-        .header__buttons-wrapper.header__buttons-wrapper--editor
-          include ./../common/_header_edit_control
+      .header__buttons-wrapper.header__buttons-wrapper--editor
+        .add-photo__info.add-photo__info--header
+          .add-photo__info-icon
+            +icon('cam')
+          .add-photo__info-title Изменить фон
+          input.cover__file(type="file" name="background" id="file-cover" to_img='.page_background')
+          label.cover__label(for="file-cover")
+
+      .header__buttons-down
+        button.button.button--transparent(class='header-edit__cancel') Отменить
+        button.button(type='submit') Сохранить
+
+    .profile__buttons
+      .header__buttons-wrapper
+        a(class="button-circle button-circle--edit" href="#")
+          +icon('edit', ['button-circle-icon', 'button-circle-icon--edit'])
+          span.button-circle--text Редактировать
+        a(class="button-circle button-circle--login" href="#")
+          +icon('off', ['button-circle-icon', 'button-circle--off'])
+          span.button-circle--text Выйти
+
   .search-bar
     .search-bar__inner-wrapper
       form(id="search" class="search__form")
