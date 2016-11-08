@@ -68,11 +68,7 @@ var headerEditor = (function() {
 
     if(data.data.append) {
       for (var i = 0; i < textBlock.length; i++) {
-<<<<<<< HEAD
         data.data.append($(textBlock[i]).attr('name'), textBlock[i].innerText);
-=======
-        data.data.append(textBlock[i].name, textBlock[i].innerText);
->>>>>>> ab09aca... Добавил анимации, смену картинок, отправку данных на сервер
       }
     }
 

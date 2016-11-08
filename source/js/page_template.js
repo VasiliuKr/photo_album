@@ -2,14 +2,7 @@
 
 var pageTemplate = (function() {
   var templateBase = {
-<<<<<<< HEAD
-    main: { // Cтартовая
-=======
     main: {// стартовая
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> ab09aca... Добавил анимации, смену картинок, отправку данных на сервер
       headerTemplate: 'header_main',
       contentTemplate: 'content_main',
       photos: {
@@ -21,33 +14,6 @@ var pageTemplate = (function() {
         box: '.my-albums__list'
       }
     },
-<<<<<<< HEAD
-<<<<<<< HEAD
-    album: { // Карточка альбома
-      headerTemplate: 'header_album',
-      contentTemplate: 'content_album',
-      photos: {
-        ajax_url: '/ajax/photo/get',
-        box: '.photo-albums__list'
-      }
-    },
-    user: { // Альбомы пользователя
-      headerTemplate: 'header_user',
-      contentTemplate: 'content_user',
-=======
-    user: { // альбомы пользователя
-      headerTemplate: 'header_album',
-      contentTemplate: 'content_album',
->>>>>>> ab09aca... Добавил анимации, смену картинок, отправку данных на сервер
-      album: {
-        ajax_url: '/ajax/album/get',
-        box: '.my-albums__list'
-      }
-    },
-    search: { // Поиск
-      headerTemplate: 'header_search',
-      contentTemplate: 'content_search',
-=======
     user: { // альбомы пользователя
       headerTemplate: 'header_album',
       contentTemplate: 'content_album',
@@ -59,10 +25,6 @@ var pageTemplate = (function() {
     album: { // карточка альбома
       headerTemplate: 'header_user',
       contentTemplate: 'content_user',
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> ab09aca... Добавил анимации, смену картинок, отправку данных на сервер
       photos: {
         ajax_url: '/ajax/photo/get/',
         box: '.photo-albums__list'
@@ -70,32 +32,14 @@ var pageTemplate = (function() {
     }
   };
 
-  var dataAlbum;
-  var dataPhoto;
-  var animationContent;
-  var template;
-
   var init = function(updateFunction) {
 
   };
 
   var update = function(data) {
-    template = data.template.replace('.html', '');
+    var template = data.template.replace('.html', '');
 
     if (!templateBase[template]) return false;
-
-    dataAlbum = false;
-    dataPhoto = false;
-    animationContent = false;
-
-    // 1.
-    // 2. По заврешнию анимации очищения центрального блока : аниматионконтент тру, проверить есть ли в блоке датафото отправить данные на прорисовку, if data.photo вызвать photo.set (dataPhoto, template.photos.box)
-    // 3. Скролл страницы вверх
-    // 4. Все дочернии блоки контента анимированно убрать (анимация уменьшение высоты или прозрачность)
-    // 5. Сделать заготовку прелоудера
-    // $('#content >*').animate ({height: 0}, 300, функцияч по завершению анимации, написать
-    // - выбрать все дочернии элементы
-
 
     template = templateBase[template];
 
@@ -104,23 +48,13 @@ var pageTemplate = (function() {
 
     $('#header').find('.wrapper-hide').remove();
     var headerWrapper = $('#header').find('.header__wrapper');
-<<<<<<< HEAD
-    if (headerWrapper.length > 0) {
-=======
     if(headerWrapper.length > 0) {
->>>>>>> origin/master
       var oldHeight = $('#header').height();
       headerWrapper.hide();
       $('#header').append(headerTemplate);
       var newHeight = $('#header').height();
       headerWrapper.addClass('wrapper-hide');
       headerWrapper.show();
-<<<<<<< HEAD
-      // if (headerWrapper.show()) {
-      //   $('#content >*').animate({height: 0}, 300, animationEnd());
-      // }
-=======
->>>>>>> origin/master
       $('#header')
         .css({height: oldHeight})
         .animate({height: newHeight}, 1000, function() {
@@ -128,56 +62,36 @@ var pageTemplate = (function() {
         });
     } else {
       $('#header').html(headerTemplate);
+      // ОТключить задержку анимации
     }
-
-    function animationEnd() {
-      animationContent = true;
-      if (data.photo) {
-        photo.set(dataPhoto, template.photos.box);
-      }
-    }
-
-    if (animationContent) return false;
 
     var contentTemplate = template.contentTemplate;
     contentTemplate = templates[contentTemplate]();
 
     $('#content').html(contentTemplate);
 
-   /* if (template.photos) {
-      _functionAdd(template.photos, data.data, dataPhoto, photo.set);
-      var url = template.photos.ajax_url + data.data;
-      $.post(url, function(djson) {
-        dataPhoto = djson;
-        if (animationContent) {
-          photo.set(djson, data.box);
-        }
-      }, 'json');
-    } */
 
-   /* if (template.album) {
-      _functionAdd(template.album, data.data, dataAlbum, album.set);
-      var url = template.album.ajax_url + data.data;
-      $.post(url, function(djson) {
-        dataAlbum = djson;
-        if (animationContent) {
-          album.set(djson, data.box);
-        }
-      }, 'json');
-    } */
+    if(template.photos) {
+      _functionAdd(template.photos, data.data, photo.set);
+    }
+
+    if(template.album) {
+      _functionAdd(template.album, data.data, album.set);
+    }
 
     return true;
   };
 
-  // var _functionAdd = function(data, urlParam, callbackFunction) {
-  //   var url = data.ajax_url + urlParam;
-  //   $.post(url, function(djson) {
-  //     callbackFunction(djson, data.box, callbackFunction);
-  //   }, 'json');
-  // };
+
+  var _functionAdd = function(data, urlParam, callbackFunction) {
+    var url = data.ajax_url + urlParam;
+    $.post(url, function(djson) {
+      callbackFunction(djson, data.box, callbackFunction);
+    }, 'json');
+  };
 
   return {
     update: update,
     init: init
   };
-})();
+}());
