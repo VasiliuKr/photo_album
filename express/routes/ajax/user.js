@@ -7,6 +7,29 @@ let route = require('express').Router(),
   photoModel=require('./../../models/photoModel');
 require('./../../models_db/album');
 
+route.post('/social',(req,res)=> {
+  let newUserSocial={};
+  let names = ['vk','fb','twitter','google','email'];
+  for (var i = 0;i<names.length;i++) {
+    if (req.body[names[i]] && req.body[names[i]].length>2) {
+      newUserSocial[names[i]] = req.body[names[i]];
+    }
+  }
+  if(newUserSocial.length<1) {
+    res.send(JSON.stringify({error:'Нет данных для сохранения или не соответствуют формату.'}));
+    return;
+  }
+  let User = mongoose.model('user');
+  User.findOneAndUpdate({_id: req.session.userId}, newUserSocial, {upsert: true}).then( u => {
+    userModel.get(req.session.userId).then(user => {
+      res.send(JSON.stringify({
+        error  : 0,
+        message: 'Данные пользователя обновленны.',
+        data   : user
+      }))
+    })
+  });
+});
 
 route.post('/update',(req,res)=> {
   let form= new multiparty.Form();
