@@ -14,7 +14,7 @@ var headerEditor = (function() {
       break;
     case 'social':
       var href = $element.find('a').attr('href');
-      $element.append(templates.social_edit({value: href, name: $element.attr('name')}));
+      $element.append(templates.social_edit({value: href.replace('mailto:',''), name: $element.attr('name')}));
       $element.addClass('social-show');
       break;
     default:

@@ -5,6 +5,7 @@ var pageTemplate = (function() {
     main: { // Cтартовая
       headerTemplate: 'header_main',
       contentTemplate: 'content_main',
+      header_data:'/ajax/user/get/',
       photos: {
         ajax_url: '/ajax/photo/get/',
         box: '.photo-albums__list'
@@ -17,6 +18,7 @@ var pageTemplate = (function() {
     album: { // Карточка альбома
       headerTemplate: 'header_album',
       contentTemplate: 'content_album',
+      header_data:'/ajax/user/get/',
       photos: {
         ajax_url: '/ajax/photo/get',
         box: '.photo-albums__list'
@@ -24,6 +26,7 @@ var pageTemplate = (function() {
     },
     user: { // Альбомы пользователя
       headerTemplate: 'header_user',
+      header_data:'/ajax/user/get/',
       contentTemplate: 'content_user',
       album: {
         ajax_url: '/ajax/album/get',
@@ -32,6 +35,7 @@ var pageTemplate = (function() {
     },
     search: { // Поиск
       headerTemplate: 'header_search',
+      header_data:'/ajax/user/get/',
       contentTemplate: 'content_search',
       photos: {
         ajax_url: '/ajax/main/',
@@ -44,10 +48,57 @@ var pageTemplate = (function() {
   var dataPhoto;
   var animationContent;
   var template;
+  var headerWrapper;
 
   var init = function(updateFunction) {
 
   };
+
+  var headerRender = function(resizeHeader,urlSufix){
+    var waitResize = resizeHeader;
+    var headerTemplate = template.headerTemplate;
+
+    var url = template.header_data + urlSufix;
+    $.post(url, function(djson) {
+      headerTemplate = templates[headerTemplate](djson.data[0]);
+      if(waitResize){
+        var oldHeight = $('#header').height();
+        headerWrapper.hide();
+      }
+
+      $('#header').append(headerTemplate);
+      $('.page_background').css('background-image','url('+djson.data[0].background+')')
+
+      if(waitResize){
+        var newHeight = $('#header').height();
+        headerWrapper.addClass('wrapper-hide');
+        headerWrapper.show();
+
+        $('#header')
+          .css({height: oldHeight})
+          .animate({height: newHeight}, 1000, function() {
+            $(this).css({height: ''});
+          });
+
+      }
+    }, 'json');
+  };
+
+  function animationEnd() {
+    if (animationContent) return false;
+    var contentTemplate = template.contentTemplate;
+
+    contentTemplate = templates[contentTemplate]();
+    $('#content').html(contentTemplate);
+
+    animationContent = true;
+    if (dataPhoto) {
+      photo.set(dataPhoto, template.photos.box);
+    }
+    if (dataAlbum) {
+      album.set(dataAlbum, template.album.box);
+    }
+  }
 
   var update = function(data) {
     template = data.template.replace('.html', '');
@@ -66,77 +117,40 @@ var pageTemplate = (function() {
     // $('#content >*').animate ({height: 0}, 300, функцияч по завершению анимации, написать
     // - выбрать все дочернии элементы
 
-
     template = templateBase[template];
 
-    var headerTemplate = template.headerTemplate;
-    headerTemplate = templates[headerTemplate]();
-
-    $('#header').find('.wrapper-hide').remove();
-    var headerWrapper = $('#header').find('.header__wrapper');
+    $('#header .wrapper-hide').remove();
+    headerWrapper = $('#header').find('.header__wrapper');
     if (headerWrapper.length > 0) {
-      var oldHeight = $('#header').height();
-      headerWrapper.hide();
-      $('#header').append(headerTemplate);
-      var newHeight = $('#header').height();
-      headerWrapper.addClass('wrapper-hide');
-      headerWrapper.show();
-      // if (headerWrapper.show()) {
-      //   $('#content >*').animate({height: 0}, 300, animationEnd());
-      // }
-      $('#header')
-        .css({height: oldHeight})
-        .animate({height: newHeight}, 1000, function() {
-          $(this).css({height: ''});
-        });
+      $('#content >*').animate({height: 0,opaciti:0}, 300, animationEnd);
+      headerRender(true, data.data);
     } else {
-      $('#header').html(headerTemplate);
+      animationEnd();
+      headerRender(false, data.data);
     }
 
-    function animationEnd() {
-      animationContent = true;
-      if (data.photo) {
-        photo.set(dataPhoto, template.photos.box);
-      }
-    }
 
-    if (animationContent) return false;
-
-    var contentTemplate = template.contentTemplate;
-    contentTemplate = templates[contentTemplate]();
-    $('#content').html(contentTemplate);
-
-    /* if (template.photos) {
-     _functionAdd(template.photos, data.data, dataPhoto, photo.set);
+    if (template.photos) {
      var url = template.photos.ajax_url + data.data;
      $.post(url, function(djson) {
-     dataPhoto = djson;
-     if (animationContent) {
-     photo.set(djson, data.box);
-     }
-     }, 'json');
-     } */
+       dataPhoto = djson;
+       if (animationContent) {
+         photo.set(djson, template.photos.box);
+       }
+      }, 'json');
+    }
 
-    /* if (template.album) {
-     _functionAdd(template.album, data.data, dataAlbum, album.set);
-     var url = template.album.ajax_url + data.data;
-     $.post(url, function(djson) {
-     dataAlbum = djson;
-     if (animationContent) {
-     album.set(djson, data.box);
-     }
-     }, 'json');
-     } */
-
+    if (template.album) {
+      var url = template.album.ajax_url + data.data;
+      $.post(url, function(djson) {
+        dataAlbum = djson;
+        if (animationContent) {
+          album.set(djson, template.album.box);
+        }
+      }, 'json');
+    }
     return true;
   };
-
-  // var _functionAdd = function(data, urlParam, callbackFunction) {
-  //   var url = data.ajax_url + urlParam;
-  //   $.post(url, function(djson) {
-  //     callbackFunction(djson, data.box, callbackFunction);
-  //   }, 'json');
-  // };
 
   return {
     update: update,
