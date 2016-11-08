@@ -6,7 +6,10 @@ var pageTemplate = (function() {
     main: { // Cтартовая
 =======
     main: {// стартовая
+<<<<<<< HEAD
 >>>>>>> origin/master
+=======
+>>>>>>> ab09aca... Добавил анимации, смену картинок, отправку данных на сервер
       headerTemplate: 'header_main',
       contentTemplate: 'content_main',
       photos: {
@@ -19,6 +22,7 @@ var pageTemplate = (function() {
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     album: { // Карточка альбома
       headerTemplate: 'header_album',
       contentTemplate: 'content_album',
@@ -30,6 +34,11 @@ var pageTemplate = (function() {
     user: { // Альбомы пользователя
       headerTemplate: 'header_user',
       contentTemplate: 'content_user',
+=======
+    user: { // альбомы пользователя
+      headerTemplate: 'header_album',
+      contentTemplate: 'content_album',
+>>>>>>> ab09aca... Добавил анимации, смену картинок, отправку данных на сервер
       album: {
         ajax_url: '/ajax/album/get',
         box: '.my-albums__list'
@@ -50,7 +59,10 @@ var pageTemplate = (function() {
     album: { // карточка альбома
       headerTemplate: 'header_user',
       contentTemplate: 'content_user',
+<<<<<<< HEAD
 >>>>>>> origin/master
+=======
+>>>>>>> ab09aca... Добавил анимации, смену картинок, отправку данных на сервер
       photos: {
         ajax_url: '/ajax/photo/get/',
         box: '.photo-albums__list'
