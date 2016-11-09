@@ -27,7 +27,7 @@
     }
   },
   "style":{
-    "userBackground":"/assets/img/bg-profile.jpg",
-    "userPhoto":"/assets/img/default_avatar.jpg"
+    "userBackground":"assets/img/bg-profile.jpg",
+    "userPhoto":"assets/img/default_avatar.jpg"
   }
 }

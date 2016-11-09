@@ -68,7 +68,7 @@ var pageTemplate = (function() {
       }
 
       $('#header').append(headerTemplate);
-      $('.page_background').css('background-image', 'url(' + djson.data[0].background + ')');
+      $('.page_background').css('background-image', 'url(/' + djson.data[0].background + ')');
       if(djson.search) {
         $('.search-query').text(djson.search);
       }
