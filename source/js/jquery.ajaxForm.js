@@ -101,7 +101,8 @@
   ajaxForm.prototype.vlidate = function( block ) {
     if(form.form.hasClass('disabled'))return;
     var $block = $(block);
-    if($block.val().length < 3) {
+    var value = $block.val() || $block.text();
+    if(value.length < 3) {
       if(form.config.onValidateUpdate) {
         form.config.onValidateUpdate( {block: $block, hasError: true} );
       }else {

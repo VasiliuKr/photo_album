@@ -2,37 +2,36 @@ include ../mixins/_icons
 
 .modal-overlay
   .modal
-    form(action="/ajax/photo/update" method="POST")
+    form(action='/ajax/photo/update' method='POST')
+      input(type='hidden' name='id' value= _id)
       .edit-photo
         .modal__header
-          a(class="modal__close modal-action-close" href="#")
+          a.modal__close.modal-action-close(href='#')
             +icon('close')
           .modal__title Отредактировать фотографию
         .modal__body
-
-          .edit-photo__delete
-            form(action="/ajax/photo/delete" method="POST")
-              .edit-photo__delete-center
-                .edit-photo__delete-text Вы действительно хотите удалить это фото?
-                .edit-photo__delete-buttons
-                  button(href="#" class="button button--theme-secondary button--transparent-secondary") Да
-                  button(href="#" class="button button--theme-secondary button--transparent-secondary edit-photo__button-cancel") Отменить
-
           .modal__row
             .modal__label Название
-            input.modal__input(class="modal--stretch" type="text" name="title" placeholder="Название" value=`${title}` required=true)
+            .modal__input.modal--stretch(type='text' name='title' placeholder='Название' required=true)= title
 
           .modal__row
             .modal__label Описание
-            textarea.modal__textarea(class="modal--stretch" type="text" name="description" placeholder="Описание" required=true) #{description}
+            .modal__textarea.modal--stretch(type='text' name='description' placeholder='Описание' required=true)= description
 
           .modal__errors
 
         .modal__footer
           button.button(type='submit') Сохранить
-          button.button.button--transparent(class='modal-action-close') Отменить
-          button(class="button button--theme-secondary button--icon-delete" href="#")
+          button.button.button--transparent.modal-action-close(type='button') Отменить
+          button.button--theme-secondary.button--icon-delete(type='button')
             +icon('delete')
             span.button--icon-text Удалить
-
+    .edit-photo__delete
+      form(action='/ajax/photo/delete' method='POST')
+        input(type='hidden' name='id' value= _id)
+        .edit-photo__delete-center
+          .edit-photo__delete-text Вы действительно хотите удалить это фото?
+          .edit-photo__delete-buttons
+            button.button.button--theme-secondary.button--transparent-secondary Да
+            button.button.button--theme-secondary.button--transparent-secondary.edit-photo__button-cancel(type='button') Отменить
 
