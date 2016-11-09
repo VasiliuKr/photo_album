@@ -2,11 +2,7 @@
 
 var pageTemplate = (function() {
   var templateBase = {
-<<<<<<< HEAD
     main: { // Cтартовая
-=======
-    main: {// стартовая
->>>>>>> origin/master
       headerTemplate: 'header_main',
       contentTemplate: 'content_main',
       photos: {
@@ -18,7 +14,6 @@ var pageTemplate = (function() {
         box: '.my-albums__list'
       }
     },
-<<<<<<< HEAD
     album: { // Карточка альбома
       headerTemplate: 'header_album',
       contentTemplate: 'content_album',
@@ -38,21 +33,8 @@ var pageTemplate = (function() {
     search: { // Поиск
       headerTemplate: 'header_search',
       contentTemplate: 'content_search',
-=======
-    user: { // альбомы пользователя
-      headerTemplate: 'header_album',
-      contentTemplate: 'content_album',
-      album: {
-        ajax_url: '/ajax/album/get/',
-        box: '.my-albums__list'
-      }
-    },
-    album: { // карточка альбома
-      headerTemplate: 'header_user',
-      contentTemplate: 'content_user',
->>>>>>> origin/master
       photos: {
-        ajax_url: '/ajax/photo/get/',
+        ajax_url: '/ajax/main/',
         box: '.photo-albums__list'
       }
     }
@@ -92,23 +74,16 @@ var pageTemplate = (function() {
 
     $('#header').find('.wrapper-hide').remove();
     var headerWrapper = $('#header').find('.header__wrapper');
-<<<<<<< HEAD
     if (headerWrapper.length > 0) {
-=======
-    if(headerWrapper.length > 0) {
->>>>>>> origin/master
       var oldHeight = $('#header').height();
       headerWrapper.hide();
       $('#header').append(headerTemplate);
       var newHeight = $('#header').height();
       headerWrapper.addClass('wrapper-hide');
       headerWrapper.show();
-<<<<<<< HEAD
-      // if (headerWrapper.show()) {
-      //   $('#content >*').animate({height: 0}, 300, animationEnd());
-      // }
-=======
->>>>>>> origin/master
+
+      $('#content >*').animate({height: 0}, 300);
+
       $('#header')
         .css({height: oldHeight})
         .animate({height: newHeight}, 1000, function() {
@@ -118,41 +93,33 @@ var pageTemplate = (function() {
       $('#header').html(headerTemplate);
     }
 
-    function animationEnd() {
-      animationContent = true;
-      if (data.photo) {
-        photo.set(dataPhoto, template.photos.box);
-      }
-    }
-
     if (animationContent) return false;
 
     var contentTemplate = template.contentTemplate;
     contentTemplate = templates[contentTemplate]();
-
     $('#content').html(contentTemplate);
 
-   /* if (template.photos) {
-      _functionAdd(template.photos, data.data, dataPhoto, photo.set);
-      var url = template.photos.ajax_url + data.data;
-      $.post(url, function(djson) {
-        dataPhoto = djson;
-        if (animationContent) {
-          photo.set(djson, data.box);
-        }
-      }, 'json');
-    } */
-
-   /* if (template.album) {
-      _functionAdd(template.album, data.data, dataAlbum, album.set);
-      var url = template.album.ajax_url + data.data;
-      $.post(url, function(djson) {
-        dataAlbum = djson;
-        if (animationContent) {
-          album.set(djson, data.box);
-        }
-      }, 'json');
-    } */
+    // if (template.photos) {
+    //   functionAdd(template.photos, data.data, dataPhoto, photo.set);
+    //   var url = template.photos.ajax_url + data.data;
+    //   $.post(url, function(djson) {
+    //     dataPhoto = djson;
+    //     if (animationContent) {
+    //       photo.set(djson, data.box);
+    //     }
+    //   }, 'json');
+    // }
+    //
+    // if (template.album) {
+    //   functionAdd(template.album, data.data, dataAlbum, album.set);
+    //   var url = template.album.ajax_url + data.data;
+    //   $.post(url, function(djson) {
+    //     dataAlbum = djson;
+    //     if (animationContent) {
+    //       album.set(djson, data.box);
+    //     }
+    //   }, 'json');
+    // }
 
     return true;
   };
@@ -163,6 +130,16 @@ var pageTemplate = (function() {
   //     callbackFunction(djson, data.box, callbackFunction);
   //   }, 'json');
   // };
+
+  function animationEnd() {
+    animationContent = true;
+    if (data.photo) {
+      photo.set(dataPhoto, template.photos.box);
+    }
+    if (data.album) {
+      album.set(dataAlbum, template.album.box);
+    }
+  }
 
   return {
     update: update,
