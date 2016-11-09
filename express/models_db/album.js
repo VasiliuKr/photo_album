@@ -2,7 +2,6 @@
 
 let mongoose = require('mongoose'),
   Schema=mongoose.Schema,
-  searchable = require('mongoose-searchable'),
   AlbumSchema = new Schema({
     _id:{
       type:Number,
@@ -47,12 +46,6 @@ let mongoose = require('mongoose'),
       }]
     }]
   });
-/*
-AlbumSchema.plugin(searchable,{
-  keywordField:'keywords',
-  language:'russian',
-  //fields:['photos.title','photos.description'],
-  fields:['title','description'],
-});*/
+
 
 mongoose.model('album',AlbumSchema);
