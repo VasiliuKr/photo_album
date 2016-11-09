@@ -62,6 +62,19 @@ let createPhotoArray = function(files,dir,fields){
   })
 };
 
+let searchPhoto  = function(text) {
+  console.log(text);
+  return  new Promise(function(resolve, reject) {
+    let Album = mongoose.model('album');
+    Album.search(text,function(error, books){
+      console.log(books);
+      console.log(error);
+    });
+    console.log('run search');
+    resolve(text);
+  })
+};
+
 let  get = function(filter,user) {
   if (!filter)filter={};
   let userId=user;
@@ -70,6 +83,7 @@ let  get = function(filter,user) {
     let startParametr={
       _id:'$photos._id',
       album_id:'$_id',
+      album_title:'$title',
       dir:'$dir',
       user:'$user',
       src:'$photos.src',
@@ -116,6 +130,7 @@ module.exports = {
   getLast: getLast,
   get: get,
   getPath: getPath,*/
+  search: searchPhoto,
   get: get,
   loadPhoto: loadPhoto,
   unlinkPhoto: unlinkPhoto,

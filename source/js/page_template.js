@@ -35,7 +35,7 @@ var pageTemplate = (function() {
     },
     search: { // Поиск
       headerTemplate: 'header_search',
-      header_data: '/ajax/search/get/',
+      header_data: '/ajax/user/get/',
       contentTemplate: 'content_search',
       photos: {
         ajax_url: '/ajax/search/',
@@ -69,6 +69,9 @@ var pageTemplate = (function() {
 
       $('#header').append(headerTemplate);
       $('.page_background').css('background-image', 'url(/' + djson.data[0].background + ')');
+      if(djson.search){
+        $('.search-query').text(djson.search);
+      }
 
       if(waitResize) {
         var newHeight = $('#header').height();

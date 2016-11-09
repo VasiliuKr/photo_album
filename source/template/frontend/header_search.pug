@@ -6,16 +6,14 @@ include ../mixins/_icons
       .header__top-title--search Исследуй мир
       .profile__buttons
         .header__buttons-wrapper.header__buttons-wrapper--search
-          a(class="button-circle button-circle--home" href="#")
+          a(class="button-circle button-circle--home" href="/main")
             +icon('home', ['button-circle-icon', 'button-circle--home'])
             span.button-circle--text На главную
   .search-bar.search-bar--search
     .profile.profile--search
-      .profile__photo.profile__photo--album
-        img(class="profile__img" src="./assets/img/cherepov_anton.jpg" alt="Антон Черепов")
+      .profile__photo.profile__photo--album(style=`background-image: url(${photo})`)
       .profile__info.profile__info--album
-        h1.profile__name.profile__name--album.profile__name--search Антон Черепов
+        h1.profile__name.profile__name--album.profile__name--search= name
     form(id="search" class="search__form search__form--search")
       input(type="search" class="search__field search__field--search" placeholder="Исследовать мир")
       +icon('search', ['search__icon'])
-      a.search__link(href='#') Показать новые

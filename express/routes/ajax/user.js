@@ -90,23 +90,12 @@ route.post('/update',(req,res)=> {
 
 route.post('/get/*',(req,res)=> {
     userModel.get( req.session.userId).then(user => {
-      res.send(JSON.stringify({
-        data: user
-      }))
+      var outData = { data: user };
+      if(req.query.search){
+        outData.search = req.query.search;
+      }
+      res.send(JSON.stringify(outData))
     })
 });
-/*
-route.post('/get_user/:id',(req,res)=> {
-  albumModel.get({user:req.params.id},req.session.userId).then(u => {
-    userModel.get(req.session.userId).then(user => {
-      res.send(JSON.stringify({
-        data: u,
-        user: user
-      }))
-    })
-  });
-});
-*/
-
 
 module.exports = route;
