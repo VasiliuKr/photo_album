@@ -9,13 +9,9 @@
   }
 
   headerEditor.init('#header');
-  /*
-  album.init( {showAddModal: modal.add_album});
-  photo.init( {showAddModal: modal.add_photo});
-*/
 
   album.init( {showAddModal: modal.add_album, showEditModal: modal.edit_album});
-  // photo.init( {showAddModal: modal.add_photo, showEditModal: modal.edit_photo});
+  photo.init( {showAddModal: modal.add_photo, showEditModal: modal.edit_photo});
 
   urlParser.init( pageTemplate.update );
 })();

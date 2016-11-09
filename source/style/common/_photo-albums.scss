@@ -31,6 +31,7 @@
   }
 }
 
+
 // Альбом в блоке "Новое в мире"
 .photo-albums__item {
   animation: PhotoLoad 0.5s;
@@ -219,6 +220,12 @@
       color: $photo-album-title;
       font: 16px/1 'pantonbold', sans-serif;
       margin-left: 11px;
+    }
+  }
+
+  &-liked {
+    .icon {
+      fill: $photo-icon-like-hover;
     }
   }
 
