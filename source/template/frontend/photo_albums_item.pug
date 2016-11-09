@@ -1,21 +1,20 @@
 include ../mixins/_icons
 
-- var cover = `${dir}/_thumbs/${src}`
-- var avatar = cover
+- var cover = `/${dir}/_thumbs/${src}`
 - var photoName = 'Название фото'
-if !iLike
+if iLike
   - var iLikeClass = 'photo-albums__item-liked'
 
-.photo-albums__item(data-photo-id=`${_id}`)
-  a(href=`#` class="photo-albums__item-cover-wrapper" )
+.photo-albums__item(data-photo-id=`${_id}` )
+  a(href=`#` class="photo-albums__item-cover-wrapper" style=`background-image: url(${cover}); min-height:100px;`)
     .photo-albums__item-spinner
       +icon('loupe', ['photo-albums__item-spinner-icon'])
-    img(class="photo-albums__item-cover" src=`${cover}` alt="Album cover")
+    //- img(class="photo-albums__item-cover" alt="Album cover")
   .photo-albums__item-info-wrapper
-    a(href=`/user/${user}` class="photo-albums__item-avatar-wrapper")
+    a(href=`/user/${user}` class="photo-albums__item-avatar-wrapper" style=`background-image: url(${avatar})`)
       .photo-albums__item-avatar-hover
         +icon('more', ['photo-albums__item-avatar-icon'])
-      img(class="photo-albums__item-avatar" src=`${avatar}` alt="Avatar")
+      //- img(class="photo-albums__item-avatar" src=`${avatar}` alt="Avatar")
     .photo-albums__item-info
       p.photo-albums__item-title-img #{photoName}
       .photo-albums__item-meta
@@ -28,4 +27,4 @@ if !iLike
   .photo-albums__item-footer
     a(class="photo-albums__item-link" href=`/album/${album_id}`)
       +icon('album', ['photo-albums__item-icon', 'photo-albums__item-icon_album'])
-      h3.photo-albums__item-title #{albumName}
+      h3.photo-albums__item-title #{album_title}

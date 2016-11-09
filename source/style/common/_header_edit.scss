@@ -109,7 +109,7 @@
     margin-bottom: 10px;
   }
 
-  [contenteditable]{
+  [contenteditable] {
     @extend %modal-input-placeholder;
     border: 0;
     outline: 0;

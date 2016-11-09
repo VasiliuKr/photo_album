@@ -11,7 +11,7 @@ var photo = (function() {
   var showEditModal = false;
   var photoOnPage = 12;
   var photoOnShowMore = 6;
-  var lastPhotoNumer = 0;
+  var lastPhotoNumber = 0;
   var errorMessageText = {
     title: 'Введите название альбома',
     description: 'Введите описание  альбома',
@@ -19,11 +19,19 @@ var photo = (function() {
     file_size: 'Превышен допустимый размер файла'
   };
 
+  var showMoreHide = function() {
+    if (lastPhotoNumber === photoCollection.length) {
+      photoContainer.parent().find( '.show_more' ).hide();
+    }
+  };
+
   var showMorePhoto = function() {
-    for (var i = 0; i < photoOnShowMore; i++) {
+    var i = lastPhotoNumber;
+    for (; i < lastPhotoNumber + photoOnShowMore && i < photoCollection.length; i++) {
       photoContainer.append(templates.photo_albums_item(photoCollection[i]));
     }
-    lastPhotoNumer += photoOnShowMore;
+    lastPhotoNumber = i;
+    showMoreHide();
   };
 
   var _showMoreClick = function(e) {
@@ -31,53 +39,42 @@ var photo = (function() {
     photo.showMore();
   };
 
-  var albumLoaded = new Promise(function(resolve, reject) {
-    setTimeout(reject, 15000);// Время до ошибки
-
-    setTimeout(function run() {
-      if (album.loaded) {
-        resolve();
-      }else{
-        setTimeout(run, 50);
+  var getUser = function(userId) {
+    for (var i = 0; i < userCollection.length; i++ ) {
+      if ( userCollection[i]._id === parseInt(userId, 10) ) {
+        return userCollection[i];
       }
-    }, 50);
-  });
+    }
+    return false;
+  };
 
   var setParam = function(photos, conteiner, canAdd) {
-    albumLoaded.then( function() {
-      photoContainer = $(conteiner);
-      var addButton = photoContainer.parent().find('.button-circle-icon--add');
+    photoContainer = $(conteiner);
+    var addButton = photoContainer.parent().find('.photo-albums__btn-add');
 
-      if (addButton.length > 0) {
-        photoCanEdit = true;
-        // addButton.on('click', _addphoto);
-      }else{
-        photoCanEdit = false;
-      }
+    if (addButton.length > 0) {
+      photoCanEdit = true;
+      addButton.on('click', _addPhoto);
+    }else{
+      photoCanEdit = false;
+    }
 
-      var showMore = photoContainer.parent().find( '.show_more' );
-      if(showMore.length > 0) {
-        showMore.on('click', _showMoreClick);
-        lastPhotoNumer = photoOnPage;
-      }else{
-        lastPhotoNumer = photos.data.length;
-      }
+    var showMore = photoContainer.parent().find( '.show_more' );
+    if(showMore.length > 0) {
+      showMore.on('click', _showMoreClick);
+    }
 
-      photoCollection = photos.data;
-      userCollection = photos.user;
+    photoCollection = photos.data;
+    userCollection = photos.user;
 
-      for (var i = 0; i < lastPhotoNumer && i < photoCollection.length; i++) {
-        var albumId = photoCollection[i].album_id;
-        var albumData = album.getAlbum(albumId);
-
-        photoCollection[i].albumName = albumData.title;
-        photoContainer.append(templates.photo_albums_item(photoCollection[i]));
-      }
-    },
-    function() {
-      album.loaded = true;// выключаем таймер
-      popup.open({message: 'Превышено время ожидания загрузки'});
-    });
+    var i = 0;
+    for (; i < photoOnPage && i < photoCollection.length; i++) {
+      var userId = photoCollection[i].user;
+      photoCollection[i].avatar = getUser(userId).photo;
+      photoContainer.append(templates.photo_albums_item(photoCollection[i]));
+    }
+    lastPhotoNumber = i;
+    showMoreHide();
   };
 
   var init = function(params) {
@@ -86,7 +83,8 @@ var photo = (function() {
     // _editPhoto();
     // _addPhoto();
 
-    // $('body').on('click', '.класс редактирования фото', _editAlbum);
+    // $('body').on('click', '.photo-albums__btn-add', _addPhoto);
+    // $('body').on('click', '.photo-albums__btn-add', _editAlbum);
   };
 
   var _addPhoto = function(e) {
