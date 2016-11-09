@@ -125,7 +125,7 @@ var photosAdd = ( function() {
     }
   };
 
-  var getFiles = function(){
+  var getFiles = function() {
     return files;
   };
 

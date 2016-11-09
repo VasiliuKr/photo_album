@@ -51,11 +51,11 @@ var photo = (function() {
     return false;
   };
 
-  var _addTagEditInput = function(data){
+  var _addTagEditInput = function(data) {
     var textBlock = $('.edit-photo [contenteditable]');
     data.data = JSON.parse(data.data);
     for (var i = 0; i < textBlock.length; i++) {
-      data.data[$(textBlock[i]).attr('name')]= textBlock[i].innerText;
+      data.data[$(textBlock[i]).attr('name')] = textBlock[i].innerText;
     }
     data.data = JSON.stringify(data.data);
 
@@ -98,9 +98,9 @@ var photo = (function() {
 
     var i = 0;
     if (addButton.length > 0) {
-      if (photos.data.length > 0 && photos.data[0].canEdit == 1) {
+      if (photos.data.length > 0 && photos.data[0].canEdit === 1) {
         typePhotoShow = 2;
-        addButton.attr('code',photos.data[0].album_id);
+        addButton.attr('code', photos.data[0].album_id);
         addButton.on('click', _addPhoto);
         photoContainer.on('click', '.my-albums__item-edit-link', _editPhoto);
       }else{
@@ -112,8 +112,10 @@ var photo = (function() {
     }
 
     userCollection = {};
-    for (i=0; i < photos.user.length; i++){
-      var userId = parseInt(photos.user[i]._id);
+    var userId;
+    for (i = 0; i < photos.user.length; i++) {
+      userId = photos.user[i];
+      userId = parseInt( userId._id, 10);
       userCollection[userId] = photos.user[i];
     }
 
@@ -121,9 +123,9 @@ var photo = (function() {
     var totalLikes = 0;
     var totalComment = 0;
 
-    for (i=0; i < photos.data.length; i++){
-      var userId = parseInt(photos.data[i].user);
-      photoCollection[i]=photos.data[i];
+    for (i = 0; i < photos.data.length; i++) {
+      userId = parseInt(photos.data[i].user, 10);
+      photoCollection[i] = photos.data[i];
       photoCollection[i].user = userCollection[userId];
       photoCollection[i].typePhoto = typePhotoShow;
       totalLikes += photoCollection[i].likes;
@@ -148,7 +150,7 @@ var photo = (function() {
 
   var _addPhoto = function(e) {
     e.preventDefault();
-    var albumData ={
+    var albumData = {
       id: $(this).attr('code'),
       title: $('h1.profile-album__title').text()
     };
@@ -215,31 +217,33 @@ var photo = (function() {
       popup.open({message: data.message});
       setTimeout(popup.close, 1000);
     }else {
-      for (var j = data.length-1; j >=0; j--) {
-        var photo = data[j];
-        var photoId = photo._id;
-        photo.user = photoCollection[0].user;
-        photo.typePhoto = photoCollection[0].typePhoto;
-        var newPhoto = templates.photo_albums_item(photo);
-        //ищим в уже отображенных
-        for (var i = 0; i < photoCollection.length; i++) {
+      var j;
+      var i;
+      for ( j = data.length - 1; j >= 0; j-- ) {
+        var photos = data[j];
+        var photoId = photos._id;
+        photos.user = photoCollection[0].user;
+        photos.typePhoto = photoCollection[0].typePhoto;
+        var newPhoto = templates.photo_albums_item(photos);
+        // ищим в уже отображенных
+        for (i = 0; i < photoCollection.length; i++) {
           if (photoCollection[i]._id === photoId) break;
         }
 
-        photoCollection[i] = photo;
-        if (i === photoCollection.length-1) {
-          //для новой фотки
+        photoCollection[i] = photos;
+        if (i === photoCollection.length - 1) {
+          // для новой фотки
           photoContainer.prepend(newPhoto);
         } else {
-          //для уже отображенной
-          var oldPhoto = $('[data-photo-id='+photoId+']');
+          // для уже отображенной
+          var oldPhoto = $('[data-photo-id=' + photoId + ']');
           oldPhoto.before(newPhoto);
           oldPhoto.remove();
         }
 
-        var totalLikes=0;
-        var totalComment=0;
-        for (i=0; i < photoCollection.length; i++){
+        var totalLikes = 0;
+        var totalComment = 0;
+        for (i = 0; i < photoCollection.length; i++) {
           totalLikes += photoCollection[i].likes;
           totalComment += photoCollection[i].comments;
         }
@@ -247,7 +251,6 @@ var photo = (function() {
         $('.count-photos').text(photoCollection.length);
         $('.count-likes').text(totalLikes);
         $('.count-comments').text(totalComment);
-
       }
     }
   };

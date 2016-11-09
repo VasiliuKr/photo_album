@@ -5,16 +5,16 @@ var photoEditDelete = ( function() {
     _setUpListeners(form);
   };
 
-  var _sendDel = function (e){
+  var _sendDel = function(e) {
     e.preventDefault();
     var $this = $(this);
 
     var ajaxParametr = {
-      url     : $this.attr('action'),
-      method  : 'POST',
+      url: $this.attr('action'),
+      method: 'POST',
       dataType: 'json',
-      data    : JSON.stringify($this.serializeObject()),
-      beforeSend: function (xhr) {
+      data: JSON.stringify($this.serializeObject()),
+      beforeSend: function(xhr) {
         xhr.setRequestHeader('content-type', 'application/json');
       }
     };
@@ -31,7 +31,7 @@ var photoEditDelete = ( function() {
     $('.edit-photo__button-cancel').on('click', cancelDelete);
 
     var deleteForm = $('.edit-photo__delete form');
-    deleteForm.on('submit',_sendDel)
+    deleteForm.on('submit', _sendDel);
   };
 
   var cancelDelete = function() {
@@ -44,7 +44,6 @@ var photoEditDelete = ( function() {
 
   // вызовится в случае успешного удаления фото
   var _getAjax = function(json) {
-    alert(0)
     return false;
   };
 
