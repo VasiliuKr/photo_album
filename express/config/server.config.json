@@ -8,7 +8,7 @@
   "db": {
     "host": "localhost",
     "port": "27017",
-    "name": "photo_albom",
+    "name": "odinokun",
     "user": "",
     "password": ""
   },
