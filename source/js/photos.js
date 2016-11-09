@@ -32,7 +32,7 @@ var photo = (function() {
   };
 
   var albumLoaded = new Promise(function(resolve, reject) {
-    setTimeout(reject, 15000);//Время до ошибки
+    setTimeout(reject, 15000);// Время до ошибки
 
     setTimeout(function run() {
       if (album.loaded) {
@@ -44,10 +44,10 @@ var photo = (function() {
   });
 
   var setParam = function(photos, conteiner, canAdd) {
-    albumLoaded.then( () => {
+    albumLoaded.then( function() {
       photoContainer = $(conteiner);
       var addButton = photoContainer.parent().find('.button-circle-icon--add');
-      
+
       if (addButton.length > 0) {
         photoCanEdit = true;
         // addButton.on('click', _addphoto);
@@ -73,11 +73,10 @@ var photo = (function() {
         photoCollection[i].albumName = albumData.title;
         photoContainer.append(templates.photo_albums_item(photoCollection[i]));
       }
-
     },
-    ()=>{
-      album.loaded = true;//выключаем таймер
-      popup.open({message: "Превышено время ожидания загрузки"});
+    function() {
+      album.loaded = true;// выключаем таймер
+      popup.open({message: 'Превышено время ожидания загрузки'});
     });
   };
 
@@ -122,7 +121,7 @@ var photo = (function() {
 
   var _addFileToPost = function(data) {
     if(photosAdd.files.length < 1) {
-      popup.open({ message: "Файлов для отправки нет" });
+      popup.open({ message: 'Файлов для отправки нет' });
       // нужен вывод сообщения что файлов для отправки нет
       return false;
     }

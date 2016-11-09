@@ -23,7 +23,7 @@ var album = (function() {
     }else{
       albumCanEdit = false;
     }
-    
+
     albumCollection = albums.data;
     albumUser = albums.user;
 

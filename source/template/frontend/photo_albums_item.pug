@@ -3,8 +3,8 @@ include ../mixins/_icons
 - var cover = `${dir}/_thumbs/${src}`
 - var avatar = cover
 - var photoName = 'Название фото'
-if iLike
-  - var iLikeClass = 'iLike'
+if !iLike
+  - var iLikeClass = 'photo-albums__item-liked'
 
 .photo-albums__item(data-photo-id=`${_id}`)
   a(href=`#` class="photo-albums__item-cover-wrapper" )
