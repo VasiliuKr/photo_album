@@ -102,11 +102,13 @@
 
   &__item {
     display: inline-block;
-    margin-left: 6px;
 
     &:first-child {
-      margin-left: 0;
+      .social-icon {
+        margin-left: 0;
+      }
     }
+
   }
 
   &__link {
@@ -132,6 +134,7 @@
     height: 20px;
     transition: all 0.2s;
     width: 20px;
+    margin-left: 6px;
   }
 }
 
