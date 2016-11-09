@@ -13,7 +13,7 @@ var urlParser = (function() {
   }
 
   var _scrollTop = function() {
-    $('html, body').stop().animate({scrollTop:0}, '500');
+    $('html, body').stop().animate({scrollTop: 0}, '500');
   };
 
   var _onpopstate = function( e ) {
@@ -32,7 +32,7 @@ var urlParser = (function() {
     _setUpListeners();
     var hereUrl = location.href;
     _analyzeUrl(hereUrl);
-    $('.to-top').on('click',_scrollTop)
+    $('.to-top').on('click', _scrollTop);
   };
 
   var _setUpListeners = function() {
@@ -42,8 +42,8 @@ var urlParser = (function() {
   var _analyzeUrl = function(url) {
     var urlAnalize = url.replace(location.origin, '');
 
-    if(urlAnalize[urlAnalize.length-1] === '#'){
-      urlAnalize = urlAnalize.slice(0,-1);
+    if(urlAnalize[urlAnalize.length - 1] === '#') {
+      urlAnalize = urlAnalize.slice(0, -1);
     }
 
     var getParam = '';

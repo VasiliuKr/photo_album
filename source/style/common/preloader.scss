@@ -1,0 +1,33 @@
+.preloader {
+  background: $albums-wrapper-bg;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10000;
+}
+
+.preloader__spiner {
+  height: 100px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+}
+
+.preloader__pic {
+  animation: 0.85s preloaderRotate steps(8) infinite;
+  border-radius: 50%;
+  box-shadow: 0 -16px 0 0 rgba(0, 0, 0, 1),
+              -11px -11px 0 0 rgba(0, 0, 0, 0.75),
+              -16px 0 0 0 rgba(0, 0, 0, 0.50),
+              -11px 11px  0 0 rgba(0, 0, 0, 0.25);
+  display: block;
+  font-size: 50px;
+  height: 10px;
+  opacity: 0.8;
+  width: 10px;
+}
+

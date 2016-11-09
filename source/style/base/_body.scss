@@ -47,6 +47,7 @@ img {
 
 .page-wrap {
   flex: 1;
+  position: relative;
 
   &::before {
     background: rgba($photo-hover-icon, 0.6);

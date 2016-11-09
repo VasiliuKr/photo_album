@@ -5,7 +5,7 @@ var pageTemplate = (function() {
     main: { // Cтартовая
       headerTemplate: 'header_main',
       contentTemplate: 'content_main',
-      header_data:'/ajax/user/get/',
+      header_data: '/ajax/user/get/',
       photos: {
         ajax_url: '/ajax/photo/get/',
         box: '.photo-albums__list'
