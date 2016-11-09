@@ -89,6 +89,9 @@
 
     .add-photo__info-title {
       color: $shapka-edit-text;
+      @include media($tablets) {
+        font-size: 12px;
+      }
     }
   }
 
@@ -107,6 +110,9 @@
 
   .add-photo__info-icon {
     margin-bottom: 10px;
+    @include media($tablets) {
+      margin-bottom: 5px;
+    }
   }
 
   [contenteditable] {
@@ -133,7 +139,11 @@
   .social-list__link {
     opacity: 1;
     transform: rotate3d(1, 0, 0, 0deg);
-    width: 24px;
+    width: 26px;
+    text-align: right;
+    svg {
+      display: inline-block;
+    }
   }
 }
 
