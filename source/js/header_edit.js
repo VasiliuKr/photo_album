@@ -102,7 +102,7 @@ var headerEditor = (function() {
       $('.page-wrap').addClass('page-wrap--shadow');
       $.each(editBlock, _editorBlockOn);
       $('body').addClass('popup-show');
-      $('html, body').stop().animate({scrollTop:0}, '500');
+      $('html, body').stop().animate( {scrollTop: 0}, '500');
 
       var ajaxFormParam = {
         onMessage: popup.open,
