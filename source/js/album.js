@@ -1,4 +1,5 @@
 'use strict';
+var albumCollection111;
 
 var album = (function() {
   var albumCollection = [];
@@ -22,13 +23,14 @@ var album = (function() {
     }else{
       albumCanEdit = false;
     }
-
+    
     albumCollection = albums.data;
     albumUser = albums.user;
 
     for (var i = 0; i < albumCollection.length; i++) {
       albumContainer.append(templates.my_albums_item(albumCollection[i]));
     }
+    album.loaded = true;
   };
 
   var init = function(params) {
@@ -154,7 +156,7 @@ var album = (function() {
 
   var getAlbum = function(albumId) {
     for (var i = 0; i < albumCollection.length; i++ ) {
-      if (albumCollection[i]._id === albumId) {
+      if ( albumCollection[i]._id === parseInt(albumId, 10) ) {
         return albumCollection[i];
       }
     }
@@ -164,7 +166,7 @@ var album = (function() {
   var _editAlbum = function(e) {
     e.preventDefault();
 
-    var albumId = parseInt($(this).attr('code'), 10);
+    var albumId = $(this).attr('code');
 
     var albumData = getAlbum(albumId);
 

@@ -18,6 +18,9 @@ module.exports = [
   './gulp/tasks/fonts.js',
   './gulp/tasks/frontend.pug.tempator.js',
 
+  './gulp/tasks/dist/dist.copy.css.js',
+  './gulp/tasks/dist/dist.copy.js.js',
+  './gulp/tasks/dist/dist.watch.ivan.js',
 
   './gulp/tasks/dist/dist.css.foundation.js',
   './gulp/tasks/dist/dist.fonts.js',

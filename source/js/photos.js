@@ -1,5 +1,7 @@
 'use strict';
 
+var photoCollection1;
+
 var photo = (function() {
   var photoCollection = [];
   var userCollection = [];
@@ -13,13 +15,12 @@ var photo = (function() {
   var errorMessageText = {
     title: 'Введите название альбома',
     description: 'Введите описание  альбома',
-    cover: 'Выберите фаил для обдлжки',
+    cover: 'Выберите файл для обложки',
     file_size: 'Превышен допустимый размер файла'
   };
 
   var showMorePhoto = function() {
     for (var i = 0; i < photoOnShowMore; i++) {
-      photoCollection[i].photoCanEdit = photoCanEdit;
       photoContainer.append(templates.photo_albums_item(photoCollection[i]));
     }
     lastPhotoNumer += photoOnShowMore;
@@ -30,31 +31,54 @@ var photo = (function() {
     photo.showMore();
   };
 
+  var albumLoaded = new Promise(function(resolve, reject) {
+    setTimeout(reject, 15000);//Время до ошибки
+
+    setTimeout(function run() {
+      if (album.loaded) {
+        resolve();
+      }else{
+        setTimeout(run, 50);
+      }
+    }, 50);
+  });
+
   var setParam = function(photos, conteiner, canAdd) {
-    photoContainer = $(conteiner);
-    var addButton = photoContainer.parent().find('.button-circle-icon--add');
-    if (addButton.length > 0) {
-      photoCanEdit = true;
-      // addButton.on('click', _addphoto);
-    }else{
-      photoCanEdit = false;
-    }
+    albumLoaded.then( () => {
+      photoContainer = $(conteiner);
+      var addButton = photoContainer.parent().find('.button-circle-icon--add');
+      
+      if (addButton.length > 0) {
+        photoCanEdit = true;
+        // addButton.on('click', _addphoto);
+      }else{
+        photoCanEdit = false;
+      }
 
-    var showMore = photoContainer.parent().find( '.show_more' );
-    if(showMore.length > 0) {
-      showMore.on('click', _showMoreClick);
-      lastPhotoNumer = photoOnPage;
-    }else{
-      lastPhotoNumer = photos.data.length;
-    }
+      var showMore = photoContainer.parent().find( '.show_more' );
+      if(showMore.length > 0) {
+        showMore.on('click', _showMoreClick);
+        lastPhotoNumer = photoOnPage;
+      }else{
+        lastPhotoNumer = photos.data.length;
+      }
 
-    photoCollection = photos.data;
-    userCollection = photos.user;
+      photoCollection = photos.data;
+      userCollection = photos.user;
 
-    for (var i = 0; i < lastPhotoNumer; i++) {
-      photoCollection[i].photoCanEdit = photoCanEdit;
-      photoContainer.append(templates.photo_albums_item(photoCollection[i]));
-    }
+      for (var i = 0; i < lastPhotoNumer && i < photoCollection.length; i++) {
+        var albumId = photoCollection[i].album_id;
+        var albumData = album.getAlbum(albumId);
+
+        photoCollection[i].albumName = albumData.title;
+        photoContainer.append(templates.photo_albums_item(photoCollection[i]));
+      }
+
+    },
+    ()=>{
+      album.loaded = true;//выключаем таймер
+      popup.open({message: "Превышено время ожидания загрузки"});
+    });
   };
 
   var init = function(params) {
@@ -67,7 +91,7 @@ var photo = (function() {
   };
 
   var _addPhoto = function(e) {
-    e.preventDefault();
+   // e.preventDefault();
     var form = showAddModal();
     photosAdd.init(form);
     var ajaxFormParam = {
@@ -88,7 +112,7 @@ var photo = (function() {
     var ajaxFormParam = {
       onValidateUpdate: _updateValidateStatus,
       beforeAjax: _addFileToPost,
-      onGetAjaxDone: _getAjax,
+      onGetAjaxDone: _getEditAjax,
       onGetAjaxFail: _failAjax
     };
     form.ajaxForm(ajaxFormParam);
@@ -96,9 +120,9 @@ var photo = (function() {
     return false;
   };
 
-
   var _addFileToPost = function(data) {
     if(photosAdd.files.length < 1) {
+      popup.open({ message: "Файлов для отправки нет" });
       // нужен вывод сообщения что файлов для отправки нет
       return false;
     }
@@ -127,12 +151,27 @@ var photo = (function() {
     }
   };
 
+  var _closeOnSuccess = function(msg) {
+    modal.close();
+    if (msg) {
+      popup.open({ message: msg });
+      setTimeout(popup.close, 1000);
+    }
+  };
+
+  // вызовится в случае успеного сохранения формы
+  var _getEditAjax = function(json) {
+    _closeOnSuccess(json.message);
+  };
+
   // вызовится в случае успеного сохранения формы
   var _getAjax = function(json) {
+    _closeOnSuccess(json.message);
   };
 
   // вызовится в случае ошибки отправки JSON на сервер
   var _failAjax = function(json) {
+    popup.open( {message: 'Ошибка отправки данных на сервер'});
   };
 
   return {

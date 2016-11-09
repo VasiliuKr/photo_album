@@ -53,3 +53,5 @@ $.gulp.task('dist', $.gulp.parallel(
 
 
 $.gulp.task('dev', $.gulp.parallel('watch:ivan','serve'));
+
+$.gulp.task('dw', $.gulp.parallel('watch.dist:ivan','watch:ivan'));
