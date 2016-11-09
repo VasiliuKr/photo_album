@@ -77,7 +77,9 @@ let  get = function(filter,user) {
       is_cover:'$photos.is_cover',
       comments:'$photos.comments',
       likes:'$photos.likes',
-      tags:'$photos.tags'
+      tags:'$photos.tags',
+      title:'$photos.title',
+      description:'$photos.description'
     };
     let Album = mongoose.model('album');
     Album.aggregate(
@@ -97,6 +99,12 @@ let  get = function(filter,user) {
         });
         photo.likes=photo.likes.length;
         photo.comments=photo.comments.length;
+        if(!photo.title || photo.title.length==0){
+          photo.title = 'Без заголовка';
+        }
+        if(!photo.description || photo.description.length==0){
+          photo.description = 'Описание пока не заполнено';
+        }
       });
       resolveCallback(u);
     })
