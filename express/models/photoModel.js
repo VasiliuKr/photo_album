@@ -62,6 +62,19 @@ let createPhotoArray = function(files,dir,fields){
   })
 };
 
+let searchPhoto  = function(text) {
+  console.log(text);
+  return  new Promise(function(resolve, reject) {
+    let Album = mongoose.model('album');
+    Album.search(text,function(error, books){
+      console.log(books);
+      console.log(error);
+    });
+    console.log('run search');
+    resolve(text);
+  })
+};
+
 let  get = function(filter,user) {
   if (!filter)filter={};
   let userId=user;
@@ -70,6 +83,7 @@ let  get = function(filter,user) {
     let startParametr={
       _id:'$photos._id',
       album_id:'$_id',
+      album_title:'$title',
       dir:'$dir',
       user:'$user',
       src:'$photos.src',
@@ -77,7 +91,9 @@ let  get = function(filter,user) {
       is_cover:'$photos.is_cover',
       comments:'$photos.comments',
       likes:'$photos.likes',
-      tags:'$photos.tags'
+      tags:'$photos.tags',
+      title:'$photos.title',
+      description:'$photos.description'
     };
     let Album = mongoose.model('album');
     Album.aggregate(
@@ -97,6 +113,12 @@ let  get = function(filter,user) {
         });
         photo.likes=photo.likes.length;
         photo.comments=photo.comments.length;
+        if(!photo.title || photo.title.length==0){
+          photo.title = 'Без заголовка';
+        }
+        if(!photo.description || photo.description.length==0){
+          photo.description = 'Описание пока не заполнено';
+        }
       });
       resolveCallback(u);
     })
@@ -108,6 +130,7 @@ module.exports = {
   getLast: getLast,
   get: get,
   getPath: getPath,*/
+  search: searchPhoto,
   get: get,
   loadPhoto: loadPhoto,
   unlinkPhoto: unlinkPhoto,

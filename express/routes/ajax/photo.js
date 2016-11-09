@@ -48,8 +48,25 @@ route.post('/update',(req,res)=> {
   res.send('update');
 });
 
+//Новое в мире
 route.post('/get/',(req,res)=> {
   photoModel.get({},req.session.userId).then( u => {
+    let user_list=[];
+    u.map((album)=> {
+      user_list.push(album.user);
+    });
+    userModel.get({ "$in" : user_list}).then(user => {
+      res.send(JSON.stringify({
+        data: u,
+        user: user
+      }))
+    })
+  });
+});
+
+//Фото в альбоме
+route.post('/get/:id',(req,res)=> {
+  photoModel.get({album_id: parseInt(req.params.id)},req.session.userId).then( u => {
     let user_list=[];
     u.map((album)=> {
       user_list.push(album.user);

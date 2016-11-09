@@ -1,34 +1,49 @@
 include ../mixins/_icons
 
-.header__wrapper
+.header__wrapper.page_background
   .header__inner-wrapper.header__inner-wrapper--album
-    .header__top.header__top--album
-        .profile.profile--album
-          .profile__photo.profile__photo--album
-            img(class="profile__img" src="./assets/img/cherepov_anton.jpg" alt="Антон Черепов")
-          .profile__info.profile__info--album
-            h1.profile__name.profile__name--album Антон Черепов
-        .profile-album__text
-          h1.profile-album__title Лесные прогулки
-          p.profile-album___description Фотографии природы леса, енотов и оленей. Как прекрасно сойти на дальней станции и пройтись по полю босиком. И чтобы никто не беспокоил бродить влюбленным в тишину.
-          p.profile-album___description Запах мёда, лесных оленей и енотов будоражит нутро.
-        .profile__buttons
-          .header__buttons-wrapper.header__buttons-wrapper--album
-            a(class="button-circle button-circle--home" href="#")
-              +icon('home', ['button-circle-icon', 'button-circle--home'])
-              span.button-circle--text На главную
+    form.header__top.header__top--album(method='post' action='/ajax/album/update')
+      input(type="hidden" name="id" value= data._id)
+      .profile.profile--album
+        .profile__photo.profile__photo--album(style=`background-image: url(${user.photo})`)
+        .profile__info.profile__info--album
+          h1.profile__name.profile__name--album= user.name
+      .profile-album__text
+        h1.profile-album__title(name='title' editor='text_tag')= data.title
+        p.profile-album___description(name='description' editor='text_tag')= data.description
+
+      if data.canEdit
+        .header__buttons-wrapper.header__buttons-wrapper--editor
+          .add-photo__info.add-photo__info--header
+            .add-photo__info-icon
+              +icon('cam')
+            .add-photo__info-title Изменить обложку
+            input.cover__file(type="file" name="cover" id="file-cover" to_img='.page_background')
+            label.cover__label(for="file-cover")
+
+        .header__buttons-down
+          button.button.button--transparent(class='header-edit__cancel') Отменить
+          button.button(type='submit') Сохранить
+
+      .profile__buttons
+        .header__buttons-wrapper.header__buttons-wrapper--album
+          a(class="button-circle button-circle--home" href="/main")
+            +icon('home', ['button-circle-icon', 'button-circle--home'])
+            span.button-circle--text На главную
+          if data.canEdit
             a(class="button-circle button-circle--edit" href="#")
               +icon('edit', ['button-circle-icon', 'button-circle-icon--edit'])
               span.button-circle--text Редактировать
+
     .search-bar.search-bar--album
       .search-bar__inner-wrapper.search-bar__inner-wrapper--album
         ul.search-bar__list
           li.search-bar__item
-            .search-bar__number 18
+            .search-bar__number.count-photos
             .search-bar__text Фотографий
           li.search-bar__item
-            .search-bar__number 12
+            .search-bar__number.count-likes
             .search-bar__text Лайков
           li.search-bar__item
-            .search-bar__number 4
+            .search-bar__number.count-comments
             .search-bar__text Комментария

@@ -12,6 +12,10 @@ var urlParser = (function() {
     }
   }
 
+  var _scrollTop = function() {
+    $('html, body').stop().animate( {scrollTop: 0}, '500');
+  };
+
   var _onpopstate = function( e ) {
     var url;
     if (history.location === undefined) {
@@ -28,6 +32,7 @@ var urlParser = (function() {
     _setUpListeners();
     var hereUrl = location.href;
     _analyzeUrl(hereUrl);
+    $('.to-top').on('click', _scrollTop);
   };
 
   var _setUpListeners = function() {
@@ -36,6 +41,18 @@ var urlParser = (function() {
 
   var _analyzeUrl = function(url) {
     var urlAnalize = url.replace(location.origin, '');
+
+    if(urlAnalize[ urlAnalize.length - 1 ] === '#') {
+      urlAnalize = urlAnalize.slice(0, -1);
+    }
+
+    var getParam = '';
+    if(urlAnalize.indexOf('?') >= 0) {
+      urlAnalize = urlAnalize.split( '?' );
+      getParam = '?' + urlAnalize[1];
+      urlAnalize = urlAnalize[0];
+    }
+
     if(urlAnalize.indexOf('#') >= 0) {
       urlAnalize = urlAnalize.split( '#' );
       urlAnalize = '/' + urlAnalize[1];
@@ -43,7 +60,7 @@ var urlParser = (function() {
     urlAnalize = urlAnalize.split( '/' );
     var pageData = {
       template: urlAnalize[1] ? urlAnalize[1] : '',
-      data: urlAnalize[2] ? urlAnalize[2] : ''
+      data: (urlAnalize[2] ? urlAnalize[2] : '') + getParam
     };
 
     return pageTemplate(pageData);
@@ -61,11 +78,12 @@ var urlParser = (function() {
   };
 
   var goToUrl = function(url) {
+    _setLocation(url);
     return _analyzeUrl(url);
   };
 
   return {
-    makeUrl: goToUrl,
+    'goto': goToUrl,
     init: init
   };
 }());

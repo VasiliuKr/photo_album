@@ -5,7 +5,7 @@ var pageTemplate = (function() {
     main: { // Cтартовая
       headerTemplate: 'header_main',
       contentTemplate: 'content_main',
-      header_data: '/ajax/user/get/',
+      headerData: '/ajax/user/get/',
       photos: {
         ajax_url: '/ajax/photo/get/',
         box: '.photo-albums__list'
@@ -18,27 +18,27 @@ var pageTemplate = (function() {
     album: { // Карточка альбома
       headerTemplate: 'header_album',
       contentTemplate: 'content_album',
-      header_data: '/ajax/user/get/',
+      headerData: '/ajax/album/get/',
       photos: {
-        ajax_url: '/ajax/photo/get',
+        ajax_url: '/ajax/photo/get/',
         box: '.photo-albums__list'
       }
     },
     user: { // Альбомы пользователя
       headerTemplate: 'header_user',
-      header_data: '/ajax/user/get/',
+      headerData: '/ajax/user/get/',
       contentTemplate: 'content_user',
       album: {
-        ajax_url: '/ajax/album/get',
+        ajax_url: '/ajax/album/get_user/',
         box: '.my-albums__list'
       }
     },
     search: { // Поиск
       headerTemplate: 'header_search',
-      header_data: '/ajax/user/get/',
+      headerData: '/ajax/user/get/',
       contentTemplate: 'content_search',
       photos: {
-        ajax_url: '/ajax/main/',
+        ajax_url: '/ajax/search/',
         box: '.photo-albums__list'
       }
     }
@@ -58,7 +58,7 @@ var pageTemplate = (function() {
     var waitResize = resizeHeader;
     var headerTemplate = template.headerTemplate;
 
-    var url = template.header_data + urlSufix;
+    var url = template.headerData + urlSufix;
     $.post(url, function(djson) {
       headerTemplate = templates[headerTemplate](djson.data[0]);
       var oldHeight;
@@ -68,7 +68,10 @@ var pageTemplate = (function() {
       }
 
       $('#header').append(headerTemplate);
-      $('.page_background').css('background-image', 'url(' + djson.data[0].background + ')');
+      $('.page_background').css('background-image', 'url(/' + djson.data[0].background + ')');
+      if(djson.search) {
+        $('.search-query').text(djson.search);
+      }
 
       if(waitResize) {
         var newHeight = $('#header').height();
@@ -81,6 +84,7 @@ var pageTemplate = (function() {
             $(this).css({height: ''});
           });
       }
+      search.init('#header');
     }, 'json');
   };
 
