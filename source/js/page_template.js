@@ -35,10 +35,10 @@ var pageTemplate = (function() {
     },
     search: { // Поиск
       headerTemplate: 'header_search',
-      header_data: '/ajax/user/get/',
+      header_data: '/ajax/search/get/',
       contentTemplate: 'content_search',
       photos: {
-        ajax_url: '/ajax/main/',
+        ajax_url: '/ajax/search/',
         box: '.photo-albums__list'
       }
     }
@@ -81,6 +81,7 @@ var pageTemplate = (function() {
             $(this).css({height: ''});
           });
       }
+      search.init('#header');
     }, 'json');
   };
 

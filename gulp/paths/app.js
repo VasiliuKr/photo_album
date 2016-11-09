@@ -13,6 +13,7 @@ module.exports = [
   './source/js/jquery.textEditor.js',
   './source/js/slider.js',
   './source/js/url_router.js',
+  './source/js/search.js',
   './source/js/header_edit.js',
   './source/js/app.js'
 ];
