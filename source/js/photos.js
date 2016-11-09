@@ -6,9 +6,12 @@ var photo = (function() {
   var photoCollection = [];
   var userCollection = [];
   var photoContainer = false;
-  var photoCanEdit = false;
   var showAddModal = false;
   var showEditModal = false;
+  // 0 - пустой левый угол
+  // 1 - аватарку пользователя
+  // 2 - редактировать
+  var typePhotoShow = 0;
   var photoOnPage = 12;
   var photoOnShowMore = 6;
   var lastPhotoNumber = 0;
@@ -39,12 +42,18 @@ var photo = (function() {
     photo.showMore();
   };
 
-  var getUser = function(userId) {
-    for (var i = 0; i < userCollection.length; i++ ) {
-      if ( userCollection[i]._id === parseInt(userId, 10) ) {
-        return userCollection[i];
-      }
-    }
+  var _editPhoto = function(e) {
+    // e.preventDefault();
+    var form = showEditModal();
+    photoEditDelete.init(form);
+    var ajaxFormParam = {
+      onValidateUpdate: _updateValidateStatus,
+      beforeAjax: _addFileToPost,
+      onGetAjaxDone: _getEditAjax,
+      onGetAjaxFail: _failAjax
+    };
+    form.ajaxForm(ajaxFormParam);
+
     return false;
   };
 
@@ -52,27 +61,43 @@ var photo = (function() {
     photoContainer = $(conteiner);
     var addButton = photoContainer.parent().find('.photo-albums__btn-add');
 
-    if (addButton.length > 0) {
-      photoCanEdit = true;
-      addButton.on('click', _addPhoto);
-    }else{
-      photoCanEdit = false;
-    }
-
     var showMore = photoContainer.parent().find( '.show_more' );
     if(showMore.length > 0) {
       showMore.on('click', _showMoreClick);
     }
 
-    photoCollection = photos.data;
-    userCollection = photos.user;
-
     var i = 0;
-    for (; i < photoOnPage && i < photoCollection.length; i++) {
-      var userId = photoCollection[i].user;
-      photoCollection[i].avatar = getUser(userId).photo;
+    if (addButton.length > 0) {
+      if (photos.data.length > 0 && photos.data[0].canEdit == 1) {
+        typePhotoShow = 2;
+        addButton.on('click', _addPhoto);
+        photoContainer.on('click', '.photo-albums__btn-add', _editPhoto);
+      }else{
+        typePhotoShow = 0;
+        addButton.remove();
+      }
+    }else{
+      typePhotoShow = 1;
+    }
+
+    userCollection = {};
+    for (i=0; i < photos.user.length; i++){
+      var userId = parseInt(photos.user[i]._id);
+      userCollection[userId] = photos.user[i];
+    }
+
+    photoCollection = [];
+    for (i=0; i < photos.data.length; i++){
+      var userId = parseInt(photos.data[i].user);
+      photoCollection[i]=photos.data[i];
+      photoCollection[i].user = userCollection[userId];
+      photoCollection[i].typePhoto = typePhotoShow;
+    }
+
+    for (i = 0; i < photoOnPage && i < photoCollection.length; i++) {
       photoContainer.append(templates.photo_albums_item(photoCollection[i]));
     }
+    console.log(photoCollection[0]);
     lastPhotoNumber = i;
     showMoreHide();
   };
@@ -80,8 +105,6 @@ var photo = (function() {
   var init = function(params) {
     showAddModal = params.showAddModal;
     showEditModal = params.showEditModal;
-    // _editPhoto();
-    // _addPhoto();
 
     // $('body').on('click', '.photo-albums__btn-add', _addPhoto);
     // $('body').on('click', '.photo-albums__btn-add', _editAlbum);
@@ -95,21 +118,6 @@ var photo = (function() {
       onValidateUpdate: _updateValidateStatus,
       beforeAjax: _addFileToPost,
       onGetAjaxDone: _getAjax,
-      onGetAjaxFail: _failAjax
-    };
-    form.ajaxForm(ajaxFormParam);
-
-    return false;
-  };
-
-  var _editPhoto = function(e) {
-    // e.preventDefault();
-    var form = showEditModal();
-    photoEditDelete.init(form);
-    var ajaxFormParam = {
-      onValidateUpdate: _updateValidateStatus,
-      beforeAjax: _addFileToPost,
-      onGetAjaxDone: _getEditAjax,
       onGetAjaxFail: _failAjax
     };
     form.ajaxForm(ajaxFormParam);
