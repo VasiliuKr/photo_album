@@ -9,8 +9,8 @@ include ../mixins/_icons
       .comments__photo
         img(class="comments__img" src=`${photo}` alt=`${name}`)
     .comments__right
-      form(action="/ajax/comments" method="POST")
+      form.comments__form(data-user-id=`${_id}` action="/ajax/comments" method="POST")
         .comments__name #{name}
-        input.modal__input(type="text" placeholder="Добавить комментарий")
+        input.modal__input.comments--text(name="text" type="text" placeholder="Добавить комментарий")
         button(type="submit" class="button button--outline") Добавить
   .comments__block
