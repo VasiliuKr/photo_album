@@ -13,9 +13,14 @@
 }
 
 .header__inner-wrapper {
-  padding: 20px 40px 0 87px;
   position: relative;
   z-index: 9;
+  @include media-min($phones) {
+    padding: 10px 10px 0 10px;
+  }
+  @include media-min($tablets) {
+    padding: 20px 40px 0 87px;
+  }
 
   &::before {
     background: linear-gradient(to right, $shapka-grad-left 0%, $shapka-grad-right 60%);
@@ -47,20 +52,49 @@
 .header__top {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 56px;
   position: relative;
   z-index: 1;
+  @include media-min($phones) {
+    flex-direction: column;
+  }
+  @include media-min($tablets) {
+    padding-bottom: 56px;
+    flex-direction: row;
+
+  }
+
 }
 // Profile
 .profile {
   display: flex;
-  padding-top: 37px;
   width: 100%;
 
+  @include media-min($phones) {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+  }
+  @include media-min($tablets) {
+    flex-direction: row;
+    padding-top: 37px;
+  }
+
   &__info {
-    margin-left: 48px;
     width: 100%;
-    max-width: 430px;
+    @include media-min($phones) {
+      margin-left: 0;
+      text-align: center;
+      max-width: 100%;
+    }
+    @include media-min($tablets) {
+      margin-left: 48px;
+      max-width: 400px;
+      text-align: left;
+    }
+    @include media-min($laptop) {
+      max-width: 430px;
+    }
+
   }
 
   &__photo {
@@ -73,9 +107,13 @@
     height: 50px;
     overflow: hidden;
     position: relative;
+    @include media-min($phones) {
+      margin-bottom: 15px;
+    }
     @include media-min($tablets) {
       width: 100px;
       height: 100px;
+      margin-bottom: 0;
     }
     @include media-min($laptop) {
       width: 124px;
@@ -92,17 +130,27 @@
     color: $shapka-avatar-text;
     font: 21px/1 'pantonbold', sans-serif;
     margin: 0 0 8px;
-    max-width: 480px;
     width: 100%;
+    @include media-min($phones) {
+      max-width: 100%;
+    }
+    @include media-min($tablets) {
+      max-width: 480px;
+    }
   }
 
   &__description {
     animation: Up 1s -0.3s;
     color: $shapka-avatar-description;
     font: 16px/1.5 'proxima_nova_ltlight', sans-serif;
-    margin-bottom: 26px;
     max-width: 480px;
     width: 100%;
+    @include media-min($phones) {
+      margin-bottom: 15px;
+    }
+    @include media-min($tablets) {
+      margin-bottom: 26px;
+    }
   }
 }
 
@@ -152,11 +200,18 @@
 
 // Контейнер для кнопок в хеддере
 .profile__buttons {
-  padding-right: 40px;
   position: absolute;
   right: 0;
   top: 20px;
   z-index: 1;
+  @include media-min($phones) {
+    padding-right: 0;
+    right: 20px;
+    left: 20px;
+  }
+  @include media-min($tablets) {
+  padding-right: 40px;
+  }
 
   .button-circle {
     margin-bottom: 10px;
@@ -166,7 +221,13 @@
 .header__buttons-wrapper {
   align-items: flex-end;
   display: flex;
-  flex-direction: column;
+  @include media-min($phones) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  @include media-min($tablets) {
+    flex-direction: column;
+  }
 }
 
 .header__buttons-down {
@@ -188,7 +249,14 @@
   &__inner-wrapper {
     display: flex;
     justify-content: flex-end;
-    margin-right: 60px;
+    @include media-min($phones) {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    @include media-min($tablets) {
+      margin-right: 60px;
+      margin-left: 0;
+    }
   }
 }
 

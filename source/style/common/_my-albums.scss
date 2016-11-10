@@ -36,8 +36,13 @@
   }
   .button-circle {
     position: absolute;
-    right: 40px;
     top: 53px;
+    @include media-min($phones) {
+      right: 20px;
+    }
+    @include media-min($tablets) {
+      right: 40px;
+    }
   }
 }
 
