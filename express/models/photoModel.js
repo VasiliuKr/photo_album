@@ -6,9 +6,39 @@ let mongoose = require('mongoose'),
   fs = require('fs'),
   crypto=require('crypto'),
   thumb = require('node-thumbnail').thumb,
-  ObjectId = require('mongodb').ObjectID,
-  albumModel=require('./albumModel');
+  ObjectId = require('mongodb').ObjectID;//,
+  //albumModel=require('./albumModel');
 
+let getPath = function(userId,albomId) {
+  let dirName='upload/'+Math.ceil(userId/100);
+
+  let uploadDir = path.resolve(config.http.publicRoot,dirName);
+  if(!fs.existsSync(uploadDir)){
+    fs.mkdirSync(uploadDir);
+  }
+
+  dirName+='/'+(userId % 100);
+  uploadDir = path.resolve(config.http.publicRoot,dirName);
+  if(!fs.existsSync(uploadDir)){
+    fs.mkdirSync(uploadDir);
+  }
+
+  dirName+='/'+albomId;
+  uploadDir = path.resolve(config.http.publicRoot,dirName);
+  if(!fs.existsSync(uploadDir)){
+    fs.mkdirSync(uploadDir);
+  }
+
+  let thumbsDir = path.resolve(config.http.publicRoot,dirName+'/_thumbs');
+  if(!fs.existsSync(thumbsDir)){
+    fs.mkdirSync(thumbsDir);
+  }
+
+  return {
+    server: uploadDir,
+    browser: dirName
+  };
+};
 
 let loadPhoto = function(path,files){
   return  new Promise(function(resolve, reject) {
@@ -170,7 +200,7 @@ let  update = function(id,user,newData) {
   })
 };
 
-let  deletePhoto = function(id,user) {
+let  deletePhoto = function(id,user,path) {
   let userId=user;
   let photoId=id;
   return  new Promise(function(resolve, reject) {
@@ -181,7 +211,7 @@ let  deletePhoto = function(id,user) {
         return;
       }
       let albumid = u[0]._id;
-      let path = albumModel.getPath(userId, u[0]._id);
+      let path = getPath(userId, u[0]._id);
 
       var photoArray = [];
       u[0].photos.map(photo=> {
