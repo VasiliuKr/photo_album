@@ -1,7 +1,5 @@
 'use strict';
 
-var photoCollection1;
-
 var photo = (function() {
   var photoCollection = [];
   var userCollection = [];
@@ -20,6 +18,14 @@ var photo = (function() {
     description: 'Введите описание  альбома',
     cover: 'Выберите файл для обложки',
     file_size: 'Превышен допустимый размер файла'
+  };
+
+  var getPhotos = function() {
+    return photoCollection;
+  };
+
+  var getUsers = function() {
+    return userCollection;
   };
 
   var showMoreHide = function() {
@@ -68,7 +74,7 @@ var photo = (function() {
 
     var i = 0;
     if (addButton.length > 0) {
-      if (photos.data.length > 0 && photos.data[0].canEdit == 1) {
+      if (photos.data.length > 0 && photos.data[0].canEdit === 1) {
         typePhotoShow = 2;
         addButton.on('click', _addPhoto);
         photoContainer.on('click', '.photo-albums__btn-add', _editPhoto);
@@ -81,15 +87,16 @@ var photo = (function() {
     }
 
     userCollection = {};
-    for (i=0; i < photos.user.length; i++){
-      var userId = parseInt(photos.user[i]._id);
+    var userId;
+    for (i = 0; i < photos.user.length; i++) {
+      userId = parseInt(photos.user[i]._id, 10);
       userCollection[userId] = photos.user[i];
     }
-
+// console.log(photos);
     photoCollection = [];
-    for (i=0; i < photos.data.length; i++){
-      var userId = parseInt(photos.data[i].user);
-      photoCollection[i]=photos.data[i];
+    for (i = 0; i < photos.data.length; i++) {
+      userId = parseInt(photos.data[i].user, 10);
+      photoCollection[i] = photos.data[i];
       photoCollection[i].user = userCollection[userId];
       photoCollection[i].typePhoto = typePhotoShow;
     }
@@ -97,7 +104,6 @@ var photo = (function() {
     for (i = 0; i < photoOnPage && i < photoCollection.length; i++) {
       photoContainer.append(templates.photo_albums_item(photoCollection[i]));
     }
-    console.log(photoCollection[0]);
     lastPhotoNumber = i;
     showMoreHide();
   };
@@ -182,6 +188,8 @@ var photo = (function() {
   return {
     init: init,
     set: setParam,
-    showMore: showMorePhoto
+    showMore: showMorePhoto,
+    getPhotos: getPhotos,
+    getUsers: getUsers
   };
 }());

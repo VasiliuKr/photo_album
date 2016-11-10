@@ -7,23 +7,113 @@ var slider = (function() {
     _setUpListeners();
   };
 
+  var _setUpListeners = function() {
+    $('body').on('click', '.slider__next', nextSlide);
+    $('body').on('click', '.slider__prev', prevSlide);
+    $('body').on('click', '.photo-albums__item-cover-wrapper,.photo-albums__item-comments', openSlider);
+
+    $('body').on('click', '.slider__description-item--current .button--icon-like', setLike);
+  };
+
+// Берем с сервера состояние лайка
+  var initLike = function() {
+    var url = '/ajax/ilike';
+
+    $.post(url, function(data) {
+      changeLikeClass(data.iLike);
+    }).fail(function() {
+      changeLikeClass(false);
+    });
+  };
+
+  var changeLikeClass = function(like) {
+    var likeButton = $('.slider__description-item--current').find('.button--icon-like');
+
+    // console.log(likeButton.attr('class'));
+
+    if (like) {
+      likeButton.addClass('liked');
+    }else{
+      likeButton.removeClass('liked');
+    }
+  };
+
+  var setLike = function() {
+    event.preventDefault();
+
+    var likeButton = $('.slider__description-item--current').find('.button--icon-like');
+    var ilikeNew = false;
+    if (!likeButton.hasClass('liked')) {
+      ilikeNew = true;
+    }
+    changeLikeClass(ilikeNew);
+
+    var url = '/ajax/ilike';
+    $.post(url, {ilike: ilikeNew});
+  };
+
   var openSlider = function() {
     event.preventDefault();
     // Устанавливаем слайд
-    open($(this).index());
+    open($(this).closest('.photo-albums__item').index());
   };
 
   var open = function(curSlide) {
-    modal.open('modal-slider');
+    modal.slider();
+
+    var images = photo.getPhotos();
+    var users = photo.getUsers();
+    var user = 1;
+    var currentUser = users[user];
+
+    var slidesNum = images.length;
+    var i;
+    for ( i = 0; i < slidesNum; i++) {
+      $('.slider__images').append(templates.slider_image(images[i]));
+
+      var $description = $('<div />')
+        .attr('class', 'slider__description-item')
+        // .attr('data-photo-id', images[i]._id)
+        .append(templates.slider_description(images[i]))
+        .append(templates.slider_comments(currentUser));
+
+      // Пример структуры комментариев для 3 сущ-х юзеров
+      images[i].comments = [
+        {user: users[3], text: 'Комментарий №1'},
+        {user: users[1], text: 'Комментарий №2'},
+        {user: users[2], text: ''}
+      ];
+
+      var commentsNum = images[i].comments.length;
+      commentsNum *= Math.random();// случайное от 0 до commentsNum
+
+      for (var j = 0; j < commentsNum; j++) {
+        var comment = images[i].comments[j];
+        $description
+          .find('.comments__block')
+          .append(templates.slider_comments_item(comment));
+      }
+
+      $('.slider__description').append($description);
+    }
     // Удаляем все анимации
     $('.slider__images-item').removeClass(animations);
-    setCurrentSlide(curSlide || 0);// индексация с нуля
-  };
 
-  var _setUpListeners = function() {
-    $('.slider__next').on('click', nextSlide);
-    $('.slider__prev').on('click', prevSlide);
-    $('.open-slider').on('click', openSlider);
+    // Анимация падения
+    // $('.slider__description').css('top', 0);
+
+    i = 0;
+    var imagesLoad = function() {
+      i++;
+      if (i === slidesNum) {
+        setCurrentSlide(curSlide || 0);// индексация с нуля
+      }
+    };
+
+    $('.slider__images img').on({
+      load: imagesLoad,
+      error: imagesLoad
+    });
   };
   // имитация подгрузки
   var ajaxGetData = function(from, to) {
@@ -110,6 +200,9 @@ var slider = (function() {
       .removeClass('slider__description-item--current')
       .eq(index)
       .addClass('slider__description-item--current');
+
+    // Устанавливаем состояние лайка
+    initLike($('.slider__description-item--current'));
 
     // Анимируем часть слайдера с описанием и комментариями
     $('.slider__description').css('top', $('.slider').height());
