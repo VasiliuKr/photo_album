@@ -70,6 +70,8 @@
     height: 200px;
     overflow: hidden;
     position: relative;
+    background-size: cover;
+    background-position: 50% 50%;
 
     &:hover {
       .photo-albums__item-spinner {
