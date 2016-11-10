@@ -2,6 +2,7 @@
 
 var slider = (function() {
   var animations = 'animate-prev animate-next animate-next-current animate-prev-current';
+  var photoBaza;
 
   var init = function() {
     _setUpListeners();
@@ -13,7 +14,7 @@ var slider = (function() {
     $('body').on('click', '.photo-albums__item-cover-wrapper,.photo-albums__item-comments', openSlider);
 
     $('body').on('click', '.slider__description-item--current .button--icon-like', setLike);
-    $('body').on('submit', '.comments__form', addCommentOnSubmit);
+    //$('body').on('submit', '.comments__form', addCommentOnSubmit);
   };
 
 // Берем с сервера состояние лайка
@@ -62,16 +63,16 @@ var slider = (function() {
   var open = function(curSlide) {
     modal.slider();
 
-    var images = photo.getPhotos();
+    photoBaza = photo.getPhotos();
 
-    var slidesNum = images.length;
+    var slidesNum = photoBaza.length;
     for (var i = 0; i < slidesNum; i++) {
-      $('.slider__images').append(templates.slider_image(images[i]));
+      $('.slider__images').append(templates.slider_image(photoBaza[i]));
 
       var $description = $('<div />')
         .attr('class', 'slider__description-item')
         // .attr('data-photo-id', images[i]._id)
-        .append(templates.slider_description(images[i]));
+        .append(templates.slider_description(photoBaza[i]));
 
       $('.slider__description').append($description);
     }
@@ -93,7 +94,7 @@ var slider = (function() {
 
 // Берем с сервера инфу о комментах
   var loadComments = function(curSlide) {
-    var url = '/ajax/get/comments';
+    var url = '/ajax/comments/get';
 
 // fail поменять на done, когда будет работать AJAX
     $.post(url).fail(function(data) {
@@ -113,10 +114,12 @@ var slider = (function() {
       // Конец примера
 
       var myId = 1;// info.myId;
-      var currentUser = users[myId];
+      var commentData = users[myId];
       var $currentItem = $('.slider__description-item').eq(curSlide);
+      commentData.photoId = photoBaza[curSlide]._id;
 
-      $currentItem.append(templates.slider_comments(currentUser));
+      $currentItem.append(templates.slider_comments(commentData));
+      $currentItem.find('form').ajaxForm();
 
       for (var i = 0; i < comments.length; i++) {
         $currentItem
@@ -138,15 +141,14 @@ var slider = (function() {
     var $input = form.find('.comments--text');
 
     var comment = {
-      user: form.data('user-id'),
-      date: parseInt(new Date().getTime() / 1000, 10),
+      photo: photoBaza[curSlide]._id,
       comment: $input.val()
     };
 
-    var url = '/ajax/add/comments';
+    var url = '/ajax/comments/add';
 
 // fail поменять на done, когда будет работать AJAX
-    $.post(url, {comment: comment}).fail(function(data) {
+    $.post(url, comment).fail(function(data) {
       data.comments = true;// убрать, если есть AJAX
       if (data.comments) {
         $input.val('');
