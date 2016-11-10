@@ -127,7 +127,7 @@
 
   &-info-wrapper {
     display: flex;
-    flex: 1;
+    // flex: 1;
 
     @include media-min($phones) {
       padding: 10px;
@@ -301,6 +301,13 @@
       font-size: 16px;
     }
   }
+}
+
+.photo-albums__item-ava-info-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .button--outline-albums {
