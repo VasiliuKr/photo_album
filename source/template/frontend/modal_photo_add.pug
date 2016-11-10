@@ -11,9 +11,9 @@ include ../mixins/_icons
         .add-photo
           .add-photo__header
             .add-photo__label Название
-            .add-photo__title Как я провел лето
+            .add-photo__title= title
           .add-photo__area
-            input(type="hidden" name='albumid' value=1)
+            input(type="hidden" name='id' value= id)
             input.add-photo__file(type="file" id="files" multiple accept="image/*" )
             label.add-photo__area-label(for="files")
             .add-photo__info

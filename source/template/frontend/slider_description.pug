@@ -1,0 +1,15 @@
+include ../mixins/_icons
+
+.description
+  .description__info
+    .author
+      .author__photo
+        img(class="author__img" src=`${user.photo}` alt=`${user.name}`)
+      .author__name #{user.name}
+    .likes
+      a(class="button button--theme-secondary button--icon-like" href="#")
+        +icon('like')
+        span.button--icon-text #{likes}
+
+  .description__title #{title}
+  .description__text #{description}

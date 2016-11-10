@@ -5,7 +5,7 @@ let mongoose = require('mongoose'),
   photoModel=require('./photoModel'),
   path = require('path'),
   fs = require('fs');
-require('./../models_db/album');
+  require('./../models_db/album');
 
 let getPath = function(userId,albomId) {
   let dirName='upload/'+Math.ceil(userId/100);
@@ -63,7 +63,6 @@ let  getAlbum = function(filter, user) {
         _id:1
       }
     };
-
     let groupParametr={
       _id:{
         _id:'$_id',
@@ -98,10 +97,15 @@ let  getAlbum = function(filter, user) {
     ).then(albums => {
       var cover_list = [];
       albums.map(album=> {
-        album.canEdit = (album.user == userId)
+        album.canEdit = (album.user == userId);
         cover_list.push(album.cover);
       });
-      return photoModel.get({_id: {$in: cover_list}}, userId).then(covers => {
+      let filter = {
+        _id: {
+          $in: cover_list
+        }
+      };
+      photoModel.get(filter, userId).then(covers => {
         cover_list={};
         covers.map(cover=> {
          cover_list[cover._id]=cover;

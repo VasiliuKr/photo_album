@@ -1,0 +1,16 @@
+include ../mixins/_icons
+
+.comments
+  .comments__title Комментарии
+    a(class="comments__open")
+      +icon('comment')
+  .comments__row
+    .comments__left
+      .comments__photo
+        img(class="comments__img" src=`${photo}` alt=`${name}`)
+    .comments__right
+      form.comments__form(data-user-id=`${_id}` action="/ajax/comments" method="POST")
+        .comments__name #{name}
+        input.modal__input.comments--text(name="text" type="text" placeholder="Добавить комментарий")
+        button(type="submit" class="button button--outline") Добавить
+  .comments__block

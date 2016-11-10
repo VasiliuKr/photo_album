@@ -107,7 +107,7 @@ route.post('/update',(req,res)=> {
   });
 });
 
-route.post('/get/',(req,res)=> {
+route.post('/get/*',(req,res)=> {
   albumModel.get({user:req.session.userId},req.session.userId).then(u => {
     let user_list=[];
     u.map((album)=> {

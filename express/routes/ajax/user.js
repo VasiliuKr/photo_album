@@ -94,6 +94,9 @@ route.post('/get/*',(req,res)=> {
       if(req.query.search){
         outData.search = req.query.search;
       }
+      if(req.query.tag){
+        outData.search = '#'+req.query.tag;
+      }
       res.send(JSON.stringify(outData))
     })
 });

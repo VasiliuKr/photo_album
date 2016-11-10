@@ -15,7 +15,7 @@ route.post('/',(req,res)=> {
     ];
   }else if(req.query.tag){
     //поиск по тегам
-    query.tag = { tags : req.query.tag.replace('#','')}
+    query.tags = req.query.tag.replace('#','');
   } else {
     //ошибка входных данных
     res.send(JSON.stringify({

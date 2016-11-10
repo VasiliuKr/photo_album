@@ -44,8 +44,14 @@ route.post('/add',(req,res)=> {
 
 
 route.post('/update',(req,res)=> {
-
-  res.send('update');
+  let photoId = req.body.id;
+  photoModel.update(photoId,req.session.userId,req.body).then( u => {
+    if(u.error){
+      res.send(JSON.stringify({error: u.error}))
+    }else{
+      res.send(JSON.stringify(u))
+    }
+  })
 });
 
 //Новое в мире
@@ -81,8 +87,14 @@ route.post('/get/:id',(req,res)=> {
 });
 
 route.post('/delete',(req,res)=> {
-
-  res.send('delete');
+  let photoId = req.body.id;
+  photoModel.deletePhoto(photoId,req.session.userId).then( u => {
+    if(u.error){
+      res.send(JSON.stringify({error: u.error}))
+    }else{
+      res.send(JSON.stringify(u))
+    }
+  })
 });
 
 

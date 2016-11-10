@@ -5,7 +5,40 @@ let mongoose = require('mongoose'),
   path = require('path'),
   fs = require('fs'),
   crypto=require('crypto'),
-  thumb = require('node-thumbnail').thumb;
+  thumb = require('node-thumbnail').thumb,
+  ObjectId = require('mongodb').ObjectID;//,
+  //albumModel=require('./albumModel');
+
+let getPath = function(userId,albomId) {
+  let dirName='upload/'+Math.ceil(userId/100);
+
+  let uploadDir = path.resolve(config.http.publicRoot,dirName);
+  if(!fs.existsSync(uploadDir)){
+    fs.mkdirSync(uploadDir);
+  }
+
+  dirName+='/'+(userId % 100);
+  uploadDir = path.resolve(config.http.publicRoot,dirName);
+  if(!fs.existsSync(uploadDir)){
+    fs.mkdirSync(uploadDir);
+  }
+
+  dirName+='/'+albomId;
+  uploadDir = path.resolve(config.http.publicRoot,dirName);
+  if(!fs.existsSync(uploadDir)){
+    fs.mkdirSync(uploadDir);
+  }
+
+  let thumbsDir = path.resolve(config.http.publicRoot,dirName+'/_thumbs');
+  if(!fs.existsSync(thumbsDir)){
+    fs.mkdirSync(thumbsDir);
+  }
+
+  return {
+    server: uploadDir,
+    browser: dirName
+  };
+};
 
 let loadPhoto = function(path,files){
   return  new Promise(function(resolve, reject) {
@@ -20,7 +53,7 @@ let loadPhoto = function(path,files){
       fs.writeFileSync(newFilePath,fs.readFileSync(file.path));
 
       thumb({
-        source: newFilePath, // could be a filename: dest/path/image.jpg
+        source: newFilePath,
         destination: path+'/_thumbs',
         concurrency: 4,
         width: 800,
@@ -62,26 +95,14 @@ let createPhotoArray = function(files,dir,fields){
   })
 };
 
-let searchPhoto  = function(text) {
-  console.log(text);
-  return  new Promise(function(resolve, reject) {
-    let Album = mongoose.model('album');
-    Album.search(text,function(error, books){
-      console.log(books);
-      console.log(error);
-    });
-    console.log('run search');
-    resolve(text);
-  })
-};
 
-let  get = function(filter,user) {
+let  getPhotos = function(filter,user) {
   if (!filter)filter={};
   let userId=user;
   return  new Promise(function(resolve, reject) {
     let resolveCallback = resolve;
     let startParametr={
-      _id:'$photos._id',
+      _id: '$photos._id',
       album_id:'$_id',
       album_title:'$title',
       dir:'$dir',
@@ -125,13 +146,98 @@ let  get = function(filter,user) {
   })
 };
 
+let _findTag = function(str){
+  const regex = /(#[a-zA-Zа-яА-Я0-9]+)/gi;
+  let outTag = [];
+  let m;
+
+  while ((m = regex.exec(str)) !== null) {
+    if (m.index === regex.lastIndex) {
+      regex.lastIndex++;
+    }
+    m = m[0].replace('#', '');
+    if (outTag.indexOf(m) == -1) {
+      outTag.push(m);
+    }
+  }
+
+  return outTag;
+};
+
+let  update = function(id,user,newData) {
+  let userId=user;
+  let photoId=id;
+  let albumid;
+  return  new Promise(function(resolve, reject) {
+    let Album = mongoose.model('album');
+    Album.where("photos._id").eq(photoId).then(u => {
+      if (!u || u.length == 0 || u[0].user != userId) {
+        throw {error: 'Ошибка доступа'};
+        return;
+      }
+      albumid = u[0]._id;
+      var photoArray = [];
+      u[0].photos.map(photo=> {
+        if (photo._id == photoId){
+          photo.title = newData.title;
+          photo.description = newData.description;
+          photo.tags = _findTag(newData.title + ' ' + newData.description);
+        }
+        photoArray.push(photo);
+      });
+      return Album.findOneAndUpdate({_id:albumid},{photos:photoArray},{upsert:true});
+    }).then(u => {
+      let filter={
+        _id: ObjectId(photoId),
+        album_id: albumid
+      };
+      return getPhotos(filter, userId);
+    }).then( u => {
+        resolve(u);
+    }, err => {
+      resolve({error: err.error || 'Неизвестная ошибка'});
+    })
+  })
+};
+
+let  deletePhoto = function(id,user,path) {
+  let userId=user;
+  let photoId=id;
+  return  new Promise(function(resolve, reject) {
+    let Album = mongoose.model('album');
+    Album.where("photos._id").eq(photoId).then( u => {
+      if (!u || u.length == 0 || u[0].user != userId) {
+        throw {error: 'Ошибка доступа'};
+        return;
+      }
+      let albumid = u[0]._id;
+      let path = getPath(userId, u[0]._id);
+
+      var photoArray = [];
+      u[0].photos.map(photo=> {
+        if (photo._id != photoId){
+          photoArray.push(photo);
+        }else {
+          if (photo.is_cover) {
+            throw {error: 'Нельзя удалить обложку'};
+            return;
+          }
+          unlinkPhoto(path.server,photo.src);
+        }
+      });
+      return Album.findOneAndUpdate({_id:albumid},{photos:photoArray},{upsert:true});
+    }).then( u => {
+      resolve({'delete': photoId});
+    }, err => {
+      resolve({error:err.error});
+    })
+  })
+};
+
 module.exports = {
- /* add: add,
-  getLast: getLast,
-  get: get,
-  getPath: getPath,*/
-  search: searchPhoto,
-  get: get,
+  get: getPhotos,
+  update: update,
+  deletePhoto: deletePhoto,
   loadPhoto: loadPhoto,
   unlinkPhoto: unlinkPhoto,
   createPhotoArray: createPhotoArray
