@@ -126,7 +126,7 @@ route.post('/get/*',(req,res)=> {
 
 //Альбом с данным id (для шапки)
 route.post('/get/:id',(req,res)=> {
-  albumModel.get({_id: parseInt(req.params.id)},req.session.userId).then(u => {
+  albumModel.get({_id: parseInt(req.params.id)},0).then(u => {
     let user_list=[];
     u.map((album)=> {
       user_list.push(album.user);

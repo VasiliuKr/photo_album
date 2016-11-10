@@ -88,17 +88,31 @@ route.post('/update',(req,res)=> {
   });
 });
 
-route.post('/get/*',(req,res)=> {
-    userModel.get( req.session.userId).then(user => {
-      var outData = { data: user };
-      if(req.query.search){
-        outData.search = req.query.search;
-      }
-      if(req.query.tag){
-        outData.search = '#'+req.query.tag;
-      }
-      res.send(JSON.stringify(outData))
-    })
+route.post('/get/',(req,res)=> {
+  userModel.get( req.session.userId).then(user => {
+    var outData = { data: user };
+    if(req.query.search){
+      outData.search = req.query.search;
+    }
+    if(req.query.tag){
+      outData.search = '#'+req.query.tag;
+    }
+    res.send(JSON.stringify(outData))
+  })
+});
+
+route.post('/get/:id',(req,res)=> {
+  userModel.get( parseInt(req.params.id)).then(user => {
+
+    var outData = { data: user };
+    if(req.query.search){
+      outData.search = req.query.search;
+    }
+    if(req.query.tag){
+      outData.search = '#'+req.query.tag;
+    }
+    res.send(JSON.stringify(outData))
+  })
 });
 
 module.exports = route;
