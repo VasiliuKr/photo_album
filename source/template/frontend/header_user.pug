@@ -1,30 +1,29 @@
 include ../mixins/_icons
 
-.header__wrapper
+.header__wrapper.page_background
   .header__inner-wrapper
     .header__top
       .profile
-        .profile__photo
-          img(class="profile__img" src="./assets/img/cherepov_anton.jpg" alt="Антон Черепов")
+        .profile__photo.profile__photo--user-page(style='background-image: url('+'/'+photo+')')
         .profile__info
-          h1.profile__name Антон Черепов
-          p.profile__description Я веб разработчик. Мне 24 года. Люблю путешествия, кодинг, фриланс и активный отдых.
+          h1.profile__name= name
+          p.profile__description= description
           .profile__social
             ul.social-list
               li.social-list__item
-                a(class="social-list__link" href="#")
+                a(class="social-list__link" target='_blank' href= vk)
                   +icon('soc_vk', ['social-icon', 'social-icon_vk'])
               li.social-list__item
-                a(class="social-list__link" href="#")
+                a(class="social-list__link" target='_blank' href= fb)
                   +icon('soc_fb', ['social-icon', 'social-icon_fb'])
               li.social-list__item
-                a(class="social-list__link" href="#")
+                a(class="social-list__link" target='_blank' href= twitter)
                   +icon('soc_twitter', ['social-icon', 'social-icon_twitter'])
               li.social-list__item
-                a(class="social-list__link" href="#")
+                a(class="social-list__link" target='_blank' href= google)
                   +icon('social_google', ['social-icon', 'social-icon_google'])
               li.social-list__item
-                a(class="social-list__link" href="#")
+                a(class="social-list__link" href= 'mailto:'+mail)
                   +icon('soc_email', ['social-icon', 'social-icon_email'])
       .profile__buttons
         .header__buttons-wrapper
@@ -33,6 +32,6 @@ include ../mixins/_icons
             span.button-circle--text На главную
   .search-bar
     .search-bar__inner-wrapper
-      form(id="search" class="search__form")
-        input(type="search" class="search__field" placeholder="Исследовать мир")
+      form#search.search__form
+        input.search__field(type="search" placeholder="Исследовать мир")
         +icon('search', ['search__icon'])

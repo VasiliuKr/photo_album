@@ -113,6 +113,7 @@ route.post('/get/*',(req,res)=> {
     u.map((album)=> {
       user_list.push(album.user);
     });
+    u[0].background=u[0].cover.dir+'/'+u[0].cover.src;
     userModel.get({ "$in" : user_list}).then(user => {
       res.send(JSON.stringify({
         data: u,
@@ -144,19 +145,19 @@ route.post('/get/:id',(req,res)=> {
 });
 
 route.post('/get_user/:id',(req,res)=> {
-  albumModel.get({user:req.params.id},req.session.userId).then(u => {
-    userModel.get(req.session.userId).then(user => {
+  albumModel.get({user:parseInt(req.params.id)},0).then(u => {
+    let user_list=[];
+    u.map((album)=> {
+      user_list.push(album.user);
+    });
+    u[0].background=u[0].cover.dir+'/'+u[0].cover.src;
+    userModel.get({ "$in" : user_list}).then(user => {
       res.send(JSON.stringify({
         data: u,
         user: user
       }))
     })
   });
-});
-
-route.post('/delete',(req,res)=> {
-
-  res.send('delete');
 });
 
 

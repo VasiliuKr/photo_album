@@ -103,6 +103,10 @@ var photo = (function() {
       showMore.on('click', _showMoreClick);
     }
 
+    if (photos.error){
+      $('.count-photos').text(0);
+      return;
+    }
     var i = 0;
     if (addButton.length > 0) {
       if (photos.data.length > 0 && photos.data[0].canEdit == 1) {
