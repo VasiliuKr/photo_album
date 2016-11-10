@@ -41,6 +41,7 @@ var modal = (function() {
     edit_album: modalOpen('modal_edit_album'),
     add_photo: modalOpen('modal_photo_add'),
     edit_photo: modalOpen('modal_edit_photo'),
+    slider: modalOpen('modal_slider'),
     close: close,
     init: init
   };

@@ -79,6 +79,7 @@
     margin-bottom: 40px;
     position: absolute;
     transition: 0.2s top linear 0.2s;
+    width: 100%;
     z-index: 1;
   }
 
@@ -155,6 +156,14 @@ $slide-time: 0.4s;
 
     .likes {
       margin-left: auto;
+    }
+
+    .liked {
+      background-color: $button-secondary-color-hover;
+
+      .icon {
+        fill: $button-icon-color;
+      }
     }
 
     .author {

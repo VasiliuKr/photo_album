@@ -3,6 +3,7 @@
 (function() {
   modal.init();
   popup.init();
+  slider.init();
   if( $('.form-index').length > 0) {
     $('form').ajaxForm({ onMessage: popup.open });
     return;

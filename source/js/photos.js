@@ -22,6 +22,14 @@ var photo = (function() {
     file_size: 'Превышен допустимый размер файла'
   };
 
+  var getPhotos = function() {
+    return photoCollection;
+  };
+
+  var getUsers = function() {
+    return userCollection;
+  };
+
   var showMoreHide = function() {
     if (lastPhotoNumber === photoCollection.length) {
       photoContainer.parent().find( '.show_more' ).hide();
@@ -86,7 +94,6 @@ var photo = (function() {
     return false;
   };
 
-
   var setParam = function(photos, conteiner, canAdd) {
     photoContainer = $(conteiner);
     var addButton = photoContainer.closest( 'section' ).find('.photo-albums__btn-add');
@@ -98,7 +105,7 @@ var photo = (function() {
 
     var i = 0;
     if (addButton.length > 0) {
-      if (photos.data.length > 0 && photos.data[0].canEdit) {
+      if (photos.data.length > 0 && photos.data[0].canEdit == 1) {
         typePhotoShow = 2;
         addButton.attr('code', photos.data[0].album_id);
         addButton.on('click', _addPhoto);
@@ -114,8 +121,7 @@ var photo = (function() {
     userCollection = {};
     var userId;
     for (i = 0; i < photos.user.length; i++) {
-      userId = photos.user[i];
-      userId = parseInt( userId._id, 10);
+      userId = parseInt(photos.user[i]._id, 10);
       userCollection[userId] = photos.user[i];
     }
 
@@ -279,6 +285,7 @@ var photo = (function() {
     init: init,
     set: setParam,
     showMore: showMorePhoto,
-    getPhoto: getPhoto
+    getPhotos: getPhotos,
+    getUsers: getUsers
   };
 }());
