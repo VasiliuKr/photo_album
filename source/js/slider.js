@@ -15,7 +15,7 @@ var slider = (function() {
     $('body').on('click', '.photo-albums__item-cover-wrapper,.photo-albums__item-comments', openSlider);
 
     $('body').on('click', '.slider__description-item--current .button--icon-like', setLike);
-    //$('body').on('submit', '.comments__form', addCommentOnSubmit);
+    $('body').on('submit', '.comments__form', addCommentOnSubmit);
   };
 
 // Берем с сервера состояние лайка
@@ -68,12 +68,16 @@ var slider = (function() {
     photoBaza = photo.getPhotos();
 
     var slidesNum = photoBaza.length;
+    //Запрещаем слайдить если 1 фотка
+    if (slidesNum===1) {
+      $('.slider__prev,.slider__next').remove();
+    }
+
     for (var i = 0; i < slidesNum; i++) {
       $('.slider__images').append(templates.slider_image(photoBaza[i]));
 
       var $description = $('<div />')
         .attr('class', 'slider__description-item')
-        // .attr('data-photo-id', images[i]._id)
         .append(templates.slider_description(photoBaza[i]));
 
       $('.slider__description').append($description);
@@ -85,7 +89,7 @@ var slider = (function() {
     // $('.slider__description').css('top', 0);
 
     var imagesLoad = function () {
-      setCurrentSlide(hereSlide);// индексация с нуля
+      setCurrentSlide(hereSlide);
     };
     // Ждем загрузку картинки текущего слайда
     $('.slider__images img').eq(hereSlide).on({
@@ -108,6 +112,7 @@ var slider = (function() {
     var $currentItem = $('.slider__description-item').eq(hereSlide);
     commentData.photoId = photoBaza[hereSlide]._id;
 
+    //$currentItem.find('.comments').remove();
     $currentItem.append(templates.slider_comments(commentData));
     $currentItem.find('form').ajaxForm();
 
@@ -141,10 +146,8 @@ var slider = (function() {
     };
 
     var url = '/ajax/comments/add';
-
-// fail поменять на done, когда будет работать AJAX
-    $.post(url, comment).fail(function(data) {
-      data.comments = true;// убрать, если есть AJAX
+    myAjaxRequest.send(url, comment, function(data) {
+      console.log(data.comments);
       if (data.comments) {
         $input.val('');
         var comments = data.comments;
@@ -248,7 +251,7 @@ var slider = (function() {
       .addClass('slider__description-item--current');
 
     // Устанавливаем состояние лайка
-    initLike($('.slider__description-item--current'));
+    // initLike($('.slider__description-item--current'));
 
     // Анимируем часть слайдера с описанием и комментариями
     $('.slider__description').css('top', $('.slider').height());
