@@ -12,11 +12,9 @@ html
       header.header#header
       .page-wrap
         include frontend/preloader
-
         a.links(href='/album') Альбом
         a.links(href='/user') Пользователь
         a.links(href='/search') Поиск
-
         div.content#content
           block content
       include common/_footer

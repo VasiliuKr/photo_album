@@ -13,7 +13,7 @@ var urlParser = (function() {
   }
 
   var _scrollTop = function() {
-    $('html, body').stop().animate({scrollTop: 0}, '500');
+    $('html, body').stop().animate( {scrollTop: 0}, '500');
   };
 
   var _onpopstate = function( e ) {
@@ -42,7 +42,7 @@ var urlParser = (function() {
   var _analyzeUrl = function(url) {
     var urlAnalize = url.replace(location.origin, '');
 
-    if(urlAnalize[urlAnalize.length - 1] === '#') {
+    if(urlAnalize[ urlAnalize.length - 1 ] === '#') {
       urlAnalize = urlAnalize.slice(0, -1);
     }
 
@@ -83,7 +83,7 @@ var urlParser = (function() {
   };
 
   return {
-    goto: goToUrl,
+    'goto': goToUrl,
     init: init
   };
 }());

@@ -32,6 +32,7 @@ app.use('/ajax/autorisation',require('./routes/ajax/autorisation'));
 app.use('/ajax/album',require('./routes/ajax/album'));
 app.use('/ajax/photo',require('./routes/ajax/photo'));
 app.use('/ajax/user',require('./routes/ajax/user'));
+app.use('/ajax/search',require('./routes/ajax/search'));
 app.use('/ajax/comments',require('./routes/ajax/comments'));
 app.use('/ajax/like',require('./routes/ajax/like'));
 app.use('/ajax',require('./routes/ajax'));

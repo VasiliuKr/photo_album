@@ -1,5 +1,16 @@
 'use strict';
 
+var tagsProcessor = (function() {
+  var hashText = function(text) {
+    var regExpForUserGroup = /(^|\s)(#)([a-zA-Zа-яА-Я0-9]+)/ig;
+    return  text.replace(regExpForUserGroup, '$1<a href="/search/?tag=$3">$2$3</a>');
+  };
+
+  return {
+    convert: hashText
+  };
+}());
+
 (function($) {
   var editor;
   var defaults = {
@@ -112,7 +123,8 @@
     var stripTag = valueOfTextarea.replace(/\n/g, '').replace(/<\/?[^>]+(>|$)/g, ' ');
 
     if ( regExpForUserGroup.test(valueOfTextarea) ) {
-      valueOfQuery = stripTag.replace(regExpForUserGroup, '$1<a href="/search/?tag=$3">$2$3</a>');
+      // valueOfQuery = stripTag.replace(regExpForUserGroup, '$1<a href="/search/?tag=$3">$2$3</a>');
+      valueOfQuery = tagsProcessor.convert(stripTag);
 
       var selection = saveSelection($(this)[0]);
 
