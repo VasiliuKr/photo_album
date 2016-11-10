@@ -3,12 +3,13 @@
 var slider = (function() {
   var animations = 'animate-prev animate-next animate-next-current animate-prev-current';
   var photoBaza;
+  var hereSlide;
 
-  var init = function() {
+  var init = function () {
     _setUpListeners();
   };
 
-  var _setUpListeners = function() {
+  var _setUpListeners = function () {
     $('body').on('click', '.slider__next', nextSlide);
     $('body').on('click', '.slider__prev', prevSlide);
     $('body').on('click', '.photo-albums__item-cover-wrapper,.photo-albums__item-comments', openSlider);
@@ -18,29 +19,29 @@ var slider = (function() {
   };
 
 // Берем с сервера состояние лайка
-  var initLike = function() {
+  var initLike = function () {
     var url = '/ajax/ilike';
 
-    $.post(url, function(data) {
+    $.post(url, function (data) {
       changeLikeClass(data.iLike);
-    }).fail(function() {
+    }).fail(function () {
       changeLikeClass(false);
     });
   };
 
-  var changeLikeClass = function(like) {
+  var changeLikeClass = function (like) {
     var likeButton = $('.slider__description-item--current').find('.button--icon-like');
 
     // console.log(likeButton.attr('class'));
 
     if (like) {
       likeButton.addClass('liked');
-    }else{
+    } else {
       likeButton.removeClass('liked');
     }
   };
 
-  var setLike = function() {
+  var setLike = function () {
     event.preventDefault();
 
     var likeButton = $('.slider__description-item--current').find('.button--icon-like');
@@ -54,15 +55,16 @@ var slider = (function() {
     $.post(url, {ilike: ilikeNew});
   };
 
-  var openSlider = function() {
+  var openSlider = function () {
     event.preventDefault();
     // Устанавливаем слайд
     open($(this).closest('.photo-albums__item').index());
   };
 
-  var open = function(curSlide) {
+  var open = function (curSlide) {
     modal.slider();
 
+    hereSlide = curSlide;
     photoBaza = photo.getPhotos();
 
     var slidesNum = photoBaza.length;
@@ -82,51 +84,45 @@ var slider = (function() {
     // Анимация падения
     // $('.slider__description').css('top', 0);
 
-    var imagesLoad = function() {
-      setCurrentSlide(curSlide);// индексация с нуля
+    var imagesLoad = function () {
+      setCurrentSlide(hereSlide);// индексация с нуля
     };
     // Ждем загрузку картинки текущего слайда
-    $('.slider__images img').eq(curSlide).on({
-      load: imagesLoad,
+    $('.slider__images img').eq(hereSlide).on({
+      load : imagesLoad,
       error: imagesLoad
     });
   };
 
+  var _onGetComments = function (data) {
+    var comments = data.comments;
+    var users = {};
+
+    var i;
+    for(i = 0; i < data.users.length; i++){
+      users[data.users[i]['_id']] = data.users[i];
+    }
+
+    var myId = data.myId;
+    var commentData = users[myId];
+    var $currentItem = $('.slider__description-item').eq(hereSlide);
+    commentData.photoId = photoBaza[hereSlide]._id;
+
+    $currentItem.append(templates.slider_comments(commentData));
+    $currentItem.find('form').ajaxForm();
+
+    for (var i = 0; i < comments.length; i++) {
+      $currentItem
+        .find('.comments__block')
+        .append(templates.slider_comments_item(comments[i]));
+    }
+  };
+
 // Берем с сервера инфу о комментах
-  var loadComments = function(curSlide) {
+  var loadComments = function (curSlide) {
     var url = '/ajax/comments/get';
-
-// fail поменять на done, когда будет работать AJAX
-    $.post(url).fail(function(data) {
-      var comments = data.comments;
-      var users = data.users;
-
-      // Пример структуры комментариев для 3 сущ-х юзеров
-      // удалить, когда будет работать AJAX
-      users = photo.getUsers();
-      users = Object.keys(users).map(function(key) { return users[key]; });
-   // console.log(users.length);
-
-      comments = [];
-      for (var j = 1; j <= users.length; j++) {
-        comments.push({user: users[j - 1], text: 'Старый Комментарий №' + j});
-      }
-      // Конец примера
-
-      var myId = 1;// info.myId;
-      var commentData = users[myId];
-      var $currentItem = $('.slider__description-item').eq(curSlide);
-      commentData.photoId = photoBaza[curSlide]._id;
-
-      $currentItem.append(templates.slider_comments(commentData));
-      $currentItem.find('form').ajaxForm();
-
-      for (var i = 0; i < comments.length; i++) {
-        $currentItem
-          .find('.comments__block')
-          .append(templates.slider_comments_item(comments[i]));
-      }
-    });
+    hereSlide = curSlide;
+    myAjaxRequest.send(url, {id: photoBaza[hereSlide]._id}, _onGetComments);
   };
 
   var addCommentOnSubmit = function(event) {
@@ -137,11 +133,10 @@ var slider = (function() {
 
 // Добавляем комментарий
   var addComment = function(form) {
-    var curSlide = form.closest('.slider__description-item').index();
     var $input = form.find('.comments--text');
 
     var comment = {
-      photo: photoBaza[curSlide]._id,
+      photo: photoBaza[hereSlide]._id,
       comment: $input.val()
     };
 
@@ -166,7 +161,7 @@ var slider = (function() {
           comments.push({user: users[j - 1], text: 'Новый Комментарий №' + j});
         }
 
-        var $currentItem = $('.slider__description-item').eq(curSlide);
+        var $currentItem = $('.slider__description-item').eq(hereSlide);
         $currentItem.find('.comments__block').html('');
 
         for (var i = 0; i < comments.length; i++) {
