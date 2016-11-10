@@ -46,7 +46,6 @@ route.post('/add',(req,res)=> {
 route.post('/update',(req,res)=> {
   let photoId = req.body.id;
   photoModel.update(photoId,req.session.userId,req.body).then( u => {
-    console.log(u);
     if(u.error){
       res.send(JSON.stringify({error: u.error}))
     }else{

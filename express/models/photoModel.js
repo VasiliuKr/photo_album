@@ -199,7 +199,6 @@ let  deletePhoto = function(id,user) {
     }).then( u => {
       resolve({'delete': photoId});
     }, err => {
-      console.log(err);
       resolve({error:err.error});
     })
   })

@@ -12,11 +12,11 @@ include ../mixins/_icons
         .modal__body
           .modal__row
             .modal__label Название
-            .modal__input.modal--stretch(type='text' name='title' placeholder='Название' required=true)= title
+            .modal__input.modal--stretch(type='text' name='title' placeholder='Название' required=true) !{title}
 
           .modal__row
             .modal__label Описание
-            .modal__textarea.modal--stretch(type='text' name='description' placeholder='Описание' required=true)= description
+            .modal__textarea.modal--stretch(type='text' name='description' placeholder='Описание' required=true) !{description}
 
           .modal__errors
 
