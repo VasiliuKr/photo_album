@@ -2,6 +2,13 @@
 .photo-albums {
   display: flex;
   justify-content: center;
+  position: relative;
+
+  .button-circle {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+  }
 
   &__inner-wrapper {
     padding: 53px 0 60px;
@@ -43,6 +50,7 @@
   flex-direction: column;
   margin: 10px;
   overflow: hidden;
+  position: relative;
 
   @include media-min($phones) {
     max-width: 300px;
@@ -107,6 +115,12 @@
     transition: all 0.25s;
     visibility: hidden;
     z-index: 10;
+  }
+
+  &-information {
+    position: absolute;
+    top: 170px;
+    left: 18px;
   }
 
   &-info-wrapper {
@@ -275,6 +289,7 @@
   &-title {
     color: $photo-album-title;
     margin: 0 0 0 9px;
+    display: inline-block;
 
     @include media-min($phones) {
       font: 14px/1 'proxima_nova_ltsemibold', sans-serif;

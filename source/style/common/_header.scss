@@ -55,9 +55,12 @@
 .profile {
   display: flex;
   padding-top: 37px;
+  width: 100%;
 
   &__info {
     margin-left: 48px;
+    width: 100%;
+    max-width: 430px;
   }
 
   &__photo {
@@ -66,10 +69,6 @@
     background-size: cover;
     border: 3px solid $shapka-avatar-border;
     border-radius: 50%;
-    // max-height: 124px;
-    // max-width: 124px;
-    // min-height: 124px;
-    // min-width: 124px;
     width: 50px;
     height: 50px;
     overflow: hidden;
@@ -93,6 +92,8 @@
     color: $shapka-avatar-text;
     font: 21px/1 'pantonbold', sans-serif;
     margin: 0 0 8px;
+    max-width: 480px;
+    width: 100%;
   }
 
   &__description {
@@ -100,7 +101,8 @@
     color: $shapka-avatar-description;
     font: 16px/1.5 'proxima_nova_ltlight', sans-serif;
     margin-bottom: 26px;
-    max-width: 450px;
+    max-width: 480px;
+    width: 100%;
   }
 }
 

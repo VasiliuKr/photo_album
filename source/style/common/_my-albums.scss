@@ -5,6 +5,7 @@
   background: $albums-wrapper-bg;
   display: flex;
   justify-content: center;
+  position: relative;
 
   &__inner-wrapper {
     padding: 53px 0 38px;

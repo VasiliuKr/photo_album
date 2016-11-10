@@ -42,6 +42,11 @@
 }
 
 .header-edit {
+  .profile__photo,
+  .profile__info {
+    // display: inline-block;
+    // vertical-align: middle;
+  }
   .profile__label,
   .cover__label {
     cursor: pointer;
