@@ -22,14 +22,13 @@ let  add = function(id,user,text) {
     Album.where("photos._id").eq(photoId).then(u => {
       albumid = u[0]._id;
       var photoArray = [];
+      photoId=photoId.toString();
       u[0].photos.map(photo=> {
         if (photo._id == photoId){
           photo.comments.push(comment);
-
         }
         photoArray.push(photo);
       });
-
 
       return Album.findOneAndUpdate({_id:albumid},{photos:photoArray},{upsert:true});
     }).then( u => {
@@ -40,7 +39,25 @@ let  add = function(id,user,text) {
   })
 };
 
+let get = function(id) {
+  let photoId = ObjectId(id);
+  return  new Promise(function(resolve, reject) {
+    let Album = mongoose.model('album');
+    Album.where("photos._id").eq(photoId).then(u => {
+      photoId = photoId.toString();
+      u[0].photos.map(photo=> {
+        if (photo._id == photoId) {
+          resolve(photo.comments);
+          return;
+        }
+      });
+      resolve({error:'Фото не найденно.'});
+      return;
+    })
+  })
+};
+
 module.exports = {
-  //get: get,
+  get: get,
   add: add
 };

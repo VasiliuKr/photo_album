@@ -3,6 +3,7 @@
 module.exports = [
   './source/js/jquery.animation_callback.js',
   './source/js/popup.js',
+  './source/js/ajax_request.js',
   './source/js/modals.js',
   './source/js/multi_photo_add.js',
   './source/js/photo_edit.js',
