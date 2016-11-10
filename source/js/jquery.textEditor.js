@@ -123,7 +123,6 @@ var tagsProcessor = (function() {
     var stripTag = valueOfTextarea.replace(/\n/g, '').replace(/<\/?[^>]+(>|$)/g, ' ');
 
     if ( regExpForUserGroup.test(valueOfTextarea) ) {
-      // valueOfQuery = stripTag.replace(regExpForUserGroup, '$1<a href="/search/?tag=$3">$2$3</a>');
       valueOfQuery = tagsProcessor.convert(stripTag);
 
       var selection = saveSelection($(this)[0]);

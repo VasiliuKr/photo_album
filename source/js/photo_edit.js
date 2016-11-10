@@ -44,6 +44,13 @@ var photoEditDelete = ( function() {
 
   // вызовится в случае успешного удаления фото
   var _getAjax = function(json) {
+    if(json.error) {
+      popup.open({message: json.error});
+    }else{
+      modal.close();
+      $('[data-photo-id=' + json.delete + ']').animateCssAndRemove('photo-delete');
+    }
+    cancelDelete();
     return false;
   };
 

@@ -98,7 +98,7 @@ var photo = (function() {
 
     var i = 0;
     if (addButton.length > 0) {
-      if (photos.data.length > 0 && photos.data[0].canEdit === 1) {
+      if (photos.data.length > 0 && photos.data[0].canEdit) {
         typePhotoShow = 2;
         addButton.attr('code', photos.data[0].album_id);
         addButton.on('click', _addPhoto);
@@ -128,6 +128,8 @@ var photo = (function() {
       photoCollection[i] = photos.data[i];
       photoCollection[i].user = userCollection[userId];
       photoCollection[i].typePhoto = typePhotoShow;
+      photoCollection[i].title = tagsProcessor.convert(photoCollection[i].title);
+      photoCollection[i].description = tagsProcessor.convert(photoCollection[i].description);
       totalLikes += photoCollection[i].likes;
       totalComment += photoCollection[i].comments;
     }
@@ -224,6 +226,9 @@ var photo = (function() {
         var photoId = photos._id;
         photos.user = photoCollection[0].user;
         photos.typePhoto = photoCollection[0].typePhoto;
+        photos.title = tagsProcessor.convert(photos.title);
+        photos.description = tagsProcessor.convert(photos.description);
+
         var newPhoto = templates.photo_albums_item(photos);
         // ищим в уже отображенных
         for (i = 0; i < photoCollection.length; i++) {

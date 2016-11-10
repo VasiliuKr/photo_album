@@ -59,9 +59,9 @@
   // Фотка альбома
   &-cover-wrapper {
     display: block;
+    height: 200px;
     overflow: hidden;
     position: relative;
-    height: 200px;
 
     &:hover {
       .photo-albums__item-spinner {
@@ -129,8 +129,8 @@
   &-avatar-wrapper {
     display: block;
     height: 50px;
-    width: 50px;
     position: relative;
+    width: 50px;
 
     &:hover {
       .photo-albums__item-avatar-hover {

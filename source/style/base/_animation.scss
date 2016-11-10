@@ -3,6 +3,10 @@
   opacity: 0;
 }
 
+.photo-delete {
+  animation: PhotoDelate 0.5s;
+}
+
 @keyframes fadeInScale {
   0% {
     transform: scale(0);
@@ -75,6 +79,16 @@
 
   100% {
     transform: rotate3d(0.05, 1, 0, 0deg);
+  }
+}
+
+@keyframes PhotoDelate {
+  0% {
+    transform: rotate3d(0.05, 1, 0, 0deg);
+  }
+
+  100% {
+    transform: rotate3d(0.05, 1, 0, 90deg);
   }
 }
 
