@@ -67,7 +67,7 @@
   // Фотка альбома
   &-cover-wrapper {
     display: block;
-    height: 200px;
+    height: 250px;
     overflow: hidden;
     position: relative;
     background-size: cover;
@@ -143,6 +143,8 @@
   }
 
   &-avatar-wrapper {
+    background-size: cover;
+    border-radius: 50%;
     display: block;
     height: 50px;
     position: relative;

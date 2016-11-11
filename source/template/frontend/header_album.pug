@@ -5,7 +5,7 @@ include ../mixins/_icons
     form.header__top.header__top--album(method='post' action='/ajax/album/update')
       input(type="hidden" name="id" value= _id)
       .profile.profile--album
-        .profile__photo.profile__photo--album(style=`background-image: url(${user.photo})`)
+        .profile__photo.profile__photo--album(style=`background-image: url(/${user.photo})`)
         .profile__info.profile__info--album
           h1.profile__name.profile__name--album= user.name
       .profile-album__text
