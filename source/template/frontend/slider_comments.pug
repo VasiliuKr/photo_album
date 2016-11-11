@@ -9,7 +9,7 @@ include ../mixins/_icons
       .comments__photo
         img(class="comments__img" src=`${photo}` alt=`${name}`)
     .comments__right
-      form.comments__form(data-user-id=`${_id}` action="/ajax/comments/add" method="POST")
+      .comments__form(data-user-id=`${_id}` action="/ajax/comments/add" method="POST")
         input(name="photo" type="hidden" value= photoId)
         .comments__name #{name}
         input.modal__input.comments--text(name="text" type="text" placeholder="Добавить комментарий" required=true)
