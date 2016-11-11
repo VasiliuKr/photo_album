@@ -13,6 +13,9 @@
 .header__top--search {
   justify-content: center;
   padding-bottom: 0;
+  .profile__buttons {
+    top: 0;
+  }
 }
 
 .header__top-title--search {
@@ -21,7 +24,7 @@
   flex: 10 auto;
   font-family: 'pantonbold', sans-serif;
   font-size: 42px;
-  padding-left: 15%;
+  // padding-left: 15%;
   text-align: center;
 }
 
@@ -33,12 +36,21 @@
 .search-bar--search {
   display: flex;
   padding: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
 }
 
 .profile--search {
   animation: Right 1s;
-  margin-left: 60px;
-  margin-right: 200px;
+  // margin-left: 60px;
+  // margin-right: 200px;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  .profile__photo {
+    margin: 0;
+  }
 }
 
 .profile__name--search {
@@ -46,10 +58,10 @@
 }
 
 .search__form--search {
-  align-items: center;
   animation: Left 1s;
   display: flex;
   margin: 7px 0;
+  align-items: center;
 }
 
 .search__field--search {

@@ -67,7 +67,6 @@
 // Profile
 .profile {
   display: flex;
-  width: 100%;
 
   @include media-min($phones) {
     flex-direction: column;
@@ -80,7 +79,6 @@
   }
 
   &__info {
-    width: 100%;
     @include media-min($phones) {
       margin-left: 0;
       text-align: center;
@@ -205,12 +203,14 @@
   top: 20px;
   z-index: 1;
   @include media-min($phones) {
-    padding-right: 0;
-    right: 20px;
-    left: 20px;
   }
   @include media-min($tablets) {
-  padding-right: 40px;
+    padding-right: 40px;
+  }
+  @include media(767px) {
+    left: 20px;
+    right: 20px;
+    padding-right: 0;
   }
 
   .button-circle {

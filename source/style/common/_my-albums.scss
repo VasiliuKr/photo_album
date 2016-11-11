@@ -81,6 +81,9 @@
       height: 220px;
     }
     @include media-min($laptop) {
+      height: 280px;
+    }
+    @include media-min($desktop) {
       height: 300px;
     }
 

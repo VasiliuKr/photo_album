@@ -3,12 +3,30 @@
 }
 
 .header__top--album {
-  padding: 18px 29px 80px 90px;
+  @include media-min($phones) {
+    padding: 10px;
+  }
+  @include media-min($tablets) {
+    padding: 15px 15px 30px 15px;
+  }
+  @include media-min($laptop) {
+    padding: 18px 29px 80px 90px;
+  }
 }
 
 .profile--album {
   animation: Right 1s;
   flex: 1 auto;
+  @include media-min($tablets) {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding-top: 0;
+  }
+  @include media-min($laptop) {
+    position: static;
+    padding-top: 37px;
+  }
 }
 
 .profile__photo--album {
@@ -52,7 +70,11 @@
 .header__buttons-wrapper--album {
   flex: 1 auto;
   margin: 0;
-  width: 200px;
+  @include media-min($phones) {
+  }
+  @include media-min($tablets) {
+    width: 200px;
+  }
 }
 
 .search-bar--album {
