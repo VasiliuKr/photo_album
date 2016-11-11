@@ -14,4 +14,5 @@
   photo.init( {showAddModal: modal.add_photo, showEditModal: modal.edit_photo});
 
   urlParser.init( pageTemplate.update );
+  likesPhoto.init();
 })();

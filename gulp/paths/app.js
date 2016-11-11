@@ -16,5 +16,6 @@ module.exports = [
   './source/js/url_router.js',
   './source/js/search.js',
   './source/js/header_edit.js',
+  './source/js/likes.js',
   './source/js/app.js'
 ];

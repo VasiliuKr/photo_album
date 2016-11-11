@@ -37,7 +37,8 @@ let mongoose = require('mongoose'),
         type: Boolean
       },
       likes:[{
-        user:{ type: Number, ref: 'user' }
+        user:{ type: Number, ref: 'user' },
+        date:{ type: String }
       }],
       comments:[{
         user:{ type: Number, ref: 'user' },
