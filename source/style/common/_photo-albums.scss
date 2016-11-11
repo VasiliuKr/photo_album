@@ -67,7 +67,7 @@
   // Фотка альбома
   &-cover-wrapper {
     display: block;
-    height: 200px;
+    height: 250px;
     overflow: hidden;
     position: relative;
     background-size: cover;
@@ -121,13 +121,13 @@
 
   &-information {
     position: absolute;
-    top: 170px;
+    top: 220px;
     left: 18px;
   }
 
   &-info-wrapper {
     display: flex;
-    // flex: 1;
+    z-index: 99;
 
     @include media-min($phones) {
       padding: 10px;
@@ -143,6 +143,8 @@
   }
 
   &-avatar-wrapper {
+    background-size: cover;
+    border-radius: 50%;
     display: block;
     height: 50px;
     position: relative;
@@ -208,6 +210,12 @@
     display: flex;
     text-decoration: none;
 
+    &--album{
+      .icon {
+        fill: $album-photo-comment-icon;
+      }
+    }
+
     &:hover {
       .icon {
         fill: $photo-icon-comment-hover;
@@ -218,6 +226,10 @@
       color: $photo-album-title;
       font: 16px/1 'pantonbold', sans-serif;
       margin-left: 11px;
+
+      &--album{
+        color: $album-photo-comment-text;
+      }
     }
   }
 
@@ -227,16 +239,26 @@
     margin-left: 17px;
     text-decoration: none;
 
-    &:hover {
-      .icon {
-        fill: $photo-icon-like-hover;
-      }
-    }
-
     &-number {
       color: $photo-album-title;
       font: 16px/1 'pantonbold', sans-serif;
       margin-left: 11px;
+
+      &--album{
+        color: $album-photo-like-text;
+      }
+    }
+
+    &--album{
+      .icon {
+        fill: $album-photo-like-icon;
+      }
+    }
+
+    &:hover {
+      .icon {
+        fill: $photo-icon-like-hover;
+      }
     }
   }
 
@@ -308,6 +330,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  z-index: 99;
 }
 
 .button--outline-albums {

@@ -29,12 +29,12 @@ else
     .photo-albums__item-ava-info-wrapper
       .photo-albums__item-information
         .photo-albums__item-meta.photo-albums__item-meta--information
-          a(class="photo-albums__item-comments" href="#")
+          a.photo-albums__item-comments.photo-albums__item-comments--album(href="#")
             +icon('comments', ['photo-albums__item-icon', 'photo-albums__item-icon_comments'])
-            span.photo-albums__item-comments-number #{comments}
-          a.photo-albums__item-likes(class=`${iLikeClass}` href="#" likeCode= _id)
+            span.photo-albums__item-comments-number.photo-albums__item-comments-number--album #{comments}
+          a.photo-albums__item-likes.photo-albums__item-likes-number--album(class=`${iLikeClass}` href="#" likeCode= _id)
             +icon('like', ['photo-albums__item-icon', 'photo-albums__item-icon_likes'])
-            span.photo-albums__item-likes-number #{likes}
+            span.photo-albums__item-likes-number.photo-albums__item-likes-number--album #{likes}
   .photo-albums__item-footer
     if typePhoto == 2
       a.my-albums__item-edit-link.canEdit(code= _id href=`#`)
