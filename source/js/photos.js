@@ -30,6 +30,40 @@ var photo = (function() {
     return userCollection;
   };
 
+  var updateComment = function(photoId, count) {
+    var totalComment = 0;
+
+    for (var i = 0; i < photoCollection.length; i++ ) {
+      if ( photoCollection[i]._id === photoId ) {
+        photoCollection[i].comments = count;
+
+        $('.photo-albums__item[data-photo-id=' + photoId + ']')
+          .find('.photo-albums__item-comments-number')
+          .text(count);
+      }
+      totalComment += photoCollection[i].comments;
+    }
+
+    $('.count-comments').text(totalComment);
+  };
+
+  var updateLike = function(photoId, count, iLike) {
+    var totalLikes = 0;
+
+    for (var i = 0; i < photoCollection.length; i++ ) {
+      if ( photoCollection[i]._id === photoId ) {
+        photoCollection[i].likes = count;
+        photoCollection[i].iLike = iLike;
+        /* $('.photo-albums__item[data-photo-id='+photoId+']')
+          .find('.photo-albums__item-likes-number')
+          .text(count);*/
+      }
+      totalLikes += photoCollection[i].likes;
+    }
+
+    $('.count-likes').text(totalLikes);
+  };
+
   var showMoreHide = function() {
     if (lastPhotoNumber === photoCollection.length) {
       photoContainer.parent().find( '.show_more' ).hide();
@@ -299,6 +333,8 @@ var photo = (function() {
     showMore: showMorePhoto,
     getPhotos: getPhotos,
     getUsers: getUsers,
-    updatePhoto: updatePhoto
+    updatePhoto: updatePhoto,
+    updateComment: updateComment,
+    updateLike: updateLike
   };
 }());
