@@ -7,7 +7,7 @@ include ../mixins/_icons
   .comments__row
     .comments__left
       .comments__photo
-        img(class="comments__img" src=`${photo}` alt=`${name}`)
+        img(class="comments__img" src=`/${photo}` alt=`${name}`)
     .comments__right
       .comments__form(data-user-id=`${_id}` action="/ajax/comments/add" method="POST")
         input(name="photo" type="hidden" value= photoId)

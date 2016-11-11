@@ -16,48 +16,9 @@ var slider = (function() {
   var _setUpSliderListeners = function() {
     $('.modal-overlay').on('click', '.slider__next', nextSlide);
     $('.modal-overlay').on('click', '.slider__prev', prevSlide);
-
-    $('.modal-overlay').on('click', '.slider__description-item--current .button--icon-like', setLike);
-    // $('body').on('submit', '.comments__form', addCommentOnSubmit);
     $('.modal-overlay').on('click', '.comments__form .button', addCommentOnSubmit);
   };
 
-// Берем с сервера состояние лайка
-  var initLike = function() {
-    var url = '/ajax/ilike';
-
-    $.post(url, function(data) {
-      changeLikeClass(data.iLike);
-    }).fail(function() {
-      changeLikeClass(false);
-    });
-  };
-
-  var changeLikeClass = function(like) {
-    var likeButton = $('.slider__description-item--current').find('.button--icon-like');
-
-    // console.log(likeButton.attr('class'));
-
-    if (like) {
-      likeButton.addClass('liked');
-    } else {
-      likeButton.removeClass('liked');
-    }
-  };
-
-  var setLike = function() {
-    event.preventDefault();
-
-    var likeButton = $('.slider__description-item--current').find('.button--icon-like');
-    var ilikeNew = false;
-    if (!likeButton.hasClass('liked')) {
-      ilikeNew = true;
-    }
-    changeLikeClass(ilikeNew);
-
-    var url = '/ajax/ilike';
-    $.post(url, {ilike: ilikeNew});
-  };
 
   var openSlider = function() {
     event.preventDefault();
@@ -90,8 +51,6 @@ var slider = (function() {
     // Удаляем все анимации
     $('.slider__images-item').removeClass(animations);
 
-    // Анимация падения
-    // $('.slider__description').css('top', 0);
 
     var imagesLoad = function() {
       setCurrentSlide(hereSlide);
@@ -181,6 +140,7 @@ var slider = (function() {
 
   var nextSlide = function(event) {
     event.preventDefault();
+    $('html, body').stop().animate( {scrollTop: 0}, '500');
 
     // Удаляем все анимации
     $('.slider__images-item').removeClass(animations);
@@ -211,6 +171,7 @@ var slider = (function() {
 
   var prevSlide = function(event) {
     event.preventDefault();
+    $('html, body').stop().animate( {scrollTop: 0}, '500');
 
     // Удаляем все анимации
     $('.slider__images-item').removeClass(animations);

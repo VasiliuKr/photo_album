@@ -2,7 +2,9 @@ include ../mixins/_icons
 
 - var cover = `/${dir}/_thumbs/${src}`
 if iLike
-  - var iLikeClass = 'photo-albums__item-liked'
+  - var iLikeClass = 'liked'
+else
+  -var iLikeClass = ''
 
 .photo-albums__item(data-photo-id=`${_id}` )
   a(href=`#` class="photo-albums__item-cover-wrapper" style=`background-image: url(${cover});`)
@@ -20,7 +22,7 @@ if iLike
           a.photo-albums__item-comments(href="#")
             +icon('comments', ['photo-albums__item-icon', 'photo-albums__item-icon_comments'])
             span.photo-albums__item-comments-number #{comments}
-          a.photo-albums__item-likes(class=`${iLikeClass}` href="#")
+          a.photo-albums__item-likes(class=`${iLikeClass}` href="#" likeCode= _id)
             +icon('like', ['photo-albums__item-icon', 'photo-albums__item-icon_likes'])
             span.photo-albums__item-likes-number #{likes}
   else
@@ -30,7 +32,7 @@ if iLike
           a(class="photo-albums__item-comments" href="#")
             +icon('comments', ['photo-albums__item-icon', 'photo-albums__item-icon_comments'])
             span.photo-albums__item-comments-number #{comments}
-          a.photo-albums__item-likes(class=`${iLikeClass}` href="#")
+          a.photo-albums__item-likes(class=`${iLikeClass}` href="#" likeCode= _id)
             +icon('like', ['photo-albums__item-icon', 'photo-albums__item-icon_likes'])
             span.photo-albums__item-likes-number #{likes}
   .photo-albums__item-footer
