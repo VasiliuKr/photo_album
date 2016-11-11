@@ -113,7 +113,9 @@ route.post('/get/*',(req,res)=> {
     u.map((album)=> {
       user_list.push(album.user);
     });
-    u[0].background=u[0].cover.dir+'/'+u[0].cover.src;
+    if(u[0]) {
+      u[0].background = u[0].cover.dir + '/' + u[0].cover.src;
+    }
     userModel.get({ "$in" : user_list}).then(user => {
       res.send(JSON.stringify({
         data: u,
