@@ -12,6 +12,12 @@
   }
 }
 
+.wrapper-hide {
+  position: absolute;
+  width: 100vw;
+  z-index: 0;
+}
+
 .header__inner-wrapper {
   padding: 20px 40px 0 87px;
   position: relative;
@@ -206,8 +212,20 @@
   }
 }
 
-.wrapper-hide {
-  position: absolute;
-  width: 100vw;
-  z-index: 0;
+.search__list {
+  background: $search-bg;
+  display: none;
+  margin: 0;
+  padding: 0;
+  width: 380px;
+
+  li {
+    color: $search-active-text;
+    cursor: pointer;
+    list-style: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

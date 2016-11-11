@@ -28,10 +28,9 @@ var search = (function() {
   }
 
   function init(element) {
-    var searchItem =  $(element).find('#search');
+    var searchItem = $(element).find('#search');
     searchItem.on('submit', _testSearch);
   }
-
   return {
     init: init
   };

@@ -145,4 +145,32 @@ var tagsProcessor = (function() {
     });
     return this;
   };
+
+  $('.search__field').on('input', function() {
+    var tagText = $(this).val();
+
+    if (tagText.charAt(0) === '#' && tagText.length >= 2) {
+      $.ajax({
+        type: 'POST',
+        url: 'tag.json',
+        data: {'tag': tagText},
+        success: function(data) {
+          var tags = '';
+          var dataTags = JSON.parse(data);
+          for (var i = 0; i < dataTags.data.length; ++i) {
+            tags += '<li>' + dataTags.data[i] + '</li>';
+          }
+          $('.search__list').html(tags).fadeIn(100);
+        }
+      });
+    } else if (tagText.charAt(0) === '#') {
+      $('.search__list').fadeOut(100);
+    }
+  });
+
+  $('.search__list').on('click', 'li', function() {
+    var choseTag = $(this).text();
+    $('.search__field').val(choseTag);
+    $('.search__list').fadeOut(100);
+  });
 })(jQuery);
