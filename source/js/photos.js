@@ -103,13 +103,13 @@ var photo = (function() {
       showMore.on('click', _showMoreClick);
     }
 
-    if (photos.error){
+    if (photos.error) {
       $('.count-photos').text(0);
       return;
     }
     var i = 0;
     if (addButton.length > 0) {
-      if (photos.data.length > 0 && photos.data[0].canEdit == 1) {
+      if (photos.data.length > 0 && photos.data[0].canEdit === 1) {
         typePhotoShow = 2;
         addButton.attr('code', photos.data[0].album_id);
         addButton.on('click', _addPhoto);
@@ -153,6 +153,10 @@ var photo = (function() {
     }
     lastPhotoNumber = i;
     showMoreHide();
+  };
+
+  var updatePhoto = function(data) {
+    _closeOnSuccess(data, true);
   };
 
   var init = function(params) {
@@ -223,7 +227,8 @@ var photo = (function() {
     }
   };
 
-  var _closeOnSuccess = function(data) {
+  var _closeOnSuccess = function(data, onlyUpdate ) {
+    var isUpdate = !!onlyUpdate;
     modal.close();
     if (data.message) {
       popup.open({message: data.message});
@@ -244,6 +249,9 @@ var photo = (function() {
         for (i = 0; i < photoCollection.length; i++) {
           if (photoCollection[i]._id === photoId) break;
         }
+
+        // если пытаемся обновить фотку которой нет, а добавлять нельзя
+        if(isUpdate && i === photoCollection.length)return;
 
         photoCollection[i] = photos;
         if (i === photoCollection.length - 1) {
@@ -290,6 +298,7 @@ var photo = (function() {
     set: setParam,
     showMore: showMorePhoto,
     getPhotos: getPhotos,
-    getUsers: getUsers
+    getUsers: getUsers,
+    updatePhoto: updatePhoto
   };
 }());
