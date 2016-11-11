@@ -5,7 +5,7 @@ let mongoose = require('mongoose'),
   path = require('path'),
   fs = require('fs'),
   crypto=require('crypto'),
-  thumb = require('node-thumbnail').thumb,
+  easyimg = require('easyimage'),
   ObjectId = require('mongodb').ObjectID;//,
   //albumModel=require('./albumModel');
 
@@ -40,29 +40,38 @@ let getPath = function(userId,albomId) {
   };
 };
 
-let loadPhoto = function(path,files){
+let createThumb = function(path,file){
   return  new Promise(function(resolve, reject) {
-    let picture=files.map((file,key)=>{
-      if(file.size<100) return false;
+    if(file.size<100) return false;
+    console.log('-'+file.path);
+    var fileName=file.path.split('.');
+    fileName=fileName[fileName.length-1];
+    fileName=crypto.createHash('md5').update(file.path).digest('hex')+'.'+fileName;
 
-      let fileName=file.path.split('.');
-      fileName=fileName[fileName.length-1];
-      fileName=crypto.createHash('md5').update(file.path).digest('hex')+'.'+fileName;
-
-      let newFilePath=path+'/'+fileName;
-      fs.writeFileSync(newFilePath,fs.readFileSync(file.path));
-
-      thumb({
-        source: newFilePath,
-        destination: path+'/_thumbs',
-        concurrency: 4,
-        width: 800,
-        suffix:'',
-        quiet:true
-      });
-      return fileName;
+    var newFilePath=path+'/'+fileName;
+    fs.writeFileSync(newFilePath,fs.readFileSync(file.path));
+    easyimg.thumbnail({
+      src:newFilePath,
+      dst:path+'/_thumbs/'+fileName,
+      width: 800,
+    }).then(image => {
+      resolve(image.name)
     });
-    resolve(picture);
+   })
+};
+
+let loadPhoto = function(path,files){
+  var outArray = [];
+  return  new Promise(function(resolve, reject) {
+    console.log(files.length);
+    files.map((file,key)=> {
+      createThumb(path, file).then(e => {
+        outArray.push(e);
+        if(outArray.length == files.length){
+          resolve(outArray);
+        }
+      })
+    })
   })
 };
 
@@ -70,8 +79,12 @@ let unlinkPhoto = function(path,files){
   return  new Promise(function(resolve, reject) {
     if(files.length>0) {
       files.map((file, key)=> {
-        fs.unlink(path + '/_thumbs/' + file);
-        fs.unlink(path + '/' + file);
+        if(fs.existsSync('/_thumbs/' + file)) {
+           fs.unlink(path + '/_thumbs/' + file);
+        }
+        if(fs.existsSync('/_thumbs/' + file)) {
+          fs.unlink(path + '/' + file);
+        }
       });
     }
     resolve();

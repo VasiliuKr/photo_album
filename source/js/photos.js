@@ -54,9 +54,6 @@ var photo = (function() {
       if ( photoCollection[i]._id === photoId ) {
         photoCollection[i].likes = count;
         photoCollection[i].iLike = iLike;
-        /* $('.photo-albums__item[data-photo-id='+photoId+']')
-          .find('.photo-albums__item-likes-number')
-          .text(count);*/
       }
       totalLikes += photoCollection[i].likes;
     }
@@ -143,7 +140,7 @@ var photo = (function() {
     }
     var i = 0;
     if (addButton.length > 0) {
-      if (photos.data.length > 0 && photos.data[0].canEdit === 1) {
+      if (photos.data.length > 0 && photos.data[0].canEdit === true) {
         typePhotoShow = 2;
         addButton.attr('code', photos.data[0].album_id);
         addButton.on('click', _addPhoto);

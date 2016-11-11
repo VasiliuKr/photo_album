@@ -21,7 +21,7 @@ var likesPhoto = (function() {
       likeElement.removeClass('liked');
     }
     likeElement.find('span').text(data.likes);
-    photo.updateLike(photoId, data.likes, data.iLike)
+    photo.updateLike(photoId, data.likes, data.iLike);
   };
 
   var _testLike = function(e) {
