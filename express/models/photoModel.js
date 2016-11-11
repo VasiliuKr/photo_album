@@ -42,8 +42,10 @@ let getPath = function(userId,albomId) {
 
 let createThumb = function(path,file){
   return  new Promise(function(resolve, reject) {
-    if(file.size<100) return false;
-    console.log('-'+file.path);
+    if(file.size<100){
+      resolve(false);
+      return false;
+    }
     var fileName=file.path.split('.');
     fileName=fileName[fileName.length-1];
     fileName=crypto.createHash('md5').update(file.path).digest('hex')+'.'+fileName;
@@ -63,7 +65,6 @@ let createThumb = function(path,file){
 let loadPhoto = function(path,files){
   var outArray = [];
   return  new Promise(function(resolve, reject) {
-    console.log(files.length);
     files.map((file,key)=> {
       createThumb(path, file).then(e => {
         outArray.push(e);

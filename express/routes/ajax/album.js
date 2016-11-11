@@ -65,6 +65,7 @@ route.post('/update',(req,res)=> {
     let albumid = parseInt(fields.id[0]);
     let Album = mongoose.model('album');
     let oldPhotos;
+    let newPhotos;
     let newData;
     let path;
     Album.findOne({_id:albumid}).then( u => {
@@ -79,35 +80,36 @@ route.post('/update',(req,res)=> {
       };
       path = albumModel.getPath(u.user, u._id);
       return photoModel.loadPhoto(path.server,files['cover']);
-    }).then(photos=>{
-      if(photos.length>0 && photos[0]!==false){
+    }).then(photos=> {
+      newPhotos=photos;
+      if (newPhotos.length > 0 && newPhotos[0] !== false) {
         oldPhotos.map((photo)=> {
-          if(photo.is_cover){
-            photoModel.unlinkPhoto(path.server,photo.src);
-            photo.src=photos[0];
+          if (photo.is_cover) {
+            photoModel.unlinkPhoto(path.server, photo.src);
+            photo.src = newPhotos[0];
             return photo;
           }
         });
-        newData['photos']=oldPhotos;
+        newData['photos'] = oldPhotos;
       }
-      Album.findOneAndUpdate({_id:albumid},newData,{upsert:true}).then(albums=>{
-        let photo_list=[];
-        photos.map(photo=>{
-          photo_list.push(photo.src);
-        });
-        albumModel.get({_id:albumid}, req.session.userId).then(u => {
-          res.send(JSON.stringify({
-            error: 0,
-            message: 'Альбом отредактирован!',
-            data: u
-          }))
-        });
+      return Album.findOneAndUpdate({_id: albumid}, newData, {upsert: true});
+    }).then(albums=>{
+      let photo_list=[];
+      newPhotos.map(photo=>{
+        photo_list.push(photo.src);
+      });
+      albumModel.get({_id:albumid}, req.session.userId).then(u => {
+        res.send(JSON.stringify({
+          error: 0,
+          message: 'Альбом отредактирован!',
+          data: u
+        }))
       });
     }).then(message=>res.send(JSON.stringify({error: message.error})));;
   });
 });
 
-route.post('/get/*',(req,res)=> {
+route.post('/get',(req,res)=> {
   albumModel.get({user:req.session.userId},req.session.userId).then(u => {
     let user_list=[];
     u.map((album)=> {
@@ -128,7 +130,7 @@ route.post('/get/*',(req,res)=> {
 
 //Альбом с данным id (для шапки)
 route.post('/get/:id',(req,res)=> {
-  albumModel.get({_id: parseInt(req.params.id)},0).then(u => {
+  albumModel.get({_id: parseInt(req.params.id)},req.session.userId).then(u => {
     let user_list=[];
     u.map((album)=> {
       user_list.push(album.user);
@@ -136,7 +138,10 @@ route.post('/get/:id',(req,res)=> {
     userModel.get({ "$in" : user_list}).then(user => {
       let outData = {
         background: u[0].dir + '/' + u[0].cover.src,
-        data: u[0],
+        title: u[0].title,
+        description: u[0].description,
+        _id: u[0]._id,
+        canEdit: u[0].canEdit,
         user: user[0]
       };
       res.send(JSON.stringify({
