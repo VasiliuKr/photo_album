@@ -1,13 +1,18 @@
 include ../mixins/_icons
 
+if iLike
+  - var iLikeClass = 'liked'
+else
+  -var iLikeClass = ''
+
 .description
   .description__info
     .author
       .author__photo
-        img(class="author__img" src=`/${user.photo}` alt=`${user.name}`)
+        img.author__img(src=`/${user.photo}` alt=`${user.name}`)
       .author__name #{user.name}
     .likes
-      a(class="button button--theme-secondary button--icon-like" href="#" likeCode= _id)
+      a.button.button--theme-secondary.button--icon-like(class= iLikeClass href="#" likeCode= _id)
         +icon('like')
         span.button--icon-text #{likes}
 

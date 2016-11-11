@@ -11,13 +11,12 @@ let  setLike = function(user,id,state) {
   let userId=user;
   let photoId=ObjectId(id);
   let likeStatus = state;
-
+  let likeArray = [];
   return  new Promise(function(resolve, reject) {
     let Album = mongoose.model('album');
     Album.where("photos._id").eq(photoId).then(u => {
       var albumid = u[0]._id;
       var photoArray = [];
-      var likeArray = [];
       var findPhoto = false;
       var findLike = false;
       var error = false;
@@ -58,7 +57,7 @@ let  setLike = function(user,id,state) {
       return Album.findOneAndUpdate({_id:albumid},{photos:photoArray},{upsert:true});
     }).then( u => {
       if (u) {
-        resolve({iLike: likeStatus});
+        resolve({iLike: likeStatus, likes: likeArray.length});
       }else{
         throw new Error('Ошибка сохранения');
       }

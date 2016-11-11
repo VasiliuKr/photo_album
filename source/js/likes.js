@@ -4,12 +4,23 @@ var likesPhoto = (function() {
   var likeUrl = '/ajax/like/set';
 
   var init = function() {
-    $('body').on('click','[likeCode]',_testLike);
+    $('body').on('click', '[likeCode]', _testLike);
   };
 
-  var _getLikeStatus = function (data) {
+  var _getLikeStatus = function(data) {
+    if (data.error) {
+      popup.open({message: data.error});
+      return;
+    }
+
     var photoId = data.photoId;
-    var likeElement = $('[likeCode' + photoId + ']');
+    var likeElement = $('[likeCode=' + photoId + ']');
+    if(data.iLike) {
+      likeElement.addClass('liked');
+    }else{
+      likeElement.removeClass('liked');
+    }
+    likeElement.find('span').text(data.likes);
   };
 
   var _testLike = function(e) {
