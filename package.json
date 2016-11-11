@@ -32,6 +32,7 @@
     "gulp-util": "^3.0.7",
     "gulp.spritesmith": "^6.2.1",
     "install": "^0.8.1",
+    "node-thumbnail": "^0.7.0",
     "normalize.css": "^4.2.0",
     "npm": "^3.10.8",
     "rimraf": "2.5.2"

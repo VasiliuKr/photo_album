@@ -3,16 +3,16 @@ include ../mixins/_icons
 .header__wrapper.page_background
   .header__inner-wrapper.header__inner-wrapper--album
     form.header__top.header__top--album(method='post' action='/ajax/album/update')
-      input(type="hidden" name="id" value= data._id)
+      input(type="hidden" name="id" value= _id)
       .profile.profile--album
-        .profile__photo.profile__photo--album(style=`background-image: url(${user.photo})`)
+        .profile__photo.profile__photo--album(style=`background-image: url(/${user.photo})`)
         .profile__info.profile__info--album
           h1.profile__name.profile__name--album= user.name
       .profile-album__text
-        h1.profile-album__title(name='title' editor='text_tag')= data.title
-        p.profile-album___description(name='description' editor='text_tag')= data.description
+        h1.profile-album__title(name='title' editor='text_tag')= title
+        p.profile-album___description(name='description' editor='text_tag')= description
 
-      if data.canEdit
+      if canEdit
         .header__buttons-wrapper.header__buttons-wrapper--editor
           .add-photo__info.add-photo__info--header
             .add-photo__info-icon
@@ -30,7 +30,7 @@ include ../mixins/_icons
           a(class="button-circle button-circle--home" href="/main")
             +icon('home', ['button-circle-icon', 'button-circle--home'])
             span.button-circle--text На главную
-          if data.canEdit
+          if canEdit
             a(class="button-circle button-circle--edit" href="#")
               +icon('edit', ['button-circle-icon', 'button-circle-icon--edit'])
               span.button-circle--text Редактировать

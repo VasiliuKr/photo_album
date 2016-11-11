@@ -1,7 +1,6 @@
 include ../mixins/_icons
 
 - var cover = `/${dir}/_thumbs/${src}`
-- var photoName = 'Название фото'
 if iLike
   - var iLikeClass = 'photo-albums__item-liked'
 
@@ -10,34 +9,36 @@ if iLike
     .photo-albums__item-spinner
       +icon('loupe', ['photo-albums__item-spinner-icon'])
   if typePhoto == 1
-    .photo-albums__item-info-wrapper
-      a(href=`/user/${user}` class="photo-albums__item-avatar-wrapper" style=`background-image: url(${user.photo})`)
-        .photo-albums__item-avatar-hover
-          +icon('more', ['photo-albums__item-avatar-icon'])
-    .photo-albums__item-info
-      p.photo-albums__item-title-img #{photoName}
-      .photo-albums__item-meta
-        a(class="photo-albums__item-comments" href="#")
-          +icon('comments', ['photo-albums__item-icon', 'photo-albums__item-icon_comments'])
-          span.photo-albums__item-comments-number #{comments}
-        a(class=`photo-albums__item-likes ${iLikeClass}` href="#")
-          +icon('like', ['photo-albums__item-icon', 'photo-albums__item-icon_likes'])  
-          span.photo-albums__item-likes-number #{likes}
+    .photo-albums__item-ava-info-wrapper
+      .photo-albums__item-info-wrapper
+        a.photo-albums__item-avatar-wrapper(href=`/user/${user._id}` style=`background-image: url(${user.photo})`)
+          .photo-albums__item-avatar-hover
+            +icon('more', ['photo-albums__item-avatar-icon'])
+      .photo-albums__item-info
+        p.photo-albums__item-title-img !{title}
+        .photo-albums__item-meta
+          a.photo-albums__item-comments(href="#")
+            +icon('comments', ['photo-albums__item-icon', 'photo-albums__item-icon_comments'])
+            span.photo-albums__item-comments-number #{comments}
+          a.photo-albums__item-likes(class=`${iLikeClass}` href="#")
+            +icon('like', ['photo-albums__item-icon', 'photo-albums__item-icon_likes'])
+            span.photo-albums__item-likes-number #{likes}
   else
-    .photo-albums__item-information
-      .photo-albums__item-meta.photo-albums__item-meta--information
-        a(class="photo-albums__item-comments" href="#")
-          +icon('comments', ['photo-albums__item-icon', 'photo-albums__item-icon_comments'])
-          span.photo-albums__item-comments-number #{comments}
-        a(class=`photo-albums__item-likes ${iLikeClass}` href="#")
-          +icon('like', ['photo-albums__item-icon', 'photo-albums__item-icon_likes'])
-          span.photo-albums__item-likes-number #{likes}
+    .photo-albums__item-ava-info-wrapper
+      .photo-albums__item-information
+        .photo-albums__item-meta.photo-albums__item-meta--information
+          a(class="photo-albums__item-comments" href="#")
+            +icon('comments', ['photo-albums__item-icon', 'photo-albums__item-icon_comments'])
+            span.photo-albums__item-comments-number #{comments}
+          a.photo-albums__item-likes(class=`${iLikeClass}` href="#")
+            +icon('like', ['photo-albums__item-icon', 'photo-albums__item-icon_likes'])
+            span.photo-albums__item-likes-number #{likes}
   .photo-albums__item-footer
     if typePhoto == 2
       a.my-albums__item-edit-link.canEdit(code= _id href=`#`)
         +icon('edit', ['my-albums__item-icon', 'my-albums__item-icon_edit'])
     if typePhoto == 1
-      a(class="photo-albums__item-link" href=`/album/${album_id}`)
+      a.photo-albums__item-link(href=`/album/${album_id}`)
         +icon('album', ['photo-albums__item-icon', 'photo-albums__item-icon_album'])
         h3.photo-albums__item-title #{album_title}
     else

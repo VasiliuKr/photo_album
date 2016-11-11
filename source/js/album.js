@@ -16,9 +16,11 @@ var album = (function() {
   };
   var setParam = function(albums, conteiner, canAdd) {
     albumContainer = $(conteiner);
-    var addButton = albumContainer.parent().find('.button-circle--add');
+
+    var addButton = albumContainer.closest( 'section' ).find('.button-circle--add');
     if (addButton.length > 0) {
       albumCanEdit = true;
+      albumContainer.on('click', '.my-albums__item-edit-link', _editAlbum);
       addButton.on('click', _addAlbum);
     }else{
       albumCanEdit = false;
@@ -36,8 +38,6 @@ var album = (function() {
   var init = function(params) {
     showAddModal = params.showAddModal;
     showEditModal = params.showEditModal;
-
-    $('body').on('click', '.my-albums__item-edit-link', _editAlbum);
   };
 
   var addMessage = function(message, className) {

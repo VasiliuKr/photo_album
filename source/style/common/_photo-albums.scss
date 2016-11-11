@@ -2,6 +2,13 @@
 .photo-albums {
   display: flex;
   justify-content: center;
+  position: relative;
+
+  .button-circle {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+  }
 
   &__inner-wrapper {
     padding: 53px 0 60px;
@@ -43,6 +50,7 @@
   flex-direction: column;
   margin: 10px;
   overflow: hidden;
+  position: relative;
 
   @include media-min($phones) {
     max-width: 300px;
@@ -59,9 +67,11 @@
   // Фотка альбома
   &-cover-wrapper {
     display: block;
+    height: 250px;
     overflow: hidden;
     position: relative;
-    height: 200px;
+    background-size: cover;
+    background-position: 50% 50%;
 
     &:hover {
       .photo-albums__item-spinner {
@@ -109,9 +119,15 @@
     z-index: 10;
   }
 
+  &-information {
+    position: absolute;
+    top: 170px;
+    left: 18px;
+  }
+
   &-info-wrapper {
     display: flex;
-    flex: 1;
+    // flex: 1;
 
     @include media-min($phones) {
       padding: 10px;
@@ -127,10 +143,12 @@
   }
 
   &-avatar-wrapper {
+    background-size: cover;
+    border-radius: 50%;
     display: block;
     height: 50px;
-    width: 50px;
     position: relative;
+    width: 50px;
 
     &:hover {
       .photo-albums__item-avatar-hover {
@@ -275,6 +293,7 @@
   &-title {
     color: $photo-album-title;
     margin: 0 0 0 9px;
+    display: inline-block;
 
     @include media-min($phones) {
       font: 14px/1 'proxima_nova_ltsemibold', sans-serif;
@@ -284,6 +303,13 @@
       font-size: 16px;
     }
   }
+}
+
+.photo-albums__item-ava-info-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .button--outline-albums {

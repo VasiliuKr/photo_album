@@ -3,8 +3,6 @@
 @import 'base/body';
 @import 'base/buttons';
 @import 'base/buttons-container'; // Удалить перед релизом (стили для офрмления страницы Buttons)
-@import 'base/animation';
-@import 'common/preloader';
 @import 'pages/index';
 @import 'common/footer';
 @import 'common/authorization/login';
@@ -17,4 +15,4 @@
 @import 'common/header_edit';
 @import 'common/header-album';
 @import 'common/header-search';
-
+@import 'base/animation';

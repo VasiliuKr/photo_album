@@ -60,7 +60,9 @@ var pageTemplate = (function() {
 
     var url = template.header_data + urlSufix;
     $.post(url, function(djson) {
-      headerTemplate = templates[headerTemplate](djson.data[0]);
+      var headerData = djson.data[0];
+      if (djson.user) headerData.user = djson.user[0];
+      headerTemplate = templates[headerTemplate](headerData);
       var oldHeight;
       if(waitResize) {
         oldHeight = $('#header').height();

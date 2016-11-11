@@ -1,7 +1,7 @@
 include ../mixins/_icons
 
 .my-albums__item(data-album-id=`${_id}`)
-  a(href=`/album/${_id}` class="my-albums__item-cover-wrapper" style=`background-image: url(${cover.dir}/_thumbs/${cover.src})`)
+  a(href=`/album/${_id}` class="my-albums__item-cover-wrapper" style=`background-image: url(/${cover.dir}/_thumbs/${cover.src})`)
     .my-albums__item-spinner
       .my-albums__item-hover-text
         .my-albums__item-hover-description #{description}
@@ -12,7 +12,7 @@ include ../mixins/_icons
     - var canEditClass = '';
     if canEdit
       - canEditClass = 'canEdit'
-    a(class=`my-albums__item-edit-link ${canEditClass}` code= _id href=`#`)
-      +icon('edit', ['my-albums__item-icon', 'my-albums__item-icon_edit'])
+      a(class=`my-albums__item-edit-link ${canEditClass}` code= _id href=`#`)
+        +icon('edit', ['my-albums__item-icon', 'my-albums__item-icon_edit'])
     a(class="my-albums__item-link" href=`/album/${_id}`)
       h3.my-albums__item-title #{title}

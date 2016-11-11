@@ -93,6 +93,7 @@ var photosAdd = ( function() {
   };
 
   var removePhoto = function(event) {
+    e.preventDefault();
     var photoItem = $(this).closest('.add-photo__item');
     var src = photoItem.find('img').attr('src');
     var i = photos.indexOf(src);
@@ -107,6 +108,7 @@ var photosAdd = ( function() {
     }
     photoItem.remove();
     updatePhotosInfo();
+    return false;
   };
 
   var updatePhotosInfo = function() {
@@ -123,9 +125,14 @@ var photosAdd = ( function() {
     }
   };
 
+  var getFiles = function() {
+    return files;
+  };
+
   return {
     init: init,
-    files: files
+    files: files,
+    getFiles: getFiles
   };
 }());
 

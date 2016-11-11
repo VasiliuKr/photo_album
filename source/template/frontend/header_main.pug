@@ -19,16 +19,16 @@ include ../mixins/_icons
           .profile__social
             ul.social-list
               li.social-list__item(name='vk' editor='social')
-                a(class="social-list__link" href= vk)
+                a(class="social-list__link" target='_blank' href= vk)
                   +icon('soc_vk', ['social-icon', 'social-icon_vk'])
               li.social-list__item(name='fb' editor='social')
-                a(class="social-list__link" href= fb)
+                a(class="social-list__link" target='_blank' href= fb)
                   +icon('soc_fb', ['social-icon', 'social-icon_fb'])
               li.social-list__item(name='twitter' editor='social')
-                a(class="social-list__link" href= twitter)
+                a(class="social-list__link" target='_blank' href= twitter)
                   +icon('soc_twitter', ['social-icon', 'social-icon_twitter'])
               li.social-list__item(name='google' editor='social')
-                a(class="social-list__link" href= google)
+                a(class="social-list__link" target='_blank' href= google)
                   +icon('social_google', ['social-icon', 'social-icon_google'])
               li.social-list__item(name='email' editor='social')
                 a(class="social-list__link" href= "mailto:"+email)
@@ -56,7 +56,7 @@ include ../mixins/_icons
 
   .search-bar
     .search-bar__inner-wrapper
-      form(id="search" class="search__form")
+      form#search.search__form
         input(type="search" class="search__field" placeholder="Исследовать мир")
         +icon('search', ['search__icon'])
         ul.search__list

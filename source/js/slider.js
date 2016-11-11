@@ -2,35 +2,181 @@
 
 var slider = (function() {
   var animations = 'animate-prev animate-next animate-next-current animate-prev-current';
+  var photoBaza;
+  var hereSlide;
 
   var init = function() {
-    _setUpListeners();
+    _setUpMainListeners();
+  };
+
+  var _setUpMainListeners = function() {
+    $('body').on('click', '.photo-albums__item-cover-wrapper,.photo-albums__item-comments', openSlider);
+  };
+
+  var _setUpSliderListeners = function() {
+    $('.modal-overlay').on('click', '.slider__next', nextSlide);
+    $('.modal-overlay').on('click', '.slider__prev', prevSlide);
+
+    $('.modal-overlay').on('click', '.slider__description-item--current .button--icon-like', setLike);
+    // $('body').on('submit', '.comments__form', addCommentOnSubmit);
+    $('.modal-overlay').on('click', '.comments__form .button', addCommentOnSubmit);
+  };
+
+// Берем с сервера состояние лайка
+  var initLike = function() {
+    var url = '/ajax/ilike';
+
+    $.post(url, function(data) {
+      changeLikeClass(data.iLike);
+    }).fail(function() {
+      changeLikeClass(false);
+    });
+  };
+
+  var changeLikeClass = function(like) {
+    var likeButton = $('.slider__description-item--current').find('.button--icon-like');
+
+    // console.log(likeButton.attr('class'));
+
+    if (like) {
+      likeButton.addClass('liked');
+    } else {
+      likeButton.removeClass('liked');
+    }
+  };
+
+  var setLike = function() {
+    event.preventDefault();
+
+    var likeButton = $('.slider__description-item--current').find('.button--icon-like');
+    var ilikeNew = false;
+    if (!likeButton.hasClass('liked')) {
+      ilikeNew = true;
+    }
+    changeLikeClass(ilikeNew);
+
+    var url = '/ajax/ilike';
+    $.post(url, {ilike: ilikeNew});
   };
 
   var openSlider = function() {
     event.preventDefault();
     // Устанавливаем слайд
-    open($(this).index());
+    open($(this).closest('.photo-albums__item').index());
   };
 
   var open = function(curSlide) {
-    modal.open('modal-slider');
+    modal.slider();
+    _setUpSliderListeners();
+
+    hereSlide = curSlide;
+    photoBaza = photo.getPhotos();
+
+    var slidesNum = photoBaza.length;
+    // Запрещаем слайдить если 1 фотка
+    if (slidesNum === 1) {
+      $('.slider__prev,.slider__next').remove();
+    }
+
+    for (var i = 0; i < slidesNum; i++) {
+      $('.slider__images').append(templates.slider_image(photoBaza[i]));
+
+      var $description = $('<div />')
+        .attr('class', 'slider__description-item')
+        .append(templates.slider_description(photoBaza[i]));
+
+      $('.slider__description').append($description);
+    }
     // Удаляем все анимации
     $('.slider__images-item').removeClass(animations);
-    setCurrentSlide(curSlide || 0);// индексация с нуля
+
+    // Анимация падения
+    // $('.slider__description').css('top', 0);
+
+    var imagesLoad = function() {
+      setCurrentSlide(hereSlide);
+    };
+    // Ждем загрузку картинки текущего слайда
+    $('.slider__images img').eq(hereSlide).on({
+      load: imagesLoad,
+      error: imagesLoad
+    });
   };
 
-  var _setUpListeners = function() {
-    $('.slider__next').on('click', nextSlide);
-    $('.slider__prev').on('click', prevSlide);
-    $('.open-slider').on('click', openSlider);
+  var _onGetComments = function(data) {
+    var comments = data.comments;
+    var users = {};
+
+    var i;
+    for(i = 0; i < data.users.length; i++) {
+      users[data.users[i]._id] = data.users[i];
+    }
+
+    var myId = data.myId;
+    var commentData = users[myId];
+    var $currentItem = $('.slider__description-item').eq(hereSlide);
+    commentData.photoId = photoBaza[hereSlide]._id;
+
+    $currentItem.find('.comments').remove();
+    $currentItem.append(templates.slider_comments(commentData));
+    $currentItem.find('form').ajaxForm();
+
+    for (i = 0; i < comments.length; i++) {
+      comments[i].user = users[comments[i].user];
+      $currentItem
+        .find('.comments__block')
+        .append(templates.slider_comments_item(comments[i]));
+    }
   };
-  // имитация подгрузки
-  var ajaxGetData = function(from, to) {
-    return {};
+
+// Берем с сервера инфу о комментах
+  var loadComments = function(curSlide) {
+    var url = '/ajax/comments/get';
+    hereSlide = curSlide;
+    myAjaxRequest.send(url, {id: photoBaza[hereSlide]._id}, _onGetComments);
   };
-  // добавление данных в слайдер
-  var addData = function(data) {
+
+  var addCommentOnSubmit = function(event) {
+    event.preventDefault();
+
+    addComment($(this));
+  };
+
+// Добавляем комментарий
+  var addComment = function(form) {
+    // var $input = form.find('.comments--text');
+    var $input = form.closest('.comments__form').find('.comments--text');
+
+    var comment = {
+      photo: photoBaza[hereSlide]._id,
+      text: $input.val()
+    };
+
+    var url = '/ajax/comments/add';
+    myAjaxRequest.send(url, comment, function(data) {
+      if (data.comments) {
+        $input.val('');
+        var comments = data.comments;
+        var users = {};
+
+        var i;
+        for(i = 0; i < data.users.length; i++) {
+          users[data.users[i]._id] = data.users[i];
+        }
+
+        var $currentItem = $('.slider__description-item').eq(hereSlide);
+        $currentItem.find('.comments__block').html('');
+
+        for (i = 0; i < comments.length; i++) {
+          comments[i].user = users[comments[i].user];
+          $currentItem
+            .find('.comments__block')
+            .append(templates.slider_comments_item(comments[i]));
+        }
+      }else{
+        popup.open({message: data.error});
+      }
+    });
   };
 
   var nextSlide = function(event) {
@@ -46,12 +192,6 @@ var slider = (function() {
 
     // Получаем следующий слайд
     var next = curSlide.next();
-
-    // Догрузить данные перед последним
-    /* if (next.length && !next.next().length) {
-      var data = ajaxGetData(0, 0);
-      addData(data);
-    }*/
 
     // если текущий слайд не последний и имеет следующий слайд
     if (next.length) {
@@ -111,8 +251,13 @@ var slider = (function() {
       .eq(index)
       .addClass('slider__description-item--current');
 
+    // Устанавливаем состояние лайка
+    // initLike($('.slider__description-item--current'));
+
     // Анимируем часть слайдера с описанием и комментариями
     $('.slider__description').css('top', $('.slider').height());
+
+    loadComments(index);
   };
 
   return {

@@ -1,0 +1,17 @@
+include ../mixins/_icons
+
+.modal-overlay.modal-slider
+  .modal.modal--top
+
+    .slider
+      a(class="modal__close modal__close--slider modal-action-close" href="#")
+        +icon('close')
+
+      .slider__prev
+        +icon('arrow_left')
+      .slider__next
+        +icon('arrow_right')
+
+      .slider__images
+
+      .slider__description

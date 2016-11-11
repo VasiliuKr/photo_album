@@ -5,6 +5,7 @@
   background: $albums-wrapper-bg;
   display: flex;
   justify-content: center;
+  position: relative;
 
   &__inner-wrapper {
     padding: 53px 0 38px;
@@ -33,6 +34,16 @@
     flex-wrap: wrap;
     margin: -10px -10px 14px;
   }
+  .button-circle {
+    position: absolute;
+    top: 53px;
+    @include media-min($phones) {
+      right: 20px;
+    }
+    @include media-min($tablets) {
+      right: 40px;
+    }
+  }
 }
 
 // Альбом в блоке "Мои альбомы"
@@ -46,25 +57,32 @@
   overflow: hidden;
 
   @include media-min($phones) {
-    max-width: 320px;
+    width: calc(100% - 20px);
   }
-
   @include media-min($tablets) {
-    max-width: 220px;
+    width: calc(33.3% - 20px);
+  }
+  @include media-min($laptop) {
+    width: calc(25% - 20px);
+  }
+  @include media-min($desktop) {
+    width: calc(20% - 20px);
   }
 
-  @include media-min($laptop) {
-    max-width: 280px;
-  }
 
   // Фотка альбома
   &-cover-wrapper {
     background: no-repeat 50% 50%;
     background-size: cover;
     display: block;
-    height: 220px;
     position: relative;
-    width: 230px;
+    min-width: 100%;
+    @include media-min($phones) {
+      height: 220px;
+    }
+    @include media-min($laptop) {
+      height: 300px;
+    }
 
     &:hover {
       .my-albums__item-spinner {

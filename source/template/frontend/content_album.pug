@@ -1,9 +1,9 @@
 include ../mixins/_icons
 
 section.photo-albums
+  a(class="photo-albums__btn-add button-circle button-circle--add" href="#" )
+    +icon('add', ['button-circle-icon', 'button-circle-icon--add'])
+    span.button-circle--text Добавить
   .photo-albums__inner-wrapper
-    a(class="photo-albums__btn-add button-circle button-circle--add" href="#" )
-      +icon('add', ['button-circle-icon', 'button-circle-icon--add'])
-      span.button-circle--text Добавить
     .photo-albums__list
       

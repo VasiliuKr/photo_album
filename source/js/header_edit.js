@@ -2,7 +2,7 @@
 
 var headerEditor = (function() {
   var headerBlock;
-
+  var lastAjax = false;
   var _editorBlockOn = function(index, element) {
     var $element = $(element);
 
@@ -70,6 +70,9 @@ var headerEditor = (function() {
       for (var i = 0; i < textBlock.length; i++) {
         data.data.append($(textBlock[i]).attr('name'), textBlock[i].innerText);
       }
+      lastAjax = false;
+    }else{
+      lastAjax = data.data;
     }
 
     return data;
@@ -77,6 +80,50 @@ var headerEditor = (function() {
 
   // вызовется в случае успеного сохранения формы
   var _getAjax = function(json) {
+    if(json.error) {
+      popup.open( {message: json.error});
+      return;
+    }
+    popup.open( {message: json.message});
+    _startEdit();
+
+    if(lastAjax) {
+      lastAjax = JSON.parse(lastAjax);
+      var selector;
+      for(var colum in lastAjax) {
+        selector = '[name=' + colum + ']';
+        var val = json.data[0][colum];
+        $('input' + selector).attr('value', val);
+        if(colum === 'email') val = 'emailto:' + val;
+        $('li' + selector + ' a').attr('href', val);
+      }
+      return;
+    }
+    var background;
+    if(!json.data[0].background) {
+      background = json.data[0].cover.dir + '/' + json.data[0].cover.src;
+      if (background[0] !== '/') background = '/' + background;
+      $('.page_background').css('background-image', 'url(' + background + ')');
+
+      photo.updatePhoto(json.data[0].cover);
+    }else {
+      background = json.data[0].background;
+      if (background[0] !== '/') background = '/' + background;
+      $('.page_background').css('background-image', 'url(' + background + ')');
+
+
+      var picture = json.data[0].photo;
+      if (picture[0] !== '/') picture = '/' + picture;
+      $('#header .profile__photo').css('background-image', 'url(' + picture + ')');
+    }
+
+    for (var key in json.data[0]) {
+      var keySelector = '#header [name=' + key + '][editor]';
+      var input = $(keySelector);
+      if (input.length > 0 && input[0].tagName !== 'LI') {
+        input.text( json.data[0][key] );
+      }
+    }
   };
 
   // вызовется в случае ошибки отправки JSON на сервер
@@ -85,7 +132,7 @@ var headerEditor = (function() {
   };
 
   var _startEdit = function(e) {
-    e.preventDefault();
+    if(e)e.preventDefault();
     var buttonBlock = headerBlock.find('.profile__buttons');
     var editBlock = headerBlock.find('[name]');
 
@@ -119,7 +166,6 @@ var headerEditor = (function() {
     headerBlock = $(header);
     headerBlock.on('click', '.button-circle--edit,.header-edit__cancel', _startEdit);
   };
-
   return {
     init: init
   };
