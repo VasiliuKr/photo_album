@@ -19,7 +19,6 @@ var slider = (function() {
     $('.modal-overlay').on('click', '.comments__form .button', addCommentOnSubmit);
   };
 
-
   var openSlider = function() {
     event.preventDefault();
     // Устанавливаем слайд
@@ -32,7 +31,7 @@ var slider = (function() {
 
     hereSlide = curSlide;
     photoBaza = photo.getPhotos();
-
+// console.log(photoBaza);
     var slidesNum = photoBaza.length;
     // Запрещаем слайдить если 1 фотка
     if (slidesNum === 1) {
@@ -64,6 +63,7 @@ var slider = (function() {
 
   var _onGetComments = function(data) {
     var comments = data.comments;
+    photo.updateComment(photoBaza[hereSlide]._id, comments.length);
     var users = {};
 
     var i;
@@ -116,6 +116,7 @@ var slider = (function() {
       if (data.comments) {
         $input.val('');
         var comments = data.comments;
+        photo.updateComment(photoBaza[hereSlide]._id, comments.length);
         var users = {};
 
         var i;
